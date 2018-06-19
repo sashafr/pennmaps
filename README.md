@@ -15,7 +15,7 @@ TODO: These instructions will get you a copy of the project up and running on yo
     * GEOS
     * PROJ.4
     * GDAL
-4. PostGres & PostGIS `apt-get install postgresql postgresql-contrib postgis libpq-dev`
+4. PostGres & PostGIS: `apt-get install postgresql postgresql-contrib postgis libpq-dev`
 5. Psycopg module: `pip install psycopg2`
 
 *Note: You may have to add `/usr/local/lib` on a new line in `/etc/ld.so.conf` and then run `ldconfig` after each `make install`*
