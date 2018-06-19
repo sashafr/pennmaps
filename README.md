@@ -8,7 +8,7 @@ TODO: These instructions will get you a copy of the project up and running on yo
 
 ### Prerequisites
 
-1. Python
+1. Python: `apt-get install python3 python3-dev`
 2. Django
 3. Install spatial libraries needed for GeoDjango ([detailed instructions can be found here](https://docs.djangoproject.com/en/2.0/ref/contrib/gis/install/geolibs/)).
     * Debian/Ubuntu only: `apt-get install binutils libproj-dev gdal-bin`
@@ -17,6 +17,10 @@ TODO: These instructions will get you a copy of the project up and running on yo
     * GDAL
 4. PostGres & PostGIS: `apt-get install postgresql postgresql-contrib postgis libpq-dev`
 5. Psycopg module: `pip install psycopg2`
+6. Apache: `apt-get install apache2 apache2-dev`
+    * Edit `/etc/apache2/apache2.conf`, add `ServerName server_domain_or_IP` to bottom of file
+    * Run `ufw allow in Apache Full`
+7. mod_wsgi: [follow these instructions](http://modwsgi.readthedocs.io/en/develop/user-guides/quick-installation-guide.html) - you may have to specify the python version
 
 *Note: You may have to add `/usr/local/lib` on a new line in `/etc/ld.so.conf` and then run `ldconfig` after each `make install`*
 
@@ -33,21 +37,68 @@ postgres=# create extension postgis;
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+1. Edit your `/etc/apache2/sites-available/000-default.conf`:
+```
+<VirtualHost *:80>
 
-Say what the step will be
+	ServerAdmin webmaster@localhost
+	DocumentRoot /project/home
+        WSGIScriptAlias / /project/home/digginphilly/wsgi.py
+
+        <Directory /project/home>
+            AllowOverride all
+            Require all granted
+            Options FollowSymlinks
+        </Directory>
+
+	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+	# error, crit, alert, emerg.
+	# It is also possible to configure the loglevel for particular
+	# modules, e.g.
+	#LogLevel info ssl:warn
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	# For most configuration files from conf-available/, which are
+	# enabled or disabled at a global level, it is possible to
+	# include a line for only one particular virtual host. For example the
+	# following line enables the CGI configuration for this host only
+	# after it has been globally disabled with "a2disconf".
+	#Include conf-available/serve-cgi-bin.conf
+
+        Alias /robots.txt /project/home/static/robots.txt
+        Alias /favicon.ico /project/home/static/favicon.ico
+        Alias /media/ /project/home/media/
+        Alias /static/ /project/home/static/
+
+        <Directory /project/home/static>
+            Require all granted
+        </Directory>
+
+        <Directory /project/home/media>
+            Require all granted
+        </Directory>
+
+        <Directory /project/home/digginphilly>
+            <Files wsgi.py>
+                Require all granted
+            </Files>
+        </Directory>
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
 
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+2. Check install `apache2ctl configtest`, if Syntax OK, then `systemctl restart apache2`
+3. `chgrp -R www-data /project/home`
+4. `chmod -R g+w /project/home/media`
+5. Edit `settings-dist.py` and change to `settings.py`
+6. `python3 manage.py migrate`
+7. `python3 manage.py createsuperuser`
+8. Test install: `python3 manage.py runserver [server IP][port number]`
+9. Test your install by going to your IP address in a browser
 
 ## Running the tests
 
