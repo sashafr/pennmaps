@@ -11,10 +11,25 @@ TODO: These instructions will get you a copy of the project up and running on yo
 1. Python
 2. Django
 3. Install spatial libraries needed for GeoDjango ([detailed instructions can be found here](https://docs.djangoproject.com/en/2.0/ref/contrib/gis/install/geolibs/)).
-  * Debian/Ubuntu only: `sudo apt-get install binutils libproj-dev gdal-bin`
-  * GEOS
-  * PROJ.4
-  * GDAL
+    * Debian/Ubuntu only: `apt-get install binutils libproj-dev gdal-bin`
+    * GEOS
+    * PROJ.4
+    * GDAL
+4. PostGres & PostGIS `apt-get install postgresql postgresql-contrib postgis libpq-dev`
+5. Psycopg module: `pip install psycopg2`
+
+*Note: You may have to add `/usr/local/lib` on a new line in `/etc/ld.so.conf` and then run `ldconfig` after each `make install`*
+
+#### *Setting up Your Database*
+
+```
+$ su - postgres
+$ psql
+postgres=# create user [USER] password '[PASSWORD]';
+postgres=# alter user [USER] with superuser;
+postgres=# create database [DATABASE NAME] owner [USER];
+postgres=# create extension postgis;
+```
 
 ### Installing
 
@@ -46,9 +61,11 @@ TODO
 
 * [Python 3.5.2](https://www.python.org/)
 * [Django 2.0.6](https://www.djangoproject.com/) - web framework
-* [GEOS 3.4.2](https://trac.osgeo.org/geos)
+* [GEOS 3.6.2](https://trac.osgeo.org/geos)
 * [PROJ.4 4.9.1](https://proj4.org/)
 * [GDAL 1.11.2](https://trac.osgeo.org/gdal/)
+* [PostgreSQL 9.5.13](https://www.postgresql.org/)
+* [PostGIS 2.2.1](https://postgis.net/)
 
 
 ## Contributing
