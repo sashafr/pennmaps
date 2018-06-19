@@ -1,0 +1,77 @@
+<html><body>
+
+
+	{% for mapItem in map_items%}
+	{% for point in mapItem.location1%}
+	<p>{{point.coords}}</p>
+
+	{% endfor %}
+	{% endfor %}
+
+
+
+	<div id="mapdiv"></div>
+
+
+
+	<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+	<script>
+	/*
+	var myLayer = new OpenLayers.Layer.XYZ(
+		'My Map Layer',
+		['https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'],
+		{
+			sphericalMercator: true,
+			wrapDateLine: true
+		}
+		);
+	var map = new OpenLayers.Map({
+		div: 'mapdiv',
+		layers: [myLayer],
+		center: [0, 0],
+		zoom: 1
+	});
+	*/
+
+	map = new OpenLayers.Map("mapdiv");
+	map.addLayer(new OpenLayers.Layer.OSM());
+
+	{% for mapItem in map_items%}
+	{% for point in mapItem.location1%}
+
+	var lonLat = new OpenLayers.LonLat({{point.coords.0}} , {{point.coords.1}})
+	.transform(
+	new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+	map.getProjectionObject() // to Spherical Mercator Projection
+	);
+
+	var zoom=16;
+
+	var markers = new OpenLayers.Layer.Markers( "Markers" );
+	map.addLayer(markers);
+
+	markers.addMarker(new OpenLayers.Marker(lonLat));
+
+	map.setCenter (lonLat, zoom);
+	{% endfor %}
+	{% endfor %}
+
+
+	// var lonLat = new OpenLayers.LonLat(-75.156294 , 39.94233)
+	// .transform(
+	// new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+	// map.getProjectionObject() // to Spherical Mercator Projection
+	// );
+
+	// var zoom=16;
+
+	// var markers = new OpenLayers.Layer.Markers( "Markers" );
+	// map.addLayer(markers);
+
+	// markers.addMarker(new OpenLayers.Marker(lonLat));
+
+	// map.setCenter (lonLat, zoom);
+</script>
+
+
+</body></html>
