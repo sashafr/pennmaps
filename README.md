@@ -4,7 +4,7 @@ The Diggin’ Philly project is a large and ambitious project to document black 
 
 ## Getting Started
 
-TODO: These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
@@ -19,7 +19,7 @@ TODO: These instructions will get you a copy of the project up and running on yo
 5. Psycopg module: `pip install psycopg2`
 6. Apache: `apt-get install apache2 apache2-dev`
     * Edit `/etc/apache2/apache2.conf`, add `ServerName server_domain_or_IP` to bottom of file
-    * Run `ufw allow in Apache Full`
+    * Run `ufw allow in "Apache Full"`
 7. mod_wsgi: [follow these instructions](http://modwsgi.readthedocs.io/en/develop/user-guides/quick-installation-guide.html) - you may have to specify the python version
 
 *Note: You may have to add `/usr/local/lib` on a new line in `/etc/ld.so.conf` and then run `ldconfig` after each `make install`*
@@ -37,7 +37,17 @@ postgres=# create extension postgis;
 
 ### Installing
 
-1. Edit your `/etc/apache2/sites-available/000-default.conf`:
+1. Clone this repo
+2. Make a copy of settings-dist.py and rename to settings.py, edit `DATABASES` and `ALLOWED_HOSTS`
+3. From the command line, run the following to generate a secret key and then edit settings.py to add your `SECRET_KEY`:
+```
+>>> import random
+>>> ''.join(random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50))
+```
+4. `python3 manage.py migrate`
+5. `python3 manage.py createsuperuser`
+6. Test install: `python3 manage.py runserver [server IP][port number]`
+7. Edit your `/etc/apache2/sites-available/000-default.conf`:
 ```
 <VirtualHost *:80>
 
@@ -89,16 +99,11 @@ postgres=# create extension postgis;
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 
-
 ```
-2. Check install `apache2ctl configtest`, if Syntax OK, then `systemctl restart apache2`
-3. `chgrp -R www-data /project/home`
-4. `chmod -R g+w /project/home/media`
-5. Edit `settings-dist.py` and change to `settings.py`
-6. `python3 manage.py migrate`
-7. `python3 manage.py createsuperuser`
-8. Test install: `python3 manage.py runserver [server IP][port number]`
-9. Test your install by going to your IP address in a browser
+8. Check install `apache2ctl configtest`, if Syntax OK, then `systemctl restart apache2`
+9. `chgrp -R www-data /project/home`
+10. `chmod -R g+w /project/home/media`
+11. Test your install by going to your IP address in a browser
 
 ## Running the tests
 
