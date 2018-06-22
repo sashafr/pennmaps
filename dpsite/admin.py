@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import admin
-from ckeditor.widgets import CKEditorWidget
+#from ckeditor.widgets import CKEditorWidget
 from .models import MapItem, WebSeries, Media, PartOfCity, TimePeriod, Tag, TagGroup, OverlayGroup
 
 
@@ -13,8 +13,8 @@ admin.site.register(Media)
 
 
 class MapItemAdminForm(forms.ModelForm):
-    summary = forms.CharField(widget=CKEditorWidget())
-    description = forms.CharField(widget=CKEditorWidget())
+    #summary = forms.CharField(widget=CKEditorWidget())
+    #description = forms.CharField(widget=CKEditorWidget())
     class Meta:
         model = MapItem
         fields = '__all__'
