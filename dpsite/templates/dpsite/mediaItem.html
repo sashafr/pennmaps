@@ -1,11 +1,7 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h1>Content goes here</h1>
-{% endblock %}
 <html>
 <!--- copied from bootstrap template "portolio item" // Nia 06.22.2018 -->
 <head>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:light,regular,bold,extra-bold" rel="stylesheet">
 <style>
 /* taking css from other bootstrap files in the package : SHOULD WE JUST INCLUDE FULL BOOTSTRAP FILES AS LINK REFS???? */
 /* Below: css specifically for the portfolio item page, to be updated */
@@ -16,7 +12,43 @@ body {
 @media (min-width: 992px) {
   body {
     padding-top: 56px;
+    font-family: 'Open Sans', sans-serif; /*added by Nia 6.25.18*/
+    padding-left:3%;
+    padding-right:3%;
   }
+}
+/* Nia adding styles to test out Open Sans font, 6.25.18 */
+h1 {
+  font-size:30px;
+  font-family:'Open Sans';
+  font-weight:900;
+}
+
+h2 {
+  font-size:20px;
+  font-family:'Open Sans';
+  font-weight:600;
+}
+
+h3 {
+  font-size:16px;
+  font-family:'Open Sans';
+  font-weight:400;
+}
+
+p {
+  font-size:13px;
+  font-family:'Open Sans';
+  font-weight:100;
+  font-style:italic;
+}
+
+a {
+  color:rgb(47, 124, 147);/*lt blue*/
+}
+
+a:visited {
+  color:rgb(0, 77, 100); /*dk blue*/
 }
 
 /* Below: sourcing styles referred to in BODY from files
@@ -106,14 +138,14 @@ bootstrap.css,
 <body>
 <!-- need  Irene's nav bar to be added eventually -->
 
-<!-- Below: pulled from index.html of bootstrap portfolio item theme -->
+<!-- Below: pulled from index.html of bootstrap portfolio item theme; beginning adjustments to mimic inDesign markups -->
 
 <!-- Page Content -->
 <div class="container">
 
   <!-- Portfolio Item Heading -->
-  <h1 class="my-4">Page Heading
-    <small>Secondary Text</small>
+  <h1 class="my-4">Diggin' Philly:
+    <small>The Black Philadelphia Project</small>
   </h1>
 
   <!-- Portfolio Item Row -->
@@ -124,7 +156,7 @@ bootstrap.css,
     </div>
 
     <div class="col-md-4">
-      <h3 class="my-3">Project Description</h3>
+      <h2 class="my-3">Site of MOVE Bombing</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
       <h3 class="my-3">Project Details</h3>
       <ul>
@@ -132,6 +164,7 @@ bootstrap.css,
         <li>Dolor Sit Amet</li>
         <li>Consectetur</li>
         <li>Adipiscing Elit</li>
+        <li><a href="/">Sample link</a></li>
       </ul>
     </div>
 
@@ -139,7 +172,7 @@ bootstrap.css,
   <!-- /.row -->
 
   <!-- Related Projects Row -->
-  <h3 class="my-4">Related Projects</h3>
+  <h3 class="my-4">Supplementary Content</h3>
 
   <div class="row">
 
