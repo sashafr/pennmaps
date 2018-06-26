@@ -1,13 +1,19 @@
 <html><body>
 
-
+<!--
 	{% for mapItem in map_items%}
 	{% for point in mapItem.location1%}
 	<p>{{point.coords}}</p>
 
 	{% endfor %}
 	{% endfor %}
+-->
 
+	{% for mapItem in map_items%}
+	{% for tag in mapItem.tags.all%}
+	<!--<p>{{tag}}</p>-->
+	{% endfor %}
+	{% endfor %}
 
 
 	<div id="mapdiv"></div>
