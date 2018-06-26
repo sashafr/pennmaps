@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from .models import MapItem, WebSeries
+from .models import MapItem, WebSeries, media
 from django.template import Context, loader
 
 
@@ -23,3 +23,8 @@ def webSeries(request):
     series = WebSeries.objects.all()
     context = {'series': series, 'dummmyvariable': 'Helloworld'}
     return render(request, 'dpsite/webseries.html', context)
+
+def mediaItem(request):
+    mediaitem = mediaitem.objects.all()
+    context = {'mediaitem': mediaitem}
+    return render(request, 'dpsite/mediaitem.html', context)
