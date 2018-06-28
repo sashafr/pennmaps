@@ -1,23 +1,16 @@
 {% extends "dpsite/base.html" %}
+{% block content %}
 
-
-<html>
 <!--- copied from bootstrap template "portolio item" // Nia 06.22.2018 -->
 <head>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:light,regular,bold,extra-bold" rel="stylesheet">
 <style>
 /* taking css from other bootstrap files in the package : SHOULD WE JUST INCLUDE FULL BOOTSTRAP FILES AS LINK REFS???? */
 /* Below: css specifically for the portfolio item page, to be updated */
-body {
-  padding-top: 54px;
-}
 
 @media (min-width: 992px) {
   body {
-    padding-top: 56px;
     font-family: 'Open Sans', sans-serif; /*added by Nia 6.25.18*/
-    padding-left:3%;
-    padding-right:3%;
   }
 }
 /* Nia adding styles to test out Open Sans font, 6.25.18 */
@@ -39,11 +32,17 @@ h3 {
   font-weight:400;
 }
 
+h4 {
+  font-size:13px;
+  font-family:'Open Sans';
+  font-weight:400;
+  font-style:italic;
+}
+
 p {
   font-size:13px;
   font-family:'Open Sans';
   font-weight:100;
-  font-style:italic;
 }
 
 a {
@@ -144,38 +143,48 @@ bootstrap.css,
 <!-- Below: pulled from index.html of bootstrap portfolio item theme; beginning adjustments to mimic inDesign markups -->
 
 <!-- Page Content -->
+<br> <!-- for space between divs without making margins/padding -->
+
 <div class="container">
 
   <!-- Portfolio Item Heading -->
-  <h1 class="my-4">Diggin' Philly:
-    <small>The Black Philadelphia Project</small>
-  </h1>
+    <!-- (deleted) -->
 
   <!-- Portfolio Item Row -->
   <div class="row">
-
-    <div class="col-md-8">
+    <div class="col-md-6">
       <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+      <h2 class="my-3">Site of MOVE Bombing</h2>
+      <h3>Family Pictures and Stories "Momma at Work"</h3>
+      <h4>6221 Osage Avenue, West Philadelphia
+        <br>1980s-1990s</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
     </div>
 
     <div class="col-md-4">
-      <h2 class="my-3">Site of MOVE Bombing</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-      <h3 class="my-3">Project Details</h3>
-      <ul>
+      <img class="img-fluid" src="https://i5.walmartimages.com/asr/4124033b-fac1-4c5e-965d-75611f1fe75f_1.ede2d65a57a1580e181a607f1ba7078e.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF">
+      <h2>Test title</h2>
+      <h3 class="my-3">Supplementary Content</h3>
+      <ul><h4>
         <li>Lorem Ipsum</li>
         <li>Dolor Sit Amet</li>
         <li>Consectetur</li>
         <li>Adipiscing Elit</li>
         <li><a href="/">Sample link</a></li>
-      </ul>
+      </h4></ul>
     </div>
+
+    <div class="col-md-2">
+      <h3>Oral History Archive</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
 
   </div>
   <!-- /.row -->
 
   <!-- Related Projects Row -->
-  <h3 class="my-4">Supplementary Content</h3>
+  <h3 class="my-4">Explore Related Items</h3>
 
   <div class="row">
 
@@ -211,5 +220,4 @@ bootstrap.css,
 
 
 </body>
-{% block content %} {% endblock %}
-</html>
+ {% endblock %}
