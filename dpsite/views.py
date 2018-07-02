@@ -22,6 +22,12 @@ def webSeries(request):
     return render(request, 'dpsite/webseries.html', context)
 
 def mediaItem(request):
+<<<<<<< HEAD
     #mediaitem = Media.objects.all()
     #context = {'mediaitem': mediaitem}
     return render(request, 'dpsite/mediaItem.html')#, context)
+=======
+    mediaitem = Media.objects.all()
+    context = {'mediaitem': mediaitem}
+    return render(request, 'dpsite/mediaItem.html', context)
+>>>>>>> a508754beddb898778b77ea6b7e2cd356f6f27e1
