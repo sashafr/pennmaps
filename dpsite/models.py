@@ -1,20 +1,19 @@
-#from django.db import models
 from django.contrib.gis.db import models
-
 from datetime import date
-
-# Create your models here.
 
 class TagGroup(models.Model):
     title = models.CharField(max_length = 50)
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Tag Group"
+        verbose_name_plural = "Tag Groups"
+
 class Tag(models.Model):
     title = models.CharField(max_length = 50)
-    tag_group = models.ForeignKey(
-    'TagGroup',
-    on_delete=models.CASCADE,)
+    slug = models.SlugField()
+    tag_group = models.ForeignKey('TagGroup', on_delete=models.CASCADE, blank=True, null=True)
     def __str__(self):
         return self.title
 
@@ -31,18 +30,23 @@ class OverlayGroupLayer(models.Model):
     order = models.IntegerField()
 
 class Media(models.Model):
-    title = models.CharField(max_length = 50)
-    description = models.CharField(max_length = 200)
-    credits = models.CharField(max_length=50)
+    title = models.CharField(max_length = 200)
+    description = models.CharField(max_length = 200, blank=True, null=True)
+    credits = models.CharField(max_length=50, blank=True, null=True)
     date_created = models.DateField('date', default=date.today)
-    file_upload = models.FileField()
-    file_url = models.URLField(max_length=200)
-    tags = models.ManyToManyField('Tag')
-    start_date = models.DateField('start date',default=date.today)
-    end_date = models.DateField('end date',default=date.today)
-    media_sources = models.CharField(max_length = 200)
+    file_upload = models.FileField('File Upload', blank=True, null=True)
+    file_url = models.URLField('File URL', max_length=200, blank=True, null=True)
+    file_iframe = models.CharField('File <iframe>', max_length = 1000, help_text="Please paste in an &lt;iframe&gt; to embed external content. Content must begin with &lt;iframe&gt; and end with &lt;/iframe&gt;", blank=True, null=True)
+    tags = models.ManyToManyField('Tag', blank=True)
+    start_date = models.DateField('Start Date', blank=True, null=True)
+    end_date = models.DateField('End Date', blank=True, null=True)
+    media_sources = models.CharField('Sources', max_length = 500, blank=True, null=True)
+
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name_plural = "media"
 
 class MapItem(models.Model):
     title = models.CharField(max_length = 50)
