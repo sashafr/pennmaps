@@ -51,7 +51,7 @@ class Media(models.Model):
 class MapItem(models.Model):
     title = models.CharField(max_length = 50)
     summary = models.CharField(max_length = 200)
-    description = models.CharField(max_length = 1000)
+    description = models.CharField(max_length = 1500)
     info_sources = models.CharField(max_length = 1000)
     location_notes = models.CharField(max_length = 50)
     start_date = models.DateField('start date',default=date.today)
