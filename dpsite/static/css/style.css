@@ -51,6 +51,55 @@ html {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* Nia's styles for mapitem.html */
+h1 {
+  font-size:30px;
+  font-family:'Open Sans';
+  font-weight:900;
+}
+
+h2 {
+  font-size:20px;
+  font-family:'Open Sans';
+  font-weight:600;
+}
+
+h3 {
+  font-size:16px;
+  font-family:'Open Sans';
+  font-weight:400;
+}
+
+h4 {
+  font-size:13px;
+  font-family:'Open Sans';
+  font-weight:400;
+  font-style:italic;
+}
+
+p {
+  font-size:13px;
+  font-family:'Open Sans';
+  font-weight:100;
+}
+
+a {
+  color:rgb(47, 124, 147);/*lt blue*/
+}
+
+a:visited {
+  color:rgb(0, 77, 100); /*dk blue*/
+}
+
+
+
+
+/* end Nia's styles for mapitem.html */
+
+/* Nia's styles for xyz */
+
+/* end Nia's styles for xyz */
+
 @-ms-viewport {
     width: device-width;
 }
