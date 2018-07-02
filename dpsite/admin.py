@@ -13,10 +13,8 @@ admin.site.register(Media)
 
 
 class MapItemAdminForm(forms.ModelForm):
-
     summary = forms.CharField(widget=CKEditorWidget())
     description = forms.CharField(widget=CKEditorWidget())
-
 
     class Meta:
         model = MapItem
