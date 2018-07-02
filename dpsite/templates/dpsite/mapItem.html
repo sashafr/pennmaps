@@ -1,5 +1,223 @@
-{% extends "base.html" %}
-
+{% extends "dpsite/base.html" %}
 {% block content %}
-<h1>Content goes here</h1>
-{% endblock %}
+
+<!--- copied from bootstrap template "portolio item" // Nia 06.22.2018 -->
+<head>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:light,regular,bold,extra-bold" rel="stylesheet">
+<style>
+/* taking css from other bootstrap files in the package : SHOULD WE JUST INCLUDE FULL BOOTSTRAP FILES AS LINK REFS???? */
+/* Below: css specifically for the portfolio item page, to be updated */
+
+@media (min-width: 992px) {
+  body {
+    font-family: 'Open Sans', sans-serif; /*added by Nia 6.25.18*/
+  }
+}
+/* Nia adding styles to test out Open Sans font, 6.25.18 */
+h1 {
+  font-size:30px;
+  font-family:'Open Sans';
+  font-weight:900;
+}
+
+h2 {
+  font-size:20px;
+  font-family:'Open Sans';
+  font-weight:600;
+}
+
+h3 {
+  font-size:16px;
+  font-family:'Open Sans';
+  font-weight:400;
+}
+
+h4 {
+  font-size:13px;
+  font-family:'Open Sans';
+  font-weight:400;
+  font-style:italic;
+}
+
+p {
+  font-size:13px;
+  font-family:'Open Sans';
+  font-weight:100;
+}
+
+a {
+  color:rgb(47, 124, 147);/*lt blue*/
+}
+
+a:visited {
+  color:rgb(0, 77, 100); /*dk blue*/
+}
+
+/* Below: sourcing styles referred to in BODY from files
+bootstrap-grid.css,
+bootstrap.css,
+*/
+
+  .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
+  .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
+  .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
+  .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg,
+  .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl,
+  .col-xl-auto {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-sm-6 {
+    -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .col-md-3 {
+    -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .col-md-4 {
+    -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+
+  .col-md-8 {
+      -ms-flex: 0 0 66.666667%;
+          flex: 0 0 66.666667%;
+      max-width: 66.666667%;
+    }
+/* below: i am confusion at this part and if i pulled the right class */
+  .mb-4,
+    .my-4 {
+      margin-bottom: 1.5rem !important;
+    }
+
+  .mt-3,
+  .my-3 {
+      margin-top: 1rem !important;
+    }
+
+  .mb-3,
+  .my-3 {
+      margin-bottom: 1rem !important;
+    }
+
+  .mt-4,
+  .my-4 {
+      margin-top: 1.5rem !important;
+    }
+
+  .mb-4,
+  .my-4 {
+      margin-bottom: 1.5rem !important;
+    }
+
+  .img-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+</style>
+</head>
+
+<body>
+<!-- need  Irene's nav bar to be added eventually -->
+
+<!-- Below: pulled from index.html of bootstrap portfolio item theme; beginning adjustments to mimic inDesign markups -->
+
+<!-- Page Content -->
+<br> <!-- for space between divs without making margins/padding -->
+
+<div class="container">
+
+  <!-- Portfolio Item Heading -->
+    <!-- (deleted) -->
+
+  <!-- Portfolio Item Row -->
+  <div class="row">
+    <div class="col-md-6">
+      <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+      <h2 class="my-3">Site of MOVE Bombing</h2>
+      <h3>Family Pictures and Stories "Momma at Work"</h3>
+      <h4>6221 Osage Avenue, West Philadelphia
+        <br>1980s-1990s</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
+    </div>
+
+    <div class="col-md-4">
+      <img class="img-fluid" src="https://i5.walmartimages.com/asr/4124033b-fac1-4c5e-965d-75611f1fe75f_1.ede2d65a57a1580e181a607f1ba7078e.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF">
+      <h2>Test title</h2>
+      <h3 class="my-3">Supplementary Content</h3>
+      <ul><h4>
+        <li>Lorem Ipsum</li>
+        <li>Dolor Sit Amet</li>
+        <li>Consectetur</li>
+        <li>Adipiscing Elit</li>
+        <li><a href="/">Sample link</a></li>
+      </h4></ul>
+    </div>
+
+    <div class="col-md-2">
+      <h3>Oral History Archive</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
+
+  </div>
+  <!-- /.row -->
+
+  <!-- Related Projects Row -->
+  <h3 class="my-4">Explore Related Items</h3>
+
+  <div class="row">
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+        <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+      </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+        <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+      </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+        <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+      </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+        <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+      </a>
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+</div>
+
+
+
+</body>
+ {% endblock %}
