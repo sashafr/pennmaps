@@ -5,5 +5,5 @@ urlpatterns = [
 	path('', views.base, name = 'base'),
 	path('dpsite/', views.mapItem),
     path('webseries/', views.webSeries),
-	path('mediaitem/', views.mediaitem), 
+	path('mediaitem/', views.mediaItem),
 ]
