@@ -62,6 +62,6 @@ def aboutProject(request):
     return render(request, 'dpsite/aboutProject.html')
 
 def map(request):
-    mapItems = MapItem.objects.all()
-    context = {'mapItems': mapItems, }
-    return render(request, 'dpsite/map.html', context)
+	mapItem = MapItem.objects.all()
+	context = {'map_items': mapItem}
+	return render(request, 'dpsite/Test.html',context)
