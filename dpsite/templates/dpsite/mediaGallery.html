@@ -1,5 +1,7 @@
 {{tag}}
 
 {% for mediaItem in media %}
-    {{mediaItem}}
+    <div class="row">
+        {{mediaItem.display_media|safe}}
+    </div>
 {% endfor %}

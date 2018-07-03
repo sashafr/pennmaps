@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from datetime import date
+import os
 
 class TagGroup(models.Model):
     title = models.CharField(max_length = 50)
@@ -41,6 +42,24 @@ class Media(models.Model):
     start_date = models.DateField('Start Date', blank=True, null=True)
     end_date = models.DateField('End Date', blank=True, null=True)
     media_sources = models.CharField('Sources', max_length = 500, blank=True, null=True)
+
+    def display_media(self, classes = ""):
+        image_ext = ['.jpg', '.jpeg', '.jpe', '.gif', '.png', '.bmp']
+        video_ext = ['.mp4', '.webm']
+        audio_ext = ['.mp3', '.wav']
+
+        if self.file_iframe:
+            return self.file_iframe
+        elif self.file_upload:
+            filename, ext = os.path.splitext(self.file_upload.name)
+            if ext in image_ext:
+                return '<img class="'+ classes + '" src="' + self.file_upload.url + '" alt="' + self.title + '">'
+            elif ext in video_ext:
+                return '<video class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="video/' + ext[1:] + '"></video>'
+            elif ext in audio_ext:
+                return '<audio class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="audio/' + ext[1:] + '"></audio>'                
+        else:
+            return "to do"
 
     def __str__(self):
         return self.title
