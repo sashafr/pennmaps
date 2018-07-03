@@ -9,7 +9,16 @@ from import_export.admin import ImportExportModelAdmin
 
 # Register your models here.
 
-admin.site.register(Tag)
+class TagResource(resources.ModelResource):
+
+    class Meta:
+        model = Tag
+
+class TagAdmin(ImportExportModelAdmin):
+    list_display = ('title', 'slug', 'tag_group')
+    resource_class = TagResource
+
+admin.site.register(Tag, TagAdmin)
 admin.site.register(TagGroup)
 admin.site.register(OverlayGroup)
 
