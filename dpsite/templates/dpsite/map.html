@@ -50,11 +50,13 @@
 
 	{% block content %}
 	<div class="searchBox">
-		<form action="/action_page.php">
-			<input type="text" placeholder="Search.." name="search">
-			<button type="submit"><i class="fa fa-search"></i></button>
-		</form>
+		<!-- <form action="/action_page.php"> -->
+
+			<input type="text" id = "query" placeholder="Search.." name="search">
+			<button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
+		<!-- </form> -->
 	</div>
+	<span id='logMsg'><!-- Use this span for writing debug messages --></span>
 
 <!-- Temporary modal button -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -92,6 +94,20 @@
 <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
 <script>
 
+const queryInput = document.getElementById('query');
+const searchButton = document.getElementById('submitButton');
+function search(query) {
+	 // $('#logMsg').html(queryInput.value);
+	  $('#logMsg').html("queryInput");
+}
+/**
+	* Handle click event.
+	* @param {Event} event The event.
+	*/
+ searchButton.onclick = function(event) {
+	 search(queryInput.value);
+	 event.preventDefault();
+ };
 
 /**
 * Elements that make up the popup.
