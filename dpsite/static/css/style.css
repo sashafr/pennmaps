@@ -9360,3 +9360,9 @@ a.text-dark:focus {
 
 
 /*# sourceMappingURL=bootstrap.css.map */
+
+/* Miranda style start here */
+.rainbow-menu-title {
+  font-family: 'Over the Rainbow', cursive;
+}
+/* Miranda style ends here */
