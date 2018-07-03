@@ -36,7 +36,7 @@ class Media(models.Model):
     date_created = models.DateField('date', default=date.today)
     file_upload = models.FileField('File Upload', blank=True, null=True)
     file_url = models.URLField('File URL', max_length=200, blank=True, null=True)
-    file_iframe = models.CharField('File <iframe>', max_length = 1000, help_text="Please paste in an &lt;iframe&gt; to embed external content. Content must begin with &lt;iframe&gt; and end with &lt;/iframe&gt;", blank=True, null=True)
+    file_iframe = models.CharField('File <iframe>', max_length = 1000, help_text="Please paste in an &lt;iframe&gt; to embed external content. Content must begin with &lt;iframe&gt; and end with &lt;/iframe&gt; ", blank=True, null=True)
     tags = models.ManyToManyField('Tag', blank=True)
     start_date = models.DateField('Start Date', blank=True, null=True)
     end_date = models.DateField('End Date', blank=True, null=True)
