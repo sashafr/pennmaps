@@ -32,8 +32,8 @@
     --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
-    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font-family-monospace: "Open Sans", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 *,
@@ -50,6 +50,55 @@ html {
     -ms-overflow-style: scrollbar;
     -webkit-tap-highlight-color: transparent;
 }
+
+/* Nia's styles for mapitem.html, currently moving to appropriate spots in file */
+h1 {
+  font-size:30px;
+  font-family:'Open Sans' !important;
+  font-weight:900;
+}
+
+h2 {
+  font-size:20px;
+  font-family:'Open Sans' !important;
+  font-weight:600;
+}
+
+h3 {
+  font-size:16px;
+  font-family:'Open Sans' !important;
+  font-weight:400;
+}
+
+h4 {
+  font-size:13px;
+  font-family:'Open Sans' !important;
+  font-weight:400;
+  font-style:italic;
+}
+
+p {
+  font-size:13px;
+  font-family:'Open Sans' !important;
+  font-weight:100;
+}
+
+a {
+  color:rgb(47, 124, 147) !important;/*lt blue*/
+}
+
+a:visited {
+  color:rgb(0, 77, 100) !important; /*dk blue*/
+}
+
+
+
+
+/* end Nia's styles for mapitem.html */
+
+/* Nia's styles for xyz */
+
+/* end Nia's styles for xyz */
 
 @-ms-viewport {
     width: device-width;
@@ -103,6 +152,9 @@ h6 {
 p {
     margin-top: 0;
     margin-bottom: 1rem;
+    font-size:13px;
+    font-family:'Open Sans' !important;
+    font-weight:100;
 }
 
 abbr[title],
@@ -388,30 +440,43 @@ h6,
 .h5,
 .h6 {
     margin-bottom: 0.5rem;
-    font-family: inherit;
+  /*  font-family: inherit;
     font-weight: 500;
     line-height: 1.2;
-    color: inherit;
+    color: inherit; */
 }
 
 h1,
 .h1 {
-    font-size: 2.5rem;
+    /* font-size: 2.5rem; */
+    font-size:30px;
+    font-family:'Open Sans' !important;
+    font-weight:900; /* nia edits */
 }
 
 h2,
 .h2 {
-    font-size: 2rem;
+    /* font-size: 2rem; */
+    font-size:20px;
+    font-family:'Open Sans' !important;
+    font-weight:600;
 }
 
 h3,
 .h3 {
-    font-size: 1.75rem;
+    /*font-size: 1.75rem; */
+    font-size:16px;
+    font-family:'Open Sans' !important;
+    font-weight:400;
 }
 
 h4,
 .h4 {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
+    font-size:13px;
+    font-family:'Open Sans' !important;
+    font-weight:400;
+    font-style:italic;
 }
 
 h5,
@@ -9357,3 +9422,9 @@ a.text-dark:focus {
 
 
 /*# sourceMappingURL=bootstrap.css.map */
+
+/* Miranda style start here */
+.rainbow-menu-title {
+  font-family: 'Over the Rainbow', cursive;
+}
+/* Miranda style ends here */
