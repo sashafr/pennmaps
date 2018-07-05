@@ -10,9 +10,6 @@ from django.template import Context, loader
 # Request Functions
 def base(request):
     return render(request, 'dpsite/base.html')
-    #template = loader.get_template("dpsite/index.html")
-    #return HttpResponse(template.render())
-	#return HttpResponse("Diggin' Philly data index.")
 
 def mapItem(request):
 	mapItem = MapItem.objects.all()

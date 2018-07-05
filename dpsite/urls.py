@@ -6,6 +6,7 @@ urlpatterns = [
 	path('dpsite/', views.mapItem),
     path('webseries/', views.webSeries),
 	path('mediaitem/', views.mediaItem),
+	path('mediaitem/', views.mediaItem),
     path('media/gallery/', views.mediaGallery),
     path('media/gallery/<slug:tag>/', views.mediaGallery),
     path('archive/search/', views.archiveSearch),
