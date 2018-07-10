@@ -223,9 +223,9 @@
 		<span class="checkmark"></span>
 	</label>
 
-	<!-- <button type="button" class="btn btn-primary" onclick="selectTag()">
+	<button type="button" class="btn btn-primary" onclick="selectTag()">
 		Filter
-	</button> -->
+	</button>
 
 	<span id='logMsg'><!-- Use this span for writing debug messages --></span>
 
@@ -284,32 +284,38 @@ function search(query) {
 
 searchButton.onclick = function(event) {
 	$('#logMsg').html(queryInput.value);
-	// search(queryInput.value);
+	search(queryInput.value);
 	event.preventDefault();
 };
 
-//function for tag selection\
-// function selectTag() {
-// 	// $('#logMsg').html("");\
-// 	var checkBox = document.getElementsByName("tag");
-//
-// 	var selectedItems = "";
-// 	// for (var i = 0; i< checkBox.length; i++) \{\
-// 	// 	// $('#logMsg').append("true " + checkBox[i].checked);\
-// 	// 	if (checkBox[i].checked == true) \{\
-// 	// 		// $('#logMsg').append(checkBox[i].value);\
-// 	// 		selectedItems += checkBox[i].value + "\\n";\
-// 	// 		// \{% for mapItem in map_items%\}\
-// 	// 		// \{% for tag in mapItem.tags%\}\
-// 	// 		// $('#logMsg').append('\{\{mapItem.tags\}\}');\
-// 	// 		// \{% endfor %\}\
-// 	// 		// \{% endfor %\}\
-// 	// 	\}\
-// 	//\
-// 	// \}\
-// 	$('#logMsg').html(selectedItems);
-//
-// }
+// function for tag selection
+function selectTag() {
+	$('#logMsg').html("");
+	var checkBox = document.getElementsByName("tag");
+
+	var selectedItems = "selected: ";
+	for (var i = 0; i< checkBox.length; i++) {
+		 // $('#logMsg').append("true " + checkBox[i].checked);
+		if (checkBox[i].checked == true) {
+			// $('#logMsg').append(checkBox[i].value);\
+			selectedItems += checkBox[i].value + "\n";
+			{% for mapItem in map_items%}
+
+			{%for t in mapItem.tags.all%}
+			if ('{{t}}'==checkBox[i].value) {
+				$('#logMsg').append('{{mapItem}}');
+			}
+
+			{% endfor %}
+
+			// \{% endfor %\}\
+			{% endfor %}
+		}
+
+	}
+	$('#logMsg').append(selectedItems);
+
+}
 
 /**
 * Elements that make up the popup.
