@@ -2,7 +2,9 @@ from django import forms
 from django.contrib.gis import forms as geoforms
 from django.contrib import admin
 from ckeditor.widgets import CKEditorWidget
-from .models import MapItem, WebSeries, Media, PartOfCity, TimePeriod, Tag, TagGroup, OverlayGroup
+from .models import *
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 
 # Register your models here.
@@ -31,9 +33,6 @@ class MapItemAdminForm(forms.ModelForm):
     class Meta:
         model = MapItem
         fields = '__all__'
-<<<<<<< HEAD
-class MapItemAdmin(admin.ModelAdmin):
-=======
 
 class MapItemResource(resources.ModelResource):
 
@@ -45,7 +44,6 @@ class MappedMediaInline(admin.TabularInline):
     extra = 1
 
 class MapItemAdmin(ImportExportModelAdmin):
->>>>>>> 292ca76adc9aa97a7c52e5a363b22c5395e4e82f
     form = MapItemAdminForm
     list_display = ('title','location_notes','status')
     list_filter = ['tags']

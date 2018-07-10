@@ -42,6 +42,72 @@
 	    border: 1px solid #ccc;
 	  }
 	}
+	/* styling checkbox */
+/* The container */
+.container {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 16px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+	position: absolute;
+	top: 0;
+	left: -20;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+	background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+	background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+	display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
 	</style>
 </head>
 
@@ -50,12 +116,117 @@
 
 	{% block content %}
 	<div class="searchBox">
-		<!-- <form action="/action_page.php"> -->
 
 			<input type="text" id = "query" placeholder="Search.." name="search">
 			<button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
-		<!-- </form> -->
 	</div>
+	<label class="container">Education
+		<input type="checkbox" name = "tag" value = "education">
+
+		<span class="checkmark"></span>
+
+	</label>
+
+	<label class="container">Museum
+		<input type="checkbox" name = "tag" value = "museum">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Historic Firsts
+		<input type="checkbox" name = "tag" value = "Historic Firsts">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Religion
+		<input type="checkbox" name = "tag" value = "Religion">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Arts or Culture
+
+		<input type = "checkbox" name = "tag" value = "Arts or Culture">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Building
+		<input type="checkbox" name = "tag" value = "Building">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Murals
+		<input type="checkbox" name = "tag" value = "Murals">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Activism
+		<input type="checkbox" name = "tag" value = "Activism">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Oral History
+		<input type="checkbox" name = "tag" value = "Oral History">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Public Spaces
+		<input type="checkbox" name = "tag" value = "Public Spaces">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Monument
+		<input type="checkbox" name = "tag" value = "Monument">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Politics
+		<input type="checkbox" name = "tag" value = "Politics">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Historic Events
+		<input type="checkbox" name = "tag" value = "Historic Events">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Image
+		<input type="checkbox" name = "tag" value = "Image">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Video
+		<input type="checkbox" name = "tag" value = "Video">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Organization
+		<input type="checkbox" name = "tag" value = "Organization">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Events
+		<input type="checkbox" name = "tag" value = "Events">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">Historic Marker
+		<input type="checkbox" name = "tag" value = "Historic Marker">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">People
+		<input type="checkbox" name = "tag" value = "People">
+		<span class="checkmark"></span>
+	</label>
+
+	<label class="container">360 Video
+		<input type="checkbox" name = "tag" value = "360 Video">
+		<span class="checkmark"></span>
+	</label>
+
+	<!-- <button type="button" class="btn btn-primary" onclick="selectTag()">
+		Filter
+	</button> -->
+
 	<span id='logMsg'><!-- Use this span for writing debug messages --></span>
 
 <!-- Temporary modal button -->
@@ -92,32 +263,53 @@
 <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
 const queryInput = document.getElementById('query');
 const searchButton = document.getElementById('submitButton');
 
 function search(query) {
-	 $('#logMsg').html(queryInput.value);
+	$('#logMsg').html(queryInput.value);
 
-	 {% for mapItem in map_items%}
-	 if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value)) {
-	 $('#logMsg').append('{{mapItem.title}}');
+	{% for mapItem in map_items%}
+	if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value)) {
+		$('#logMsg').append('{{mapItem.title}}');
 
- }
+	}
 
-	 {% endfor %}
+	{% endfor %}
 
 }
-/**
-	* Handle click event.
-	* @param {Event} event The event.
-	*/
- searchButton.onclick = function(event) {
-	 search(queryInput.value);
-	 event.preventDefault();
- };
 
+searchButton.onclick = function(event) {
+	$('#logMsg').html(queryInput.value);
+	// search(queryInput.value);
+	event.preventDefault();
+};
+
+//function for tag selection\
+// function selectTag() {
+// 	// $('#logMsg').html("");\
+// 	var checkBox = document.getElementsByName("tag");
+//
+// 	var selectedItems = "";
+// 	// for (var i = 0; i< checkBox.length; i++) \{\
+// 	// 	// $('#logMsg').append("true " + checkBox[i].checked);\
+// 	// 	if (checkBox[i].checked == true) \{\
+// 	// 		// $('#logMsg').append(checkBox[i].value);\
+// 	// 		selectedItems += checkBox[i].value + "\\n";\
+// 	// 		// \{% for mapItem in map_items%\}\
+// 	// 		// \{% for tag in mapItem.tags%\}\
+// 	// 		// $('#logMsg').append('\{\{mapItem.tags\}\}');\
+// 	// 		// \{% endfor %\}\
+// 	// 		// \{% endfor %\}\
+// 	// 	\}\
+// 	//\
+// 	// \}\
+// 	$('#logMsg').html(selectedItems);
+//
+// }
 
 /**
 * Elements that make up the popup.
