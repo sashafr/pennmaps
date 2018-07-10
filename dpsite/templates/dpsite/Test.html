@@ -1,8 +1,24 @@
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
 	* {box-sizing: border-box;}
+
+	/* Create two equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 
 	.searchBox input[type=text] {
 	  padding: 6px;
@@ -47,8 +63,10 @@
 .container {
 	display: block;
 	position: relative;
+	left:60;
 	padding-left: 35px;
 	margin-bottom: 12px;
+
 	cursor: pointer;
 	font-size: 16px;
 	-webkit-user-select: none;
@@ -120,108 +138,122 @@
 			<input type="text" id = "query" placeholder="Search.." name="search">
 			<button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
 	</div>
-	<label class="container">Education
-		<input type="checkbox" name = "tag" value = "education">
 
-		<span class="checkmark"></span>
+	<div class="row">
 
-	</label>
+  <div class="column">
+    <h2>Theme</h2>
+		<label class="container">Education
+			<input type="checkbox" name = "tag" value = "education">
 
-	<label class="container">Museum
-		<input type="checkbox" name = "tag" value = "museum">
-		<span class="checkmark"></span>
-	</label>
+			<span class="checkmark"></span>
 
-	<label class="container">Historic Firsts
-		<input type="checkbox" name = "tag" value = "Historic Firsts">
-		<span class="checkmark"></span>
-	</label>
+		</label>
 
-	<label class="container">Religion
-		<input type="checkbox" name = "tag" value = "Religion">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Museum
+			<input type="checkbox" name = "tag" value = "museum">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Arts or Culture
+		<label class="container">Historic Firsts
+			<input type="checkbox" name = "tag" value = "Historic Firsts">
+			<span class="checkmark"></span>
+		</label>
 
-		<input type = "checkbox" name = "tag" value = "Arts or Culture">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Religion
+			<input type="checkbox" name = "tag" value = "Religion">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Building
-		<input type="checkbox" name = "tag" value = "Building">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Arts or Culture
 
-	<label class="container">Murals
-		<input type="checkbox" name = "tag" value = "Murals">
-		<span class="checkmark"></span>
-	</label>
+			<input type = "checkbox" name = "tag" value = "Arts or Culture">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Activism
-		<input type="checkbox" name = "tag" value = "Activism">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Building
+			<input type="checkbox" name = "tag" value = "Building">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Oral History
-		<input type="checkbox" name = "tag" value = "Oral History">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Murals
+			<input type="checkbox" name = "tag" value = "Murals">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Public Spaces
-		<input type="checkbox" name = "tag" value = "Public Spaces">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Activism
+			<input type="checkbox" name = "tag" value = "Activism">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Monument
-		<input type="checkbox" name = "tag" value = "Monument">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Oral History
+			<input type="checkbox" name = "tag" value = "Oral History">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Politics
-		<input type="checkbox" name = "tag" value = "Politics">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Public Spaces
+			<input type="checkbox" name = "tag" value = "Public Spaces">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Historic Events
-		<input type="checkbox" name = "tag" value = "Historic Events">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Monument
+			<input type="checkbox" name = "tag" value = "Monument">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Image
-		<input type="checkbox" name = "tag" value = "Image">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Politics
+			<input type="checkbox" name = "tag" value = "Politics">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Video
-		<input type="checkbox" name = "tag" value = "Video">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Historic Events
+			<input type="checkbox" name = "tag" value = "Historic Events">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Organization
-		<input type="checkbox" name = "tag" value = "Organization">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Image
+			<input type="checkbox" name = "tag" value = "Image">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Events
-		<input type="checkbox" name = "tag" value = "Events">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Video
+			<input type="checkbox" name = "tag" value = "Video">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">Historic Marker
-		<input type="checkbox" name = "tag" value = "Historic Marker">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Organization
+			<input type="checkbox" name = "tag" value = "Organization">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">People
-		<input type="checkbox" name = "tag" value = "People">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Events
+			<input type="checkbox" name = "tag" value = "Events">
+			<span class="checkmark"></span>
+		</label>
 
-	<label class="container">360 Video
-		<input type="checkbox" name = "tag" value = "360 Video">
-		<span class="checkmark"></span>
-	</label>
+		<label class="container">Historic Marker
+			<input type="checkbox" name = "tag" value = "Historic Marker">
+			<span class="checkmark"></span>
+		</label>
+
+		<label class="container">People
+			<input type="checkbox" name = "tag" value = "People">
+			<span class="checkmark"></span>
+		</label>
+
+		<label class="container">360 Video
+			<input type="checkbox" name = "tag" value = "360 Video">
+			<span class="checkmark"></span>
+		</label>
+  </div>
+  <div class="column">
+    <h2>Part of City</h2>
+    <p>Some text..</p>
+  </div>
+</div>
+
+
+
 
 	<button type="button" class="btn btn-primary" onclick="selectTag()">
 		Filter
