@@ -47,12 +47,54 @@
 				border: 1px solid #ccc;
 			}
 		}
+		/*--------------------------------------------------------*/
+		.ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+        min-width: 280px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 48px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 48px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+      }
+      .ol-popup-closer:after {
+        content: "✖";
+			}
 	</style>
 </head>
 
 <body>
-	{% extends 'dpsite/base.html' %}
-	{% block content %}
+	{% extends 'dpsite/base.html' %} {% block content %}
 	<div class="searchBox">
 		<form action="/action_page.php">
 			<input type="text" placeholder="Search.." name="search">
@@ -92,10 +134,10 @@
 	<!--end modal-->
 
 	<div id="map" class="map"></div>
-	<div id="popup" class="ol-popup">
-		<a href="#" id="popup-closer" class="ol-popup-closer"></a>
-		<div id="popup-content"></div>
-	</div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+    </div>
 
 	<!--Import JS Stuff-->
 	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
@@ -103,6 +145,13 @@
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
 	<script>
+			import Map from 'ol/Map.js';
+      import Overlay from 'ol/Overlay.js';
+      import View from 'ol/View.js';
+      import {toStringHDMS} from 'ol/coordinate.js';
+      import TileLayer from 'ol/layer/Tile.js';
+      import {toLonLat} from 'ol/proj.js';
+      import TileJSON from 'ol/source/TileJSON.js';
 		/**
 		 * Elements that make up the popup.
 		 */
@@ -154,49 +203,72 @@
 			})
 		});
 
+		// Create markers for each data point
 		{ %
 			for mapItem in map_items %
 		} { %
 			for point in mapItem.location1 %
 		}
+
 		var markers = new ol.layer.Vector({
 			source: new ol.source.Vector({
 				features: [
+					// create new point
 					new ol.Feature({
-						geometry: new ol.geom.Point(ol.proj.fromLonLat([{
-							{
-								point.coords .0
-							}
-						}, {
-							{
-								point.coords .1
-							}
-						}])),
-
+						geometry: new ol.geom.Point(ol.proj.fromLonLat([
+							{{point.coords .0}}, {{point.coords .1}}
+						])
+					),
 					})
-
 				]
 			}),
+
+			// set marker style
 			style: new ol.style.Style({
 				image: new ol.style.Icon({
-					src: 'http://i65.tinypic.com/10g09hv.gif',
-					anchor: [0.5, 1]
+					anchor: [0.5, 1],
+					src: 'https://s22.postimg.cc/knhnjmzht/icon.png',
 				})
 			})
 		});
+
+		// TODO: Create a popup for each data point --------------------------------------------------------
+
+		// Add marker layer
 		map.addLayer(markers); { % endfor %
 		} { % endfor %
 		}
+		// -----------------TEST-----------------------------
+		var popup = new ol.Overlay({
+			element: document.getElementById('exampleModal'),
+			positioning: 'bottom-center',
+		})
+		/*Bootstrap Modal Pop Up Open Code*/
+		$(".modal-title").text("This is google map..");
+		$(".modal-body").text("Modal Body");
+		$("#myModal").modal('show');
 
 		/**
 		 * Add a click handler to the map to render the popup.
 		 */
 		map.on('singleclick', function(evt) {
+			if (evt.dragging) {
+				$(element).popover('destroy');
+				return;
+			}
+
 			var name = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
 				return feature.get('name');
 			})
+
 			var coordinate = evt.coordinate;
-			content.innerHTML = name;
+			const coordinate = evt.coordinate;
+        const hdms = toStringHDMS(toLonLat(coordinate));
+
+        content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
+            '</code>';
+        overlay.setPosition(coordinate);
+			content.innerHTML = 'name';
 			overlay.setPosition(coordinate);
 		});
 		map.on('pointermove', function(evt) {
