@@ -4,60 +4,66 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
+	/*Siyang Search Styles*/
 	* {box-sizing: border-box;}
 
-	/* Create two equal columns that floats next to each other */
+	/* Create two equal columns that floats next to each other*/
 	.column {
-		float: left;
-		width: 50%;
-		padding: 10px;
-
+		z-index: 2;
+	  float: left;
+		color: white;
+	  padding: 10px;
+		width: 25%;
+		overflow-x: hidden;
+		background-color: rgba(47, 124, 147, 0.8);;
 	}
 
-	/* Clear floats after the columns */
+	/* Clear floats after the columns*/
 	.row:after {
-		content: "";
-		display: table;
-		clear: both;
+	  content: "";
+	  display: table;
+	  clear: both;
 	}
 
 	.searchBox input[type=text] {
-		padding: 6px;
-		margin-top: 8px;
-		font-size: 17px;
-		border: none;
+	  font-size: 17px;
+	  border: none;
+	  color: white;
+	  background-color: rgba(47, 124, 147, 1);
 	}
+
 	.searchBox button {
-		/* float: right; */
-		padding: 6px 10px;
-		margin-top: 8px;
-		margin-right: 16px;
-		background: #ddd;
-		font-size: 17px;
-		border: none;
-		cursor: pointer;
+	  float: right;
+	  padding: 6px 10px;
+	  margin-top:8px;
+	  margin-right:16px;
+	  background: #ddd;
+	  font-size: 17px;
+	  border: none;
+	  cursor: pointer;
+	  background-color: rgba(47, 124, 147, 0.7);
 	}
 
 
 	.searchBox button:hover {
-		background: #ccc;
+	  background: #ccc;
 	}
 
 	@media screen and (max-width: 600px) {
-		.searchBox {
-			float: none;
-		}
-		.searchBox input[type=text], .searchBox button {
-			float: none;
-			display: block;
-			text-align: left;
-			width: 100%;
-			margin: 0;
-			padding: 14px;
-		}
-		.searchBox input[type=text] {
-			border: 1px solid #ccc;
-		}
+	  .searchBox {
+	    float: none;
+	  }
+	  .searchBox input[type=text], .searchBox button {
+	    float: none;
+	    display: block;
+	    text-align: left;
+	    width: 100%;
+	    margin: 0;
+	    padding: 14px;
+	  }
+	  .searchBox input[type=text] {
+	    border: 1px solid black;
+	  }
 	}
 	/* styling checkbox */
 	/* The container */
@@ -90,17 +96,15 @@
 		left: -20;
 		height: 25px;
 		width: 25px;
-		background-color: #eee;
+		background-color: #ddd;
 	}
 
 	/* Create a custom radio button */
 .radioCheckmark {
     position: absolute;
-    top: 0;
-    left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: #ddd;
     border-radius: 50%;
 }
 
@@ -149,7 +153,14 @@
 	background: white;
 }
 .slidecontainer {
-    width: 100%;
+		position: absolute;
+		z-index: 2;
+		right: 0.5rem;
+		top: 38.75rem;
+		width: 25%;
+		height: 12%;
+		padding: 8px 12px;
+		background-color: rgba(47, 124, 147, 1);
 }
 
 .slider {
@@ -189,18 +200,18 @@
 		.contentBox{
 			position: absolute;
 			z-index: 2;
-			background-color: rgba(47, 124, 147, 0.8);
+			background-color: rgba(47, 124, 147, 1);
 			color: #fff;
 			padding: 8px 12px;
-			right: 5px;
-			top: 10rem;
+			right: 0.5rem;
+			top: 7rem;
 			width: 25%;
 			height: 50%;
 			overflow-x: hidden;
 		}
 
 		.popup{
-			background-color: rgba(255,74,0,0.8);
+			background-color: rgba(255,74,0,1);
 		}
 	</style>
 </head>
@@ -209,20 +220,24 @@
 	{% extends 'dpsite/base.html' %}
 	{% load static %}
 	{% block content %}
+
 	<!--Search Box-->
+	<div style="background-color:rgba(47, 124, 147, 0.8); width: 270px">
+	<div class="input-group">
 	<div class="searchBox">
-
 		<input type="text" id = "query" placeholder="Search.." name="search">
+		<span class="input-group-btn">
 		<button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
+		</span>
 	</div>
-
+</div>
+</div>
 	<div class="row">
 
-		<div class="column">
-			<h2>Theme</h2>
+		<div class="column" style="top:40rem; height:25%;">
+			<h6 style="color:black;"><strong>Theme</strong></h6>
 			<label class="container">Education
 				<input type="checkbox" name = "tag" value = "education">
-
 				<span class="checkmark"></span>
 
 			</label>
@@ -324,25 +339,23 @@
 			</label>
 		</div>
 
-		<div class="column">
+		<div class="column" style="height=50px;">
 			<h2>Part of City</h2>
-			<!-- Octavius Catto    House: South Philly, Monument: Center City -->
+
 			<label class="radioContainer">North Philadelphia
 				<input type="radio" name = "location" value = "North Philadelphia">
-				<span class="radioCheckmark"></span>
 			</label>
+			<br>
 			<label class="radioContainer">West Philadelphia
 				<input type="radio" name = "location" value = "West Philadelphia">
-				<span class="radioCheckmark"></span>
 			</label>
-
+			<br>
 			<label class="radioContainer">South Philadelphia
 				<input type="radio" name = "location" value = "South Philadelphia">
-				<span class="radioCheckmark"></span>
 			</label>
 
-			<h2>Time Period</h2>
 			<div class="slidecontainer">
+			<h6>Time Period</h6>
   		<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
   		<p>Year: <span id="sliderValue"></span></p>
 			</div>
@@ -351,19 +364,21 @@
 	</div>
 
 
-	<button type="button" class="btn btn-primary" onclick="selectTag()">
+	<button type="button" class="btn btn-primary" onclick="selectTag()" style="z-index:2;">
 		Filter By Tags
 	</button>
-	<button type="button" class="btn btn-primary" onclick="selectPartOfCity()">
+	<button type="button" class="btn btn-primary" onclick="selectPartOfCity()" style="z-index:2;">
 		Filter By Part Of City
 	</button>
-	<button type="button" class="btn btn-primary" onclick="selectTimePeriod()">
+	<button type="button" class="btn btn-primary" onclick="selectTimePeriod()" style="z-index:2;">
 		Filter By Time Period
 	</button>
 
-	<span id='logMsg'><!-- Use this span for writing debug messages --></span>
+<!-- Use this span for writing debug messages -->
+	<span id='logMsg'></span>
 
 	<!--Content-->
+	<div class="shadow p-3 mb-5 bg-white rounded">
 	<div class="contentBox">
 		<!--Header of the location; default: "Diggin'Philly"-->
 		<h6 style="color:black;"><strong><div id="content-header" href=#>
@@ -385,17 +400,15 @@
 		<div id="media, if it exists">
 		</div>
 	</div>
+</div>
 
 	<!--Map and popup items-->
 	<div id="map"></div>
 	<div id="popup" class="popup"></div>
 
-
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-	<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 	<script>
 	const queryInput = document.getElementById('query');
 	const searchButton = document.getElementById('submitButton');
@@ -464,10 +477,6 @@
 				if ('{{mapItem.location_notes}}'==checkBox[i].value) {
 					$('#logMsg').append('{{mapItem}}');
 				}
-
-
-
-
 				{% endfor %}
 				break;
 			}
@@ -487,7 +496,7 @@
 
 	function selectTimePeriod() {
 		$('#logMsg').html("");
-		// $('#logMsg').append(slider.value);
+		$('#logMsg').append(slider.value);
 		{% for mapItem in map_items%}
 		var startDate = '{{mapItem.start_date}}';
 		var startYear = startDate.substr(startDate.indexOf(",")+1);
