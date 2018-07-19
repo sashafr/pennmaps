@@ -9,27 +9,23 @@
 
 	/* Create two equal columns that floats next to each other*/
 	.column {
-		z-index: 2;
 	  float: left;
 		color: white;
 	  padding: 10px;
-		width: 25%;
-		overflow-x: hidden;
-		background-color: rgba(47, 124, 147, 0.8);;
 	}
 
-	/* Clear floats after the columns*/
+	/* Clear floats after the columns
 	.row:after {
 	  content: "";
 	  display: table;
 	  clear: both;
-	}
+	}*/
 
 	.searchBox input[type=text] {
 	  font-size: 17px;
 	  border: none;
-	  color: white;
-	  background-color: rgba(47, 124, 147, 1);
+	  color: #ddd;
+		padding: 8px -12px;
 	}
 
 	.searchBox button {
@@ -41,7 +37,6 @@
 	  font-size: 17px;
 	  border: none;
 	  cursor: pointer;
-	  background-color: rgba(47, 124, 147, 0.7);
 	}
 
 
@@ -71,9 +66,8 @@
 		display: block;
 		position: relative;
 		left:60;
-		padding-left: 35px;
+		padding-left: 5px;
 		margin-bottom: 12px;
-
 		cursor: pointer;
 		font-size: 16px;
 		-webkit-user-select: none;
@@ -133,7 +127,7 @@
 
 	/* Style the checkmark/indicator */
 	.container .checkmark:after {
-		left: 9px;
+		left: 10px;
 		top: 5px;
 		width: 5px;
 		height: 10px;
@@ -153,14 +147,8 @@
 	background: white;
 }
 .slidecontainer {
-		position: absolute;
-		z-index: 2;
-		right: 0.5rem;
-		top: 38.75rem;
-		width: 25%;
-		height: 12%;
+		height: 13%;
 		padding: 8px 12px;
-		background-color: rgba(47, 124, 147, 1);
 }
 
 .slider {
@@ -195,24 +183,45 @@
 }
 
 		/**
-			* Styles for content boxes and hover popups
+			* Irene's styles for content boxes and hover popups
 			*/
 		.contentBox{
-			position: absolute;
-			z-index: 2;
-			background-color: rgba(47, 124, 147, 1);
 			color: #fff;
 			padding: 8px 12px;
-			right: 0.5rem;
-			top: 7rem;
-			width: 25%;
-			height: 50%;
-			overflow-x: hidden;
 		}
 
-		.popup{
-			background-color: rgba(255,74,0,1);
+		/**
+			* Aligns the content boxes to the right side
+			*/
+		#right-align{
+			width: 25%;
+			right: 0em;
+			position: absolute;
+			z-index: 1;
+			background-color: rgba(47, 124, 147, 0.7);
+			overflow-x: hidden;
 		}
+		/* width */
+		::-webkit-scrollbar {
+		    width: 10px;
+		}
+
+		/* Track */
+		::-webkit-scrollbar-track {
+		    background: #f1f1f1;
+		}
+
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+		    background: #888;
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+		    background: #555;
+		}
+		/**/
+
 	</style>
 </head>
 
@@ -220,21 +229,21 @@
 	{% extends 'dpsite/base.html' %}
 	{% load static %}
 	{% block content %}
-
-	<!--Search Box-->
-	<div style="background-color:rgba(47, 124, 147, 0.8); width: 270px">
-	<div class="input-group">
-	<div class="searchBox">
-		<input type="text" id = "query" placeholder="Search.." name="search">
+	<!--INFORMATION-->
+	<!--SEARCH BOX-->
+	<div class="input-group" id="right-align" style="top:70rem;">
+	<div class="searchBox" style="width:100%;">
+		<input type="text" id = "query" placeholder="Search.." style="width:75%;" name="search">
 		<span class="input-group-btn">
-		<button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
-		</span>
+		<button type="submit" style="" id ="submitButton"><i class="fa fa-search"></i></button>
+	</span>
 	</div>
 </div>
-</div>
+
+<!--CHECKBOXES-->
 	<div class="row">
 
-		<div class="column" style="top:40rem; height:25%;">
+		<div id="right-align" class="column" style="top:36em; height:20%;">
 			<h6 style="color:black;"><strong>Theme</strong></h6>
 			<label class="container">Education
 				<input type="checkbox" name = "tag" value = "education">
@@ -339,8 +348,9 @@
 			</label>
 		</div>
 
-		<div class="column" style="height=50px;">
-			<h2>Part of City</h2>
+		<!--PART OF CITY-->
+		<div id="right-align" class="column" style="height=10%; top:48em">
+			<h6 style="color:black;"><strong>Part of City</strong></h6>
 
 			<label class="radioContainer">North Philadelphia
 				<input type="radio" name = "location" value = "North Philadelphia">
@@ -353,15 +363,15 @@
 			<label class="radioContainer">South Philadelphia
 				<input type="radio" name = "location" value = "South Philadelphia">
 			</label>
-
-			<div class="slidecontainer">
+		</div>
+	</div>
+			<!--TIME PERIOD SLIDER-->
+			<div id="right-align" class="slidecontainer" style="top:60em;">
 			<h6>Time Period</h6>
   		<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
   		<p>Year: <span id="sliderValue"></span></p>
 			</div>
 
-		</div>
-	</div>
 
 
 	<button type="button" class="btn btn-primary" onclick="selectTag()" style="z-index:2;">
@@ -377,30 +387,26 @@
 <!-- Use this span for writing debug messages -->
 	<span id='logMsg'></span>
 
-	<!--Content-->
-	<div class="shadow p-3 mb-5 bg-white rounded">
-	<div class="contentBox">
+	<!--INFO BOX-->
+	<div class="contentBox"id="right-align" style="height:50%;">
 		<!--Header of the location; default: "Diggin'Philly"-->
 		<h6 style="color:black;"><strong><div id="content-header" href=#>
 			Diggin' Philly: The Black Philadelphia Project
 		</div></strong></h6>
-		<!--Image if one exists-->
-		<div></div>
-		<!--Neighboord and date, if one exists-->
-		<p><strong><div id="content-neighborhood-dates">
 
-		</div></strong></p>
-
-		<!--Summary of data; default: project description-->
-		<p><div id="content-summary">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</div></p>
-
-		<!--Media, if it exists-->
-		<div id="media, if it exists">
+			<!--Image if one exists-->
+			<div></div>
+			<!--Neighboord and date, if one exists-->
+			<p><strong><div id="content-neighborhood-dates">
+			</div></strong></p>
+			<!--Summary of data; default: project description-->
+			<p><div id="content-summary">
+				Loem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div></p>
+			<!--Media, if it exists-->
+			<div id="media, if it exists">
+			</div>
 		</div>
-	</div>
-</div>
 
 	<!--Map and popup items-->
 	<div id="map"></div>
@@ -446,7 +452,7 @@
 				{% for mapItem in map_items%}
 
 				{%for t in mapItem.tags.all%}
-				if ('{{t}}'==checkBox[i].value) {
+				if ('{{t}}'===checkBox[i].value) {
 					$('#logMsg').append('{{mapItem}}');
 				}
 
