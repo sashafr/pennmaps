@@ -100,8 +100,10 @@ a:visited {
 
 /* end Nia's styles for xyz */
 
-/**/
-/* width */
+
+/**
+  * Custom Scrollbar CSS
+  */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -121,6 +123,8 @@ a:visited {
     background: #555;
 }
 /**/
+/**/
+
 @-ms-viewport {
     width: device-width;
 }
