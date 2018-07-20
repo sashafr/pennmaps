@@ -4,269 +4,295 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
-	/*Siyang Search Styles*/
-	* {box-sizing: border-box;}
+		/*Siyang Search Styles*/
+
+		* {
+			box-sizing: border-box;
+		}
 
 
-	.searchBox input[type=text] {
-	  font-size: 17px;
-	  border: none;
-	  color: #ddd;
-	}
+		.searchBox input[type=text] {
+			font-size: 17px;
+			border: none;
+			color: #ddd;
+		}
 
-	.searchBox button {
-	  float: right;
-		size: 5rem;
-	  background: #ddd;
-	  font-size: 17px;
-	  border: none;
-	  cursor: pointer;
-	}
+		.searchBox button {
+			float: right;
+			size: 5rem;
+			background: #ddd;
+			font-size: 17px;
+			border: none;
+			cursor: pointer;
+		}
 
 
-	.searchBox button:hover {
-	  background: #ccc;
-	}
+		.searchBox button:hover {
+			background: #ccc;
+		}
 
-	@media screen and (max-width: 600px) {
-	  .searchBox {
-	    float: none;
+		@media screen and (max-width: 600px) {
+			.searchBox {
+				float: none;
+				width: 100%;
+			}
+			.searchBox input[type=text],
+			.searchBox button {
+				float: none;
+				display: block;
+				text-align: left;
+				margin: 0;
+				padding: 14px;
+			}
+			.searchBox input[type=text] {
+				border: 1px solid black;
+			}
+		}
+
+		/* styling checkbox */
+
+		/* The container */
+
+		.container {
+			display: block;
+			position: relative;
+			left: 60;
+			padding-left: 5px;
+			margin-bottom: 12px;
+			cursor: pointer;
+			font-size: 16px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		/* Hide the browser's default checkbox */
+
+		.container input {
+			position: absolute;
+			opacity: 0;
+			cursor: pointer;
+		}
+
+		/* Create a custom checkbox */
+
+		.checkmark {
+			position: absolute;
+			top: 0;
+			left: -20;
+			height: 25px;
+			width: 25px;
+			background-color: #ddd;
+		}
+
+		/* Create a custom radio button */
+
+		.radioCheckmark {
+			position: absolute;
+			height: 25px;
+			width: 25px;
+			background-color: #ddd;
+			border-radius: 50%;
+		}
+
+
+		/* On mouse-over, add a grey background color */
+
+		.container:hover input~.checkmark {
+			background-color: #ccc;
+		}
+
+		/* When the checkbox is checked, add a blue background */
+
+		.container input:checked~.checkmark {
+			background-color: #2196F3;
+		}
+
+		/* Create the checkmark/indicator (hidden when not checked) */
+
+		.checkmark:after {
+			content: "";
+			position: absolute;
+			display: none;
+		}
+
+		/* Show the checkmark when checked */
+
+		.container input:checked~.checkmark:after {
+			display: block;
+		}
+
+		/* Style the checkmark/indicator */
+
+		.container .checkmark:after {
+			left: 10px;
+			top: 5px;
+			width: 5px;
+			height: 10px;
+			border: solid white;
+			border-width: 0 3px 3px 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+
+		/* Style the indicator (dot/circle) */
+
+		.radioContainer .radioCheckmark:after {
+			top: 9px;
+			left: 9px;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: white;
+		}
+
+		.slidecontainer {
+			padding: 8px 12px;
+		}
+
+		.slider {
+			-webkit-appearance: none;
 			width: 100%;
-	  }
-	  .searchBox input[type=text], .searchBox button {
-	    float: none;
-	    display: block;
-	    text-align: left;
-	    margin: 0;
-	    padding: 14px;
-	  }
-	  .searchBox input[type=text] {
-	    border: 1px solid black;
-	  }
-	}
-	/* styling checkbox */
-	/* The container */
-	.container {
-		display: block;
-		position: relative;
-		left:60;
-		padding-left: 5px;
-		margin-bottom: 12px;
-		cursor: pointer;
-		font-size: 16px;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
+			height: 25px;
+			background: #eee;
+			outline: none;
+			opacity: 0.7;
+			-webkit-transition: .2s;
+			transition: opacity .2s;
+		}
 
-	/* Hide the browser's default checkbox */
-	.container input {
-		position: absolute;
-		opacity: 0;
-		cursor: pointer;
-	}
+		.slider:hover {
+			opacity: 1;
+		}
 
-	/* Create a custom checkbox */
-	.checkmark {
-		position: absolute;
-		top: 0;
-		left: -20;
-		height: 25px;
-		width: 25px;
-		background-color: #ddd;
-	}
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 25px;
+			height: 25px;
+			background: #000000;
+			cursor: pointer;
+		}
 
-	/* Create a custom radio button */
-.radioCheckmark {
-    position: absolute;
-    height: 25px;
-    width: 25px;
-    background-color: #ddd;
-    border-radius: 50%;
-}
-
-
-	/* On mouse-over, add a grey background color */
-	.container:hover input ~ .checkmark {
-		background-color: #ccc;
-	}
-
-	/* When the checkbox is checked, add a blue background */
-	.container input:checked ~ .checkmark {
-		background-color: #2196F3;
-	}
-
-	/* Create the checkmark/indicator (hidden when not checked) */
-	.checkmark:after {
-		content: "";
-		position: absolute;
-		display: none;
-	}
-
-	/* Show the checkmark when checked */
-	.container input:checked ~ .checkmark:after {
-		display: block;
-	}
-
-	/* Style the checkmark/indicator */
-	.container .checkmark:after {
-		left: 10px;
-		top: 5px;
-		width: 5px;
-		height: 10px;
-		border: solid white;
-		border-width: 0 3px 3px 0;
-		-webkit-transform: rotate(45deg);
-		-ms-transform: rotate(45deg);
-		transform: rotate(45deg);
-	}
-	/* Style the indicator (dot/circle) */
-.radioContainer .radioCheckmark:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
-}
-.slidecontainer {
-		padding: 8px 12px;
-}
-
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 25px;
-    background: #eee;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.slider:hover {
-    opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #000000;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
-}
+		.slider::-moz-range-thumb {
+			width: 25px;
+			height: 25px;
+			background: #4CAF50;
+			cursor: pointer;
+		}
 
 
 		/**
 			* Aligns all the content boxes to the right side
 			*/
-		#right-align{
+
+		#right-align {
 			width: 25%;
-			height:100%;
+			height: 100%;
 			right: 0em;
 			z-index: 1000;
 			position: fixed;
 			background-color: rgba(47, 124, 147, 0.7);
 			overflow-x: hidden;
-			transform: translateX(100%);
+			transform: translateX(0);
 			transition: transform 1s;
 		}
 
-		#right-align.active{
-			transform:translateX(0);
+		#right-align.active {
+			transform: translateX(100%);
 		}
 
 		/* Irene's Collapsibles*/
-		/**
-			* Hides Option Menu to the right
-			*/
 
-		.hideButton{
-			cursor:pointer;
-			position: absolute
-			z-index=1000;
-			left: 20rem;
-			top:10rem;
+		/* a button that hides Option Menu to the right */
+
+		.hideButton {
+			cursor: pointer;
+			position: fixed;
+			z-index:1000;
+			left: 5rem;
+			top: 10rem;
 			width: 5rem;
-			height:5rem;
+			height: 5rem;
+			transform: translateX(0);
+			transition: transform 1s;
+		}
+
+		.hideButton:active{
+			transform:translateX(100%);
 		}
 
 		/* Creates a single collapsible tag */
-		.collapsible{
-			position:relative;
-			border-style:solid;
-			border-width:1px;
+
+		.collapsible {
+			position: relative;
+			border-style: solid;
+			border-width: 1px;
 			border-color: rgba(47, 124, 147, 1);
-		  cursor:pointer;
+			cursor: pointer;
 			width: 100%;
 			padding: 18px;
-		  text-align: center;
-		  font-size: 1rem;
-		  color:black;
-		  background-color: rgba(47, 124, 147, 0.7);
+			text-align: center;
+			font-size: 1rem;
+			color: black;
+			background-color: rgba(47, 124, 147, 0.7);
 		}
 
-		.active, .collapsible:hover{
-		  background-color: rgba(47, 124, 147, 1);
+		.active,
+		.collapsible:hover {
+			background-color: rgba(47, 124, 147, 1);
 		}
 
-		.content{
+		/**/
+		.content {
 			padding: 0px 8px;
-		  max-height: 0;
+			max-height: 0;
 			overflow-x: hidden;
-		  transition: max-height 0.2s ease-out;
-		  background-color: rgba(47, 124, 147, 0.7);
+			transition: max-height 0.2s ease-out;
+			background-color: rgba(47, 124, 147, 0.7);
 		}
-
-
 	</style>
 </head>
 
 <body>
-	{% extends 'dpsite/base.html' %}
-	{% load static %}
-	{% block content %}
+	{% extends 'dpsite/base.html' %} {% load static %} {% block content %}
 
 	<!--INFO BOX-->
-	<button  id="hideButton">Toggle Menu</button>
+	<button class="hideButton" id="hideButton">Toggle Menu</button>
 
-<div id="right-align">
-	<div class="contentBox">
-		<button class="collapsible"><strong><div id="content-header">Diggin' Philly: The Black Philadelphia Project</div></strong></button>
-		<div class="content" style="color:white;">
-			<p><strong><div id="content-neighborhood-dates">
+	<div id="right-align">
+		<div class="contentBox">
+			<button class="collapsible"><strong><div id="content-header">Diggin' Philly: The Black Philadelphia Project</div></strong></button>
+			<div class="content" style="color:white;">
+				<p><strong><div id="content-neighborhood-dates">
 			</div></strong></p>
-			<p><div id="content-summary">
-				Loem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-			</div></p>
-		</div>
-	</div>
-
-	<!--SEARCH BOX-->
-	<div class="input-group">
-		<button class="collapsible"id="search"><strong>Search</strong></button>
-		<div class="content" id="search-content">
-			<div class="searchBox" style="width:100%;">
-				<input type="text" id = "query" placeholder="Search.." style="width:75%;" name="search">
-				<span class="input-group-btn">
-					<button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
-				</span>
+				<p>
+					<div id="content-summary">
+						Loem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+						in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+				</p>
 			</div>
 		</div>
-	</div>
 
-<!--CHECKBOXES-->
-			<button class="collapsible" ><strong>Theme</strong></button>
-			<div class="content"  style="color:white;">
+		<!--SEARCH BOX-->
+		<div class="input-group">
+			<button class="collapsible" id="search"><strong>Search</strong></button>
+			<div class="content" id="search-content">
+				<div class="searchBox" style="width:100%;">
+					<input type="text" id="query" placeholder="Search.." style="width:75%;" name="search">
+					<span class="input-group-btn">
+					<button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
+				</span>
+				</div>
+			</div>
+		</div>
+
+		<!--CHECKBOXES-->
+		<button class="collapsible"><strong>Theme</strong></button>
+		<div class="content" style="color:white;">
 			<label class="container">Education
 				<input type="checkbox" name = "tag" value = "education">
 				<span class="checkmark"></span>
@@ -371,35 +397,35 @@
 
 		<!--PART OF CITY-->
 		<div id="part-of-city">
-			<button class="collapsible" ><strong>Part of City</strong></button>
-			<div class="content"  style="color:white;">
-			<label class="radioContainer">North Philadelphia
+			<button class="collapsible"><strong>Part of City</strong></button>
+			<div class="content" style="color:white;">
+				<label class="radioContainer">North Philadelphia
 				<input type="radio" name = "location" value = "North Philadelphia">
 			</label>
-			<br>
-			<label class="radioContainer">West Philadelphia
+				<br>
+				<label class="radioContainer">West Philadelphia
 				<input type="radio" name = "location" value = "West Philadelphia">
 			</label>
-			<br>
-			<label class="radioContainer">South Philadelphia
+				<br>
+				<label class="radioContainer">South Philadelphia
 				<input type="radio" name = "location" value = "South Philadelphia">
 			</label>
-		</div>
-		</div>
-			<!--TIME PERIOD SLIDER-->
-			<div id="time">
-			<button class="collapsible" ><strong>Time Period</strong></button>
-			<div class="content"  style="color:white;">
-			<div  class="slidecontainer">
-
-  		<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
-  		<p>Year: <span id="sliderValue"></span></p>
 			</div>
 		</div>
-	</div>
+		<!--TIME PERIOD SLIDER-->
+		<div id="time">
+			<button class="collapsible"><strong>Time Period</strong></button>
+			<div class="content" style="color:white;">
+				<div class="slidecontainer">
 
-</div>
-<!--
+					<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
+					<p>Year: <span id="sliderValue"></span></p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!--
 	<button type="button" class="btn btn-primary" onclick="selectTag()" style="z-index:2;">
 		Filter By Tags
 	</button>
@@ -410,7 +436,7 @@
 		Filter By Time Period
 	</button>-->
 
-<!-- Use this span for writing debug messages -->
+	<!-- Use this span for writing debug messages -->
 	<span id='logMsg'></span>
 
 	<!--Map and popup items-->
@@ -421,139 +447,140 @@
 
 
 	<script>
-	/*COLLAPSIBLE SIDEBAR*/
-	var collapse = document.getElementsByClassName("collapsible");
+		/*COLLAPSIBLE SIDEBAR ELEMENTS*/
+		var collapse = document.getElementsByClassName("collapsible");
 
-	for(var i=0; i<collapse.length;i++){
-		collapse[i].addEventListener("click",function(){
-			this.classList.toggle("active");
-			var content=this.nextElementSibling;
-			if(content.style.maxHeight){
-				content.style.maxHeight =null;
-			}
-			else{
-				content.style.maxHeight=content.scrollHeight+"px";
-			}
-		});
-	}
-	/*END COLLAPSIBLE SIDEBAR*/
+		for (var i = 0; i < collapse.length; i++) {
+			collapse[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var content = this.nextElementSibling;
+				if (content.style.maxHeight) {
+					content.style.maxHeight = null;
+				} else {
+					content.style.maxHeight = content.scrollHeight + "px";
+				}
+			});
+		}
+		/*END COLLAPSIBLE SIDEBAR*/
 
-	/*HIDE PANEL*/
-	var hideRight = document.getElementById("hideButton");
+		/*HIDE PANEL*/
+		var hide = document.getElementById("hideButton");
 
-	hideRight.addEventListener("click", function(){
+		hide.addEventListener("click", function() {
 			var options = document.getElementById("right-align");
-			if (options.classList.contains("active")){
+			var button = document.getElementById("hideButton");
+			if (options.classList.contains("active")) {
 				options.classList.remove("active");
-			}
-			else{
+			} else {
 				options.classList.add("active");
 			}
-	});
+			if (button.classList.contains("active")){
+				button.classList.remove("active");
+			}
+			else{
+				button.classList.add("active");
+			}
+		});
+		/*END HIDE PANEL*/
 
-	/*END HIDE PANEL*/
-	const queryInput = document.getElementById('query');
-	const searchButton = document.getElementById('submitButton');
+		/*Map Query*/
+		const queryInput = document.getElementById('query');
+		const searchButton = document.getElementById('submitButton');
 
-	function search(query) {
-		$('#logMsg').html(queryInput.value);
+		function search(query) {
+			$('#logMsg').html(queryInput.value);
 
-		{% for mapItem in map_items%}
-		if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value)) {
-			$('#logMsg').append('{{mapItem.title}}');
+			{%for mapItem in map_items %}
+			if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value)) {
+				$('#logMsg').append('{{mapItem.title}}');
+
+			}
+
+			{% endfor %}
 
 		}
 
-		{% endfor %}
+		searchButton.onclick = function(event) {
+			$('#logMsg').html(queryInput.value);
+			search(queryInput.value);
+			event.preventDefault();
+		};
 
-	}
+		// function for tag selection
+		function selectTag() {
+			$('#logMsg').html("");
+			var checkBox = document.getElementsByName("tag");
 
-	searchButton.onclick = function(event) {
-		$('#logMsg').html(queryInput.value);
-		search(queryInput.value);
-		event.preventDefault();
-	};
-
-	// function for tag selection
-	function selectTag() {
-		$('#logMsg').html("");
-		var checkBox = document.getElementsByName("tag");
-
-		var selectedItems = "selected: ";
-		for (var i = 0; i< checkBox.length; i++) {
-			// $('#logMsg').append("true " + checkBox[i].checked);
-			if (checkBox[i].checked == true) {
-				// $('#logMsg').append(checkBox[i].value);\
-				selectedItems += checkBox[i].value + "\n";
-				{% for mapItem in map_items%}
-
-				{%for t in mapItem.tags.all%}
-				if ('{{t}}'===checkBox[i].value) {
-					$('#logMsg').append('{{mapItem}}');
+			var selectedItems = "selected: ";
+			for (var i = 0; i < checkBox.length; i++) {
+				// $('#logMsg').append("true " + checkBox[i].checked);
+				if (checkBox[i].checked == true) {
+					// $('#logMsg').append(checkBox[i].value);\
+					selectedItems += checkBox[i].value + "\n";
+					{%for mapItem in map_items %}
+					{%for t in mapItem.tags.all %}
+						if ('{{t}}' === checkBox[i].value) {
+							$('#logMsg').append('{{mapItem}}');
+						}
+					{% endfor %}
+					// \{% endfor %\}\
+					{% endfor %}
 				}
 
-				{% endfor %}
+			}
+			$('#logMsg').append(selectedItems);
 
-				// \{% endfor %\}\
-				{% endfor %}
+		}
+
+		// function for part of city selection
+		function selectPartOfCity() {
+			$('#logMsg').html("");
+			var checkBox = document.getElementsByName("location");
+
+			for (var i = 0; i < checkBox.length; i++) {
+
+				if (checkBox[i].checked == true) {
+
+					// $('#logMsg').append("checked");
+					{%for mapItem in map_items %}
+						// $('#logMsg').append('{{mapItem}}');
+						if ('{{mapItem.location_notes}}' == checkBox[i].value) {
+							$('#logMsg').append('{{mapItem}}');
+						}
+					{% endfor %}
+					break;
+				}
+
 			}
 
 		}
-		$('#logMsg').append(selectedItems);
 
-	}
 
-	// function for part of city selection
-	function selectPartOfCity() {
-		$('#logMsg').html("");
-		var checkBox = document.getElementsByName("location");
+		var slider = document.getElementById("sliderRange");
+		var output = document.getElementById("sliderValue");
+		output.innerHTML = slider.value;
 
-		for (var i = 0; i< checkBox.length; i++) {
+		slider.oninput = function() {
+			output.innerHTML = this.value;
+		}
 
-			if (checkBox[i].checked == true) {
-
-				// $('#logMsg').append("checked");
-				{% for mapItem in map_items%}
-				// $('#logMsg').append('{{mapItem}}');
-
-				if ('{{mapItem.location_notes}}'==checkBox[i].value) {
+		function selectTimePeriod() {
+			$('#logMsg').html("");
+			$('#logMsg').append(slider.value);
+			{%for mapItem in map_items %}
+				var startDate = '{{mapItem.start_date}}';
+				var startYear = startDate.substr(startDate.indexOf(",") + 1);
+				var endDate = '{{mapItem.end_date}}';
+				var endYear = endDate.substr(endDate.indexOf(",") + 1);
+				// $('#logMsg').append("start year: " + startYear);
+				// $('#logMsg').append("end year: " + endYear);
+				// && endYear >=slider.value
+				if (startYear <= slider.value && slider.value >= endYear) {
 					$('#logMsg').append('{{mapItem}}');
 				}
-				{% endfor %}
-				break;
-			}
-
+				// var year = '{{mapItem.start_date}}'.substr(str.indexOf(",")+1);
+			{% endfor %}
 		}
-
-	}
-
-
-	var slider = document.getElementById("sliderRange");
-	var output = document.getElementById("sliderValue");
-	output.innerHTML = slider.value;
-
-	slider.oninput = function() {
-  	output.innerHTML = this.value;
-	}
-
-	function selectTimePeriod() {
-		$('#logMsg').html("");
-		$('#logMsg').append(slider.value);
-		{% for mapItem in map_items%}
-		var startDate = '{{mapItem.start_date}}';
-		var startYear = startDate.substr(startDate.indexOf(",")+1);
-		var endDate = '{{mapItem.end_date}}';
-		var endYear = endDate.substr(endDate.indexOf(",")+1);
-		// $('#logMsg').append("start year: " + startYear);
-		// $('#logMsg').append("end year: " + endYear);
-	// && endYear >=slider.value
-		if (startYear <= slider.value && slider.value >= endYear) {
-			$('#logMsg').append('{{mapItem}}');
-		}
-		// var year = '{{mapItem.start_date}}'.substr(str.indexOf(",")+1);
-
-		{% endfor %}
-	}
 		/**
 		 * Elements that make up the popup.
 		 */
@@ -587,25 +614,25 @@
 				center: ol.proj.fromLonLat([-75.165222, 39.952583]),
 				zoom: 12,
 				minZoom: 10,
-        maxZoom: 19,
+				maxZoom: 19,
 			})
 		});
 
 		/**
-			* Create a feature for each data point we have
-			*/
+		 * Create a feature for each data point we have
+		 */
 		{% for mapItem in map_items %}
-		{% for point in mapItem.location1 %}
+		{%for point in mapItem.location1 %}
 		var markers = new ol.layer.Vector({
 			source: new ol.source.Vector({
 				features: [
 					new ol.Feature({
-						title:"{{mapItem.title|safe|striptags}}",
+						title: "{{mapItem.title|safe|striptags}}",
 						summary: '{{mapItem.summary|safe|striptags}}',
-						description:'{{mapItem.description|safe|striptags}}',
-						start:'{{mapItem.start_date|safe|striptags}}',
-						end:'{{mapItem.end_date|safe|striptags}}',
-						media:'{{mapItem.media|safe}}',
+						description: '{{mapItem.description|safe|striptags}}',
+						start: '{{mapItem.start_date|safe|striptags}}',
+						end: '{{mapItem.end_date|safe|striptags}}',
+						media: '{{mapItem.media|safe}}',
 						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}}, {{point.coords.1}}])),
 					})
 				]
@@ -613,7 +640,7 @@
 			style: new ol.style.Style({
 				image: new ol.style.Icon({
 					src: 'https://s8.postimg.cc/gcsd9zztx/target.png',
-					width:10,
+					width: 10,
 					anchor: [0.5, 1]
 				})
 			})
@@ -623,17 +650,17 @@
 		{% endfor %}
 
 		/**
-			* Creating an overlay with popups
-			*/
+		 * Creating an overlay with popups
+		 */
 		const element = document.getElementById('popup');
 
 		const popup = new ol.Overlay({
-      element: element,
-      positioning: 'bottom-center',
-      stopEvent: false,
-    });
+			element: element,
+			positioning: 'bottom-center',
+			stopEvent: false,
+		});
 
-    map.addOverlay(popup);
+		map.addOverlay(popup);
 
 		/**
 		 * Create an overlay box in the top right hand corner
@@ -644,42 +671,43 @@
 		 */
 		map.on('singleclick', function(evt) {
 			const feature = map.forEachFeatureAtPixel(evt.pixel,
-          function(feature) {
-            return feature;
-          });
+				function(feature) {
+					return feature;
+				});
 
-				// Handle click on map item
-        if (feature) {
-					// Handle content change
-					document.getElementById('content-header').innerHTML = feature.get('title');
-					document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + '-' + feature.get('end');
-					document.getElementById('content-summary').innerHTML = feature.get('summary');
-          // Handle popup
-          const coordinates = feature.getGeometry().getCoordinates();
-          popup.setPosition(coordinates);
-					$(element).popover({
-            placement: 'right',
-            html: true,
-            content: feature.get('title')
-          });
-          $(element).popover('show');
+			// Handle click on map item
+			if (feature) {
+				// Handle content change
+				document.getElementById('content-header').innerHTML = feature.get('title');
+				document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + '-' + feature.get('end');
+				document.getElementById('content-summary').innerHTML = feature.get('summary');
+				// Handle popup
+				const coordinates = feature.getGeometry().getCoordinates();
+				popup.setPosition(coordinates);
+				$(element).popover({
+					placement: 'right',
+					html: true,
+					content: feature.get('title')
+				});
+				$(element).popover('show');
 
 				// Dispose popup and return to default text otherwise
-        } else {
-          $(element).popover('dispose');
-					document.getElementById('content-header').innerHTML ="Diggin' Philly: The Black Philadelphia Project";
-					document.getElementById('content-summary').innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim idest laborum.';
+			} else {
+				$(element).popover('dispose');
+				document.getElementById('content-header').innerHTML = "Diggin' Philly: The Black Philadelphia Project";
+				document.getElementById('content-summary').innerHTML =
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim idest laborum.';
 
-        }
+			}
 		});
 
 		map.on('pointermove', function(evt) {
-        if (evt.dragging) {
-          $(element).popover('dispose');
-          return;
-        }
-        map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
-      });
+			if (evt.dragging) {
+				$(element).popover('dispose');
+				return;
+			}
+			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+		});
 	</script>
 	{% endblock %}
 </body>

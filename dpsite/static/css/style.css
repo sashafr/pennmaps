@@ -6,7 +6,13 @@
  */
 
 :root {
-    --blue: #007bff; /*Lt. Blue: R=47, G=124, B=147 #2f7c93*/
+    /*Custom color shortcuts*/
+    --dp-lt-blue: #2f7c93;
+    --dp-dk-blue: #004d64;
+    --dp-lt-green:  #cac99d;
+    --dp-br-red: #ff4a00;
+    /**/
+    --blue: #007bff;
     --indigo: #6610f2;
     --purple: #6f42c1;
     --pink: #e83e8c;
@@ -122,8 +128,9 @@ a:visited {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-/**/
-/**/
+
+
+
 
 @-ms-viewport {
     width: device-width;
