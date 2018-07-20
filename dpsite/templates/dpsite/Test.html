@@ -31,12 +31,12 @@
 	@media screen and (max-width: 600px) {
 	  .searchBox {
 	    float: none;
+			width: 100%;
 	  }
 	  .searchBox input[type=text], .searchBox button {
 	    float: none;
 	    display: block;
 	    text-align: left;
-	    width: 100%;
 	    margin: 0;
 	    padding: 14px;
 	  }
@@ -131,7 +131,6 @@
 	background: white;
 }
 .slidecontainer {
-		height: 13%;
 		padding: 8px 12px;
 }
 
@@ -166,26 +165,42 @@
     cursor: pointer;
 }
 
+
 		/**
-			* Irene's styles for content boxes and hover popups
-			*/
-		.contentBox{
-			color: #fff;
-		}
-		/**
-			* Aligns the content boxes to the right side
+			* Aligns all the content boxes to the right side
 			*/
 		#right-align{
 			width: 25%;
 			height:100%;
 			right: 0em;
 			z-index: 1000;
-			position: absolute;
+			position: fixed;
 			background-color: rgba(47, 124, 147, 0.7);
 			overflow-x: hidden;
+			transform: translateX(100%);
+			transition: transform 1s;
 		}
 
-		/* Irene's Collapsible classes*/
+		#right-align.active{
+			transform:translateX(0);
+		}
+
+		/* Irene's Collapsibles*/
+		/**
+			* Hides Option Menu to the right
+			*/
+
+		.hideButton{
+			cursor:pointer;
+			position: absolute
+			z-index=1000;
+			left: 20rem;
+			top:10rem;
+			width: 5rem;
+			height:5rem;
+		}
+
+		/* Creates a single collapsible tag */
 		.collapsible{
 			position:relative;
 			border-style:solid;
@@ -208,7 +223,6 @@
 			padding: 0px 8px;
 		  max-height: 0;
 			overflow-x: hidden;
-		  overflow: hidden;
 		  transition: max-height 0.2s ease-out;
 		  background-color: rgba(47, 124, 147, 0.7);
 		}
@@ -223,10 +237,12 @@
 	{% block content %}
 
 	<!--INFO BOX-->
+	<button  id="hideButton">Toggle Menu</button>
+
 <div id="right-align">
 	<div class="contentBox">
 		<button class="collapsible"><strong><div id="content-header">Diggin' Philly: The Black Philadelphia Project</div></strong></button>
-		<div class="content" id="content-summary">
+		<div class="content" style="color:white;">
 			<p><strong><div id="content-neighborhood-dates">
 			</div></strong></p>
 			<p><div id="content-summary">
@@ -249,8 +265,8 @@
 	</div>
 
 <!--CHECKBOXES-->
-			<button class="collapsible" id="content-header"><strong>Theme</strong></button>
-			<div class="content" id="content-summary" style="color:white;">
+			<button class="collapsible" ><strong>Theme</strong></button>
+			<div class="content"  style="color:white;">
 			<label class="container">Education
 				<input type="checkbox" name = "tag" value = "education">
 				<span class="checkmark"></span>
@@ -355,8 +371,8 @@
 
 		<!--PART OF CITY-->
 		<div id="part-of-city">
-			<button class="collapsible" id="content-header"><strong>Part of City</strong></button>
-			<div class="content" id="content-summary">
+			<button class="collapsible" ><strong>Part of City</strong></button>
+			<div class="content"  style="color:white;">
 			<label class="radioContainer">North Philadelphia
 				<input type="radio" name = "location" value = "North Philadelphia">
 			</label>
@@ -372,8 +388,8 @@
 		</div>
 			<!--TIME PERIOD SLIDER-->
 			<div id="time">
-			<button class="collapsible" id="content-header"><strong>Time Period</strong></button>
-			<div class="content" id="content-summary">
+			<button class="collapsible" ><strong>Time Period</strong></button>
+			<div class="content"  style="color:white;">
 			<div  class="slidecontainer">
 
   		<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
@@ -405,10 +421,10 @@
 
 
 	<script>
-	/*COLLAPSIBLE SIDEBAR JS*/
+	/*COLLAPSIBLE SIDEBAR*/
 	var collapse = document.getElementsByClassName("collapsible");
-	var i;
-	for(i=0; i<collapse.length;i++){
+
+	for(var i=0; i<collapse.length;i++){
 		collapse[i].addEventListener("click",function(){
 			this.classList.toggle("active");
 			var content=this.nextElementSibling;
@@ -420,7 +436,22 @@
 			}
 		});
 	}
-	/*END COLLAPSIBLE SIDEBAR JS*/
+	/*END COLLAPSIBLE SIDEBAR*/
+
+	/*HIDE PANEL*/
+	var hideRight = document.getElementById("hideButton");
+
+	hideRight.addEventListener("click", function(){
+			var options = document.getElementById("right-align");
+			if (options.classList.contains("active")){
+				options.classList.remove("active");
+			}
+			else{
+				options.classList.add("active");
+			}
+	});
+
+	/*END HIDE PANEL*/
 	const queryInput = document.getElementById('query');
 	const searchButton = document.getElementById('submitButton');
 
