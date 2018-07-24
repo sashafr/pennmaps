@@ -6,7 +6,7 @@
  */
 
 :root {
-    --blue: #007bff;
+    --blue: #007bff; /*Lt. Blue: R=47, G=124, B=147 #2f7c93*/
     --indigo: #6610f2;
     --purple: #6f42c1;
     --pink: #e83e8c;
@@ -84,13 +84,13 @@ p {
 }
 
 a {
-  color:rgb(47, 124, 147) !important;/*lt blue*/
+  color: rgb(255, 255, 255, 1.0) !important; /*rgb(47, 124, 147) !important; lt blue*/
 }
+
 
 a:visited {
-  color:rgb(0, 77, 100) !important; /*dk blue*/
+  color: rgba(255,255,255,0.7) !important; /*rgb(0, 77, 100) !important; dk blue*/
 }
-
 
 
 
@@ -127,6 +127,7 @@ body {
     color: #212529;
     text-align: left;
     background-color: #fff;
+    padding-bottom: 6rem;
 }
 
 [tabindex="-1"]:focus {
@@ -2118,19 +2119,14 @@ pre code {
 
 .footer {
     clear: both;
-    position: relative;
     z-index: 1;
-    height: -3em;
-    margin-top: 40em;
     background-color: #2b2e34;
     color: white;
     text-align: center;
-    /*
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    -->*/
+    position:absolute;
+    width:100%;
+    bottom:0;
+    left:0;
 }
 
 .form-control {
@@ -4183,7 +4179,7 @@ tbody.collapse.show {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    color: #495057;
+    color: #fff;
     background-color: #fff;
     border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -5785,10 +5781,10 @@ button.close {
     flex-direction: column;
     width: 100%;
     pointer-events: auto;
-    background-color: #fff;
+    background: none;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 0.3rem;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 20rem;
     outline: 0;
 }
 
@@ -5799,15 +5795,7 @@ button.close {
     bottom: 0;
     left: 0;
     z-index: 1040;
-    background-color: #000;
-}
-
-.modal-backdrop.fade {
-    opacity: 0;
-}
-
-.modal-backdrop.show {
-    opacity: 0.5;
+    background: none;
 }
 
 .modal-header {
@@ -5842,6 +5830,7 @@ button.close {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1rem;
+    background: none;
 }
 
 .modal-footer {
@@ -5855,7 +5844,7 @@ button.close {
     -ms-flex-pack: end;
     justify-content: flex-end;
     padding: 1rem;
-    border-top: 1px solid #e9ecef;
+    border-top: 1px solid;
 }
 
 .modal-footer> :not(:first-child) {
@@ -5881,7 +5870,7 @@ button.close {
     }
     .modal-dialog-centered {
         min-height: calc(100% - (1.75rem * 2));
-    }
+    }l
     .modal-sm {
         max-width: 300px;
     }
@@ -6201,7 +6190,7 @@ button.close {
     margin-bottom: 0;
     font-size: 1rem;
     color: inherit;
-    background-color: #f7f7f7;
+    background-color: rgba(255,74,0,0.8);
     border-bottom: 1px solid #ebebeb;
     border-top-left-radius: calc(0.3rem - 1px);
     border-top-right-radius: calc(0.3rem - 1px);
@@ -9357,6 +9346,46 @@ a.text-dark:focus {
         border: 1px solid #ddd !important;
     }
 }
+
+* {box-sizing: border-box;}
+
+.searchBox input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+.searchBox button {
+  /* float: right; */
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.searchBox button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+  .searchBox {
+    float: none;
+  }
+  .searchBox input[type=text], .searchBox button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .searchBox input[type=text] {
+    border: 1px solid #ccc;
+  }
 
 
 /*# sourceMappingURL=bootstrap.css.map */

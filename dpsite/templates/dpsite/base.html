@@ -12,11 +12,14 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+
 </head>
 <header>
   <!--Logo and search bar-->
           <nav class="navbar navbar-light bg-dark">
-              <a class="navbar-brand" href="#">
+              <a class="navbar-brand" href="/dpsite">
                   <img src="https://s22.postimg.cc/kaq9dgwnl/logo.png" alt="header logo" height="50">
               </a>
           </nav>
@@ -27,39 +30,33 @@
                   </button>
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                   <ul class="navbar-nav w-100 nav-justified">
-                      <li class="nav-item">
-                          <a class="nav-link" href="#">ABOUT <span class="rainbow-menu-title">dp</span></a>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ABOUT <span class="rainbow-menu-title">dp</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background:#b33300;">
+                            <a class="dropdown-item" href="/dpsite/about/project/">THE PROJECT</a>
+                            <a class="dropdown-item" href="/dpsite/about/team/">THE TEAM</a>
+                        </div>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">MAP INDEX</a>
+                          <a class="nav-link" href="/dpsite/map">MAP INDEX</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">WEB SERIES</a>
+                          <a class="nav-link" href="/dpsite/webseries">WEB SERIES</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">ORAL HISTORY ARCHIVE</a>
+                          <a class="nav-link" href="/dpsite/archive/gallery/">ORAL HISTORY ARCHIVE</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">3D ARCHIVE</a>
+                          <a class="nav-link" href="/dpsite/archive/gallery">3D ARCHIVE</a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link" href="#">DIGITAL RESOURCES</a>
+                          <a class="nav-link" href="/dpsite/">DIGITAL RESOURCES</a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="#"><span class="rainbow-menu-title">dp</span> BLOG</a>
                       </li>
-                      <!--DROPDOWN - If they decide they want it for "About" page
-                      <li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Dropdown link
-                        </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                          </div>
-                      </li>
-                  -->
                   </ul>
               </div>
           </nav>
@@ -73,3 +70,19 @@
     <span class="text-muted">Created by PriceLabs at UPenn</span>
   </div>
 </footer>
+
+<!--
+Color specifications for DP website:
+-BR RED:
+  rgb(255, 74, 0);
+  #ff4a00;
+-LT BLUE:
+  rgb(47, 124, 147);
+  #2f7c93;
+-DK BLUE:
+  rbg (0, 77, 100);
+  #004d64;
+-LT GREEN:
+  rgb(202, 201, 157);
+  #cac99d;
+-->

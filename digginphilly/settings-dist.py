@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'dpsite',
+    'ckeditor',
     'import_export',
 ]
 

@@ -21,26 +21,8 @@ class TagAdmin(ImportExportModelAdmin):
 admin.site.register(Tag, TagAdmin)
 admin.site.register(TagGroup)
 admin.site.register(OverlayGroup)
+admin.site.register(Media)
 
-class MediaAdminForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea, required=False)
-    credits = forms.CharField(widget=forms.Textarea, required=False)
-
-    class Meta:
-        model = Media
-        fields = '__all__'
-
-class MediaResource(resources.ModelResource):
-
-    class Meta:
-        model = Media
-
-class MediaAdmin(ImportExportModelAdmin):
-    form = MediaAdminForm
-    list_display = ('title', 'description')
-    resource_class = MediaResource
-
-admin.site.register(Media, MediaAdmin)
 
 class MapItemAdminForm(forms.ModelForm):
     summary = forms.CharField(widget=CKEditorWidget(), required=False)
@@ -69,6 +51,7 @@ class MapItemAdmin(ImportExportModelAdmin):
     inlines = (MappedMediaInline, )
 
 admin.site.register(MapItem, MapItemAdmin)
+
 
 admin.site.register(WebSeries)
 admin.site.register(PartOfCity)
