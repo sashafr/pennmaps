@@ -1,6 +1,7 @@
 from django.contrib.gis.db import models
 from datetime import date
 import os
+from django.urls import reverse
 
 class TagGroup(models.Model):
     title = models.CharField(max_length = 50)
@@ -122,9 +123,12 @@ class WebSeries(models.Model):
             elif ext in audio_ext:
                 return '<audio class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="audio/' + ext[1:] + '"></audio>'
         elif self.file_url:
-            return '<a href="' + self.file_url + '" target="_blank">View Episode</a>'
+            return '<a class="'+ classes + '" href="' + self.file_url + '" target="_blank">View Episode</a>'
         else:
             return "(None)"
+
+    def get_absolute_url(self):
+        return reverse('webseries')
 
     def __str__(self):
         return self.title

@@ -70,6 +70,7 @@ class WebSeriesAdmin(admin.ModelAdmin):
     list_filter = ['tags']
     readonly_fields = ['display_media']
     fields = ['display_media', 'title', 'description', 'upload_date', 'season', 'episode', 'file_upload', 'file_url', 'file_iframe', 'map_location', 'tags', 'credits', 'start_date', 'end_date']
+    view_on_site = True
 
     def display_media(self, obj):
         return format_html(obj.display_media())

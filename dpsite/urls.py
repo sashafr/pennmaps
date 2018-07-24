@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
 	path('', views.base, name = 'base'),
 	path('dpsite/', views.mapItem),
-    path('webseries/', views.webSeries),
+    path('webseries/', views.webSeries, name = 'webseries'),
 	path('mediaitem/', views.mediaItem),
 	path('mediaitem/', views.mediaItem),
     path('media/gallery/', views.mediaGallery),
