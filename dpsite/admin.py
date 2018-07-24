@@ -5,6 +5,7 @@ from ckeditor.widgets import CKEditorWidget
 from .models import *
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from django.utils.html import format_html
 
 
 # Register your models here.
@@ -17,12 +18,12 @@ class TagResource(resources.ModelResource):
 class TagAdmin(ImportExportModelAdmin):
     list_display = ('title', 'slug', 'tag_group')
     resource_class = TagResource
+    search_fields = ['title']
 
 admin.site.register(Tag, TagAdmin)
 admin.site.register(TagGroup)
 admin.site.register(OverlayGroup)
 admin.site.register(Media)
-
 
 class MapItemAdminForm(forms.ModelForm):
     summary = forms.CharField(widget=CKEditorWidget(), required=False)
@@ -49,10 +50,32 @@ class MapItemAdmin(ImportExportModelAdmin):
     list_filter = ['tags']
     resource_class = MapItemResource
     inlines = (MappedMediaInline, )
+    search_fields = ['title']
 
 admin.site.register(MapItem, MapItemAdmin)
 
+class WebSeriesAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}))
 
-admin.site.register(WebSeries)
+    class Meta:
+        model = WebSeries
+        fields = '__all__'
+
+class WebSeriesAdmin(admin.ModelAdmin):
+    form = WebSeriesAdminForm
+    autocomplete_fields = ['map_location', 'tags']
+    search_fields = ['title']
+    list_display = ('season', 'episode', 'title', 'description')
+    list_display_links = ('title', )
+    list_filter = ['tags']
+    readonly_fields = ['display_media']
+    fields = ['display_media', 'title', 'description', 'upload_date', 'season', 'episode', 'file_upload', 'file_url', 'file_iframe', 'map_location', 'tags', 'credits', 'start_date', 'end_date']
+
+    def display_media(self, obj):
+        return format_html(obj.display_media())
+    display_media.short_description = 'Preview'
+
+admin.site.register(WebSeries, WebSeriesAdmin)
+
 admin.site.register(PartOfCity)
 admin.site.register(TimePeriod)

@@ -57,7 +57,7 @@ class Media(models.Model):
             elif ext in video_ext:
                 return '<video class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="video/' + ext[1:] + '"></video>'
             elif ext in audio_ext:
-                return '<audio class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="audio/' + ext[1:] + '"></audio>'                
+                return '<audio class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="audio/' + ext[1:] + '"></audio>'
         else:
             return "to do"
 
@@ -93,17 +93,46 @@ class MappedMedia(models.Model):
 
 class WebSeries(models.Model):
     title = models.CharField(max_length = 50)
-    description = models.CharField(max_length = 200)
-    upload_date = models.DateField('date', default=date.today)
-    season = models.IntegerField()
-    episode = models.IntegerField()
-    file_upload = models.FileField()
-    file_url = models.URLField(max_length=200)
-    map_location = models.ForeignKey('MapItem',on_delete=models.CASCADE,)
-    tags = models.ManyToManyField('Tag')
-    credits = models.CharField(max_length=50)
-    start_date = models.DateField('start date',default=date.today)
-    end_date = models.DateField('end date',default=date.today)
+    description = models.CharField(max_length = 5000, blank=True, null=True)
+    upload_date = models.DateField('Uploaded', default=date.today, blank=True, null=True)
+    season = models.IntegerField(blank=True, null=True)
+    episode = models.IntegerField(blank=True, null=True)
+    file_upload = models.FileField('File Upload', blank=True, null=True)
+    file_url = models.URLField('File URL', max_length=1000, blank=True, null=True)
+    file_iframe = models.CharField('File <iframe>', max_length = 1000, help_text="Please paste in an &lt;iframe&gt; to embed external content. Content must begin with &lt;iframe&gt; and end with &lt;/iframe&gt; ", blank=True, null=True)
+    map_location = models.ManyToManyField('MapItem', blank=True, verbose_name="Map")
+    tags = models.ManyToManyField('Tag', blank=True)
+    credits = models.CharField(max_length=1000, blank=True, null=True)
+    start_date = models.DateField('Start Date', blank=True, null=True)
+    end_date = models.DateField('End Date', blank=True, null=True)
+
+    def display_media(self, classes = ""):
+        image_ext = ['.jpg', '.jpeg', '.jpe', '.gif', '.png', '.bmp']
+        video_ext = ['.mp4', '.webm']
+        audio_ext = ['.mp3', '.wav']
+
+        if self.file_iframe:
+            return self.file_iframe
+        elif self.file_upload:
+            filename, ext = os.path.splitext(self.file_upload.name)
+            if ext in image_ext:
+                return '<img class="'+ classes + '" src="' + self.file_upload.url + '" alt="' + self.title + '">'
+            elif ext in video_ext:
+                return '<video class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="video/' + ext[1:] + '"></video>'
+            elif ext in audio_ext:
+                return '<audio class="'+ classes + '" controls><source src="' + self.file_upload.url + '" type="audio/' + ext[1:] + '"></audio>'
+        elif self.file_url:
+            return '<a href="' + self.file_url + '" target="_blank">View Episode</a>'
+        else:
+            return "(None)"
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Episode"
+        verbose_name_plural = "Web Series"
+        ordering = ['season', 'episode']
 
 class PartOfCity(models.Model):
     title = models.CharField(max_length = 50)
