@@ -55,7 +55,7 @@ class MapItemAdmin(ImportExportModelAdmin):
 admin.site.register(MapItem, MapItemAdmin)
 
 class WebSeriesAdminForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}))
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
 
     class Meta:
         model = WebSeries
@@ -69,7 +69,7 @@ class WebSeriesAdmin(admin.ModelAdmin):
     list_display_links = ('title', )
     list_filter = ['tags']
     readonly_fields = ['display_media']
-    fields = ['display_media', 'title', 'description', 'upload_date', 'season', 'episode', 'file_upload', 'file_url', 'file_iframe', 'map_location', 'tags', 'credits', 'start_date', 'end_date']
+    fields = ['display_media', 'title', 'description', 'upload_date', 'season', 'episode', 'file_upload', 'file_url', 'file_iframe', 'thumbnail', 'map_location', 'tags', 'credits', 'start_date', 'end_date']
     view_on_site = True
 
     def display_media(self, obj):

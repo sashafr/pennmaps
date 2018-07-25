@@ -2,6 +2,7 @@ from django.contrib.gis.db import models
 from datetime import date
 import os
 from django.urls import reverse
+from django.conf import settings
 
 class TagGroup(models.Model):
     title = models.CharField(max_length = 50)
@@ -106,6 +107,7 @@ class WebSeries(models.Model):
     credits = models.CharField(max_length=1000, blank=True, null=True)
     start_date = models.DateField('Start Date', blank=True, null=True)
     end_date = models.DateField('End Date', blank=True, null=True)
+    thumbnail = models.FileField('File Upload', blank=True, null=True, help_text="If you are uploading a non-image file or using the File URL or File IFrame options, its recommended you select a thumbnail. If you do not, a default image will be used.")
 
     def display_media(self, classes = ""):
         image_ext = ['.jpg', '.jpeg', '.jpe', '.gif', '.png', '.bmp']
@@ -126,6 +128,26 @@ class WebSeries(models.Model):
             return '<a class="'+ classes + '" href="' + self.file_url + '" target="_blank">View Episode</a>'
         else:
             return "(None)"
+
+    def display_media_thumb(self, classes = ""):
+        image_ext = ['.jpg', '.jpeg', '.jpe', '.gif', '.png', '.bmp']
+        video_ext = ['.mp4', '.webm']
+        audio_ext = ['.mp3', '.wav']
+
+        if self.thumbnail:
+            return '<img class="media-thumb '+ classes + '" src="' + self.thumbnail.url + '" alt="' + self.title + '">'
+        elif self.file_upload:
+            filename, ext = os.path.splitext(self.file_upload.name)
+            if ext in image_ext:
+                return '<img class="media-thumb '+ classes + '" src="' + self.file_upload.url + '" alt="' + self.title + '">'
+            elif ext in video_ext:
+                return '<img class="media-thumb '+ classes + '" src="' + settings.STATIC_URL + '/img/video_default.png" alt="' + self.title + '">'
+            elif ext in audio_ext:
+                return '<img class="media-thumb '+ classes + '" src="' + settings.STATIC_URL + '/img/video_default.png" alt="' + self.title + '">'
+            else:
+                return '<img class="media-thumb '+ classes + '" src="' + settings.STATIC_URL + '/img/file_default.png" alt="' + self.title + '">'
+        else:
+            return '<img class="media-thumb '+ classes + '" src="' + settings.STATIC_URL + '/img/image_default.png" alt="' + self.title + '">'
 
     def get_absolute_url(self):
         return reverse('webseries')
