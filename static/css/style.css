@@ -106,6 +106,32 @@ a:visited {
 
 /* end Nia's styles for xyz */
 
+/*BEGIN irene's popups*/
+.popup{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1060;
+  display: block;
+  background-color: rgba(255,74,0,0.7);
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  line-break: auto;
+}
+/*END*/
 
 /**
   * Custom Scrollbar CSS
