@@ -2,7 +2,7 @@
 <head>
     <!--Tab style-->
     <title>Diggin' Philly - The Black Philadelphia Project</title>
-    <link href="https://s22.postimg.cc/knhnjmzht/icon.png" rel="icon" type="image/png">
+    <link href="{% static 'img/icon.png' %}" rel="icon" type="image/png">
     <!--CSS-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <!--Import Font-->
@@ -17,72 +17,59 @@
 
 </head>
 <header>
-  <!--Logo and search bar-->
-          <nav class="navbar navbar-light bg-dark">
-              <a class="navbar-brand" href="/dpsite">
-                  <img src="https://s22.postimg.cc/kaq9dgwnl/logo.png" alt="header logo" height="50">
-              </a>
-          </nav>
-          <!--Regular collapsable nav bar-->
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                  <ul class="navbar-nav w-100 nav-justified">
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <!--Logo and search bar-->
+    <nav class="navbar navbar-light bg-dark">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'img/logo.png' %}" alt="header logo" height="50">
+        </a>
+    </nav>
+    <!--Regular collapsable nav bar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav w-100 nav-justified">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ABOUT <span class="rainbow-menu-title">dp</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background:#b33300;">
-                            <a class="dropdown-item" href="/dpsite/about/project/">THE PROJECT</a>
-                            <a class="dropdown-item" href="/dpsite/about/team/">THE TEAM</a>
-                        </div>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/dpsite/map">MAP INDEX</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/dpsite/webseries">WEB SERIES</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/dpsite/archive/gallery/">ORAL HISTORY ARCHIVE</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/dpsite/archive/gallery">3D ARCHIVE</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="/dpsite/">DIGITAL RESOURCES</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="#"><span class="rainbow-menu-title">dp</span> BLOG</a>
-                      </li>
-                  </ul>
-              </div>
-          </nav>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background:#b33300;">
+                        <a class="dropdown-item" href="{% url 'aboutproject' %}">THE PROJECT</a>
+                        <a class="dropdown-item" href="{% url 'aboutteam' %}">THE TEAM</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'map' %}">MAP</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'webseries' %}">WEB SERIES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'archivegallery' %}">ORAL HISTORY ARCHIVE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mediagallery' %}">3D ARCHIVE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'archivegallery' %}">DIGITAL RESOURCES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><span class="rainbow-menu-title">dp</span> BLOG</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>
 
-{% block content %}{% endblock %}
+<div class="content">
+    {% block content %}{% endblock %}
+    <div class="push"></div>
+</div>
 
 <footer class="footer">
-  <div class="container">
-    <p>Welcome to the footer. Content Pending.</p>
-    <span class="text-muted">Created by PriceLabs at UPenn</span>
-  </div>
+    <div class="container">
+        <p>Welcome to the footer. Content Pending.</p>
+        <span class="text-muted">Created by the <a href="http://pricelab.sas.upenn.edu/">Price Lab for Digital Humanities</a> | <a href="https://github.com/upenndigitalscholarship/diggin-philly">Get the Code</a></span>
+    </div>
 </footer>
-
-<!--
-Color specifications for DP website:
--BR RED:
-  rgb(255, 74, 0);
-  #ff4a00;
--LT BLUE:
-  rgb(47, 124, 147);
-  #2f7c93;
--DK BLUE:
-  rbg (0, 77, 100);
-  #004d64;
--LT GREEN:
-  rgb(202, 201, 157);
-  #cac99d;
--->
