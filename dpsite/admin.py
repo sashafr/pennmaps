@@ -80,3 +80,15 @@ admin.site.register(WebSeries, WebSeriesAdmin)
 
 admin.site.register(PartOfCity)
 admin.site.register(TimePeriod)
+
+class PageTextAdminForm(forms.ModelForm):
+    page_text = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = PageText
+        fields = '__all__'
+
+class PageTextAdmin(admin.ModelAdmin):
+    form = PageTextAdminForm
+
+admin.site.register(PageText, PageTextAdmin)

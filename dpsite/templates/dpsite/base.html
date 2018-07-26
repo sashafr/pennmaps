@@ -5,15 +5,21 @@
     <link href="{% static 'img/icon.png' %}" rel="icon" type="image/png">
     <!--CSS-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/lity.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <!-- Page Specific Styles -->
+    {% if page_styles %}
+        {{ page_styles|safe }}
+    {% endif %}
     <!--Import Font-->
     <link href="https://fonts.googleapis.com/css?family=Over+the+Rainbow" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <!--JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <script src="{% static 'js/lity.min.js' %}"></script>
 
 </head>
 <header>

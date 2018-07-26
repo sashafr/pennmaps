@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from .models import *
 from django.template import Context, loader
-
+from django.conf import settings
 
 # Request Functions
 def base(request):
@@ -17,8 +17,16 @@ def mapItem(request):
 	return render(request, 'dpsite/Test.html',context)
 
 def webSeries(request):
-    series = WebSeries.objects.all()
-    context = {'series': series,}
+    seasons = WebSeries.objects.values('season').distinct()
+    series = {}
+    for season_number in seasons:
+        series[season_number['season']] = WebSeries.objects.filter(season=season_number['season'])
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+    sidebar_text = ""
+    getsidebar = PageText.objects.filter(text_hook="webseries_sidebar")
+    if getsidebar:
+        sidebar_text = getsidebar[0].page_text
+    context = {'series': series, 'page_styles': page_styles, "sidebar_text": sidebar_text}
     return render(request, 'dpsite/webseries.html', context)
 
 def mediaItem(request):

@@ -1,5 +1,51 @@
 {% extends "dpsite/base.html" %}
-
+{% load static %}
 {% block content %}
-test
+<!--
+Full Motion by TEMPLATED
+templated.co @templatedco
+Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<body id="top">
+
+    <!-- Main -->
+    <div id="main" class="row">
+        <div class="inner col-md-9">
+            {% for season, episodes in series.items %}
+                <h1>Season {{season}}</h1>
+                <div class="thumbnails">
+                    {% for episode in episodes %}
+                        <div class="box">
+                            {% if episode.get_main_url == "" %}
+                                <a href="#" class="image fit">{{ episode.display_media_thumb|safe }}</a>
+                            {% elif episode.get_main_url == "iframe" %}
+                                <a href="#inline-{{ episode.season }}-{{ episode.episode }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">{{ episode.display_media_thumb|safe }}</a>
+                                <div id="inline-{{ episode.season }}-{{ episode.episode }}" class="lity-hide">
+                                    {{ episode.file_iframe|safe }}
+                                </div>
+                            {% else %}
+                                <a href="{{ episode.get_main_url }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">{{ episode.display_media_thumb|safe }}</a>
+                            {% endif %}
+                            <div class="inner">
+                                <h3>{{ episode.title }}</h3>
+                                <p>{{ episode.description }}</p>
+                                {% if episode.get_main_url == "" %}
+                                    <a class="button disabled fit">Coming Soon</a>
+                                {% elif episode.get_main_url == "iframe" %}
+                                    <a href="#inline-{{ episode.season }}-{{ episode.episode }}" class="button fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">View</a>
+                                {% else %}
+                                    <a href="{{ episode.get_main_url }}" class="button fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">View</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3 dp-sidebar">
+            {{ sidebar_text|safe }}
+        </div>
+    </div>
+</body>
+
 {% endblock content %}

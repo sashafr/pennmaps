@@ -5,12 +5,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
 		/*Siyang Search Styles*/
-
-		* {
-			box-sizing: border-box;
-		}
-
-
 		.searchBox input[type=text] {
 			font-size: 17px;
 			border: none;
@@ -216,12 +210,6 @@
 			top: 10rem;
 			width: 5rem;
 			height: 5rem;
-			transform: translateX(0);
-			transition: transform 1s;
-		}
-
-		.hideButton:active{
-			transform:translateX(100%);
 		}
 
 		/* Creates a single collapsible tag */
@@ -245,7 +233,7 @@
 			background-color: rgba(47, 124, 147, 1);
 		}
 
-		/**/
+		/* Content inside collapsible */
 		.content {
 			padding: 0px 8px;
 			max-height: 0;
@@ -274,6 +262,10 @@
 						in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 					</div>
 				</p>
+				<p>
+					<div id="content-description"></div>
+				</p>
+				<div id="content-media"></div>
 			</div>
 		</div>
 
@@ -416,8 +408,12 @@
 		<div id="time">
 			<button class="collapsible"><strong>Time Period</strong></button>
 			<div class="content" style="color:white;">
-				<div class="slidecontainer">
+				<div class="timeSelectionBox">
 
+			<input type="text" id = "startTimeInput" placeholder="1960" name="search">
+			<input type="text" id = "endTimeInput" placeholder="2000" name="search">
+		</div>
+				<div class="slidecontainer">
 					<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
 					<p>Year: <span id="sliderValue"></span></p>
 				</div>
@@ -425,7 +421,7 @@
 		</div>
 
 	</div>
-	<!--
+
 	<button type="button" class="btn btn-primary" onclick="selectTag()" style="z-index:2;">
 		Filter By Tags
 	</button>
@@ -434,7 +430,9 @@
 	</button>
 	<button type="button" class="btn btn-primary" onclick="selectTimePeriod()" style="z-index:2;">
 		Filter By Time Period
-	</button>-->
+	</button>
+	<button type="button" class="btn btn-primary" onclick="filter()">
+		Filter</button>
 
 	<!-- Use this span for writing debug messages -->
 	<span id='logMsg'></span>
@@ -489,15 +487,20 @@
 
 		function search(query) {
 			$('#logMsg').html(queryInput.value);
-
-			{%for mapItem in map_items %}
-			if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value)) {
-				$('#logMsg').append('{{mapItem.title}}');
-
-			}
-
+			var mapItemList = [];
+			mapItemPointCoord0 = [];
+			mapItemPointCoord1 = [];
+			{% for mapItem in map_items%}
+				if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) ||'{{mapItem.description}}'.includes(queryInput.value)) {
+						$('#logMsg').append('{{mapItem.title}}');
+						mapItemList.push('{{mapItem}}');
+			{% for point in mapItem.location1%}
+				mapItemPointCoord0.push({{point.coords.0}});
+				mapItemPointCoord1.push({{point.coords.1}});
 			{% endfor %}
-
+			}
+			{% endfor %}
+			setMarkers();
 		}
 
 		searchButton.onclick = function(event) {
@@ -505,6 +508,82 @@
 			search(queryInput.value);
 			event.preventDefault();
 		};
+
+		var mapItemPointCoord0 = [];
+var mapItemPointCoord1 = [];
+
+function filter() {
+	var checkBox = document.getElementsByName("tag");
+	var radioButton = document.getElementsByName("location");
+	var mapItemList = [];
+	$('#logMsg').html("");
+	mapItemPointCoord0 = [];
+	mapItemPointCoord1 = [];
+
+	for (var i = 0; i < checkBox.length; i++) {
+		if (checkBox[i].checked == true) {
+			{% for mapItem in map_items%}
+				{%for t in mapItem.tags.all%}
+					if ('{{t}}'==checkBox[i].value) {
+						// $('#logMsg').append('{{mapItem}}');
+						mapItemList.push('{{mapItem}}');
+						{% for point in mapItem.location1%}
+						mapItemPointCoord0.push({{point.coords.0}});
+						mapItemPointCoord1.push({{point.coords.1}});
+						{% endfor %}
+					}
+
+			{% endfor %}
+			{% endfor %}
+		}
+	}
+
+	for (var i = 0; i< radioButton.length; i++) {
+		if (radioButton[i].checked == true) {
+			{% for mapItem in map_items%}
+			if ('{{mapItem.location_notes}}'==radioButton[i].value) {
+				// $('#logMsg').append('{{mapItem}}');
+				if (!mapItemList.includes('{{mapItem}}')) {
+					mapItemList.push('{{mapItem}}');
+					{% for point in mapItem.location1%}
+					mapItemPointCoord0.push({{point.coords.0}});
+					mapItemPointCoord1.push({{point.coords.1}});
+					{% endfor %}
+				}
+			}
+
+			{% endfor %}
+			break;
+		}
+	}
+
+	var startDate = '{{mapItem.start_date}}';
+	var startYear = startDate.substr(startDate.indexOf(",")+1);
+	var endDate = '{{mapItem.end_date}}';
+	var endYear = endDate.substr(endDate.indexOf(",")+1);
+	// $('#logMsg').append("start year: " + startYear);
+	// $('#logMsg').append("end year: " + endYear);
+	// && endYear >=slider.value
+	if (startYear <= slider.value && slider.value >= endYear) {
+		if (!mapItemList.includes('{{mapItem}}')) {
+			mapItemList.push('{{mapItem}}');
+			{% for point in mapItem.location1%}
+			mapItemPointCoord0.push({{point.coords.0}});
+			mapItemPointCoord1.push({{point.coords.1}});
+			{% endfor %}
+		}
+	}
+
+	for (var i = 0; i < mapItemList.length; i++) {
+		$('#logMsg').append(mapItemList[i]);
+	}
+	setMarkers();
+	// for (var i = 0; i < mapItemList.length; i++) {
+	// 	$('#logMsg').append(mapItemPointCoord0[i]);
+	// }
+
+
+}
 
 		// function for tag selection
 		function selectTag() {
@@ -565,22 +644,28 @@
 		}
 
 		function selectTimePeriod() {
-			$('#logMsg').html("");
-			$('#logMsg').append(slider.value);
-			{%for mapItem in map_items %}
-				var startDate = '{{mapItem.start_date}}';
-				var startYear = startDate.substr(startDate.indexOf(",") + 1);
-				var endDate = '{{mapItem.end_date}}';
-				var endYear = endDate.substr(endDate.indexOf(",") + 1);
-				// $('#logMsg').append("start year: " + startYear);
-				// $('#logMsg').append("end year: " + endYear);
-				// && endYear >=slider.value
-				if (startYear <= slider.value && slider.value >= endYear) {
-					$('#logMsg').append('{{mapItem}}');
-				}
-				// var year = '{{mapItem.start_date}}'.substr(str.indexOf(",")+1);
-			{% endfor %}
-		}
+
+	const startTimeInput = document.getElementById('startTimeInput');
+	const endTimeInput = document.getElementById('endTimeInput');
+	$('#logMsg').append(startTimeInput.value);
+	$('#logMsg').append(endTimeInput.value);
+	// $('#logMsg').html("");
+	// // $('#logMsg').append(slider.value);
+	{% for mapItem in map_items%}
+	var startDate = '{{mapItem.start_date}}';
+	var startYear = startDate.substr(startDate.indexOf(",")+1);
+	var endDate = '{{mapItem.end_date}}';
+	var endYear = endDate.substr(endDate.indexOf(",")+1);
+	// $('#logMsg').append("start year: " + startYear);
+	// $('#logMsg').append("end year: " + endYear);
+	// && endYear >=slider.value
+	if (startYear >= startTimeInput && endTimeInput >= endYear) {
+		$('#logMsg').append('{{mapItem}}');
+	}
+	// var year = '{{mapItem.start_date}}'.substr(str.indexOf(",")+1);
+
+	{% endfor %}
+}
 		/**
 		 * Elements that make up the popup.
 		 */
@@ -632,8 +717,8 @@
 						description: '{{mapItem.description|safe|striptags}}',
 						start: '{{mapItem.start_date|safe|striptags}}',
 						end: '{{mapItem.end_date|safe|striptags}}',
-						media: '{{mapItem.media|safe}}',
-						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}}, {{point.coords.1}}])),
+						media: '{{mapItem.media|safe|striptags}}',
+						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
 					})
 				]
 			}),
@@ -648,7 +733,42 @@
 		map.addLayer(markers);
 		{% endfor %}
 		{% endfor %}
+		function setMarkers() {
+	$('#logMsg').append("setMarkers()");
+	// $('#logMsg').append(map);
+	// $('#logMsg').append(markers);
+	map.getLayers().forEach(function(Vectorlayer) {
 
+    if(Vectorlayer instanceof ol.layer.Vector)
+       Vectorlayer.getSource().clear();
+
+		 });
+
+
+	for (var i = 0; i < mapItemPointCoord0.length; i++) {
+		$('#logMsg').append(mapItemPointCoord0[i]);
+		$('#logMsg').append(mapItemPointCoord1[i]);
+		  markers = new ol.layer.Vector({
+			source: new ol.source.Vector({
+				features: [
+					new ol.Feature({
+
+						geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
+
+					})
+
+				]
+			}),
+			style: new ol.style.Style({
+				image: new ol.style.Icon({
+					src: '//openlayers.org/en/v3.12.1/examples/data/icon.png',
+					anchor: [0.5, 1]
+				})
+			})
+		});
+		map.addLayer(markers);
+	}
+}
 		/**
 		 * Creating an overlay with popups
 		 */
@@ -657,6 +777,7 @@
 		const popup = new ol.Overlay({
 			element: element,
 			positioning: 'bottom-center',
+			offset: [0, -50],
 			stopEvent: false,
 		});
 
@@ -679,13 +800,23 @@
 			if (feature) {
 				// Handle content change
 				document.getElementById('content-header').innerHTML = feature.get('title');
-				document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + '-' + feature.get('end');
-				document.getElementById('content-summary').innerHTML = feature.get('summary');
+				if (feature.get('start')!=null && feature.get('end')!=null){
+					document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + '-' + feature.get('end');
+				}
+				if(feature.get('summary')!=null){
+					document.getElementById('content-summary').innerHTML = feature.get('summary');
+				}
+				if (feature.get('description') !=null){
+					document.getElementById('content-description').innerHTML = feature.get('description');
+				}
+				if(feature.get('media')!==null){
+					document.getElementById('content-media').innerHTML=feature.get('media');
+				}
 				// Handle popup
 				const coordinates = feature.getGeometry().getCoordinates();
 				popup.setPosition(coordinates);
 				$(element).popover({
-					placement: 'right',
+					placement: 'top',
 					html: true,
 					content: feature.get('title')
 				});
@@ -695,9 +826,25 @@
 			} else {
 				$(element).popover('dispose');
 				document.getElementById('content-header').innerHTML = "Diggin' Philly: The Black Philadelphia Project";
+				document.getElementById('content-neighborhood-dates').innerHTML = "";
+				document.getElementById('content-description').innerHTML = "";
 				document.getElementById('content-summary').innerHTML =
 					'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim idest laborum.';
 
+			}
+		});
+
+		map.on('hover', function(evt){
+			if (feature){
+				// Handle popup
+				const coordinates = feature.getGeometry().getCoordinates();
+				popup.setPosition(coordinates);
+				$(element).popover({
+					placement: 'right',
+					html: true,
+					content: feature.get('title')
+				});
+				$(element).popover('show');
 			}
 		});
 
