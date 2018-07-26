@@ -50,6 +50,7 @@ class MapItemAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget(), required=False)
     location1 = geoforms.MultiPointField(widget = geoforms.OSMWidget(attrs={'default_lat': 39.9526, 'default_lon': -75.1652, 'default_zoom': 12 }), required=False)
     location2 = geoforms.MultiPolygonField(widget = geoforms.OSMWidget(attrs={'default_lat': 39.9526, 'default_lon': -75.1652, 'default_zoom': 12 }), required=False)
+    info_sources = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
 
     class Meta:
         model = MapItem
@@ -63,14 +64,21 @@ class MapItemResource(resources.ModelResource):
 class MappedMediaInline(admin.TabularInline):
     model = MappedMedia
     extra = 1
+    readonly_fields = ['display_media']
+    fields =['display_media', 'media', 'order']    
+
+    def display_media(self, obj):
+        return format_html(obj.media.display_media())
+    display_media.short_description = 'Preview'
 
 class MapItemAdmin(ImportExportModelAdmin):
     form = MapItemAdminForm
-    list_display = ('title','location_notes','status')
+    list_display = ('title','summary','status')
     list_filter = ['tags']
     resource_class = MapItemResource
     inlines = (MappedMediaInline, )
     search_fields = ['title']
+    autocomplete_fields = ['tags', 'overlay_group']
 
 admin.site.register(MapItem, MapItemAdmin)
 

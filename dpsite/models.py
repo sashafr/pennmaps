@@ -125,13 +125,33 @@ class MapItem(models.Model):
     min_zoom = models.IntegerField(blank=True, null=True)
     max_zoom = models.IntegerField(blank=True, null=True)
     overlay_group = models.ManyToManyField('OverlayGroup', blank=True)
+
+    def display_media_thumb(self):
+        if self.media:
+            return self.media[0].display_media_thumb()
+        else:
+            return '<img class="item-thumb" src="' + settings.STATIC_URL + 'img/image_default.png" alt="' + self.title + '">'
+
+    def get_absolute_url(self):
+        return reverse('archiveitem', kwargs={'id': self.id})
+
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Map Item"
+        verbose_name_plural = "Map Items"
+        ordering = ['title']
 
 class MappedMedia(models.Model):
     map_item = models.ForeignKey(MapItem, on_delete=models.CASCADE)
     media = models.ForeignKey(Media, on_delete=models.CASCADE)
     order = models.IntegerField()
+
+    class Meta:
+        verbose_name = "File"
+        verbose_name_plural = "Media"
+        ordering = ['order']
 
 class WebSeries(models.Model):
     title = models.CharField(max_length = 50)
