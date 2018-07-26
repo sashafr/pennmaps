@@ -7,9 +7,6 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from django.utils.html import format_html
 
-
-# Register your models here.
-
 class TagResource(resources.ModelResource):
 
     class Meta:
@@ -23,7 +20,31 @@ class TagAdmin(ImportExportModelAdmin):
 admin.site.register(Tag, TagAdmin)
 admin.site.register(TagGroup)
 admin.site.register(OverlayGroup)
-admin.site.register(Media)
+
+class MediaAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
+    credits = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
+    media_sources = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
+
+    class Meta:
+        model = Media
+        fields = '__all__'
+
+class MediaAdmin(admin.ModelAdmin):
+    form = MediaAdminForm
+    autocomplete_fields = ['tags']
+    search_fields = ['title']
+    list_display = ('title', 'description')
+    list_filter = ['tags']
+    readonly_fields = ['display_media']
+    fields = ['display_media', 'title', 'description', 'credits', 'date_created', 'file_upload', 'file_url', 'file_iframe', 'thumbnail', 'tags', 'start_date', 'end_date', 'media_sources']
+    view_on_site = True
+
+    def display_media(self, obj):
+        return format_html(obj.display_media())
+    display_media.short_description = 'Preview'
+
+admin.site.register(Media, MediaAdmin)
 
 class MapItemAdminForm(forms.ModelForm):
     summary = forms.CharField(widget=CKEditorWidget(), required=False)

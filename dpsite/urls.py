@@ -5,7 +5,7 @@ urlpatterns = [
 	path('', views.base, name = 'home'),
 	path('dpsite/', views.mapItem),
     path('webseries/', views.webSeries, name = 'webseries'),
-	path('mediaitem/', views.mediaItem),
+	path('media/item/<int:id>/', views.mediaItem, name = 'mediaitem'),
     path('media/gallery/', views.mediaGallery, name = 'mediagallery'),
     path('media/gallery/<slug:tag>/', views.mediaGallery),
     path('archive/search/', views.archiveSearch),
