@@ -15,6 +15,7 @@ class TagGroup(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length = 50)
+    description = models.TextField(blank=True, null=True)
     slug = models.SlugField()
     tag_group = models.ForeignKey('TagGroup', on_delete=models.CASCADE, blank=True, null=True)
     def __str__(self):
@@ -99,9 +100,6 @@ class Media(models.Model):
                 return '<img class="'+ classes + '" src="' + settings.STATIC_URL + 'img/file_default.png" alt="' + self.title + '">'
         else:
             return '<img class="'+ classes + '" src="' + settings.STATIC_URL + 'img/image_default.png" alt="' + self.title + '">'
-
-    def get_absolute_url(self):
-        return reverse('mediaitem', kwargs={'id': self.id})
 
     def __str__(self):
         return self.title
