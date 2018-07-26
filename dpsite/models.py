@@ -177,7 +177,23 @@ class WebSeries(models.Model):
         elif self.file_iframe:
             return "iframe"
         else:
-            return ""
+            return settings.STATIC_URL + 'img/image_default.png'
+
+    def get_thm_url(self):
+        if self.thumbnail:
+            return self.thumbnail.url
+        elif self.file_upload:
+            filename, ext = os.path.splitext(self.file_upload.name)
+            if ext in image_ext:
+                return self.file_upload.url
+            elif ext in video_ext:
+                return settings.STATIC_URL + 'img/video_default.png'
+            elif ext in audio_ext:
+                return settings.STATIC_URL + 'img/video_default.png'
+            else:
+                return settings.STATIC_URL + 'img/file_default.png'
+        else:
+            return settings.STATIC_URL + 'img/image_default.png'
 
     def display_media(self):
         image_ext = ['.jpg', '.jpeg', '.jpe', '.gif', '.png', '.bmp']

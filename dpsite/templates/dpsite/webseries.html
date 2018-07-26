@@ -16,19 +16,19 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
                 <div class="thumbnails">
                     {% for episode in episodes %}
                         <div class="box">
-                            {% if episode.get_main_url == "" %}
-                                <a href="#" class="image fit">{{ episode.display_media_thumb|safe }}</a>
-                            {% elif episode.get_main_url == "iframe" %}
-                                <a href="#inline-{{ episode.season }}-{{ episode.episode }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">{{ episode.display_media_thumb|safe }}</a>
-                                <div id="inline-{{ episode.season }}-{{ episode.episode }}" class="lity-hide">
-                                    {{ episode.file_iframe|safe }}
-                                </div>
-                            {% else %}
-                                <a href="{{ episode.get_main_url }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">{{ episode.display_media_thumb|safe }}</a>
-                            {% endif %}
+                            <div class="dp-fixed-image" style="background-image: url('{{ episode.get_thm_url }}')">
+                                {% if episode.get_main_url == "iframe" %}
+                                    <a href="#inline-{{ episode.season }}-{{ episode.episode }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}"></a>
+                                    <div id="inline-{{ episode.season }}-{{ episode.episode }}" class="lity-hide">
+                                        {{ episode.file_iframe|safe }}
+                                    </div>
+                                {% else %}
+                                        <a href="{{ episode.get_main_url }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}"></a>
+                                {% endif %}
+                            </div>
                             <div class="inner">
                                 <h3>{{ episode.title }}</h3>
-                                <p>{{ episode.description }}</p>
+                                <p class="dp-fixed-text">{{ episode.description }}</p>
                                 {% if episode.get_main_url == "" %}
                                     <a class="button disabled fit">Coming Soon</a>
                                 {% elif episode.get_main_url == "iframe" %}
