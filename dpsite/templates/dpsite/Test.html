@@ -4,227 +4,290 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
-	* {box-sizing: border-box;}
-
-	/* Create two equal columns that floats next to each other */
-	.column {
-		float: left;
-		width: 50%;
-		padding: 10px;
-
-	}
-
-	/* Clear floats after the columns */
-	.row:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
-
-	.searchBox input[type=text] {
-		padding: 6px;
-		margin-top: 8px;
-		font-size: 17px;
-		border: none;
-	}
-	.searchBox button {
-		/* float: right; */
-		padding: 6px 10px;
-		margin-top: 8px;
-		margin-right: 16px;
-		background: #ddd;
-		font-size: 17px;
-		border: none;
-		cursor: pointer;
-	}
-
-
-	.searchBox button:hover {
-		background: #ccc;
-	}
-
-	@media screen and (max-width: 600px) {
-		.searchBox {
-			float: none;
-		}
-		.searchBox input[type=text], .searchBox button {
-			float: none;
-			display: block;
-			text-align: left;
-			width: 100%;
-			margin: 0;
-			padding: 14px;
-		}
+		/*Siyang Search Styles*/
 		.searchBox input[type=text] {
-			border: 1px solid #ccc;
+			font-size: 17px;
+			border: none;
+			color: #ddd;
 		}
-	}
-	/* styling checkbox */
-	/* The container */
-	.container {
-		display: block;
-		position: relative;
-		left:60;
-		padding-left: 35px;
-		margin-bottom: 12px;
 
-		cursor: pointer;
-		font-size: 16px;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-
-	/* Hide the browser's default checkbox */
-	.container input {
-		position: absolute;
-		opacity: 0;
-		cursor: pointer;
-	}
-
-	/* Create a custom checkbox */
-	.checkmark {
-		position: absolute;
-		top: 0;
-		left: -20;
-		height: 25px;
-		width: 25px;
-		background-color: #eee;
-	}
-
-	/* Create a custom radio button */
-.radioCheckmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 50%;
-}
+		.searchBox button {
+			float: right;
+			size: 5rem;
+			background: #ddd;
+			font-size: 17px;
+			border: none;
+			cursor: pointer;
+		}
 
 
-	/* On mouse-over, add a grey background color */
-	.container:hover input ~ .checkmark {
-		background-color: #ccc;
-	}
+		.searchBox button:hover {
+			background: #ccc;
+		}
 
-	/* When the checkbox is checked, add a blue background */
-	.container input:checked ~ .checkmark {
-		background-color: #2196F3;
-	}
+		@media screen and (max-width: 600px) {
+			.searchBox {
+				float: none;
+				width: 100%;
+			}
+			.searchBox input[type=text],
+			.searchBox button {
+				float: none;
+				display: block;
+				text-align: left;
+				margin: 0;
+				padding: 14px;
+			}
+			.searchBox input[type=text] {
+				border: 1px solid black;
+			}
+		}
 
-	/* Create the checkmark/indicator (hidden when not checked) */
-	.checkmark:after {
-		content: "";
-		position: absolute;
-		display: none;
-	}
+		/* styling checkbox */
 
-	/* Show the checkmark when checked */
-	.container input:checked ~ .checkmark:after {
-		display: block;
-	}
+		/* The container */
 
-	/* Style the checkmark/indicator */
-	.container .checkmark:after {
-		left: 9px;
-		top: 5px;
-		width: 5px;
-		height: 10px;
-		border: solid white;
-		border-width: 0 3px 3px 0;
-		-webkit-transform: rotate(45deg);
-		-ms-transform: rotate(45deg);
-		transform: rotate(45deg);
-	}
-	/* Style the indicator (dot/circle) */
-.radioContainer .radioCheckmark:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
-}
-.slidecontainer {
-    width: 100%;
-}
+		.container {
+			display: block;
+			position: relative;
+			left: 60;
+			padding-left: 5px;
+			margin-bottom: 12px;
+			cursor: pointer;
+			font-size: 16px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
 
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 25px;
-    background: #eee;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
+		/* Hide the browser's default checkbox */
 
-.slider:hover {
-    opacity: 1;
-}
+		.container input {
+			position: absolute;
+			opacity: 0;
+			cursor: pointer;
+		}
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #000000;
-    cursor: pointer;
-}
+		/* Create a custom checkbox */
 
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
-}
+		.checkmark {
+			position: absolute;
+			top: 0;
+			left: -20;
+			height: 25px;
+			width: 25px;
+			background-color: #ddd;
+		}
+
+		/* Create a custom radio button */
+
+		.radioCheckmark {
+			position: absolute;
+			height: 25px;
+			width: 25px;
+			background-color: #ddd;
+			border-radius: 50%;
+		}
+
+
+		/* On mouse-over, add a grey background color */
+
+		.container:hover input~.checkmark {
+			background-color: #ccc;
+		}
+
+		/* When the checkbox is checked, add a blue background */
+
+		.container input:checked~.checkmark {
+			background-color: #2196F3;
+		}
+
+		/* Create the checkmark/indicator (hidden when not checked) */
+
+		.checkmark:after {
+			content: "";
+			position: absolute;
+			display: none;
+		}
+
+		/* Show the checkmark when checked */
+
+		.container input:checked~.checkmark:after {
+			display: block;
+		}
+
+		/* Style the checkmark/indicator */
+
+		.container .checkmark:after {
+			left: 10px;
+			top: 5px;
+			width: 5px;
+			height: 10px;
+			border: solid white;
+			border-width: 0 3px 3px 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+
+		/* Style the indicator (dot/circle) */
+
+		.radioContainer .radioCheckmark:after {
+			top: 9px;
+			left: 9px;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: white;
+		}
+
+		.slidecontainer {
+			padding: 8px 12px;
+		}
+
+		.slider {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 25px;
+			background: #eee;
+			outline: none;
+			opacity: 0.7;
+			-webkit-transition: .2s;
+			transition: opacity .2s;
+		}
+
+		.slider:hover {
+			opacity: 1;
+		}
+
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 25px;
+			height: 25px;
+			background: #000000;
+			cursor: pointer;
+		}
+
+		.slider::-moz-range-thumb {
+			width: 25px;
+			height: 25px;
+			background: #4CAF50;
+			cursor: pointer;
+		}
+
 
 		/**
-			* Styles for content boxes and hover popups
+			* Aligns all the content boxes to the right side
 			*/
-		.contentBox{
-			position: absolute;
-			z-index: 2;
-			background-color: rgba(47, 124, 147, 0.8);
-			color: #fff;
-			padding: 8px 12px;
-			right: 5px;
-			top: 10rem;
+
+		#right-align {
 			width: 25%;
-			height: 50%;
+			height: 100%;
+			right: 0em;
+			z-index: 1000;
+			position: fixed;
+			background-color: rgba(47, 124, 147, 0.7);
 			overflow-x: hidden;
+			transform: translateX(0);
+			transition: transform 1s;
 		}
 
-		.popup{
-			background-color: rgba(255,74,0,0.8);
+		#right-align.active {
+			transform: translateX(100%);
+		}
+
+		/* Irene's Collapsibles*/
+
+		/* a button that hides Option Menu to the right */
+
+		.hideButton {
+			cursor: pointer;
+			position: fixed;
+			z-index:1000;
+			left: 5rem;
+			top: 10rem;
+			width: 5rem;
+			height: 5rem;
+		}
+
+		/* Creates a single collapsible tag */
+
+		.collapsible {
+			position: relative;
+			border-style: solid;
+			border-width: 1px;
+			border-color: rgba(47, 124, 147, 1);
+			cursor: pointer;
+			width: 100%;
+			padding: 18px;
+			text-align: center;
+			font-size: 1rem;
+			color: black;
+			background-color: rgba(47, 124, 147, 0.7);
+		}
+
+		.active,
+		.collapsible:hover {
+			background-color: rgba(47, 124, 147, 1);
+		}
+
+		/* Content inside collapsible */
+		.content {
+			padding: 0px 8px;
+			max-height: 0;
+			overflow-x: hidden;
+			transition: max-height 0.2s ease-out;
+			background-color: rgba(47, 124, 147, 0.7);
 		}
 	</style>
 </head>
 
 <body>
-	{% extends 'dpsite/base.html' %}
-	{% load static %}
-	{% block content %}
-	<!--Search Box-->
-	<div class="searchBox">
+	{% extends 'dpsite/base.html' %} {% load static %} {% block content %}
 
-		<input type="text" id = "query" placeholder="Search.." name="search">
-		<button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
-	</div>
+	<!--INFO BOX-->
+	<button class="hideButton" id="hideButton">Toggle Menu</button>
 
-	<div class="row">
+	<div id="right-align">
+		<div class="contentBox">
+			<button class="collapsible"><strong><div id="content-header">Diggin' Philly: The Black Philadelphia Project</div></strong></button>
+			<div class="content" style="color:white;">
+				<p><strong><div id="content-neighborhood-dates">
+			</div></strong></p>
+				<p>
+					<div id="content-summary">
+						Loem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+						in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</div>
+				</p>
+				<p>
+					<div id="content-description"></div>
+				</p>
+				<div id="content-media"></div>
+			</div>
+		</div>
 
-		<div class="column">
-			<h2>Theme</h2>
+		<!--SEARCH BOX-->
+		<div class="input-group">
+			<button class="collapsible" id="search"><strong>Search</strong></button>
+			<div class="content" id="search-content">
+				<div class="searchBox" style="width:100%;">
+					<input type="text" id="query" placeholder="Search.." style="width:75%;" name="search">
+					<span class="input-group-btn">
+					<button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
+				</span>
+				</div>
+			</div>
+		</div>
+
+		<!--CHECKBOXES-->
+		<button class="collapsible"><strong>Theme</strong></button>
+		<div class="content" style="color:white;">
 			<label class="container">Education
 				<input type="checkbox" name = "tag" value = "education">
-
 				<span class="checkmark"></span>
-
 			</label>
 
 			<label class="container">Museum
@@ -324,185 +387,307 @@
 			</label>
 		</div>
 
-		<div class="column">
-			<h2>Part of City</h2>
-			<!-- Octavius Catto    House: South Philly, Monument: Center City -->
-			<label class="radioContainer">North Philadelphia
+		<!--PART OF CITY-->
+		<div id="part-of-city">
+			<button class="collapsible"><strong>Part of City</strong></button>
+			<div class="content" style="color:white;">
+				<label class="radioContainer">North Philadelphia
 				<input type="radio" name = "location" value = "North Philadelphia">
-				<span class="radioCheckmark"></span>
 			</label>
-			<label class="radioContainer">West Philadelphia
+				<br>
+				<label class="radioContainer">West Philadelphia
 				<input type="radio" name = "location" value = "West Philadelphia">
-				<span class="radioCheckmark"></span>
 			</label>
-
-			<label class="radioContainer">South Philadelphia
+				<br>
+				<label class="radioContainer">South Philadelphia
 				<input type="radio" name = "location" value = "South Philadelphia">
-				<span class="radioCheckmark"></span>
 			</label>
-
-			<h2>Time Period</h2>
-			<div class="slidecontainer">
-  		<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
-  		<p>Year: <span id="sliderValue"></span></p>
 			</div>
-
 		</div>
+		<!--TIME PERIOD SLIDER-->
+		<div id="time">
+			<button class="collapsible"><strong>Time Period</strong></button>
+			<div class="content" style="color:white;">
+				<div class="timeSelectionBox">
+
+			<input type="text" id = "startTimeInput" placeholder="1960" name="search">
+			<input type="text" id = "endTimeInput" placeholder="2000" name="search">
+		</div>
+				<div class="slidecontainer">
+					<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
+					<p>Year: <span id="sliderValue"></span></p>
+				</div>
+			</div>
+		</div>
+
 	</div>
 
-
-	<button type="button" class="btn btn-primary" onclick="selectTag()">
+	<!-- <button type="button" class="btn btn-primary" onclick="selectTag()" style="z-index:2;">
 		Filter By Tags
 	</button>
-	<button type="button" class="btn btn-primary" onclick="selectPartOfCity()">
+	<button type="button" class="btn btn-primary" onclick="selectPartOfCity()" style="z-index:2;">
 		Filter By Part Of City
 	</button>
-	<button type="button" class="btn btn-primary" onclick="selectTimePeriod()">
+	<button type="button" class="btn btn-primary" onclick="selectTimePeriod()" style="z-index:2;">
 		Filter By Time Period
-	</button>
+	</button> -->
+	<button type="button" class="btn btn-primary" onclick="filter()">
+		Filter</button>
+		<button type="button" class="btn btn-primary" onclick="clearFilter()">
+			Clear Filter</button>
 
-	<span id='logMsg'><!-- Use this span for writing debug messages --></span>
-
-	<!--Content-->
-	<div class="contentBox">
-		<!--Header of the location; default: "Diggin'Philly"-->
-		<h6 style="color:black;"><strong><div id="content-header" href=#>
-			Diggin' Philly: The Black Philadelphia Project
-		</div></strong></h6>
-		<!--Image if one exists-->
-		<div></div>
-		<!--Neighboord and date, if one exists-->
-		<p><strong><div id="content-neighborhood-dates">
-
-		</div></strong></p>
-
-		<!--Summary of data; default: project description-->
-		<p><div id="content-summary">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</div></p>
-
-		<!--Media, if it exists-->
-		<div id="media, if it exists">
-		</div>
-	</div>
+	<!-- Use this span for writing debug messages -->
+	<span id='logMsg'></span>
 
 	<!--Map and popup items-->
 	<div id="map"></div>
 	<div id="popup" class="popup"></div>
 
-
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-	<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 	<script>
-	const queryInput = document.getElementById('query');
-	const searchButton = document.getElementById('submitButton');
+		/*COLLAPSIBLE SIDEBAR ELEMENTS*/
+		var collapse = document.getElementsByClassName("collapsible");
 
-	function search(query) {
-		$('#logMsg').html(queryInput.value);
+		for (var i = 0; i < collapse.length; i++) {
+			collapse[i].addEventListener("click", function() {
+				this.classList.toggle("active");
+				var content = this.nextElementSibling;
+				if (content.style.maxHeight) {
+					content.style.maxHeight = null;
+				} else {
+					content.style.maxHeight = content.scrollHeight + "px";
+				}
+			});
+		}
+		/*END COLLAPSIBLE SIDEBAR*/
 
-		{% for mapItem in map_items%}
-		if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value)) {
-			$('#logMsg').append('{{mapItem.title}}');
+		/*HIDE PANEL*/
+		var hide = document.getElementById("hideButton");
 
+		hide.addEventListener("click", function() {
+			var options = document.getElementById("right-align");
+			var button = document.getElementById("hideButton");
+			if (options.classList.contains("active")) {
+				options.classList.remove("active");
+			} else {
+				options.classList.add("active");
+			}
+			if (button.classList.contains("active")){
+				button.classList.remove("active");
+			}
+			else{
+				button.classList.add("active");
+			}
+		});
+		/*END HIDE PANEL*/
+
+		/*Map Query*/
+		const queryInput = document.getElementById('query');
+		const searchButton = document.getElementById('submitButton');
+
+		function search(query) {
+			$('#logMsg').html(queryInput.value);
+			var mapItemList = [];
+			mapItemPointCoord0 = [];
+			mapItemPointCoord1 = [];
+			{% for mapItem in map_items%}
+				if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) ||'{{mapItem.description}}'.includes(queryInput.value)) {
+						$('#logMsg').append('{{mapItem.title}}');
+						mapItemList.push('{{mapItem}}');
+			{% for point in mapItem.location1%}
+				mapItemPointCoord0.push({{point.coords.0}});
+				mapItemPointCoord1.push({{point.coords.1}});
+			{% endfor %}
+			}
+			{% endfor %}
+			setMarkers();
 		}
 
-		{% endfor %}
+		searchButton.onclick = function(event) {
+			$('#logMsg').html(queryInput.value);
+			search(queryInput.value);
+			event.preventDefault();
+		};
 
-	}
+		var mapItemPointCoord0 = [];
+var mapItemPointCoord1 = [];
 
-	searchButton.onclick = function(event) {
-		$('#logMsg').html(queryInput.value);
-		search(queryInput.value);
-		event.preventDefault();
-	};
+function filter() {
+	var checkBox = document.getElementsByName("tag");
+	var radioButton = document.getElementsByName("location");
+	var mapItemList = [];
+	$('#logMsg').html("");
+	mapItemPointCoord0 = [];
+	mapItemPointCoord1 = [];
 
-	// function for tag selection
-	function selectTag() {
-		$('#logMsg').html("");
-		var checkBox = document.getElementsByName("tag");
-
-		var selectedItems = "selected: ";
-		for (var i = 0; i< checkBox.length; i++) {
-			// $('#logMsg').append("true " + checkBox[i].checked);
-			if (checkBox[i].checked == true) {
-				// $('#logMsg').append(checkBox[i].value);\
-				selectedItems += checkBox[i].value + "\n";
-				{% for mapItem in map_items%}
-
+	for (var i = 0; i < checkBox.length; i++) {
+		if (checkBox[i].checked == true) {
+			{% for mapItem in map_items%}
 				{%for t in mapItem.tags.all%}
-				if ('{{t}}'==checkBox[i].value) {
-					$('#logMsg').append('{{mapItem}}');
-				}
+					if ('{{t}}'==checkBox[i].value) {
+						// $('#logMsg').append('{{mapItem}}');
+						mapItemList.push('{{mapItem}}');
+						{% for point in mapItem.location1%}
+						mapItemPointCoord0.push({{point.coords.0}});
+						mapItemPointCoord1.push({{point.coords.1}});
+						{% endfor %}
+					}
 
-				{% endfor %}
-
-				// \{% endfor %\}\
-				{% endfor %}
-			}
-
+			{% endfor %}
+			{% endfor %}
 		}
-		$('#logMsg').append(selectedItems);
-
 	}
 
-	// function for part of city selection
-	function selectPartOfCity() {
-		$('#logMsg').html("");
-		var checkBox = document.getElementsByName("location");
-
-		for (var i = 0; i< checkBox.length; i++) {
-
-			if (checkBox[i].checked == true) {
-
-				// $('#logMsg').append("checked");
-				{% for mapItem in map_items%}
+	for (var i = 0; i< radioButton.length; i++) {
+		if (radioButton[i].checked == true) {
+			{% for mapItem in map_items%}
+			if ('{{mapItem.location_notes}}'==radioButton[i].value) {
 				// $('#logMsg').append('{{mapItem}}');
+				if (!mapItemList.includes('{{mapItem}}')) {
+					mapItemList.push('{{mapItem}}');
+					{% for point in mapItem.location1%}
+					mapItemPointCoord0.push({{point.coords.0}});
+					mapItemPointCoord1.push({{point.coords.1}});
+					{% endfor %}
+				}
+			}
 
-				if ('{{mapItem.location_notes}}'==checkBox[i].value) {
-					$('#logMsg').append('{{mapItem}}');
+			{% endfor %}
+			break;
+		}
+	}
+
+	var startDate = '{{mapItem.start_date}}';
+	var startYear = startDate.substr(startDate.indexOf(",")+1);
+	var endDate = '{{mapItem.end_date}}';
+	var endYear = endDate.substr(endDate.indexOf(",")+1);
+	// $('#logMsg').append("start year: " + startYear);
+	// $('#logMsg').append("end year: " + endYear);
+	// && endYear >=slider.value
+	if (startYear <= slider.value && slider.value >= endYear) {
+		if (!mapItemList.includes('{{mapItem}}')) {
+			mapItemList.push('{{mapItem}}');
+			{% for point in mapItem.location1%}
+			mapItemPointCoord0.push({{point.coords.0}});
+			mapItemPointCoord1.push({{point.coords.1}});
+			{% endfor %}
+		}
+	}
+
+	for (var i = 0; i < mapItemList.length; i++) {
+		$('#logMsg').append(mapItemList[i]);
+	}
+	setMarkers();
+	// for (var i = 0; i < mapItemList.length; i++) {
+	// 	$('#logMsg').append(mapItemPointCoord0[i]);
+	// }
+
+
+}
+
+function clearFilter() {
+	// $('#logMsg').html("clearFilter clicked");
+	var checkBox = document.getElementsByName("tag");
+	var radioButton = document.getElementsByName("location");
+	for (var i = 0; i < checkBox.length; i++) {
+		checkBox[i].checked = false;
+	}
+	for (var i = 0; i < radioButton.length; i++) {
+		radioButton[i].checked = false;
+	}
+	{% for mapItem in map_items%}
+	{% for point in mapItem.location1%}
+	mapItemPointCoord0.push({{point.coords.0}});
+	mapItemPointCoord1.push({{point.coords.1}});
+	{% endfor %}
+	{% endfor %}
+	setMarkers();
+	
+}
+
+		// function for tag selection
+		function selectTag() {
+			$('#logMsg').html("");
+			var checkBox = document.getElementsByName("tag");
+
+			var selectedItems = "selected: ";
+			for (var i = 0; i < checkBox.length; i++) {
+				// $('#logMsg').append("true " + checkBox[i].checked);
+				if (checkBox[i].checked == true) {
+					// $('#logMsg').append(checkBox[i].value);\
+					selectedItems += checkBox[i].value + "\n";
+					{%for mapItem in map_items %}
+					{%for t in mapItem.tags.all %}
+						if ('{{t}}' === checkBox[i].value) {
+							$('#logMsg').append('{{mapItem}}');
+						}
+					{% endfor %}
+					// \{% endfor %\}\
+					{% endfor %}
 				}
 
+			}
+			$('#logMsg').append(selectedItems);
 
+		}
 
+		// function for part of city selection
+		function selectPartOfCity() {
+			$('#logMsg').html("");
+			var checkBox = document.getElementsByName("location");
 
-				{% endfor %}
-				break;
+			for (var i = 0; i < checkBox.length; i++) {
+
+				if (checkBox[i].checked == true) {
+
+					// $('#logMsg').append("checked");
+					{%for mapItem in map_items %}
+						// $('#logMsg').append('{{mapItem}}');
+						if ('{{mapItem.location_notes}}' == checkBox[i].value) {
+							$('#logMsg').append('{{mapItem}}');
+						}
+					{% endfor %}
+					break;
+				}
+
 			}
 
 		}
 
-	}
 
+		var slider = document.getElementById("sliderRange");
+		var output = document.getElementById("sliderValue");
+		output.innerHTML = slider.value;
 
-	var slider = document.getElementById("sliderRange");
-	var output = document.getElementById("sliderValue");
-	output.innerHTML = slider.value;
-
-	slider.oninput = function() {
-  	output.innerHTML = this.value;
-	}
-
-	function selectTimePeriod() {
-		$('#logMsg').html("");
-		// $('#logMsg').append(slider.value);
-		{% for mapItem in map_items%}
-		var startDate = '{{mapItem.start_date}}';
-		var startYear = startDate.substr(startDate.indexOf(",")+1);
-		var endDate = '{{mapItem.end_date}}';
-		var endYear = endDate.substr(endDate.indexOf(",")+1);
-		// $('#logMsg').append("start year: " + startYear);
-		// $('#logMsg').append("end year: " + endYear);
-	// && endYear >=slider.value
-		if (startYear <= slider.value && slider.value >= endYear) {
-			$('#logMsg').append('{{mapItem}}');
+		slider.oninput = function() {
+			output.innerHTML = this.value;
 		}
-		// var year = '{{mapItem.start_date}}'.substr(str.indexOf(",")+1);
 
-		{% endfor %}
+		function selectTimePeriod() {
+
+	const startTimeInput = document.getElementById('startTimeInput');
+	const endTimeInput = document.getElementById('endTimeInput');
+	$('#logMsg').append(startTimeInput.value);
+	$('#logMsg').append(endTimeInput.value);
+	// $('#logMsg').html("");
+	// // $('#logMsg').append(slider.value);
+	{% for mapItem in map_items%}
+	var startDate = '{{mapItem.start_date}}';
+	var startYear = startDate.substr(startDate.indexOf(",")+1);
+	var endDate = '{{mapItem.end_date}}';
+	var endYear = endDate.substr(endDate.indexOf(",")+1);
+	// $('#logMsg').append("start year: " + startYear);
+	// $('#logMsg').append("end year: " + endYear);
+	// && endYear >=slider.value
+	if (startYear >= startTimeInput && endTimeInput >= endYear) {
+		$('#logMsg').append('{{mapItem}}');
 	}
+	// var year = '{{mapItem.start_date}}'.substr(str.indexOf(",")+1);
+
+	{% endfor %}
+}
 		/**
 		 * Elements that make up the popup.
 		 */
@@ -536,33 +721,33 @@
 				center: ol.proj.fromLonLat([-75.165222, 39.952583]),
 				zoom: 12,
 				minZoom: 10,
-        maxZoom: 19,
+				maxZoom: 19,
 			})
 		});
 
 		/**
-			* Create a feature for each data point we have
-			*/
+		 * Create a feature for each data point we have
+		 */
 		{% for mapItem in map_items %}
-		{% for point in mapItem.location1 %}
+		{%for point in mapItem.location1 %}
 		var markers = new ol.layer.Vector({
 			source: new ol.source.Vector({
 				features: [
 					new ol.Feature({
-						title:"{{mapItem.title|safe|striptags}}",
+						title: "{{mapItem.title|safe|striptags}}",
 						summary: '{{mapItem.summary|safe|striptags}}',
-						description:'{{mapItem.description|safe|striptags}}',
-						start:'{{mapItem.start_date|safe|striptags}}',
-						end:'{{mapItem.end_date|safe|striptags}}',
-						media:'{{mapItem.media|safe}}',
-						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}}, {{point.coords.1}}])),
+						description: '{{mapItem.description|safe|striptags}}',
+						start: '{{mapItem.start_date|safe|striptags}}',
+						end: '{{mapItem.end_date|safe|striptags}}',
+						media: '{{mapItem.media|safe|striptags}}',
+						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
 					})
 				]
 			}),
 			style: new ol.style.Style({
 				image: new ol.style.Icon({
 					src: 'https://s8.postimg.cc/gcsd9zztx/target.png',
-					width:10,
+					width: 10,
 					anchor: [0.5, 1]
 				})
 			})
@@ -571,18 +756,56 @@
 		{% endfor %}
 		{% endfor %}
 
+
+	function setMarkers() {
+	// $('#logMsg').append("setMarkers()");
+	// $('#logMsg').append(map);
+	// $('#logMsg').append(markers);
+	map.getLayers().forEach(function(Vectorlayer) {
+
+    if(Vectorlayer instanceof ol.layer.Vector)
+       Vectorlayer.getSource().clear();
+
+		 });
+
+
+	for (var i = 0; i < mapItemPointCoord0.length; i++) {
+		// $('#logMsg').append(mapItemPointCoord0[i]);
+		// $('#logMsg').append(mapItemPointCoord1[i]);
+		  markers = new ol.layer.Vector({
+			source: new ol.source.Vector({
+				features: [
+					new ol.Feature({
+
+						geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
+
+					})
+
+				]
+			}),
+			style: new ol.style.Style({
+				image: new ol.style.Icon({
+					src: '//openlayers.org/en/v3.12.1/examples/data/icon.png',
+					anchor: [0.5, 1]
+				})
+			})
+		});
+		map.addLayer(markers);
+	}
+}
 		/**
-			* Creating an overlay with popups
-			*/
+		 * Creating an overlay with popups
+		 */
 		const element = document.getElementById('popup');
 
 		const popup = new ol.Overlay({
-      element: element,
-      positioning: 'bottom-center',
-      stopEvent: false,
-    });
+			element: element,
+			positioning: 'bottom-center',
+			offset: [0, -50],
+			stopEvent: false,
+		});
 
-    map.addOverlay(popup);
+		map.addOverlay(popup);
 
 		/**
 		 * Create an overlay box in the top right hand corner
@@ -593,42 +816,69 @@
 		 */
 		map.on('singleclick', function(evt) {
 			const feature = map.forEachFeatureAtPixel(evt.pixel,
-          function(feature) {
-            return feature;
-          });
+				function(feature) {
+					return feature;
+				});
 
-				// Handle click on map item
-        if (feature) {
-					// Handle content change
-					document.getElementById('content-header').innerHTML = feature.get('title');
+			// Handle click on map item
+			if (feature) {
+				// Handle content change
+				document.getElementById('content-header').innerHTML = feature.get('title');
+				if (feature.get('start')!=null && feature.get('end')!=null){
 					document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + '-' + feature.get('end');
+				}
+				if(feature.get('summary')!=null){
 					document.getElementById('content-summary').innerHTML = feature.get('summary');
-          // Handle popup
-          const coordinates = feature.getGeometry().getCoordinates();
-          popup.setPosition(coordinates);
-					$(element).popover({
-            placement: 'right',
-            html: true,
-            content: feature.get('title')
-          });
-          $(element).popover('show');
+				}
+				if (feature.get('description') !=null){
+					document.getElementById('content-description').innerHTML = feature.get('description');
+				}
+				if(feature.get('media')!==null){
+					document.getElementById('content-media').innerHTML=feature.get('media');
+				}
+				// Handle popup
+				const coordinates = feature.getGeometry().getCoordinates();
+				popup.setPosition(coordinates);
+				$(element).popover({
+					placement: 'top',
+					html: true,
+					content: feature.get('title')
+				});
+				$(element).popover('show');
 
 				// Dispose popup and return to default text otherwise
-        } else {
-          $(element).popover('dispose');
-					document.getElementById('content-header').innerHTML ="Diggin' Philly: The Black Philadelphia Project";
-					document.getElementById('content-summary').innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim idest laborum.';
+			} else {
+				$(element).popover('dispose');
+				document.getElementById('content-header').innerHTML = "Diggin' Philly: The Black Philadelphia Project";
+				document.getElementById('content-neighborhood-dates').innerHTML = "";
+				document.getElementById('content-description').innerHTML = "";
+				document.getElementById('content-summary').innerHTML =
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim idest laborum.';
 
-        }
+			}
+		});
+
+		map.on('hover', function(evt){
+			if (feature){
+				// Handle popup
+				const coordinates = feature.getGeometry().getCoordinates();
+				popup.setPosition(coordinates);
+				$(element).popover({
+					placement: 'right',
+					html: true,
+					content: feature.get('title')
+				});
+				$(element).popover('show');
+			}
 		});
 
 		map.on('pointermove', function(evt) {
-        if (evt.dragging) {
-          $(element).popover('dispose');
-          return;
-        }
-        map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
-      });
+			if (evt.dragging) {
+				$(element).popover('dispose');
+				return;
+			}
+			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+		});
 	</script>
 	{% endblock %}
 </body>
