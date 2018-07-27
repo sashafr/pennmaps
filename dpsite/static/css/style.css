@@ -98,13 +98,58 @@ a:visited {
   color: rgba(255,255,255,0.7) !important; /*rgb(0, 77, 100) !important; dk blue*/
 }
 
-
-
 /* end Nia's styles for mapitem.html */
 
-/* Nia's styles for xyz */
+/* Sticky Footer Styles */
+.dp-content {
+    min-height: 100%;
+    margin-bottom: -6rem;
+}
 
-/* end Nia's styles for xyz */
+.push {
+    height: 6rem;
+}
+/* End Sticky Footer Styles */
+
+/* Sasha's Sidebar */
+.dp-sidebar {
+    margin-top: 3rem;
+}
+/* End Sasha's Sidebar */
+
+/* Fixed image background and text boxes*/
+.dp-fixed-image {
+    width: 100%;
+    height: 20%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.dp-mi-fixed-image {
+    width: 100%;
+    height: 30%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.dp-fixed-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 9%;
+    margin-bottom: 10px;
+}
+
+.media-full {
+    max-width: 100%;
+    height: auto;
+}
+
+.mapitem-button {
+    border-radius: 0px !important;
+}
+/* End fixed image background and text boxes */
 
 /*BEGIN irene's popups*/
 .popup{
@@ -185,7 +230,6 @@ body {
     color: #212529;
     text-align: left;
     background-color: #fff;
-    padding-bottom: 6rem;
 }
 
 [tabindex="-1"]:focus {
@@ -2183,6 +2227,7 @@ pre code {
     position: relative;
     bottom: 0;
     width: 100%;
+    height: 6rem;
 }
 
 .form-control {

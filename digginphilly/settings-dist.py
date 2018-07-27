@@ -25,8 +25,9 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['204.48.29.5']
+ALLOWED_HOSTS = ['']
 
+SITE_ID = 1
 
 # Application definition
 
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'django.contrib.sites',
     'dpsite',
     'ckeditor',
     'import_export',

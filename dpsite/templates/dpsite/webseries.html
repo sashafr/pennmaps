@@ -1,5 +1,51 @@
 {% extends "dpsite/base.html" %}
-
+{% load static %}
 {% block content %}
-    {{ dummmyvariable }}
+<!--
+Full Motion by TEMPLATED
+templated.co @templatedco
+Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<body id="top">
+
+    <!-- Main -->
+    <div id="main" class="row">
+        <div class="inner col-md-9">
+            {% for season, episodes in series.items %}
+                <h1>Season {{season}}</h1>
+                <div class="thumbnails">
+                    {% for episode in episodes %}
+                        <div class="box">
+                            <div class="dp-fixed-image" style="background-image: url('{{ episode.get_thm_url }}')">
+                                {% if episode.get_main_url == "iframe" %}
+                                    <a href="#inline-{{ episode.season }}-{{ episode.episode }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}"></a>
+                                    <div id="inline-{{ episode.season }}-{{ episode.episode }}" class="lity-hide">
+                                        {{ episode.file_iframe|safe }}
+                                    </div>
+                                {% else %}
+                                        <a href="{{ episode.get_main_url }}" class="image fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}"></a>
+                                {% endif %}
+                            </div>
+                            <div class="inner">
+                                <h3>{{ episode.title }}</h3>
+                                <p class="dp-fixed-text">{{ episode.description }}</p>
+                                {% if episode.get_main_url == "" %}
+                                    <a class="button disabled fit">Coming Soon</a>
+                                {% elif episode.get_main_url == "iframe" %}
+                                    <a href="#inline-{{ episode.season }}-{{ episode.episode }}" class="button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">View</a>
+                                {% else %}
+                                    <a href="{{ episode.get_main_url }}" class="button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="Season {{ episode.season }} Episode {{ episode.episode }}: {{ episode.title }}">View</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3 dp-sidebar">
+            {{ sidebar_text|safe }}
+        </div>
+    </div>
+</body>
+
 {% endblock content %}
