@@ -186,11 +186,12 @@
 			width: 25%;
 			height: 100%;
 			right: 0em;
-			z-index: 1000;
+			z-index: 100;
+		/*	top:0em;*/
 			position: fixed;
 			background-color: rgba(47, 124, 147, 0.7);
 			overflow-x: hidden;
-			transform: translateX(0);
+			transform: translateX(0%);
 			transition: transform 1s;
 		}
 
@@ -202,14 +203,9 @@
 
 		/* a button that hides Option Menu to the right */
 
-		.hideButton {
+		#hideButton {
 			cursor: pointer;
-			position: fixed;
-			z-index:1000;
-			left: 5rem;
-			top: 10rem;
-			width: 5rem;
-			height: 5rem;
+			position: absolute;
 		}
 
 		/* Creates a single collapsible tag */
@@ -218,52 +214,57 @@
 			position: relative;
 			border-style: solid;
 			border-width: 1px;
-			border-color: rgba(47, 124, 147, 1);
+			border-color:rgba(31, 81, 97,0.1);;
 			cursor: pointer;
 			width: 100%;
 			padding: 18px;
+			position:relative;
+			z-index:2;
 			text-align: center;
 			font-size: 1rem;
 			color: black;
-			background-color: rgba(47, 124, 147, 0.7);
+			background-color: rgba(47, 124, 147, 1);
 		}
 
 		.active,
 		.collapsible:hover {
-			background-color: rgba(47, 124, 147, 1);
+			background-color: rgba(31, 81, 97,1);
 		}
 
 		/* Content inside collapsible */
 		.content {
 			padding: 0px 8px;
 			max-height: 0;
-			overflow-x: hidden;
+			overflow: hidden;
+			position:relative;
+			z-index:2;
 			transition: max-height 0.2s ease-out;
-			background-color: rgba(47, 124, 147, 0.7);
+			background-color: rgba(47, 124, 147, 1);
 		}
 	</style>
 </head>
 
 <body>
 	{% extends 'dpsite/base.html' %} {% load static %} {% block content %}
-
-	<!--INFO BOX-->
-	<button class="hideButton" id="hideButton">Toggle Menu</button>
-
+<div style="z-index:2; position:fixed; background-color:black;opacity:0.4;width:25%;"></div>
 	<div id="right-align">
 		<div class="contentBox">
-			<button class="collapsible"><strong><div id="content-header">Diggin' Philly: The Black Philadelphia Project</div></strong></button>
+			<button class="collapsible"><strong><div id="content-header">Information</div></strong></button>
 			<div class="content" style="color:white;">
 				<p><strong><div id="content-neighborhood-dates">
 			</div></strong></p>
 				<p>
-					<div id="content-summary">
-						Loem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-						in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					<div id="content-description">
+						<strong style="color:black;">Explore Black Philadelphia from a spatial perspective.</strong><br>
+
+Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present.
+
+Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure.
+
+If you hover over a map point, a small pop-up window will preview the location details.
+
+If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.
 					</div>
-				</p>
-				<p>
-					<div id="content-description"></div>
 				</p>
 				<div id="content-media"></div>
 			</div>
@@ -421,18 +422,29 @@
 		</div>
 
 	</div>
-
-	<button type="button" class="btn btn-primary" onclick="selectTag()" style="z-index:2;">
+<!--
+	<button type="button" class="btn btn-primary" onclick="selectTag()" style="top: 12rem;z-index:2;position:absolute;">
 		Filter By Tags
 	</button>
-	<button type="button" class="btn btn-primary" onclick="selectPartOfCity()" style="z-index:2;">
+
+	<button type="button" class="btn btn-primary" onclick="selectPartOfCity()" style="top:15rem;z-index:2;position:absolute;">
 		Filter By Part Of City
 	</button>
-	<button type="button" class="btn btn-primary" onclick="selectTimePeriod()" style="z-index:2;">
+
+	<button type="button" class="btn btn-primary" onclick="selectTimePeriod()" style="top:18rem;z-index:2;position:absolute;">
 		Filter By Time Period
 	</button>
-	<button type="button" class="btn btn-primary" onclick="filter()">
+-->
+	<button type="button" class="btn btn-primary" onclick="filter()" style="top:12rem;z-index:2; position:absolute;">
 		Filter</button>
+
+		<!--INFO BOX-->
+		<button type=button class="btn btn-primary" style="top:15rem;z-index:2; position:absolute;" id="hideButton">
+			Toggle Menu
+		</button>
+
+		<button type="button" class="btn btn-primary" style="top:18rem;z-index:2; position:absolute;" onclick="clearFilter()">
+			Clear Filter</button>
 
 	<!-- Use this span for writing debug messages -->
 	<span id='logMsg'></span>
@@ -471,12 +483,6 @@
 				options.classList.remove("active");
 			} else {
 				options.classList.add("active");
-			}
-			if (button.classList.contains("active")){
-				button.classList.remove("active");
-			}
-			else{
-				button.classList.add("active");
 			}
 		});
 		/*END HIDE PANEL*/
@@ -575,7 +581,7 @@ function filter() {
 	}
 
 	for (var i = 0; i < mapItemList.length; i++) {
-		$('#logMsg').append(mapItemList[i]);
+		//$('#logMsg').append(mapItemList[i]);
 	}
 	setMarkers();
 	// for (var i = 0; i < mapItemList.length; i++) {
@@ -666,6 +672,26 @@ function filter() {
 
 	{% endfor %}
 }
+
+function clearFilter() {
+	// $('#logMsg').html("clearFilter clicked");
+	var checkBox = document.getElementsByName("tag");
+	var radioButton = document.getElementsByName("location");
+	for (var i = 0; i < checkBox.length; i++) {
+		checkBox[i].checked = false;
+	}
+	for (var i = 0; i < radioButton.length; i++) {
+		radioButton[i].checked = false;
+	}
+	{% for mapItem in map_items%}
+	{% for point in mapItem.location1%}
+	mapItemPointCoord0.push({{point.coords.0}});
+	mapItemPointCoord1.push({{point.coords.1}});
+	{% endfor %}
+	{% endfor %}
+	setMarkers();
+
+}
 		/**
 		 * Elements that make up the popup.
 		 */
@@ -734,7 +760,7 @@ function filter() {
 		{% endfor %}
 		{% endfor %}
 		function setMarkers() {
-	$('#logMsg').append("setMarkers()");
+	//$('#logMsg').append("setMarkers()");
 	// $('#logMsg').append(map);
 	// $('#logMsg').append(markers);
 	map.getLayers().forEach(function(Vectorlayer) {
@@ -746,8 +772,8 @@ function filter() {
 
 
 	for (var i = 0; i < mapItemPointCoord0.length; i++) {
-		$('#logMsg').append(mapItemPointCoord0[i]);
-		$('#logMsg').append(mapItemPointCoord1[i]);
+	//	$('#logMsg').append(mapItemPointCoord0[i]);
+		//S$('#logMsg').append(mapItemPointCoord1[i]);
 		  markers = new ol.layer.Vector({
 			source: new ol.source.Vector({
 				features: [
@@ -761,7 +787,8 @@ function filter() {
 			}),
 			style: new ol.style.Style({
 				image: new ol.style.Icon({
-					src: '//openlayers.org/en/v3.12.1/examples/data/icon.png',
+					src: 'https://s8.postimg.cc/gcsd9zztx/target.png',
+					width: 10,
 					anchor: [0.5, 1]
 				})
 			})
@@ -784,67 +811,49 @@ function filter() {
 		map.addOverlay(popup);
 
 		/**
-		 * Create an overlay box in the top right hand corner
-		 */
+			* Tooltip
+		 	*/
+			var info = $('#info');
+			info.tooltip({
+				animation:false,
+				trigger:m 'manual',
+			});
 
+			var displayFeatureInfo = function(pixel){
+				info.css({
+
+				})
+			};
 		/**
 		 * Add a click handler to the map to render the popup.
 		 */
 		map.on('singleclick', function(evt) {
 			const feature = map.forEachFeatureAtPixel(evt.pixel,
-				function(feature) {
-					return feature;
-				});
-
+ 		 	function(feature) {
+ 		 		return feature;
+ 		 	});
 			// Handle click on map item
 			if (feature) {
 				// Handle content change
-				document.getElementById('content-header').innerHTML = feature.get('title');
 				if (feature.get('start')!=null && feature.get('end')!=null){
-					document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + '-' + feature.get('end');
-				}
-				if(feature.get('summary')!=null){
-					document.getElementById('content-summary').innerHTML = feature.get('summary');
+					var startDate = new Date(feature.get('start'));
+					console.log(startDate);
+					var endDate = new Date(feature.get('end'));
+					console.log(endDate);
+					document.getElementById('content-neighborhood-dates').innerHTML = startDate.toLocaleDateString("en-US", options) +'-'+endDate.toLocaleDateString("en-US",options);
 				}
 				if (feature.get('description') !=null){
-					document.getElementById('content-description').innerHTML = feature.get('description');
+					document.getElementById('content-description').innerHTML = '<strong style="color:black;">' + feature.get('title') + '</strong><br>' + feature.get('description');
 				}
-				if(feature.get('media')!==null){
-					document.getElementById('content-media').innerHTML=feature.get('media');
+				if (feature.get('media') !=null){
+					document.getElementById('content-media'){{mapItem.displayMediaItem}}
 				}
-				// Handle popup
-				const coordinates = feature.getGeometry().getCoordinates();
-				popup.setPosition(coordinates);
-				$(element).popover({
-					placement: 'top',
-					html: true,
-					content: feature.get('title')
-				});
-				$(element).popover('show');
-
-				// Dispose popup and return to default text otherwise
 			} else {
-				$(element).popover('dispose');
-				document.getElementById('content-header').innerHTML = "Diggin' Philly: The Black Philadelphia Project";
+			//	$(element).popover('dispose');
 				document.getElementById('content-neighborhood-dates').innerHTML = "";
-				document.getElementById('content-description').innerHTML = "";
-				document.getElementById('content-summary').innerHTML =
-					'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim idest laborum.';
-
-			}
-		});
-
-		map.on('hover', function(evt){
-			if (feature){
-				// Handle popup
-				const coordinates = feature.getGeometry().getCoordinates();
-				popup.setPosition(coordinates);
-				$(element).popover({
-					placement: 'right',
-					html: true,
-					content: feature.get('title')
-				});
-				$(element).popover('show');
+				document.getElementById('content-description').innerHTML =
+				'<strong style="color:black;">Explore Black Philadelphia from a spatial perspective.</strong><br> Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present. Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure. If you hover over a map point, a small pop-up window will preview the location details. If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.';
+				document.getElementById('content-meida').innerHTML="";
 			}
 		});
 
