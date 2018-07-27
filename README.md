@@ -144,3 +144,19 @@ TODO
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
+
+```
+Color specifications for DP website:
+-BR RED:
+rgb(255, 74, 0);
+#ff4a00;
+-LT BLUE:
+rgb(47, 124, 147);
+#2f7c93;
+-DK BLUE:
+rbg (0, 77, 100);
+#004d64;
+-LT GREEN:
+rgb(202, 201, 157);
+#cac99d;
+```

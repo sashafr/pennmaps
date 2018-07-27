@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from .models import *
 from django.template import Context, loader
-
+from django.conf import settings
 
 # Request Functions
 def base(request):
@@ -17,21 +17,34 @@ def mapItem(request):
 	return render(request, 'dpsite/Test.html',context)
 
 def webSeries(request):
-    series = WebSeries.objects.all()
-    context = {'series': series,}
+    seasons = WebSeries.objects.values('season').distinct()
+    series = {}
+    for season_number in seasons:
+        series[season_number['season']] = WebSeries.objects.filter(season=season_number['season'])
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+    sidebar_text = ""
+    getsidebar = PageText.objects.filter(text_hook="webseries_sidebar")
+    if getsidebar:
+        sidebar_text = getsidebar[0].page_text
+    context = {'series': series, 'page_styles': page_styles, "sidebar_text": sidebar_text}
     return render(request, 'dpsite/webseries.html', context)
-
-def mediaItem(request):
-    mediaitem = Media.objects.all()
-    context = {'mediaitem': mediaitem}
-    return render(request, 'dpsite/mediaItem.html', context)
 
 def mediaGallery(request, tag=""):
     if tag != "":
         media = Media.objects.filter(tags__slug = tag)
     else:
         media = Media.objects.all()
-    context = {'media': media, 'tag': tag }
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+    sidebar_text = ""
+    getsidebar = PageText.objects.filter(text_hook="media_sidebar")
+    if getsidebar:
+        sidebar_text = getsidebar[0].page_text
+    tagobject = Tag.objects.filter(slug = tag)
+    if tagobject:
+        pagetag = tagobject[0]
+    else:
+        pagetag = ""
+    context = {'media': media, 'page_styles': page_styles, 'tag': pagetag, 'sidebar_text': sidebar_text }
     return render(request, 'dpsite/mediaGallery.html', context)
 
 def archiveSearch(request):
@@ -49,7 +62,8 @@ def archiveGallery(request, tag=""):
 
 def archiveItem(request, id):
     mapItem = get_object_or_404(MapItem, pk = id)
-    context = {'mapItem': mapItem, }
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+    context = {'mapItem': mapItem, 'page_styles': page_styles }
     return render(request, 'dpsite/mapItem.html', context)
 
 def aboutTeam(request):
