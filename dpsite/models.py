@@ -147,10 +147,16 @@ class MapItem(models.Model):
     overlay_group = models.ManyToManyField('OverlayGroup', blank=True)
 
     def display_media_thumb(self):
-        if self.media:
-            return self.media[0].display_media_thumb()
+        if self.media.count() > 0:
+            return self.media.all().order_by('mappedmedia__order')[0].display_media_thumb()
         else:
-            return '<img class="item-thumb" src="' + settings.STATIC_URL + 'img/image_default.png" alt="' + self.title + '">'
+            return '<img class="media-thumb" src="' + settings.STATIC_URL + 'img/image_default.png" alt="' + self.title + '">'
+
+    def display_media_full(self):
+        if self.media.count() > 0:
+            return self.media.all().order_by('mappedmedia__order')[0].display_media()
+        else:
+            return '<img class="media-full" src="' + settings.STATIC_URL + 'img/image_default.png" alt="' + self.title + '">'
 
     def get_absolute_url(self):
         return reverse('archiveitem', kwargs={'id': self.id})
@@ -171,7 +177,7 @@ class MappedMedia(models.Model):
     class Meta:
         verbose_name = "File"
         verbose_name_plural = "Media"
-        ordering = ['order']
+        ordering = ('order', )
 
 class WebSeries(models.Model):
     title = models.CharField(max_length = 50)

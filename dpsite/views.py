@@ -62,7 +62,8 @@ def archiveGallery(request, tag=""):
 
 def archiveItem(request, id):
     mapItem = get_object_or_404(MapItem, pk = id)
-    context = {'mapItem': mapItem, }
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+    context = {'mapItem': mapItem, 'page_styles': page_styles }
     return render(request, 'dpsite/mapItem.html', context)
 
 def aboutTeam(request):

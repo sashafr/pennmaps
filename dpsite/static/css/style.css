@@ -126,11 +126,28 @@ a:visited {
     background-size: cover;
 }
 
+.dp-mi-fixed-image {
+    width: 100%;
+    height: 30%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .dp-fixed-text {
     overflow: hidden;
     text-overflow: ellipsis;
     height: 9%;
     margin-bottom: 10px;
+}
+
+.media-full {
+    max-width: 100%;
+    height: auto;
+}
+
+.mapitem-button {
+    border-radius: 0px !important;
 }
 /* End fixed image background and text boxes */
 

@@ -12,7 +12,15 @@ class TagResource(resources.ModelResource):
     class Meta:
         model = Tag
 
+class TagAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+
+    class Meta:
+        model = Tag
+        fields = '__all__'
+
 class TagAdmin(ImportExportModelAdmin):
+    form = TagAdminForm
     list_display = ('title', 'slug', 'tag_group')
     resource_class = TagResource
     search_fields = ['title']
@@ -50,7 +58,7 @@ class MapItemAdminForm(forms.ModelForm):
     description = forms.CharField(widget=CKEditorWidget(), required=False)
     location1 = geoforms.MultiPointField(widget = geoforms.OSMWidget(attrs={'default_lat': 39.9526, 'default_lon': -75.1652, 'default_zoom': 12 }), required=False)
     location2 = geoforms.MultiPolygonField(widget = geoforms.OSMWidget(attrs={'default_lat': 39.9526, 'default_lon': -75.1652, 'default_zoom': 12 }), required=False)
-    info_sources = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
+    info_sources = forms.CharField(widget=CKEditorWidget(), required=False)
 
     class Meta:
         model = MapItem
@@ -65,7 +73,7 @@ class MappedMediaInline(admin.TabularInline):
     model = MappedMedia
     extra = 1
     readonly_fields = ['display_media']
-    fields =['display_media', 'media', 'order']    
+    fields =['display_media', 'media', 'order']
 
     def display_media(self, obj):
         return format_html(obj.media.display_media())
