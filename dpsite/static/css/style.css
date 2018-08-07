@@ -100,6 +100,17 @@ a:visited {
 
 /* end Nia's styles for mapitem.html */
 
+/* Nia's aboutTeam placeholder images;; still need to use html to align img to left */
+img.profile-pic {
+  position:relative;
+  width:60px;
+  height:60px;
+  margin-right:10px;
+  background-color:red;
+
+}
+/* end Nia's aboutTeam placeholder images */
+
 /* Sticky Footer Styles */
 .dp-content {
     min-height: 100%;

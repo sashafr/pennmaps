@@ -100,6 +100,19 @@ a:visited {
 
 /* end Nia's styles for mapitem.html */
 
+/* Nia's aboutTeam placeholder images */
+span.profile-pic {
+  position:static;
+  width:7%;
+  height:7%;
+  max-width:inherit;
+  max-height:inherit;
+  border:1px solid #ccc;
+  color:rgb(47, 124, 147);
+
+}
+/* end Nia's aboutTeam placeholder images */
+
 /* Sticky Footer Styles */
 .dp-content {
     min-height: 100%;
