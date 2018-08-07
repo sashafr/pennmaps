@@ -5,30 +5,60 @@ from ckeditor.widgets import CKEditorWidget
 from .models import *
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-
-
-# Register your models here.
+from django.utils.html import format_html
 
 class TagResource(resources.ModelResource):
 
     class Meta:
         model = Tag
 
+class TagAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorWidget(), required=False)
+
+    class Meta:
+        model = Tag
+        fields = '__all__'
+
 class TagAdmin(ImportExportModelAdmin):
+    form = TagAdminForm
     list_display = ('title', 'slug', 'tag_group')
     resource_class = TagResource
+    search_fields = ['title']
 
 admin.site.register(Tag, TagAdmin)
 admin.site.register(TagGroup)
 admin.site.register(OverlayGroup)
-admin.site.register(Media)
 
+class MediaAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
+    credits = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
+    media_sources = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
+
+    class Meta:
+        model = Media
+        fields = '__all__'
+
+class MediaAdmin(admin.ModelAdmin):
+    form = MediaAdminForm
+    autocomplete_fields = ['tags']
+    search_fields = ['title']
+    list_display = ('title', 'description')
+    list_filter = ['tags']
+    readonly_fields = ['display_media']
+    fields = ['display_media', 'title', 'description', 'credits', 'date_created', 'file_upload', 'file_url', 'file_iframe', 'thumbnail', 'tags', 'start_date', 'end_date', 'media_sources']
+
+    def display_media(self, obj):
+        return format_html(obj.display_media())
+    display_media.short_description = 'Preview'
+
+admin.site.register(Media, MediaAdmin)
 
 class MapItemAdminForm(forms.ModelForm):
     summary = forms.CharField(widget=CKEditorWidget(), required=False)
     description = forms.CharField(widget=CKEditorWidget(), required=False)
     location1 = geoforms.MultiPointField(widget = geoforms.OSMWidget(attrs={'default_lat': 39.9526, 'default_lon': -75.1652, 'default_zoom': 12 }), required=False)
     location2 = geoforms.MultiPolygonField(widget = geoforms.OSMWidget(attrs={'default_lat': 39.9526, 'default_lon': -75.1652, 'default_zoom': 12 }), required=False)
+    info_sources = forms.CharField(widget=CKEditorWidget(), required=False)
 
     class Meta:
         model = MapItem
@@ -42,17 +72,59 @@ class MapItemResource(resources.ModelResource):
 class MappedMediaInline(admin.TabularInline):
     model = MappedMedia
     extra = 1
+    readonly_fields = ['display_media']
+    fields =['display_media', 'media', 'order']
+
+    def display_media(self, obj):
+        return format_html(obj.media.display_media())
+    display_media.short_description = 'Preview'
 
 class MapItemAdmin(ImportExportModelAdmin):
     form = MapItemAdminForm
-    list_display = ('title','location_notes','status')
+    list_display = ('title','summary','status')
     list_filter = ['tags']
     resource_class = MapItemResource
     inlines = (MappedMediaInline, )
+    search_fields = ['title']
+    autocomplete_fields = ['tags']
 
 admin.site.register(MapItem, MapItemAdmin)
 
+class WebSeriesAdminForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows':4, 'cols':40}), required=False)
 
-admin.site.register(WebSeries)
+    class Meta:
+        model = WebSeries
+        fields = '__all__'
+
+class WebSeriesAdmin(admin.ModelAdmin):
+    form = WebSeriesAdminForm
+    autocomplete_fields = ['map_location', 'tags']
+    search_fields = ['title']
+    list_display = ('season', 'episode', 'title', 'description')
+    list_display_links = ('title', )
+    list_filter = ['tags']
+    readonly_fields = ['display_media']
+    fields = ['display_media', 'title', 'description', 'upload_date', 'season', 'episode', 'file_upload', 'file_url', 'file_iframe', 'thumbnail', 'map_location', 'tags', 'credits', 'start_date', 'end_date']
+    view_on_site = True
+
+    def display_media(self, obj):
+        return format_html(obj.display_media())
+    display_media.short_description = 'Preview'
+
+admin.site.register(WebSeries, WebSeriesAdmin)
+
 admin.site.register(PartOfCity)
 admin.site.register(TimePeriod)
+
+class PageTextAdminForm(forms.ModelForm):
+    page_text = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = PageText
+        fields = '__all__'
+
+class PageTextAdmin(admin.ModelAdmin):
+    form = PageTextAdminForm
+
+admin.site.register(PageText, PageTextAdmin)
