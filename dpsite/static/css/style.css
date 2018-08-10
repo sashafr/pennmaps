@@ -106,44 +106,7 @@ a:visited {
 
 /* end Nia's styles for xyz */
 
-/*BEGIN irene's popups*/
-/* Creates a single collapsible tag */
-
-.collapsible {
-  position: relative;
-  border-style: solid;
-  border-width: 1px;
-  border-color:rgba(31, 81, 97,0.2);;
-  cursor: pointer;
-  width: 100%;
-  padding: 18px;
-  position:relative;
-  z-index:2;
-  text-align: center;
-  font-size: 1rem;
-  color: black;
-  background-color: rgba(47, 124, 147, 1);
-}
-
-.active,
-.collapsible:hover {
-  background-color: rgba(31, 81, 97,1);
-}
-
-/* Content inside collapsible */
-.content {
-  padding: 0px 8px;
-  max-height: 0;
-  overflow-x: hidden;
-  position:relative;
-  z-index:2;
-  width: 100%
-  transition: max-height 0.2s ease-out;
-  background-color: rgba(47, 124, 147, 1);
-}
-
-
-
+/*BEGIN irene's map styles*/
 /*Tooltips*/
 .tooltip{
   position: relative;
@@ -211,7 +174,6 @@ a:visited {
 .searchBox input[type=text] {
   font-size: 17px;
   border: none;
-  width:100%;
   color: #ddd;
 }
 
@@ -250,7 +212,6 @@ a:visited {
 /* styling checkbox */
 
 /* The container */
-
 .container {
   display: block;
   position: relative;
@@ -346,6 +307,7 @@ a:visited {
   background: white;
 }
 
+/* REMOVE IF THEY DO NOT WANT A SLIDER
 .slidecontainer {
   padding: 8px 12px;
 }
@@ -379,7 +341,7 @@ a:visited {
   height: 25px;
   background: #4CAF50;
   cursor: pointer;
-}
+}*/
 
 /**
   * Custom Scrollbar CSS
@@ -405,6 +367,22 @@ a:visited {
 
 
 
+
+/* Nia's aboutTeam placeholder images;; still need to use html to align img to left */
+img.profile-pic {
+  position:relative;
+  width:60px;
+  height:60px;
+  margin-right:10px;
+  background-color:red;
+}
+/* end Nia's aboutTeam placeholder images */
+
+/* Sticky Footer Styles */
+.dp-content {
+    min-height: 100%;
+    margin-bottom: -6rem;
+}
 
 @-ms-viewport {
     width: device-width;
@@ -5770,7 +5748,7 @@ tbody.collapse.show {
     align-items: flex-start;
 }
 
-.media-body {
+.body {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;

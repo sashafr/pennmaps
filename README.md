@@ -136,7 +136,6 @@ TODO
 * **Siyang You** - *Assistant Django Developer*
 * **Nia Hammond** - *Web Design & Development*
 * **Miranda Mote** - *Graphic Design*
-
 ## License
 
 TODO
@@ -160,3 +159,12 @@ rbg (0, 77, 100);
 rgb(202, 201, 157);
 #cac99d;
 ```
+***
+###Irene's Notes:
+-Time Period Slider has been commented out. If the text boxes are adequate, the slider content has been marked with "SLIDER", so you can search and delete all of it if you want.
+-The search box doesn't quote fill up the whole content box... didn't really get around to fixing that.
+-The map shows up in the box! but the map items dont...
+-collectstatic problems:
+  1. Somehow the mapitem image got messed up after a collectstatic call. The map shows up though.
+  2. The footer got screwed again :'(
+***

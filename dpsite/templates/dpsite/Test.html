@@ -4,62 +4,86 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
-
-
 		/**
 			* Aligns all the content boxes to the right side
 			*/
-
 		#right-align {
 			width: 25%;
 			height: 100%;
 			right: 0em;
 			z-index: 100;
-		/*	top:0em;*/
-			position: fixed;
 			background-color: rgba(47, 124, 147, 0);
 			overflow-x: hidden;
 			transform: translateX(0%);
-			transition: transform 1s;
+			position: fixed;
+			transition: transform 0.2s;
 		}
 
 		#right-align.active {
 			transform: translateX(100%);
 		}
 
-		/* a button that hides Option Menu to the right */
+		/* Creates a single collapsible tag */
+		.collapsible {
+		  position: relative;
+		  border-style: solid;
+		  border-width: 1px;
+		  border-color:rgba(31, 81, 97,0.2);;
+		  cursor: pointer;
+		  width: 100%;
+		  padding: 18px;
+		  z-index:2;
+		  text-align: center;
+		  font-size: 1rem;
+		  color: black;
+		  background-color: rgba(47, 124, 147, 1);
+		}
 
+		.active,
+		.collapsible:hover {
+		  background-color: rgba(31, 81, 97,1);
+		}
+
+		/* Content inside collapsible */
+		.content {
+		  padding: 0px 8px;
+		  max-height: 0;
+		  overflow: hidden;
+			width: 100%
+		  transition: max-height 1s ease-out;
+		  background-color: rgba(47, 124, 147, 1);
+		}
+
+		/* a button that hides Option Menu to the right */
 		#hideButton {
 			cursor: pointer;
 			position: absolute;
 		}
-
-
-
 	</style>
 </head>
 
 <body>
-	{% extends 'dpsite/base.html' %} {% load static %} {% block content %}
+{% extends 'dpsite/base.html' %} {% load static %} {% block content %}
 <div style="z-index:2; position:fixed; background-color:black;opacity:0.4;width:25%;"></div>
 	<div id="right-align">
 		<div class="contentBox">
 			<button class="collapsible"><strong><div id="content-header">Information</div></strong></button>
 			<div class="content" style="color:white;">
-				<!--Item Title-->
-				<h6><strong><div class="content-title"></div></strong></h6>
+				<!--TITLE-->
+				<h5><strong style="color:black;"><div class="content-title">Explore Black Philadelphia from a spatial perspective.</div></strong></h5>
+				<!--DATES-->
 				<p><strong><div id="content-neighborhood-dates">
-			</div></strong></p>
+				</div></strong></p>
+				<!--MEDIA-->
+				<div id="content-media"></div>
+				<!--DESCRIPTION-->
 				<p>
 					<div id="content-description">
-						<strong style="color:black;">Explore Black Philadelphia from a spatial perspective.</strong><br>
-						<div id="content-media"></div><br>
 						Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present.
 						Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure.
 						If you hover over a map point, a small pop-up window will preview the location details. If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.
 					</div>
 				</p>
-
 			</div>
 		</div>
 
@@ -67,8 +91,8 @@
 		<div class="input-group">
 			<button class="collapsible" id="search"><strong>Search</strong></button>
 			<div class="content">
-				<div class="searchBox" style="width:100%;">
-					<input type="text" id="query" placeholder="Search.." style="width:75%;" name="search">
+				<div class="searchBox">
+					<input type="text" id="query" placeholder="Search.." name="search">
 					<span class="input-group-btn">
 					<button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
 				</span>
@@ -207,10 +231,12 @@
 			<input type="text" id = "startTimeInput" placeholder="1960" name="search">
 			<input type="text" id = "endTimeInput" placeholder="2000" name="search">
 		</div>
+		<!-- SLIDER
 				<div class="slidecontainer">
 					<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
 					<p>Year: <span id="sliderValue"></span></p>
 				</div>
+			-->
 			</div>
 		</div>
 
@@ -220,7 +246,7 @@
 		Filter</button>
 
 		<!--INFO BOX-->
-		<button type=button class="btn btn-primary" style="top:15rem;z-index:2; position:absolute;" id="hideButton">
+		<button type="button" class="btn btn-primary" style="top:15rem;z-index:2; position:absolute;" id="hideButton">
 			Toggle Menu
 		</button>
 
@@ -232,12 +258,10 @@
 
 	<!--Map and popup items-->
 	<div id="map">
-		<div id="dp-info">
-	</div></div>
-	<div id="popup" class="popup"></div>
+		<div id="dp-info"></div>
+	</div>
 
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-
 
 	<script>
 		/*COLLAPSIBLE SIDEBAR ELEMENTS*/
@@ -340,19 +364,15 @@ function filter() {
 					{% endfor %}
 				}
 			}
-
 			{% endfor %}
 			break;
 		}
 	}
-
+/* SLIDER
 	var startDate = '{{mapItem.start_date}}';
 	var startYear = startDate.substr(startDate.indexOf(",")+1);
 	var endDate = '{{mapItem.end_date}}';
 	var endYear = endDate.substr(endDate.indexOf(",")+1);
-	// $('#logMsg').append("start year: " + startYear);
-	// $('#logMsg').append("end year: " + endYear);
-	// && endYear >=slider.value
 	if (startYear <= slider.value && slider.value >= endYear) {
 		if (!mapItemList.includes('{{mapItem}}')) {
 			mapItemList.push('{{mapItem}}');
@@ -361,16 +381,8 @@ function filter() {
 			mapItemPointCoord1.push({{point.coords.1}});
 			{% endfor %}
 		}
-	}
-
-	for (var i = 0; i < mapItemList.length; i++) {
-		//$('#logMsg').append(mapItemList[i]);
-	}
+	}*/
 	setMarkers();
-	// for (var i = 0; i < mapItemList.length; i++) {
-	// 	$('#logMsg').append(mapItemPointCoord0[i]);
-	// }
-
 
 }
 
@@ -381,9 +393,7 @@ function filter() {
 
 			var selectedItems = "selected: ";
 			for (var i = 0; i < checkBox.length; i++) {
-				// $('#logMsg').append("true " + checkBox[i].checked);
 				if (checkBox[i].checked == true) {
-					// $('#logMsg').append(checkBox[i].value);\
 					selectedItems += checkBox[i].value + "\n";
 					{%for mapItem in map_items %}
 					{%for t in mapItem.tags.all %}
@@ -391,7 +401,6 @@ function filter() {
 							$('#logMsg').append('{{mapItem}}');
 						}
 					{% endfor %}
-					// \{% endfor %\}\
 					{% endfor %}
 				}
 
@@ -423,7 +432,7 @@ function filter() {
 
 		}
 
-
+/* SLIDER
 		var slider = document.getElementById("sliderRange");
 		var output = document.getElementById("sliderValue");
 		output.innerHTML = slider.value;
@@ -431,27 +440,21 @@ function filter() {
 		slider.oninput = function() {
 			output.innerHTML = this.value;
 		}
-
+*/
 		function selectTimePeriod() {
 
 	const startTimeInput = document.getElementById('startTimeInput');
 	const endTimeInput = document.getElementById('endTimeInput');
 	$('#logMsg').append(startTimeInput.value);
 	$('#logMsg').append(endTimeInput.value);
-	// $('#logMsg').html("");
-	// // $('#logMsg').append(slider.value);
 	{% for mapItem in map_items%}
 	var startDate = '{{mapItem.start_date}}';
 	var startYear = startDate.substr(startDate.indexOf(",")+1);
 	var endDate = '{{mapItem.end_date}}';
 	var endYear = endDate.substr(endDate.indexOf(",")+1);
-	// $('#logMsg').append("start year: " + startYear);
-	// $('#logMsg').append("end year: " + endYear);
-	// && endYear >=slider.value
 	if (startYear >= startTimeInput && endTimeInput >= endYear) {
 		$('#logMsg').append('{{mapItem}}');
 	}
-	// var year = '{{mapItem.start_date}}'.substr(str.indexOf(",")+1);
 
 	{% endfor %}
 }
@@ -475,21 +478,7 @@ function clearFilter() {
 	setMarkers();
 
 }
-		/**
-		 * Elements that make up the popup.
-		 */
-		var container = document.getElementById('popup');
 
-		/**
-		 * Create an overlay to anchor the popup to the map.
-		 */
-		var overlay = new ol.Overlay({
-			element: container,
-			autoPan: true,
-			autoPanAnimation: {
-				duration: 250
-			}
-		});
 
 		/**
 		 * Create the map.
@@ -502,7 +491,6 @@ function clearFilter() {
 					})
 				})
 			],
-			overlays: [overlay],
 			target: 'map',
 			view: new ol.View({
 				center: ol.proj.fromLonLat([-75.165222, 39.952583]),
@@ -527,7 +515,7 @@ function clearFilter() {
 						start: '{{mapItem.start_date|safe|striptags}}',
 						end: '{{mapItem.end_date|safe|striptags}}',
 						media: '{{mapItem.display_media_thumb|safe}}',
-						link:"{% url 'archiveitem' mapItem.id %}",
+						//link:"{% url 'archiveitem' mapItem.id %}",
 						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
 					})
 				]
@@ -544,29 +532,18 @@ function clearFilter() {
 		{% endfor %}
 		{% endfor %}
 		function setMarkers() {
-	//$('#logMsg').append("setMarkers()");
-	// $('#logMsg').append(map);
-	// $('#logMsg').append(markers);
-	map.getLayers().forEach(function(Vectorlayer) {
-
-    if(Vectorlayer instanceof ol.layer.Vector)
-       Vectorlayer.getSource().clear();
-
+			map.getLayers().forEach(function(Vectorlayer) {
+    	if(Vectorlayer instanceof ol.layer.Vector)
+      Vectorlayer.getSource().clear();
 		 });
 
-
 	for (var i = 0; i < mapItemPointCoord0.length; i++) {
-	//	$('#logMsg').append(mapItemPointCoord0[i]);
-		//S$('#logMsg').append(mapItemPointCoord1[i]);
 		  markers = new ol.layer.Vector({
 			source: new ol.source.Vector({
 				features: [
 					new ol.Feature({
-
 						geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
-
 					})
-
 				]
 			}),
 			style: new ol.style.Style({
@@ -608,7 +585,7 @@ function clearFilter() {
 				}
 			};
 		/**
-		 * Add a click handler to the map to render the popup.
+		 * Add a click handler to the map.
 		 */
 		map.on('singleclick', function(evt) {
 			const feature = map.forEachFeatureAtPixel(evt.pixel,
@@ -618,7 +595,7 @@ function clearFilter() {
 			// Handle click on map item
 			if (feature) {
 				// Handle content change
-				document.getElementById('content-title').innerHTML = '<a href='+ feature.get('link')+'>' + feature.get('title') + '</a>';
+				document.getElementById('content-title').innerHTML = feature.get('title');
 				document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + ' to ' + feature.get('end');
 				if (feature.get('description') !=null){
 					document.getElementById('content-description').innerHTML =  feature.get('description');

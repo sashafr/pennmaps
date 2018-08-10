@@ -13,7 +13,7 @@
         <!-- Portfolio Item Row -->
         <div class="row">
             <div class="col-md-6">
-                {{ mapItem.display_media_full|safe }}
+                {{ mapItem.display_media_thumb|safe }}
                 <h2 class="my-3">{{ mapItem.title }}</h2>
                 <h4>{{ mapItem.location_notes }}
                     <br>{{ mapItem.start_date }} to {{ mapItem.end_date }}</h4>
@@ -21,7 +21,10 @@
             </div>
 
             <div class="col-md-4">
-                <img class="img-fluid" src="https://i5.walmartimages.com/asr/4124033b-fac1-4c5e-965d-75611f1fe75f_1.ede2d65a57a1580e181a607f1ba7078e.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF">
+                <!--Map goes here-->
+                <div style="height:350px; background-color:rgba(255,74,0,0.2);" id="map">
+                  <div id=#dp-info></div>
+                </div>
                 <h3 class="my-3">Information Sources</h3>
                 <p>{{ mapItem.info_sources|safe }}</p>
             </div>
@@ -71,5 +74,92 @@
         <!-- /.row -->
 
     </div>
+
+    <!--Render the map on the page where the <div id="map"> is-->
+    <script>
+    /**
+      * Tooltip
+      */
+      var info = $('#dp-info');
+      info.tooltip({
+        animation:false,
+        trigger: 'manual',
+      });
+
+      var displayFeatureInfo = function(pixel){
+        info.css({
+          left: pixel[0] + 'px',
+          top: (pixel[1]-15) +'px',
+        });
+        var feature = map.forEachFeatureAtPixel(pixel,function(feature){
+          return feature;
+        });
+        if (feature){
+          info.tooltip('show')
+            .attr('data-original-title',feature.get('title'))
+            .tooltip('show');
+        }
+        else{
+          info.tooltip('hide');
+        }
+      };
+    /**
+		 * Create the map.
+		 */
+		var map = new ol.Map({
+			layers: [
+				new ol.layer.Tile({
+					source: new ol.source.XYZ({
+						url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
+					})
+				})
+			],
+			target: 'map',
+			view: new ol.View({
+				center: ol.proj.fromLonLat([-75.165222, 39.952583]),
+				zoom: 12,
+				minZoom: 10,
+				maxZoom: 19,
+			})
+		});
+
+		/**
+		 * Create a feature for each data point we have
+		 */
+		{% for mapItem in map_items %}
+		{%for point in mapItem.location1 %}
+		var markers = new ol.layer.Vector({
+			source: new ol.source.Vector({
+				features: [
+					new ol.Feature({
+						title: "{{mapItem.title|safe|striptags}}",
+						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
+					})
+				]
+			}),
+			style: new ol.style.Style({
+				image: new ol.style.Icon({
+					src: 'https://s8.postimg.cc/gcsd9zztx/target.png',
+					width: 10,
+					anchor: [0.5, 1]
+				})
+			})
+		});
+		map.addLayer(markers);
+		{% endfor %}
+		{% endfor %}
+    
+		/**
+		 * Add mouse handlers
+		 */
+		map.on('pointermove', function(evt) {
+			if (evt.dragging) {
+				info.tooltip('hide');
+				return;
+			}
+			displayFeatureInfo(map.getEventPixel(evt.originalEvent));
+			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+		});
+    </script>
 </body>
 {% endblock %}
