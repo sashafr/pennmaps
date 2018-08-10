@@ -9,18 +9,13 @@
 			*/
 		#right-align {
 			width: 25%;
-			height: 100%;
+			height: 75%;
 			right: 0em;
 			z-index: 100;
 			background-color: rgba(47, 124, 147, 0);
 			overflow-x: hidden;
-			transform: translateX(0%);
 			position: fixed;
 			transition: transform 0.2s;
-		}
-
-		#right-align.active {
-			transform: translateX(100%);
 		}
 
 		/* Creates a single collapsible tag */
@@ -48,29 +43,38 @@
 		.content {
 		  padding: 0px 8px;
 		  max-height: 0;
-		  overflow: hidden;
+		  overflow-x: hidden;
 			width: 100%
 		  transition: max-height 1s ease-out;
 		  background-color: rgba(47, 124, 147, 1);
 		}
 
-		/* a button that hides Option Menu to the right */
-		#hideButton {
-			cursor: pointer;
-			position: absolute;
+
+		.dp-hideMenu{
+			position: fixed;
+			right: -1rem;
+			top:14.75rem;
+			z-index: 100;
+			background: rgba(47, 124, 147, 1);
+			padding: 8px 8px;
+			transform: rotate(-90deg);
 		}
 	</style>
 </head>
 
 <body>
 {% extends 'dpsite/base.html' %} {% load static %} {% block content %}
+<!--Toggle Menu-->
+<a href="javascript:void(0);" class="dp-hideMenu" id="hideButton">Menu<br><br></a>
+
+<!--Sidebar content-->
 <div style="z-index:2; position:fixed; background-color:black;opacity:0.4;width:25%;"></div>
 	<div id="right-align">
 		<div class="contentBox">
 			<button class="collapsible"><strong><div id="content-header">Information</div></strong></button>
 			<div class="content" style="color:white;">
 				<!--TITLE-->
-				<h5><strong style="color:black;"><div class="content-title">Explore Black Philadelphia from a spatial perspective.</div></strong></h5>
+				<h5><strong style="color:black;"><div id="content-title">Explore Black Philadelphia from a spatial perspective.</div></strong></h5>
 				<!--DATES-->
 				<p><strong><div id="content-neighborhood-dates">
 				</div></strong></p>
@@ -103,103 +107,103 @@
 		<!--CHECKBOXES-->
 		<button class="collapsible"><strong>Theme</strong></button>
 		<div class="content" style="color:white;">
-			<label class="container">Education
+			<label class="check-container">Education
 				<input type="checkbox" name = "tag" value = "education">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Museum
+			<label class="check-container">Museum
 				<input type="checkbox" name = "tag" value = "museum">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Historic Firsts
+			<label class="check-container">Historic Firsts
 				<input type="checkbox" name = "tag" value = "Historic Firsts">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Religion
+			<label class="check-container">Religion
 				<input type="checkbox" name = "tag" value = "Religion">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Arts or Culture
+			<label class="check-container">Arts or Culture
 
 				<input type = "checkbox" name = "tag" value = "Arts or Culture">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Building
+			<label class="check-container">Building
 				<input type="checkbox" name = "tag" value = "Building">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Murals
+			<label class="check-container">Murals
 				<input type="checkbox" name = "tag" value = "Murals">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Activism
+			<label class="check-container">Activism
 				<input type="checkbox" name = "tag" value = "Activism">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Oral History
+			<label class="check-container">Oral History
 				<input type="checkbox" name = "tag" value = "Oral History">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Public Spaces
+			<label class="check-container">Public Spaces
 				<input type="checkbox" name = "tag" value = "Public Spaces">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Monument
+			<label class="check-container">Monument
 				<input type="checkbox" name = "tag" value = "Monument">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Politics
+			<label class="check-container">Politics
 				<input type="checkbox" name = "tag" value = "Politics">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Historic Events
+			<label class="check-container">Historic Events
 				<input type="checkbox" name = "tag" value = "Historic Events">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Image
+			<label class="check-container">Image
 				<input type="checkbox" name = "tag" value = "Image">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Video
+			<label class="check-container">Video
 				<input type="checkbox" name = "tag" value = "Video">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Organization
+			<label class="check-container">Organization
 				<input type="checkbox" name = "tag" value = "Organization">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Events
+			<label class="check-container">Events
 				<input type="checkbox" name = "tag" value = "Events">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">Historic Marker
+			<label class="check-container">Historic Marker
 				<input type="checkbox" name = "tag" value = "Historic Marker">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">People
+			<label class="check-container">People
 				<input type="checkbox" name = "tag" value = "People">
 				<span class="checkmark"></span>
 			</label>
 
-			<label class="container">360 Video
+			<label class="check-container">360 Video
 				<input type="checkbox" name = "tag" value = "360 Video">
 				<span class="checkmark"></span>
 			</label>
@@ -245,12 +249,7 @@
 	<button type="button" class="btn btn-primary" onclick="filter()" style="top:12rem;z-index:2; position:absolute;">
 		Filter</button>
 
-		<!--INFO BOX-->
-		<button type="button" class="btn btn-primary" style="top:15rem;z-index:2; position:absolute;" id="hideButton">
-			Toggle Menu
-		</button>
-
-		<button type="button" class="btn btn-primary" style="top:18rem;z-index:2; position:absolute;" onclick="clearFilter()">
+		<button type="button" class="btn btn-primary" style="top:15rem;z-index:2; position:absolute;" onclick="clearFilter()">
 			Clear Filter</button>
 
 	<!-- Use this span for writing debug messages -->
@@ -264,6 +263,24 @@
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 
 	<script>
+	/**/
+	$('#right-align').css("right","-25%");
+		$('.dp-hideMenu').on('click',function(){
+			if($('.dp-hideMenu').hasClass('open')){
+			$(this).removeClass('open');
+			$(this).animate({
+				"right":"-1rem"
+			});
+			$('#right-align').animate({"right":"-25%"});
+		}
+		else{
+			$(this).addClass('open');
+			$(this).animate({
+				"right":"24%",
+			});
+			$('#right-align').animate({"right":"0rem"});
+		}
+	});
 		/*COLLAPSIBLE SIDEBAR ELEMENTS*/
 		var collapse = document.getElementsByClassName("collapsible");
 
@@ -279,20 +296,6 @@
 			});
 		}
 		/*END COLLAPSIBLE SIDEBAR*/
-
-		/*HIDE PANEL*/
-		var hide = document.getElementById("hideButton");
-
-		hide.addEventListener("click", function() {
-			var options = document.getElementById("right-align");
-			var button = document.getElementById("hideButton");
-			if (options.classList.contains("active")) {
-				options.classList.remove("active");
-			} else {
-				options.classList.add("active");
-			}
-		});
-		/*END HIDE PANEL*/
 
 		/*Map Query*/
 		const queryInput = document.getElementById('query');
@@ -514,8 +517,8 @@ function clearFilter() {
 						description: '{{mapItem.description|safe|striptags}}',
 						start: '{{mapItem.start_date|safe|striptags}}',
 						end: '{{mapItem.end_date|safe|striptags}}',
-						media: '{{mapItem.display_media_thumb|safe}}',
-						//link:"{% url 'archiveitem' mapItem.id %}",
+						media: '{{mapItem.display_media_full|safe}}',
+						link:"{% url 'archiveitem' mapItem.id %}",
 						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
 					})
 				]
@@ -595,7 +598,7 @@ function clearFilter() {
 			// Handle click on map item
 			if (feature) {
 				// Handle content change
-				document.getElementById('content-title').innerHTML = feature.get('title');
+				document.getElementById('content-title').innerHTML = "<a style='color:black !important;' href="+feature.get('link')+">"+feature.get('title')+"</a>";
 				document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + ' to ' + feature.get('end');
 				if (feature.get('description') !=null){
 					document.getElementById('content-description').innerHTML =  feature.get('description');

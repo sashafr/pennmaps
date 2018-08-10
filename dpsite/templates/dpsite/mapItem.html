@@ -77,32 +77,8 @@
 
     <!--Render the map on the page where the <div id="map"> is-->
     <script>
-    /**
-      * Tooltip
-      */
-      var info = $('#dp-info');
-      info.tooltip({
-        animation:false,
-        trigger: 'manual',
-      });
+  
 
-      var displayFeatureInfo = function(pixel){
-        info.css({
-          left: pixel[0] + 'px',
-          top: (pixel[1]-15) +'px',
-        });
-        var feature = map.forEachFeatureAtPixel(pixel,function(feature){
-          return feature;
-        });
-        if (feature){
-          info.tooltip('show')
-            .attr('data-original-title',feature.get('title'))
-            .tooltip('show');
-        }
-        else{
-          info.tooltip('hide');
-        }
-      };
     /**
 		 * Create the map.
 		 */
@@ -116,7 +92,7 @@
 			],
 			target: 'map',
 			view: new ol.View({
-				center: ol.proj.fromLonLat([-75.165222, 39.952583]),
+				center: ol.proj.fromLonLat([{{mapItem.location1.0.coords.0}}, {{mapItem.location1.0.coords.1}}]),
 				zoom: 12,
 				minZoom: 10,
 				maxZoom: 19,
@@ -126,11 +102,11 @@
 		/**
 		 * Create a feature for each data point we have
 		 */
-		{% for mapItem in map_items %}
+
 		{%for point in mapItem.location1 %}
-		var markers = new ol.layer.Vector({
-			source: new ol.source.Vector({
-				features: [
+		  var markers = new ol.layer.Vector({
+			    source: new ol.source.Vector({
+				  features: [
 					new ol.Feature({
 						title: "{{mapItem.title|safe|striptags}}",
 						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
@@ -147,19 +123,7 @@
 		});
 		map.addLayer(markers);
 		{% endfor %}
-		{% endfor %}
-    
-		/**
-		 * Add mouse handlers
-		 */
-		map.on('pointermove', function(evt) {
-			if (evt.dragging) {
-				info.tooltip('hide');
-				return;
-			}
-			displayFeatureInfo(map.getEventPixel(evt.originalEvent));
-			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
-		});
+
     </script>
 </body>
 {% endblock %}
