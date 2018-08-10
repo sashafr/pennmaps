@@ -111,6 +111,16 @@ img.profile-pic {
 }
 /* end Nia's aboutTeam placeholder images */
 
+/* Nia's styles for index.html span overlay */
+span.carousel-item-overlay {
+  position:absolute;
+  width:inherit;
+  height:inherit;
+  background-color: rbga(0, 0, 0, 0.5);
+}
+
+/* end Nia's styles for index.html */
+
 /* Sticky Footer Styles */
 .dp-content {
     min-height: 100%;
