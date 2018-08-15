@@ -136,7 +136,6 @@ TODO
 * **Siyang You** - *Assistant Django Developer*
 * **Nia Hammond** - *Web Design & Development*
 * **Miranda Mote** - *Graphic Design*
-
 ## License
 
 TODO
@@ -160,3 +159,15 @@ rbg (0, 77, 100);
 rgb(202, 201, 157);
 #cac99d;
 ```
+***
+###Irene's Notes:
+-Time Period Slider has been commented out. If the text boxes are adequate, the slider content has been marked with "SLIDER", so you can search and delete all of it if you want.
+-The map shows up in the box! Centered on the item!!! much wow.
+-Menu toggle is on the side now!
+-mapItem titles now linked to their mapItem pages!
+
+-Main problems:
+  1. Somehow the mapitem image got messed up after a collectstatic call. The map shows up though.
+  2. some of the options under the mapItem articles don't really show up right anymore, but the buttons do...?
+  3. The search box doesn't quote fill up the whole content box, I couldn't really figure out how to stretch it out or center it?
+***

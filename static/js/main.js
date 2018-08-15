@@ -116,3 +116,33 @@
 	});
 
 })(jQuery);
+
+/*COLLAPSIBLE SIDEBAR ELEMENTS*/
+var collapse = document.getElementsByClassName("collapsible");
+
+for (var i = 0; i < collapse.length; i++) {
+	collapse[i].addEventListener("click", function() {
+		this.classList.toggle("active");
+		var content = this.nextElementSibling;
+		if (content.style.maxHeight) {
+			content.style.maxHeight = null;
+		} else {
+			content.style.maxHeight = content.scrollHeight + "px";
+		}
+	});
+}
+/*END COLLAPSIBLE SIDEBAR*/
+
+/*HIDE PANEL*/
+var hide = document.getElementById("hideButton");
+
+hide.addEventListener("click", function() {
+	var options = document.getElementById("right-align");
+	var button = document.getElementById("hideButton");
+	if (options.classList.contains("active")) {
+		options.classList.remove("active");
+	} else {
+		options.classList.add("active");
+	}
+});
+/*END HIDE PANEL*/
