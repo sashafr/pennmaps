@@ -12,13 +12,19 @@ def base(request):
     return render(request, 'dpsite/base.html')
 
 def home(request):
-    return render(request, 'dpsite/index.html')
+    slides = PageText.objects.filter(text_hook__startswith="home_slide")
+    home_sidebar = ""
+    gethometext = PageText.objects.filter(text_hook="home_sidebar")
+    if gethometext:
+        home_sidebar = gethometext[0].page_text
+    context = {'slides': slides, 'home_sidebar': home_sidebar}
+    return render(request, 'dpsite/index.html', context)
 
 def mapItem(request):
     mapItem = MapItem.objects.all()
 
     context = {'map_items': mapItem}
-    return render(request, 'dpsite/Test.html',context)
+    return render(request, 'dpsite/Test.html', context)
 
 def webSeries(request):
     seasons = WebSeries.objects.values('season').distinct()

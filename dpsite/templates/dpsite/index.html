@@ -2,4 +2,26 @@
 
 {% block content %}
 
+<div id="homeCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators home-carousel-indicators">
+        <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#homeCarousel" data-slide-to="1"></li>
+        <li data-target="#homeCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        {% for slide in slides %}
+            <div class="carousel-item active dp-slide-fixed-image" style="background-image: url('{% if slide.related_image %}{{ slide.related_image.url }}{% else %}data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=={% endif %}')">
+                <div class="container">
+                    <div class="home-carousel-caption carousel-caption text-left">
+                        {{ slide.page_text|safe }}
+                    </div>
+                    <div class="home-fixed-carousel-caption carousel-caption text-left">
+                        {{ home_sidebar|safe }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

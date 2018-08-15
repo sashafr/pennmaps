@@ -10,15 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='media',
-            name='file_iframe',
-            field=models.CharField(blank=True, help_text='Please paste in an &lt;iframe&gt; to embed external content. Content must begin with &lt;iframe&gt; and end with &lt;/iframe&gt; ', max_length=1000, null=True, verbose_name='File <iframe>'),
-        ),
-        migrations.AddField(
-            model_name='tag',
-            name='slug',
-            field=models.SlugField(default=''),
-            preserve_default=False,
-        ),
     ]

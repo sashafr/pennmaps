@@ -294,6 +294,7 @@ class TimePeriod(models.Model):
 class PageText(models.Model):
     text_hook = models.CharField('Text Hook', max_length = 50)
     page_text = models.TextField('Page Text')
+    related_image = models.ImageField('Related Image', blank=True, null=True)
 
     def __str__(self):
         return self.text_hook

@@ -23,6 +23,7 @@ These instructions will get you a copy of the project up and running on your loc
 7. mod_wsgi: [follow these instructions](http://modwsgi.readthedocs.io/en/develop/user-guides/quick-installation-guide.html) - you may have to specify the python version
 8. `pip install django-ckeditor`
 9. `pip install django-import-export`
+10. `pip install Pillow`
 
 *Note: You may have to add `/usr/local/lib` on a new line in `/etc/ld.so.conf` and then run `ldconfig` after each `make install`*
 
