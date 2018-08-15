@@ -128,6 +128,21 @@ a:visited {
   margin-left: -60px;
   opacity: 0;
   transition: opacity 1s;
+
+/* Nia's styles for index.html span overlay */
+span.carousel-item-overlay {
+  position:absolute;
+  width:inherit;
+  height:inherit;
+  background-color: rbga(0, 0, 0, 0.5);
+}
+
+/* end Nia's styles for index.html */
+
+/* Sticky Footer Styles */
+.dp-content {
+    min-height: 100%;
+    margin-bottom: -6rem;
 }
 
 .tooltip:hover .tooltiptext{
