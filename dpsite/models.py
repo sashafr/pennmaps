@@ -157,7 +157,7 @@ class MapItem(models.Model):
             return self.media.all().order_by('mappedmedia__order')[0].display_media()
         else:
             return '<img class="media-full" src="' + settings.STATIC_URL + 'img/image_default.png" alt="' + self.title + '">'
-#******************************************************
+
     def get_absolute_url(self):
         return reverse('archiveitem', kwargs={'id': self.id})
 
