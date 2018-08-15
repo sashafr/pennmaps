@@ -86,7 +86,7 @@ class MapItemAdmin(ImportExportModelAdmin):
     resource_class = MapItemResource
     inlines = (MappedMediaInline, )
     search_fields = ['title']
-    autocomplete_fields = ['tags', 'overlay_group']
+    autocomplete_fields = ['tags']
 
 admin.site.register(MapItem, MapItemAdmin)
 

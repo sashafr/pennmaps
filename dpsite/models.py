@@ -283,6 +283,8 @@ class WebSeries(models.Model):
 class PartOfCity(models.Model):
     title = models.CharField(max_length = 50)
     area = models.MultiPolygonField(default=None, blank=True, null=True)
+    def __str__(self):
+        return self.title
 
 class TimePeriod(models.Model):
     title = models.CharField(max_length = 50)

@@ -512,9 +512,13 @@
 			event.preventDefault();
 		};
 
-		var mapItemPointCoord0 = [];
+//global arrays to set markers on map
+var mapItemPointCoord0 = [];
 var mapItemPointCoord1 = [];
 
+/*
+this is the filter function.
+*/
 function filter() {
 	var checkBox = document.getElementsByName("tag");
 	var radioButton = document.getElementsByName("location");
@@ -523,6 +527,7 @@ function filter() {
 	mapItemPointCoord0 = [];
 	mapItemPointCoord1 = [];
 
+	//loop through all checkboxes to see which ones are selected.
 	for (var i = 0; i < checkBox.length; i++) {
 		if (checkBox[i].checked == true) {
 			{% for mapItem in map_items%}
@@ -541,41 +546,85 @@ function filter() {
 		}
 	}
 
+	// check which radio button is slected.
+	// Sorry I can't make the contain check work :(
+	//
 	for (var i = 0; i< radioButton.length; i++) {
 		if (radioButton[i].checked == true) {
-			{% for mapItem in map_items%}
-			if ('{{mapItem.location_notes}}'==radioButton[i].value) {
-				// $('#logMsg').append('{{mapItem}}');
-				if (!mapItemList.includes('{{mapItem}}')) {
-					mapItemList.push('{{mapItem}}');
-					{% for point in mapItem.location1%}
-					mapItemPointCoord0.push({{point.coords.0}});
-					mapItemPointCoord1.push({{point.coords.1}});
-					{% endfor %}
-				}
-			}
+			$('#logMsg').append('here')
 
+			{% for partOfCity in part_of_city%}
+			// $('#logMsg').append('{{partOfCity}}')
+			// $('#logMsg').append('{{partOfCity.area}}')
+			if ('{{partOfCity.title}}' == radioButton[i].value) {
+				$('#logMsg').append('{{partOfCity.title}}')
+				$('#logMsg').append(radioButton[i].value)
+
+				// {% for mapItem in map_items%}
+				// MapItem.objects.filter(location1__contained=partOfCity.area)
+				// $('#logMsg').append()
+
+
+				// {% endfor %}
+			}
 			{% endfor %}
+			// {% for mapItem in map_items%}
+			// $('#logMsg').append('{{mapItem.}}')
+			// if ('{{mapItem.location_notes}}'==radioButton[i].value) {
+			// 	// $('#logMsg').append('{{mapItem}}');
+			// 	if (!mapItemList.includes('{{mapItem}}')) {
+			// 		mapItemList.push('{{mapItem}}');
+			// 		{% for point in mapItem.location1%}
+			// 		mapItemPointCoord0.push({{point.coords.0}});
+			// 		mapItemPointCoord1.push({{point.coords.1}});
+			// 		{% endfor %}
+			// 	}
+			// }
+
+			// {% endfor %}
 			break;
 		}
 	}
 
+	var startInput = document.getElementById('startTimeInput');
+	var endInput = document.getElementById('endTimeInput');
+	// $('#logMsg').append(startTimeInput.value);
+	$('#logMsg').append(endTimeInput.value);
+
+	{% for mapItem in map_items%}
 	var startDate = '{{mapItem.start_date}}';
 	var startYear = startDate.substr(startDate.indexOf(",")+1);
 	var endDate = '{{mapItem.end_date}}';
 	var endYear = endDate.substr(endDate.indexOf(",")+1);
+	// these following lines print fine
 	// $('#logMsg').append("start year: " + startYear);
 	// $('#logMsg').append("end year: " + endYear);
-	// && endYear >=slider.value
-	if (startYear <= slider.value && slider.value >= endYear) {
-		if (!mapItemList.includes('{{mapItem}}')) {
-			mapItemList.push('{{mapItem}}');
-			{% for point in mapItem.location1%}
-			mapItemPointCoord0.push({{point.coords.0}});
-			mapItemPointCoord1.push({{point.coords.1}});
-			{% endfor %}
-		}
+
+
+	// this line prints fine
+	console.log("start year and startTimeInput: " + startYear >= startInput.value)
+	//this line below always gives me false, doesn't make sense!
+	console.log("end year and endTimeInput: " + endYear <= endInput.value)
+
+	// it never enters this if block.
+	if (startYear >= startTimeInput.value && endTimeInput >= endYear) {
+		$('#logMsg').append("true");
+		mapItemList.push('{{mapItem}}');
+		{% for point in mapItem.location1%}
+		mapItemPointCoord0.push({{point.coords.0}});
+		mapItemPointCoord1.push({{point.coords.1}});
+		{% endfor %}
 	}
+	{% endfor %}
+	// if (startYear <= slider.value && slider.value >= endYear) {
+	// 	if (!mapItemList.includes('{{mapItem}}')) {
+	// 		mapItemList.push('{{mapItem}}');
+	// 		{% for point in mapItem.location1%}
+	// 		mapItemPointCoord0.push({{point.coords.0}});
+	// 		mapItemPointCoord1.push({{point.coords.1}});
+	// 		{% endfor %}
+	// 	}
+	// }
 
 	for (var i = 0; i < mapItemList.length; i++) {
 		$('#logMsg').append(mapItemList[i]);
@@ -588,7 +637,11 @@ function filter() {
 
 }
 
+/*
+this function clears all filters, and redisplay all map itmes on the map
+*/
 function clearFilter() {
+	$('#logMsg').html("");
 	// $('#logMsg').html("clearFilter clicked");
 	var checkBox = document.getElementsByName("tag");
 	var radioButton = document.getElementsByName("location");
@@ -608,7 +661,7 @@ function clearFilter() {
 
 }
 
-		// function for tag selection
+		// function for tag selection, not in use anymore
 		function selectTag() {
 			$('#logMsg').html("");
 			var checkBox = document.getElementsByName("tag");
@@ -634,7 +687,7 @@ function clearFilter() {
 
 		}
 
-		// function for part of city selection
+		// function for part of city selection, not in use anymore
 		function selectPartOfCity() {
 			$('#logMsg').html("");
 			var checkBox = document.getElementsByName("location");
@@ -666,7 +719,8 @@ function clearFilter() {
 			output.innerHTML = this.value;
 		}
 
-		function selectTimePeriod() {
+// function for time period selection, not in use anymore
+	function selectTimePeriod() {
 
 	const startTimeInput = document.getElementById('startTimeInput');
 	const endTimeInput = document.getElementById('endTimeInput');
@@ -740,7 +794,8 @@ function clearFilter() {
 						description: '{{mapItem.description|safe|striptags}}',
 						start: '{{mapItem.start_date|safe|striptags}}',
 						end: '{{mapItem.end_date|safe|striptags}}',
-						media: '{{mapItem.media|safe|striptags}}',
+						media: '{{ mapItem.display_media_full|safe }}',
+						// media: '{{mapItem.media|safe|striptags}}',
 						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
 					})
 				]
@@ -758,6 +813,9 @@ function clearFilter() {
 		{% endfor %}
 
 
+/*
+function to set markers on map
+*/
 	function setMarkers() {
 	// $('#logMsg').append("setMarkers()");
 	// $('#logMsg').append(map);
@@ -825,6 +883,9 @@ function clearFilter() {
 			if (feature) {
 				// Handle content change
 				document.getElementById('content-header').innerHTML = feature.get('title');
+				if(feature.get('media')!==null){
+					document.getElementById('content-media').innerHTML=feature.get('media');
+				}
 				if (feature.get('start')!=null && feature.get('end')!=null){
 					document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + '-' + feature.get('end');
 				}
@@ -834,9 +895,7 @@ function clearFilter() {
 				if (feature.get('description') !=null){
 					document.getElementById('content-description').innerHTML = feature.get('description');
 				}
-				if(feature.get('media')!==null){
-					document.getElementById('content-media').innerHTML=feature.get('media');
-				}
+
 				// Handle popup
 				const coordinates = feature.getGeometry().getCoordinates();
 				popup.setPosition(coordinates);

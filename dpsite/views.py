@@ -12,9 +12,10 @@ def base(request):
     return render(request, 'dpsite/base.html')
 
 def mapItem(request):
-	mapItem = MapItem.objects.all()
-	context = {'map_items': mapItem}
-	return render(request, 'dpsite/Test.html',context)
+    mapItem = MapItem.objects.all()
+
+    context = {'map_items': mapItem}
+    return render(request, 'dpsite/Test.html',context)
 
 def webSeries(request):
     seasons = WebSeries.objects.values('season').distinct()
@@ -73,6 +74,7 @@ def aboutProject(request):
     return render(request, 'dpsite/aboutProject.html')
 
 def map(request):
-	mapItem = MapItem.objects.all()
-	context = {'map_items': mapItem}
-	return render(request, 'dpsite/Test.html',context)
+    mapItem = MapItem.objects.all()
+    partOfCity = PartOfCity.objects.all()
+    context = {'map_items': mapItem, 'part_of_city': partOfCity}
+    return render(request, 'dpsite/Test.html',context)
