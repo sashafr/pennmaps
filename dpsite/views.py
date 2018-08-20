@@ -17,7 +17,10 @@ def home(request):
     gethometext = PageText.objects.filter(text_hook="home_sidebar")
     if gethometext:
         home_sidebar = gethometext[0].page_text
-    context = {'slides': slides, 'home_sidebar': home_sidebar}
+    fb = settings.FACEBOOK_URL
+    insta = settings.INSTAGRAM_URL
+    tw = settings.TWITTER_URL
+    context = {'slides': slides, 'home_sidebar': home_sidebar, 'fb_url': fb, 'insta_url': insta, 'tw_url': tw}
     return render(request, 'dpsite/index.html', context)
 
 def mapItem(request):

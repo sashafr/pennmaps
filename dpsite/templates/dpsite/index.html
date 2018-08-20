@@ -1,5 +1,5 @@
 {% extends "dpsite/base.html" %}
-
+{% load static %}
 {% block content %}
 
 <div id="homeCarousel" class="carousel slide" data-ride="carousel">
@@ -17,6 +17,23 @@
                     </div>
                     <div class="home-fixed-carousel-caption carousel-caption text-left">
                         {{ home_sidebar|safe }}
+                        <span class="sm-logos">
+                            {% if fb_url != '' %}
+                                <a href="{{ fb_url }}">
+                                    <img src="{% static 'img/fb.png' %}" alt="facebook logo" height="50">
+                                </a>
+                            {% endif %}
+                            {% if insta_url != '' %}
+                                <a href="{{ insta_url }}">
+                                    <img src="{% static 'img/insta.png' %}" alt="instagram logo" height="50">
+                                </a>
+                            {% endif %}
+                            {% if tw_url != '' %}
+                                <a href="{{ tw_url }}">
+                                    <img src="{% static 'img/twi.png' %}" alt="twitter logo" height="50">
+                                </a>
+                            {% endif %}
+                        </span>
                     </div>
                 </div>
             </div>

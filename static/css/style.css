@@ -154,14 +154,18 @@ a:visited {
     left: 75% !important;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 20px;
-    bottom: 7rem !important;
+    bottom: 10rem !important;
 }
 
 .home-carousel-caption h1, .home-carousel-caption h2, .home-carousel-caption h3, .home-carousel-caption h4, .home-carousel-caption strong {
     color: #000;
 }
 
-.home-carousel-caption strong {
+.home-fixed-carousel-caption h1, .home-fixed-carousel-caption h2, .home-fixed-carousel-caption h3, .home-fixed-carousel-caption h4, .home-fixed-carousel-caption strong {
+    color: #ff4a00;
+}
+
+.home-carousel-caption strong, .home-fixed-carousel-caption strong {
     font-weight: 900;
 }
 
@@ -169,8 +173,16 @@ a:visited {
     color: #fff;
 }
 
+.home-fixed-carousel-caption p {
+    color: #000;
+}
+
 .home-carousel-indicators {
     bottom: 6.5rem !important;
+}
+
+.sm-logos img {
+    padding: 0 20px;
 }
 
 /* Declare heights because of positioning of img element */
