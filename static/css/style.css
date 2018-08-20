@@ -141,19 +141,13 @@ a:visited {
 }
 
 .home-carousel-caption {
-    right: 5% !important;
     top: 20px;
-    left: 75% !important;
     background-color: rgba(47, 124, 147, 0.8);
-    padding: 20px;
     bottom: unset !important;
 }
 
 .home-fixed-carousel-caption {
-    right: 5% !important;
-    left: 75% !important;
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
     bottom: 10rem !important;
 }
 
@@ -183,6 +177,13 @@ a:visited {
 
 .sm-logos img {
     padding: 0 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .carousel-caption {
+        right: 5% !important;
+        left: 75% !important;
+    }
 }
 
 /* Declare heights because of positioning of img element */
@@ -6284,8 +6285,7 @@ button.close {
     bottom: 20px;
     left: 15%;
     z-index: 10;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px;
     color: #fff;
     text-align: center;
 }
