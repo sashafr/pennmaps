@@ -179,6 +179,10 @@ a:visited {
     padding: 0 20px;
 }
 
+.dpsearchbar {
+    margin: 0 1em !important;
+}
+
 @media only screen and (min-width: 768px) {
     .carousel-caption {
         right: 5% !important;
