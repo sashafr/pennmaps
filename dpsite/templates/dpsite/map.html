@@ -1,54 +1,54 @@
 <html>
 
 <head>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style>
-		* {
-			box-sizing: border-box;
-		}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    * {
+        box-sizing: border-box;
+    }
 
-		.searchBox input[type=text] {
-			padding: 6px;
-			margin-top: 8px;
-			font-size: 17px;
-			border: none;
-		}
+    .searchBox input[type=text] {
+        padding: 6px;
+        margin-top: 8px;
+        font-size: 17px;
+        border: none;
+    }
 
-		.searchBox button {
-			/* float: right; */
-			padding: 6px 10px;
-			margin-top: 8px;
-			margin-right: 16px;
-			background: #ddd;
-			font-size: 17px;
-			border: none;
-			cursor: pointer;
-		}
+    .searchBox button {
+        /* float: right; */
+        padding: 6px 10px;
+        margin-top: 8px;
+        margin-right: 16px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+    }
 
 
-		.searchBox button:hover {
-			background: #ccc;
-		}
+    .searchBox button:hover {
+        background: #ccc;
+    }
 
-		@media screen and (max-width: 600px) {
-			.searchBox {
-				float: none;
-			}
-			.searchBox input[type=text],
-			.searchBox button {
-				float: none;
-				display: block;
-				text-align: left;
-				width: 100%;
-				margin: 0;
-				padding: 14px;
-			}
-			.searchBox input[type=text] {
-				border: 1px solid #ccc;
-			}
-		}
-		/*--------------------------------------------------------*/
-		.ol-popup {
+    @media screen and (max-width: 600px) {
+        .searchBox {
+            float: none;
+        }
+        .searchBox input[type=text],
+        .searchBox button {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+        }
+        .searchBox input[type=text] {
+            border: 1px solid #ccc;
+        }
+    }
+    /*--------------------------------------------------------*/
+    .ol-popup {
         position: absolute;
         background-color: white;
         -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
@@ -59,8 +59,8 @@
         bottom: 12px;
         left: -50px;
         min-width: 280px;
-      }
-      .ol-popup:after, .ol-popup:before {
+    }
+    .ol-popup:after, .ol-popup:before {
         top: 100%;
         border: solid transparent;
         content: " ";
@@ -68,307 +68,309 @@
         width: 0;
         position: absolute;
         pointer-events: none;
-      }
-      .ol-popup:after {
+    }
+    .ol-popup:after {
         border-top-color: white;
         border-width: 10px;
         left: 48px;
         margin-left: -10px;
-      }
-      .ol-popup:before {
+    }
+    .ol-popup:before {
         border-top-color: #cccccc;
         border-width: 11px;
         left: 48px;
         margin-left: -11px;
-      }
-      .ol-popup-closer {
+    }
+    .ol-popup-closer {
         text-decoration: none;
         position: absolute;
         top: 2px;
         right: 8px;
-      }
-      .ol-popup-closer:after {
+    }
+    .ol-popup-closer:after {
         content: "✖";
-			}
-	</style>
+    }
+    </style>
 </head>
 
 <body>
-	{% extends 'dpsite/base.html' %} {% block content %}
-	<div class="searchBox">
-		<!-- <form action="/action_page.php"> -->
+    {% extends 'dpsite/base.html' %} {% block content %}
+    <div class="searchBox">
+        <!-- <form action="/action_page.php"> -->
 
-			<input type="text" id = "query" placeholder="Search.." name="search">
-			<button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
-		<!-- </form> -->
-	</div>
-	<span id='logMsg'><!-- Use this span for writing debug messages --></span>
+        <input type="text" id = "query" placeholder="Search.." name="search">
+        <button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
+        <!-- </form> -->
+    </div>
+    <span id='logMsg'><!-- Use this span for writing debug messages --></span>
 
-	<!-- Temporary modal button -->
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-<<<<<<< HEAD
-</button>
+    <!-- Temporary modal button -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+        <<<<<<< HEAD
+    </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" style="background:rgba(47,124,147,0.85);" >
-      <div class="modal-body" style="color: white;">
-        <h4 style="color: black;"><strong>Site of MOVE Bombing</strong></h4>
-        <img class="img-responsive" src="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" style="width: 100%;">
-        <p style="color:black;"><strong>Modal content will go here.</strong></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-        <div class="embed-container">
-          <iframe style="height: 50%; width: 100%;" src="https://www.youtube.com/embed/LAqG0wcTfV4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div> <!--end modal content-->
-  </div> <!--end modal dialogue-->
-</div> <!--end modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background:rgba(47,124,147,0.85);" >
+                <div class="modal-body" style="color: white;">
+                    <h4 style="color: black;"><strong>Site of MOVE Bombing</strong></h4>
+                    <img class="img-responsive" src="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" style="width: 100%;">
+                    <p style="color:black;"><strong>Modal content will go here.</strong></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    <div class="embed-container">
+                        <iframe style="height: 50%; width: 100%;" src="https://www.youtube.com/embed/LAqG0wcTfV4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div> <!--end modal content-->
+        </div> <!--end modal dialogue-->
+    </div> <!--end modal-->
 
-<div id="map" class="map"></div>
-<div id="popup" class="ol-popup">
-	<a href="#" id="popup-closer" class="ol-popup-closer"></a>
-	<div id="popup-content"></div>
-</div>
-
-
-
-<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
-<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-<script>
-
-const queryInput = document.getElementById('query');
-const searchButton = document.getElementById('submitButton');
-function search(query) {
-	 // $('#logMsg').html(queryInput.value);
-	  $('#logMsg').html("queryInput");
-}
-/**
-	* Handle click event.
-	* @param {Event} event The event.
-	*/
- searchButton.onclick = function(event) {
-	 search(queryInput.value);
-	 event.preventDefault();
- };
-
-/**
-* Elements that make up the popup.
-*/
-var container = document.getElementById('popup');
-var content = document.getElementById('popup-content');
-var closer = document.getElementById('popup-closer');
-
-
-/**
-* Add a click handler to hide the popup.
-* @return {boolean} Don't follow the href.
-*/
-closer.onclick = function() {
-	overlay.setPosition(undefined);
-	closer.blur();
-	return false;
-};
-
-
-/**
-* Create an overlay to anchor the popup to the map.
-*/
-var overlay = new ol.Overlay({
-	element: container,
-	autoPan: true,
-	autoPanAnimation: {
-		duration: 250
-	}
-});
-
-
-/**
-* Create the map.
-*/
-var map = new ol.Map({
-	layers: [
-		new ol.layer.Tile({
-			source: new ol.source.XYZ({
-				url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
-=======
-	</button>
-
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="background:rgba(47,124,147,0.85);">
-				<div class="modal-body" style="color: white;">
-					<!--Title-->
-					<h4 style="color: black;"><strong>Site of MOVE Bombing</strong></h4>
-					<!--Image-->
-					<img class="img-responsive" src="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" style="width: 100%;">
-					<!--Subtitle-->
-					<p style="color:black;"><strong>Modal content will go here.</strong></p>
-					<!--Content/Summary-->
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-					<!--Media (if available)-->
-					<div class="embed-container">
-						<iframe style="height: 50%; width: 100%;" src="https://www.youtube.com/embed/LAqG0wcTfV4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-					</div>
-				</div>
-			</div>
-			<!--end modal content-->
-		</div>
-		<!--end modal dialogue-->
-	</div>
-	<!--end modal-->
->>>>>>> 292ca76adc9aa97a7c52e5a363b22c5395e4e82f
-
-	<div id="map" class="map"></div>
+    <div id="map" class="map"></div>
     <div id="popup" class="ol-popup">
-      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-      <div id="popup-content"></div>
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
     </div>
 
-	<!--Import JS Stuff-->
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-	<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
-	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-	<script>
-			import Map from 'ol/Map.js';
-      import Overlay from 'ol/Overlay.js';
-      import View from 'ol/View.js';
-      import {toStringHDMS} from 'ol/coordinate.js';
-      import TileLayer from 'ol/layer/Tile.js';
-      import {toLonLat} from 'ol/proj.js';
-      import TileJSON from 'ol/source/TileJSON.js';
-		/**
-		 * Elements that make up the popup.
-		 */
-		var container = document.getElementById('popup');
-		var content = document.getElementById('popup-content');
-		var closer = document.getElementById('popup-closer');
 
 
-		/**
-		 * Add a click handler to hide the popup.
-		 * @return {boolean} Don't follow the href.
-		 */
-		closer.onclick = function() {
-			overlay.setPosition(undefined);
-			closer.blur();
-			return false;
-		};
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+    <script>
+
+    const queryInput = document.getElementById('query');
+    const searchButton = document.getElementById('submitButton');
+    function search(query) {
+        // $('#logMsg').html(queryInput.value);
+        $('#logMsg').html("queryInput");
+    }
+    /**
+    * Handle click event.
+    * @param {Event} event The event.
+    */
+    searchButton.onclick = function(event) {
+        search(queryInput.value);
+        event.preventDefault();
+    };
+
+    /**
+    * Elements that make up the popup.
+    */
+    var container = document.getElementById('popup');
+    var content = document.getElementById('popup-content');
+    var closer = document.getElementById('popup-closer');
 
 
-		/**
-		 * Create an overlay to anchor the popup to the map.
-		 */
-		var overlay = new ol.Overlay({
-			element: container,
-			autoPan: true,
-			autoPanAnimation: {
-				duration: 250
-			}
-		});
+    /**
+    * Add a click handler to hide the popup.
+    * @return {boolean} Don't follow the href.
+    */
+    closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    };
 
 
-		/**
-		 * Create the map.
-		 */
-		var map = new ol.Map({
-			layers: [
-				new ol.layer.Tile({
-					source: new ol.source.XYZ({
-						url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
+    /**
+    * Create an overlay to anchor the popup to the map.
+    */
+    var overlay = new ol.Overlay({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+            duration: 250
+        }
+    });
 
-					})
-				})
-			],
-			overlays: [overlay],
-			target: 'map',
-			view: new ol.View({
-				center: ol.proj.fromLonLat([-75.165222, 39.952583]),
-				zoom: 12
-			})
-		});
 
-		// Create markers for each data point
-		{ %
-			for mapItem in map_items %
-		} { %
-			for point in mapItem.location1 %
-		}
+    /**
+    * Create the map.
+    */
+    var map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.XYZ({
+                    url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
+                    =======
+                    </button>
 
-		var markers = new ol.layer.Vector({
-			source: new ol.source.Vector({
-				features: [
-					// create new point
-					new ol.Feature({
-						geometry: new ol.geom.Point(ol.proj.fromLonLat([
-							{{point.coords .0}}, {{point.coords .1}}
-						])
-					),
-					})
-				]
-			}),
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="background:rgba(47,124,147,0.85);">
+                    <div class="modal-body" style="color: white;">
+                    <!--Title-->
+                    <h4 style="color: black;"><strong>Site of MOVE Bombing</strong></h4>
+                    <!--Image-->
+                    <img class="img-responsive" src="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" style="width: 100%;">
+                    <!--Subtitle-->
+                    <p style="color:black;"><strong>Modal content will go here.</strong></p>
+                    <!--Content/Summary-->
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    <!--Media (if available)-->
+                    <div class="embed-container">
+                    <iframe style="height: 50%; width: 100%;" src="https://www.youtube.com/embed/LAqG0wcTfV4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    </div>
+                    </div>
+                    <!--end modal content-->
+                    </div>
+                    <!--end modal dialogue-->
+                    </div>
+                    <!--end modal-->
+                    >>>>>>> 292ca76adc9aa97a7c52e5a363b22c5395e4e82f
 
-			// set marker style
-			style: new ol.style.Style({
-				image: new ol.style.Icon({
-					anchor: [0.5, 1],
-					src: 'https://s22.postimg.cc/knhnjmzht/icon.png',
-				})
-			})
-		});
+                    <div id="map" class="map"></div>
+                    <div id="popup" class="ol-popup">
+                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                    <div id="popup-content"></div>
+                    </div>
 
-		// TODO: Create a popup for each data point --------------------------------------------------------
+                    <!--Import JS Stuff-->
+                    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+                    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+                    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+                    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+                    <script>
+                    import Map from 'ol/Map.js';
+                    import Overlay from 'ol/Overlay.js';
+                    import View from 'ol/View.js';
+                    import {toStringHDMS} from 'ol/coordinate.js';
+                    import TileLayer from 'ol/layer/Tile.js';
+                    import {toLonLat} from 'ol/proj.js';
+                    import TileJSON from 'ol/source/TileJSON.js';
+                    /**
+                    * Elements that make up the popup.
+                    */
+                    var container = document.getElementById('popup');
+                    var content = document.getElementById('popup-content');
+                    var closer = document.getElementById('popup-closer');
 
-		// Add marker layer
-		map.addLayer(markers); { % endfor %
-		} { % endfor %
-		}
-		// -----------------TEST-----------------------------
-		var popup = new ol.Overlay({
-			element: document.getElementById('exampleModal'),
-			positioning: 'bottom-center',
-		})
-		/*Bootstrap Modal Pop Up Open Code*/
-		$(".modal-title").text("This is google map..");
-		$(".modal-body").text("Modal Body");
-		$("#myModal").modal('show');
 
-		/**
-		 * Add a click handler to the map to render the popup.
-		 */
-		map.on('singleclick', function(evt) {
-			if (evt.dragging) {
-				$(element).popover('destroy');
-				return;
-			}
+                    /**
+                    * Add a click handler to hide the popup.
+                    * @return {boolean} Don't follow the href.
+                    */
+                    closer.onclick = function() {
+                        overlay.setPosition(undefined);
+                        closer.blur();
+                        return false;
+                    };
 
-			var name = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
-				return feature.get('name');
-			})
 
-			var coordinate = evt.coordinate;
-			const coordinate = evt.coordinate;
-        const hdms = toStringHDMS(toLonLat(coordinate));
+                    /**
+                    * Create an overlay to anchor the popup to the map.
+                    */
+                    var overlay = new ol.Overlay({
+                        element: container,
+                        autoPan: true,
+                        autoPanAnimation: {
+                            duration: 250
+                        }
+                    });
 
-        content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
-            '</code>';
-        overlay.setPosition(coordinate);
-			content.innerHTML = 'name';
-			overlay.setPosition(coordinate);
-		});
-		map.on('pointermove', function(evt) {
-			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
-		});
-	</script>
 
-	{% endblock %}
-</body>
+                    /**
+                    * Create the map.
+                    */
+                    var map = new ol.Map({
+                        layers: [
+                            new ol.layer.Tile({
+                                source: new ol.source.XYZ({
+                                    url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
 
-</html>
+                                })
+                            })
+                        ],
+                        overlays: [overlay],
+                        target: 'map',
+                        view: new ol.View({
+                            center: ol.proj.fromLonLat([-75.165222, 39.952583]),
+                            zoom: 12
+                        })
+                    });
+
+                    // Create markers for each data point
+                    { %
+                        for mapItem in map_items %
+                    } { %
+                        for point in mapItem.location1 %
+                    }
+
+                    var markers = new ol.layer.Vector({
+                        source: new ol.source.Vector({
+                            features: [
+                                // create new point
+                                new ol.Feature({
+                                    geometry: new ol.geom.Point(ol.proj.fromLonLat([
+                                        {{point.coords .0}}, {{point.coords .1}}
+                                    ])
+                                ),
+                            })
+                        ]
+                    }),
+
+                    // set marker style
+                    style: new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: 5,
+                            fill: new ol.style.Fill({
+                                color: 'orange'
+                            })
+                        }),
+                    })
+                });
+
+                // TODO: Create a popup for each data point --------------------------------------------------------
+
+                // Add marker layer
+                map.addLayer(markers); { % endfor %
+                } { % endfor %
+                }
+                // -----------------TEST-----------------------------
+                var popup = new ol.Overlay({
+                    element: document.getElementById('exampleModal'),
+                    positioning: 'bottom-center',
+                })
+                /*Bootstrap Modal Pop Up Open Code*/
+                $(".modal-title").text("This is google map..");
+                $(".modal-body").text("Modal Body");
+                $("#myModal").modal('show');
+
+                /**
+                * Add a click handler to the map to render the popup.
+                */
+                map.on('singleclick', function(evt) {
+                    if (evt.dragging) {
+                        $(element).popover('destroy');
+                        return;
+                    }
+
+                    var name = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
+                        return feature.get('name');
+                    })
+
+                    var coordinate = evt.coordinate;
+                    const coordinate = evt.coordinate;
+                    const hdms = toStringHDMS(toLonLat(coordinate));
+
+                    content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
+                    '</code>';
+                    overlay.setPosition(coordinate);
+                    content.innerHTML = 'name';
+                    overlay.setPosition(coordinate);
+                });
+                map.on('pointermove', function(evt) {
+                    map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+                });
+                </script>
+
+                {% endblock %}
+                </body>
+
+                </html>

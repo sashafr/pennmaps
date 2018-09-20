@@ -23,6 +23,20 @@ def home(request):
     context = {'slides': slides, 'home_sidebar': home_sidebar, 'fb_url': fb, 'insta_url': insta, 'tw_url': tw}
     return render(request, 'dpsite/index.html', context)
 
+def aboutProject(request):
+    getaboutproject = PageText.objects.filter(text_hook="aboutproject_main")
+    getaboutproject_sidebar = PageText.objects.filter(text_hook="aboutproject_sidebar")
+    if getaboutproject:
+        aboutproject_main = getaboutproject[0]
+    else:
+        aboutproject_main = ""
+    if getaboutproject_sidebar:
+        aboutproject_sidebar = getaboutproject_sidebar[0]
+    else:
+        aboutproject_sidebar = ""
+    context = {'aboutproject_main': aboutproject_main, 'aboutproject_sidebar': aboutproject_sidebar}
+    return render(request, 'dpsite/aboutProject.html', context)
+
 def mapItem(request):
     mapItem = MapItem.objects.all()
 
@@ -81,9 +95,6 @@ def archiveItem(request, id):
 
 def aboutTeam(request):
     return render(request, 'dpsite/aboutTeam.html')
-
-def aboutProject(request):
-    return render(request, 'dpsite/aboutProject.html')
 
 def map(request):
     mapItem = MapItem.objects.all()

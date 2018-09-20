@@ -1,632 +1,634 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style>
-		/**
-			* Aligns all the content boxes to the right side
-			*/
-		#right-align {
-			width: 25%;
-			height: 75%;
-			right: 0em;
-			z-index: 100;
-			background-color: rgba(47, 124, 147, 0);
-			overflow-x: hidden;
-			position: fixed;
-			transition: transform 0.2s;
-		}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    /**
+    * Aligns all the content boxes to the right side
+    */
+    #right-align {
+        width: 25%;
+        height: 75%;
+        right: 0em;
+        z-index: 100;
+        background-color: rgba(47, 124, 147, 0);
+        overflow-x: hidden;
+        position: fixed;
+        transition: transform 0.2s;
+    }
 
-		/* Creates a single collapsible tag */
-		.collapsible {
-		  position: relative;
-		  border-style: solid;
-		  border-width: 1px;
-		  border-color:rgba(31, 81, 97,0.2);;
-		  cursor: pointer;
-		  width: 100%;
-		  padding: 18px;
-		  z-index:2;
-		  text-align: center;
-		  font-size: 1rem;
-		  color: black;
-		  background-color: rgba(47, 124, 147, 1);
-		}
+    /* Creates a single collapsible tag */
+    .collapsible {
+        position: relative;
+        border-style: solid;
+        border-width: 1px;
+        border-color:rgba(31, 81, 97,0.2);;
+        cursor: pointer;
+        width: 100%;
+        padding: 18px;
+        z-index:2;
+        text-align: center;
+        font-size: 1rem;
+        color: black;
+        background-color: rgba(47, 124, 147, 1);
+    }
 
-		.active,
-		.collapsible:hover {
-		  background-color: rgba(31, 81, 97,1);
-		}
+    .active,
+    .collapsible:hover {
+        background-color: rgba(31, 81, 97,1);
+    }
 
-		/* Content inside collapsible */
-		.content {
-		  padding: 0px 8px;
-		  max-height: 0;
-		  overflow-x: hidden;
-			width: 100%
-		  transition: max-height 1s ease-out;
-		  background-color: rgba(47, 124, 147, 1);
-		}
+    /* Content inside collapsible */
+    .content {
+        padding: 0px 8px;
+        max-height: 0;
+        overflow-x: hidden;
+        width: 100%
+        transition: max-height 1s ease-out;
+        background-color: rgba(47, 124, 147, 1);
+    }
 
 
-		.dp-hideMenu{
-			position: fixed;
-			right: -1rem;
-			top:14.75rem;
-			z-index: 100;
-			background: rgba(47, 124, 147, 1);
-			padding: 8px 8px;
-			transform: rotate(-90deg);
-		}
-	</style>
+    .dp-hideMenu{
+        position: fixed;
+        right: -1rem;
+        top:14.75rem;
+        z-index: 100;
+        background: rgba(47, 124, 147, 1);
+        padding: 8px 8px;
+        transform: rotate(-90deg);
+    }
+    </style>
 </head>
 
 <body>
-{% extends 'dpsite/base.html' %} {% load static %} {% block content %}
-<!--Toggle Menu-->
-<a href="javascript:void(0);" class="dp-hideMenu" id="hideButton">Menu<br><br></a>
+    {% extends 'dpsite/base.html' %} {% load static %} {% block content %}
+    <!--Toggle Menu-->
+    <a href="javascript:void(0);" class="dp-hideMenu" id="hideButton">Menu<br><br></a>
 
-<!--Sidebar content-->
-<div style="z-index:2; position:fixed; background-color:black;opacity:0.4;width:25%;"></div>
-	<div id="right-align">
-		<div class="contentBox">
-			<button class="collapsible"><strong><div id="content-header">Information</div></strong></button>
-			<div class="content" style="color:white;">
-				<!--TITLE-->
-				<h5><strong style="color:black;"><div id="content-title">Explore Black Philadelphia from a spatial perspective.</div></strong></h5>
-				<!--DATES-->
-				<p><strong><div id="content-neighborhood-dates">
-				</div></strong></p>
-				<!--MEDIA-->
-				<div id="content-media"></div>
-				<!--DESCRIPTION-->
-				<p>
-					<div id="content-description">
-						Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present.
-						Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure.
-						If you hover over a map point, a small pop-up window will preview the location details. If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.
-					</div>
-				</p>
-			</div>
-		</div>
+    <!--Sidebar content-->
+    <div style="z-index:2; position:fixed; background-color:black;opacity:0.4;width:25%;"></div>
+    <div id="right-align">
+        <div class="contentBox">
+            <button class="collapsible"><strong><div id="content-header">Information</div></strong></button>
+            <div class="content" style="color:white;">
+                <!--TITLE-->
+                <h5><strong style="color:black;"><div id="content-title">Explore Black Philadelphia from a spatial perspective.</div></strong></h5>
+                <!--DATES-->
+                <p><strong><div id="content-neighborhood-dates">
+                </div></strong></p>
+                <!--MEDIA-->
+                <div id="content-media"></div>
+                <!--DESCRIPTION-->
+                <p>
+                    <div id="content-description">
+                        Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present.
+                        Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure.
+                        If you hover over a map point, a small pop-up window will preview the location details. If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.
+                    </div>
+                </p>
+            </div>
+        </div>
 
-		<!--SEARCH BOX-->
-		<div class="input-group">
-			<button class="collapsible" id="search"><strong>Search</strong></button>
-			<div class="content">
-				<div class="searchBox">
-					<input type="text" id="query" placeholder="Search.." name="search">
-					<span class="input-group-btn">
-					<button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
-				</span>
-				</div>
-			</div>
-		</div>
+        <!--SEARCH BOX-->
+        <div class="input-group">
+            <button class="collapsible" id="search"><strong>Search</strong></button>
+            <div class="content">
+                <div class="searchBox">
+                    <input type="text" id="query" placeholder="Search.." name="search">
+                    <span class="input-group-btn">
+                        <button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
 
-		<!--CHECKBOXES-->
-		<button class="collapsible"><strong>Theme</strong></button>
-		<div class="content" style="color:white;">
-			<label class="check-container">Education
-				<input type="checkbox" name = "tag" value = "education">
-				<span class="checkmark"></span>
-			</label>
+        <!--CHECKBOXES-->
+        <button class="collapsible"><strong>Theme</strong></button>
+        <div class="content" style="color:white;">
+            <label class="check-container">Education
+                <input type="checkbox" name = "tag" value = "education">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Museum
-				<input type="checkbox" name = "tag" value = "museum">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Museum
+                <input type="checkbox" name = "tag" value = "museum">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Historic Firsts
-				<input type="checkbox" name = "tag" value = "Historic Firsts">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Historic Firsts
+                <input type="checkbox" name = "tag" value = "Historic Firsts">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Religion
-				<input type="checkbox" name = "tag" value = "Religion">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Religion
+                <input type="checkbox" name = "tag" value = "Religion">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Arts or Culture
+            <label class="check-container">Arts or Culture
 
-				<input type = "checkbox" name = "tag" value = "Arts or Culture">
-				<span class="checkmark"></span>
-			</label>
+                <input type = "checkbox" name = "tag" value = "Arts or Culture">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Building
-				<input type="checkbox" name = "tag" value = "Building">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Building
+                <input type="checkbox" name = "tag" value = "Building">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Murals
-				<input type="checkbox" name = "tag" value = "Murals">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Murals
+                <input type="checkbox" name = "tag" value = "Murals">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Activism
-				<input type="checkbox" name = "tag" value = "Activism">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Activism
+                <input type="checkbox" name = "tag" value = "Activism">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Oral History
-				<input type="checkbox" name = "tag" value = "Oral History">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Oral History
+                <input type="checkbox" name = "tag" value = "Oral History">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Public Spaces
-				<input type="checkbox" name = "tag" value = "Public Spaces">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Public Spaces
+                <input type="checkbox" name = "tag" value = "Public Spaces">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Monument
-				<input type="checkbox" name = "tag" value = "Monument">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Monument
+                <input type="checkbox" name = "tag" value = "Monument">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Politics
-				<input type="checkbox" name = "tag" value = "Politics">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Politics
+                <input type="checkbox" name = "tag" value = "Politics">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Historic Events
-				<input type="checkbox" name = "tag" value = "Historic Events">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Historic Events
+                <input type="checkbox" name = "tag" value = "Historic Events">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Image
-				<input type="checkbox" name = "tag" value = "Image">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Image
+                <input type="checkbox" name = "tag" value = "Image">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Video
-				<input type="checkbox" name = "tag" value = "Video">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Video
+                <input type="checkbox" name = "tag" value = "Video">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Organization
-				<input type="checkbox" name = "tag" value = "Organization">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Organization
+                <input type="checkbox" name = "tag" value = "Organization">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Events
-				<input type="checkbox" name = "tag" value = "Events">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Events
+                <input type="checkbox" name = "tag" value = "Events">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">Historic Marker
-				<input type="checkbox" name = "tag" value = "Historic Marker">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">Historic Marker
+                <input type="checkbox" name = "tag" value = "Historic Marker">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">People
-				<input type="checkbox" name = "tag" value = "People">
-				<span class="checkmark"></span>
-			</label>
+            <label class="check-container">People
+                <input type="checkbox" name = "tag" value = "People">
+                <span class="checkmark"></span>
+            </label>
 
-			<label class="check-container">360 Video
-				<input type="checkbox" name = "tag" value = "360 Video">
-				<span class="checkmark"></span>
-			</label>
-		</div>
+            <label class="check-container">360 Video
+                <input type="checkbox" name = "tag" value = "360 Video">
+                <span class="checkmark"></span>
+            </label>
+        </div>
 
-		<!--PART OF CITY-->
-		<div id="part-of-city">
-			<button class="collapsible"><strong>Part of City</strong></button>
-			<div class="content" style="color:white;">
-				<label class="radioContainer">North Philadelphia
-				<input type="radio" name = "location" value = "North Philadelphia">
-			</label>
-				<br>
-				<label class="radioContainer">West Philadelphia
-				<input type="radio" name = "location" value = "West Philadelphia">
-			</label>
-				<br>
-				<label class="radioContainer">South Philadelphia
-				<input type="radio" name = "location" value = "South Philadelphia">
-			</label>
-			</div>
-		</div>
-		<!--TIME PERIOD SLIDER-->
-		<div id="time">
-			<button class="collapsible"><strong>Time Period</strong></button>
-			<div class="content" style="color:white;">
-				<div class="timeSelectionBox">
+        <!--PART OF CITY-->
+        <div id="part-of-city">
+            <button class="collapsible"><strong>Part of City</strong></button>
+            <div class="content" style="color:white;">
+                <label class="radioContainer">North Philadelphia
+                    <input type="radio" name = "location" value = "North Philadelphia">
+                </label>
+                <br>
+                <label class="radioContainer">West Philadelphia
+                    <input type="radio" name = "location" value = "West Philadelphia">
+                </label>
+                <br>
+                <label class="radioContainer">South Philadelphia
+                    <input type="radio" name = "location" value = "South Philadelphia">
+                </label>
+            </div>
+        </div>
+        <!--TIME PERIOD SLIDER-->
+        <div id="time">
+            <button class="collapsible"><strong>Time Period</strong></button>
+            <div class="content" style="color:white;">
+                <div class="timeSelectionBox">
 
-			<input type="text" id = "startTimeInput" placeholder="1960" name="search">
-			<input type="text" id = "endTimeInput" placeholder="2000" name="search">
-		</div>
-		<!-- SLIDER
-				<div class="slidecontainer">
-					<input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
-					<p>Year: <span id="sliderValue"></span></p>
-				</div>
-			-->
-			</div>
-		</div>
+                    <input type="text" id = "startTimeInput" placeholder="1960" name="search">
+                    <input type="text" id = "endTimeInput" placeholder="2000" name="search">
+                </div>
+                <!-- SLIDER
+                <div class="slidecontainer">
+                <input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
+                <p>Year: <span id="sliderValue"></span></p>
+            </div>
+        -->
+    </div>
+</div>
 
-	</div>
+</div>
 
-	<button type="button" class="btn btn-primary" onclick="filter()" style="top:12rem;z-index:2; position:absolute;">
-		Filter</button>
+<button type="button" class="btn btn-primary" onclick="filter()" style="top:12rem;z-index:2; position:absolute;">
+    Filter</button>
 
-		<button type="button" class="btn btn-primary" style="top:15rem;z-index:2; position:absolute;" onclick="clearFilter()">
-			Clear Filter</button>
+    <button type="button" class="btn btn-primary" style="top:15rem;z-index:2; position:absolute;" onclick="clearFilter()">
+        Clear Filter</button>
 
-	<!-- Use this span for writing debug messages -->
-	<span id='logMsg'></span>
+        <!-- Use this span for writing debug messages -->
+        <span id='logMsg'></span>
 
-	<!--Map and popup items-->
-	<div id="map">
-		<div id="dp-info"></div>
-	</div>
+        <!--Map and popup items-->
+        <div id="map">
+            <div id="dp-info"></div>
+        </div>
 
-	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 
-	<script>
-	/**/
-	$('#right-align').css("right","-25%");
-		$('.dp-hideMenu').on('click',function(){
-			if($('.dp-hideMenu').hasClass('open')){
-			$(this).removeClass('open');
-			$(this).animate({
-				"right":"-1rem"
-			});
-			$('#right-align').animate({"right":"-25%"});
-		}
-		else{
-			$(this).addClass('open');
-			$(this).animate({
-				"right":"24%",
-			});
-			$('#right-align').animate({"right":"0rem"});
-		}
-	});
-		/*COLLAPSIBLE SIDEBAR ELEMENTS*/
-		var collapse = document.getElementsByClassName("collapsible");
+        <script>
+        /**/
+        $('#right-align').css("right","-25%");
+        $('.dp-hideMenu').on('click',function(){
+            if($('.dp-hideMenu').hasClass('open')){
+                $(this).removeClass('open');
+                $(this).animate({
+                    "right":"-1rem"
+                });
+                $('#right-align').animate({"right":"-25%"});
+            }
+            else{
+                $(this).addClass('open');
+                $(this).animate({
+                    "right":"24%",
+                });
+                $('#right-align').animate({"right":"0rem"});
+            }
+        });
+        /*COLLAPSIBLE SIDEBAR ELEMENTS*/
+        var collapse = document.getElementsByClassName("collapsible");
 
-		for (var i = 0; i < collapse.length; i++) {
-			collapse[i].addEventListener("click", function() {
-				this.classList.toggle("active");
-				var content = this.nextElementSibling;
-				if (content.style.maxHeight) {
-					content.style.maxHeight = null;
-				} else {
-					content.style.maxHeight = content.scrollHeight + "px";
-				}
-			});
-		}
-		/*END COLLAPSIBLE SIDEBAR*/
+        for (var i = 0; i < collapse.length; i++) {
+            collapse[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+        /*END COLLAPSIBLE SIDEBAR*/
 
-		/*Map Query*/
-		const queryInput = document.getElementById('query');
-		const searchButton = document.getElementById('submitButton');
+        /*Map Query*/
+        const queryInput = document.getElementById('query');
+        const searchButton = document.getElementById('submitButton');
 
-		function search(query) {
-			$('#logMsg').html(queryInput.value);
-			var mapItemList = [];
-			mapItemPointCoord0 = [];
-			mapItemPointCoord1 = [];
-			{% for mapItem in map_items%}
-				if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) ||'{{mapItem.description}}'.includes(queryInput.value)) {
-						$('#logMsg').append('{{mapItem.title}}');
-						mapItemList.push('{{mapItem}}');
-			{% for point in mapItem.location1%}
-				mapItemPointCoord0.push({{point.coords.0}});
-				mapItemPointCoord1.push({{point.coords.1}});
-			{% endfor %}
-			}
-			{% endfor %}
-			setMarkers();
-		}
+        function search(query) {
+            $('#logMsg').html(queryInput.value);
+            var mapItemList = [];
+            mapItemPointCoord0 = [];
+            mapItemPointCoord1 = [];
+            {% for mapItem in map_items%}
+            if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) ||'{{mapItem.description}}'.includes(queryInput.value)) {
+                $('#logMsg').append('{{mapItem.title}}');
+                mapItemList.push('{{mapItem}}');
+                {% for point in mapItem.location1%}
+                mapItemPointCoord0.push({{point.coords.0}});
+                mapItemPointCoord1.push({{point.coords.1}});
+                {% endfor %}
+            }
+            {% endfor %}
+            setMarkers();
+        }
 
-		searchButton.onclick = function(event) {
-			$('#logMsg').html(queryInput.value);
-			search(queryInput.value);
-			event.preventDefault();
-		};
+        searchButton.onclick = function(event) {
+            $('#logMsg').html(queryInput.value);
+            search(queryInput.value);
+            event.preventDefault();
+        };
 
-		var mapItemPointCoord0 = [];
-var mapItemPointCoord1 = [];
+        var mapItemPointCoord0 = [];
+        var mapItemPointCoord1 = [];
 
-function filter() {
-	var checkBox = document.getElementsByName("tag");
-	var radioButton = document.getElementsByName("location");
-	var mapItemList = [];
-	$('#logMsg').html("");
-	mapItemPointCoord0 = [];
-	mapItemPointCoord1 = [];
+        function filter() {
+            var checkBox = document.getElementsByName("tag");
+            var radioButton = document.getElementsByName("location");
+            var mapItemList = [];
+            $('#logMsg').html("");
+            mapItemPointCoord0 = [];
+            mapItemPointCoord1 = [];
 
-	for (var i = 0; i < checkBox.length; i++) {
-		if (checkBox[i].checked == true) {
-			{% for mapItem in map_items%}
-				{%for t in mapItem.tags.all%}
-					if ('{{t}}'==checkBox[i].value) {
-						// $('#logMsg').append('{{mapItem}}');
-						mapItemList.push('{{mapItem}}');
-						{% for point in mapItem.location1%}
-						mapItemPointCoord0.push({{point.coords.0}});
-						mapItemPointCoord1.push({{point.coords.1}});
-						{% endfor %}
-					}
+            for (var i = 0; i < checkBox.length; i++) {
+                if (checkBox[i].checked == true) {
+                    {% for mapItem in map_items%}
+                    {%for t in mapItem.tags.all%}
+                    if ('{{t}}'==checkBox[i].value) {
+                        // $('#logMsg').append('{{mapItem}}');
+                        mapItemList.push('{{mapItem}}');
+                        {% for point in mapItem.location1%}
+                        mapItemPointCoord0.push({{point.coords.0}});
+                        mapItemPointCoord1.push({{point.coords.1}});
+                        {% endfor %}
+                    }
 
-			{% endfor %}
-			{% endfor %}
-		}
-	}
+                    {% endfor %}
+                    {% endfor %}
+                }
+            }
 
-	for (var i = 0; i< radioButton.length; i++) {
-		if (radioButton[i].checked == true) {
-			{% for mapItem in map_items%}
-			if ('{{mapItem.location_notes}}'==radioButton[i].value) {
-				// $('#logMsg').append('{{mapItem}}');
-				if (!mapItemList.includes('{{mapItem}}')) {
-					mapItemList.push('{{mapItem}}');
-					{% for point in mapItem.location1%}
-					mapItemPointCoord0.push({{point.coords.0}});
-					mapItemPointCoord1.push({{point.coords.1}});
-					{% endfor %}
-				}
-			}
-			{% endfor %}
-			break;
-		}
-	}
-/* SLIDER
-	var startDate = '{{mapItem.start_date}}';
-	var startYear = startDate.substr(startDate.indexOf(",")+1);
-	var endDate = '{{mapItem.end_date}}';
-	var endYear = endDate.substr(endDate.indexOf(",")+1);
-	if (startYear <= slider.value && slider.value >= endYear) {
-		if (!mapItemList.includes('{{mapItem}}')) {
-			mapItemList.push('{{mapItem}}');
-			{% for point in mapItem.location1%}
-			mapItemPointCoord0.push({{point.coords.0}});
-			mapItemPointCoord1.push({{point.coords.1}});
-			{% endfor %}
-		}
-	}*/
-	setMarkers();
+            for (var i = 0; i< radioButton.length; i++) {
+                if (radioButton[i].checked == true) {
+                    {% for mapItem in map_items%}
+                    if ('{{mapItem.location_notes}}'==radioButton[i].value) {
+                        // $('#logMsg').append('{{mapItem}}');
+                        if (!mapItemList.includes('{{mapItem}}')) {
+                            mapItemList.push('{{mapItem}}');
+                            {% for point in mapItem.location1%}
+                            mapItemPointCoord0.push({{point.coords.0}});
+                            mapItemPointCoord1.push({{point.coords.1}});
+                            {% endfor %}
+                        }
+                    }
+                    {% endfor %}
+                    break;
+                }
+            }
+            /* SLIDER
+            var startDate = '{{mapItem.start_date}}';
+            var startYear = startDate.substr(startDate.indexOf(",")+1);
+            var endDate = '{{mapItem.end_date}}';
+            var endYear = endDate.substr(endDate.indexOf(",")+1);
+            if (startYear <= slider.value && slider.value >= endYear) {
+            if (!mapItemList.includes('{{mapItem}}')) {
+            mapItemList.push('{{mapItem}}');
+            {% for point in mapItem.location1%}
+            mapItemPointCoord0.push({{point.coords.0}});
+            mapItemPointCoord1.push({{point.coords.1}});
+            {% endfor %}
+        }
+    }*/
+    setMarkers();
 
 }
 
-		// function for tag selection
-		function selectTag() {
-			$('#logMsg').html("");
-			var checkBox = document.getElementsByName("tag");
+// function for tag selection
+function selectTag() {
+    $('#logMsg').html("");
+    var checkBox = document.getElementsByName("tag");
 
-			var selectedItems = "selected: ";
-			for (var i = 0; i < checkBox.length; i++) {
-				if (checkBox[i].checked == true) {
-					selectedItems += checkBox[i].value + "\n";
-					{%for mapItem in map_items %}
-					{%for t in mapItem.tags.all %}
-						if ('{{t}}' === checkBox[i].value) {
-							$('#logMsg').append('{{mapItem}}');
-						}
-					{% endfor %}
-					{% endfor %}
-				}
+    var selectedItems = "selected: ";
+    for (var i = 0; i < checkBox.length; i++) {
+        if (checkBox[i].checked == true) {
+            selectedItems += checkBox[i].value + "\n";
+            {%for mapItem in map_items %}
+            {%for t in mapItem.tags.all %}
+            if ('{{t}}' === checkBox[i].value) {
+                $('#logMsg').append('{{mapItem}}');
+            }
+            {% endfor %}
+            {% endfor %}
+        }
 
-			}
-			$('#logMsg').append(selectedItems);
+    }
+    $('#logMsg').append(selectedItems);
 
-		}
+}
 
-		// function for part of city selection
-		function selectPartOfCity() {
-			$('#logMsg').html("");
-			var checkBox = document.getElementsByName("location");
+// function for part of city selection
+function selectPartOfCity() {
+    $('#logMsg').html("");
+    var checkBox = document.getElementsByName("location");
 
-			for (var i = 0; i < checkBox.length; i++) {
+    for (var i = 0; i < checkBox.length; i++) {
 
-				if (checkBox[i].checked == true) {
+        if (checkBox[i].checked == true) {
 
-					// $('#logMsg').append("checked");
-					{%for mapItem in map_items %}
-						// $('#logMsg').append('{{mapItem}}');
-						if ('{{mapItem.location_notes}}' == checkBox[i].value) {
-							$('#logMsg').append('{{mapItem}}');
-						}
-					{% endfor %}
-					break;
-				}
+            // $('#logMsg').append("checked");
+            {%for mapItem in map_items %}
+            // $('#logMsg').append('{{mapItem}}');
+            if ('{{mapItem.location_notes}}' == checkBox[i].value) {
+                $('#logMsg').append('{{mapItem}}');
+            }
+            {% endfor %}
+            break;
+        }
 
-			}
+    }
 
-		}
+}
 
 /* SLIDER
-		var slider = document.getElementById("sliderRange");
-		var output = document.getElementById("sliderValue");
-		output.innerHTML = slider.value;
+var slider = document.getElementById("sliderRange");
+var output = document.getElementById("sliderValue");
+output.innerHTML = slider.value;
 
-		slider.oninput = function() {
-			output.innerHTML = this.value;
-		}
+slider.oninput = function() {
+output.innerHTML = this.value;
+}
 */
-		function selectTimePeriod() {
+function selectTimePeriod() {
 
-	const startTimeInput = document.getElementById('startTimeInput');
-	const endTimeInput = document.getElementById('endTimeInput');
-	$('#logMsg').append(startTimeInput.value);
-	$('#logMsg').append(endTimeInput.value);
-	{% for mapItem in map_items%}
-	var startDate = '{{mapItem.start_date}}';
-	var startYear = startDate.substr(startDate.indexOf(",")+1);
-	var endDate = '{{mapItem.end_date}}';
-	var endYear = endDate.substr(endDate.indexOf(",")+1);
-	if (startYear >= startTimeInput && endTimeInput >= endYear) {
-		$('#logMsg').append('{{mapItem}}');
-	}
+    const startTimeInput = document.getElementById('startTimeInput');
+    const endTimeInput = document.getElementById('endTimeInput');
+    $('#logMsg').append(startTimeInput.value);
+    $('#logMsg').append(endTimeInput.value);
+    {% for mapItem in map_items%}
+    var startDate = '{{mapItem.start_date}}';
+    var startYear = startDate.substr(startDate.indexOf(",")+1);
+    var endDate = '{{mapItem.end_date}}';
+    var endYear = endDate.substr(endDate.indexOf(",")+1);
+    if (startYear >= startTimeInput && endTimeInput >= endYear) {
+        $('#logMsg').append('{{mapItem}}');
+    }
 
-	{% endfor %}
+    {% endfor %}
 }
 
 function clearFilter() {
-	// $('#logMsg').html("clearFilter clicked");
-	var checkBox = document.getElementsByName("tag");
-	var radioButton = document.getElementsByName("location");
-	for (var i = 0; i < checkBox.length; i++) {
-		checkBox[i].checked = false;
-	}
-	for (var i = 0; i < radioButton.length; i++) {
-		radioButton[i].checked = false;
-	}
-	{% for mapItem in map_items%}
-	{% for point in mapItem.location1%}
-	mapItemPointCoord0.push({{point.coords.0}});
-	mapItemPointCoord1.push({{point.coords.1}});
-	{% endfor %}
-	{% endfor %}
-	setMarkers();
+    // $('#logMsg').html("clearFilter clicked");
+    var checkBox = document.getElementsByName("tag");
+    var radioButton = document.getElementsByName("location");
+    for (var i = 0; i < checkBox.length; i++) {
+        checkBox[i].checked = false;
+    }
+    for (var i = 0; i < radioButton.length; i++) {
+        radioButton[i].checked = false;
+    }
+    {% for mapItem in map_items%}
+    {% for point in mapItem.location1%}
+    mapItemPointCoord0.push({{point.coords.0}});
+    mapItemPointCoord1.push({{point.coords.1}});
+    {% endfor %}
+    {% endfor %}
+    setMarkers();
 
 }
 
 
-		/**
-		 * Create the map.
-		 */
-		var map = new ol.Map({
-			layers: [
-				new ol.layer.Tile({
-					source: new ol.source.XYZ({
-						url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
-					})
-				})
-			],
-			target: 'map',
-			view: new ol.View({
-				center: ol.proj.fromLonLat([-75.165222, 39.952583]),
-				zoom: 12,
-				minZoom: 10,
-				maxZoom: 19,
-			})
-		});
+/**
+* Create the map.
+*/
+var map = new ol.Map({
+    layers: [
+        new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
+            })
+        })
+    ],
+    target: 'map',
+    view: new ol.View({
+        center: ol.proj.fromLonLat([-75.165222, 39.952583]),
+        zoom: 12,
+        minZoom: 10,
+        maxZoom: 19,
+    })
+});
 
-		/**
-		 * Create a feature for each data point we have
-		 */
-		{% for mapItem in map_items %}
-		{%for point in mapItem.location1 %}
-		var markers = new ol.layer.Vector({
-			source: new ol.source.Vector({
-				features: [
-					new ol.Feature({
-						title: "{{mapItem.title|safe|striptags}}",
-						summary: '{{mapItem.summary|safe|striptags}}',
-						description: '{{mapItem.description|safe|striptags}}',
-						start: '{{mapItem.start_date|safe|striptags}}',
-						end: '{{mapItem.end_date|safe|striptags}}',
-						media: '{{mapItem.display_media_full|safe}}',
-						link:"{% url 'archiveitem' mapItem.id %}",
-						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
-					})
-				]
-			}),
-			style: new ol.style.Style({
-				image: new ol.style.Icon({
-					src: 'https://s8.postimg.cc/gcsd9zztx/target.png',
-					width: 10,
-					anchor: [0.5, 1]
-				})
-			})
-		});
-		map.addLayer(markers);
-		{% endfor %}
-		{% endfor %}
-		function setMarkers() {
-			map.getLayers().forEach(function(Vectorlayer) {
-    	if(Vectorlayer instanceof ol.layer.Vector)
-      Vectorlayer.getSource().clear();
-		 });
+/**
+* Create a feature for each data point we have
+*/
+{% for mapItem in map_items %}
+{%for point in mapItem.location1 %}
+var markers = new ol.layer.Vector({
+    source: new ol.source.Vector({
+        features: [
+            new ol.Feature({
+                title: "{{mapItem.title|safe|striptags}}",
+                summary: '{{mapItem.summary|safe|striptags}}',
+                description: '{{mapItem.description|safe|striptags}}',
+                start: '{{mapItem.start_date|safe|striptags}}',
+                end: '{{mapItem.end_date|safe|striptags}}',
+                media: '{{mapItem.display_media_full|safe}}',
+                link:"{% url 'archiveitem' mapItem.id %}",
+                geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
+            })
+        ]
+    }),
+    style: new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 5,
+            fill: new ol.style.Fill({
+                color: [255,74,0]
+            })
+        }),
+    })
+});
+map.addLayer(markers);
+{% endfor %}
+{% endfor %}
+function setMarkers() {
+    map.getLayers().forEach(function(Vectorlayer) {
+        if(Vectorlayer instanceof ol.layer.Vector)
+        Vectorlayer.getSource().clear();
+    });
 
-	for (var i = 0; i < mapItemPointCoord0.length; i++) {
-		  markers = new ol.layer.Vector({
-			source: new ol.source.Vector({
-				features: [
-					new ol.Feature({
-						geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
-					})
-				]
-			}),
-			style: new ol.style.Style({
-				image: new ol.style.Icon({
-					src: 'https://s8.postimg.cc/gcsd9zztx/target.png',
-					width: 10,
-					anchor: [0.5, 1]
-				})
-			})
-		});
-		map.addLayer(markers);
-	}
+    for (var i = 0; i < mapItemPointCoord0.length; i++) {
+        markers = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [
+                    new ol.Feature({
+                        geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
+                    })
+                ]
+            }),
+            style: new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: 5,
+                    fill: new ol.style.Fill({
+                        color: [255,74,0]
+                    })
+                }),
+            })
+        });
+        map.addLayer(markers);
+    }
 }
 
-		/**
-			* Tooltip
-		 	*/
-			var info = $('#dp-info');
-			info.tooltip({
-				animation:false,
-				trigger: 'manual',
-			});
+/**
+* Tooltip
+*/
+var info = $('#dp-info');
+info.tooltip({
+    animation:false,
+    trigger: 'manual',
+});
 
-			var displayFeatureInfo = function(pixel){
-				info.css({
-					left: pixel[0] + 'px',
-					top: (pixel[1]-15) +'px',
-				});
-				var feature = map.forEachFeatureAtPixel(pixel,function(feature){
-					return feature;
-				});
-				if (feature){
-					info.tooltip('show')
-						.attr('data-original-title',feature.get('title'))
-						.tooltip('show');
-				}
-				else{
-					info.tooltip('hide');
-				}
-			};
-		/**
-		 * Add a click handler to the map.
-		 */
-		map.on('singleclick', function(evt) {
-			const feature = map.forEachFeatureAtPixel(evt.pixel,
- 		 	function(feature) {
- 		 		return feature;
- 		 	});
-			// Handle click on map item
-			if (feature) {
-				// Handle content change
-				document.getElementById('content-title').innerHTML = "<a style='color:black !important;' href="+feature.get('link')+">"+feature.get('title')+"</a>";
-				document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + ' to ' + feature.get('end');
-				if (feature.get('description') !=null){
-					document.getElementById('content-description').innerHTML =  feature.get('description');
-				}
-				document.getElementById('content-media').innerHTML = feature.get('media');
-				if (feature.get('media') !=null){
-					document.getElementById('content-media'){{mapItem.displayMedia}}
-				}
-			} else {
-				document.getElementById('content=title').innerHTML="";
-				document.getElementById('content-neighborhood-dates').innerHTML = "";
-				document.getElementById('content-description').innerHTML =
-				'<strong style="color:black;">Explore Black Philadelphia from a spatial perspective.</strong><br> Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present. Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure. If you hover over a map point, a small pop-up window will preview the location details. If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.';
-				document.getElementById('content-media').innerHTML="";
-			}
-		});
+var displayFeatureInfo = function(pixel){
+    info.css({
+        left: pixel[0] + 'px',
+        top: (pixel[1]-15) +'px',
+    });
+    var feature = map.forEachFeatureAtPixel(pixel,function(feature){
+        return feature;
+    });
+    if (feature){
+        info.tooltip('show')
+        .attr('data-original-title',feature.get('title'))
+        .tooltip('show');
+    }
+    else{
+        info.tooltip('hide');
+    }
+};
+/**
+* Add a click handler to the map.
+*/
+map.on('singleclick', function(evt) {
+    const feature = map.forEachFeatureAtPixel(evt.pixel,
+        function(feature) {
+            return feature;
+        });
+        // Handle click on map item
+        if (feature) {
+            // Handle content change
+            document.getElementById('content-title').innerHTML = "<a style='color:black !important;' href="+feature.get('link')+">"+feature.get('title')+"</a>";
+            document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + ' to ' + feature.get('end');
+            if (feature.get('description') !=null){
+                document.getElementById('content-description').innerHTML =  feature.get('description');
+            }
+            document.getElementById('content-media').innerHTML = feature.get('media');
+            if (feature.get('media') !=null){
+                document.getElementById('content-media'){{mapItem.displayMedia}}
+            }
+        } else {
+            document.getElementById('content=title').innerHTML="";
+            document.getElementById('content-neighborhood-dates').innerHTML = "";
+            document.getElementById('content-description').innerHTML =
+            '<strong style="color:black;">Explore Black Philadelphia from a spatial perspective.</strong><br> Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present. Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure. If you hover over a map point, a small pop-up window will preview the location details. If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.';
+            document.getElementById('content-media').innerHTML="";
+        }
+    });
 
-		map.on('pointermove', function(evt) {
-			if (evt.dragging) {
-				info.tooltip('hide');
-				return;
-			}
-			displayFeatureInfo(map.getEventPixel(evt.originalEvent));
-			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
-		});
+    map.on('pointermove', function(evt) {
+        if (evt.dragging) {
+            info.tooltip('hide');
+            return;
+        }
+        displayFeatureInfo(map.getEventPixel(evt.originalEvent));
+        map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+    });
 
-	</script>
-	{% endblock %}
+    </script>
+    {% endblock %}
 </body>
 
 </html>

@@ -1,6 +1,6 @@
-# Diggin' Philly
+# Mapping Black Philadelphia
 
-The Diggin’ Philly project is a large and ambitious project to document black Philadelphia particularly against a backdrop of rapid urban change including massive gentrification. To accomplish this we have developed a Django based CMS that serves as a home to the project and provide access to a variety of content, including an interactive map.
+The Mapping Black Philadelphia project is a large and ambitious project to document black Philadelphia particularly against a backdrop of rapid urban change including massive gentrification. To accomplish this we have developed a Django based CMS that serves as a home to the project and provide access to a variety of content, including an interactive map.
 
 ## Getting Started
 
