@@ -146,6 +146,12 @@ class MapItem(models.Model):
     max_zoom = models.IntegerField(blank=True, null=True)
     overlay_group = models.ManyToManyField('OverlayGroup', blank=True)
 
+    def get_thm_url(self):
+        if self.media.count() > 0:
+            return self.media.all().order_by('mappedmedia__order')[0].get_thm_url()
+        else:
+            return settings.STATIC_URL + 'img/image_default.png'
+
     def display_media_thumb(self):
         if self.media.count() > 0:
             return self.media.all().order_by('mappedmedia__order')[0].display_media_thumb()

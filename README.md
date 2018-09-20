@@ -135,6 +135,7 @@ TODO
 
 * **Sasha Renninger** - *Lead Developer* - [Github](https://github.com/sashafr)
 * **Siyang You** - *Assistant Django Developer*
+* **Irene Zhang** - *Assistant Django Developer*
 * **Nia Hammond** - *Web Design & Development*
 * **Miranda Mote** - *Graphic Design*
 ## License

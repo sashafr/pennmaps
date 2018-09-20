@@ -54,7 +54,7 @@ def webSeries(request):
     if getsidebar:
         sidebar_text = getsidebar[0].page_text
     context = {'series': series, 'page_styles': page_styles, "sidebar_text": sidebar_text}
-    return render(request, 'dpsite/webseries.html', context)
+    return render(request, 'dpsite/webseriestemp.html', context)
 
 def mediaGallery(request, tag=""):
     if tag != "":
@@ -84,8 +84,10 @@ def archiveGallery(request, tag=""):
         items = MapItem.objects.filter(tags__slug = tag)
     else:
         items = MapItem.objects.all()
-    context = {'items': items, 'tag': tag }
-    return render(request, 'dpsite/archiveGallery.html', context)
+    active_tag = get_object_or_404(Tag, slug = tag)
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+    context = {'items': items, 'tag': active_tag, 'page_styles': page_styles }
+    return render(request, 'dpsite/archiveGallerytemp.html', context)
 
 def archiveItem(request, id):
     mapItem = get_object_or_404(MapItem, pk = id)

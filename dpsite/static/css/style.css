@@ -124,6 +124,10 @@ a:visited {
     transition: opacity 1s;
 }
 
+.dp-hidemenu {
+    color: #fff;
+}
+
 /* Home Page Styles */
 /* Carousel base class */
 .carousel {
@@ -3119,8 +3123,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #ff4a00;
+    border-color: #ff4a00;
 }
 
 .btn-primary:hover {

@@ -1,0 +1,23 @@
+{% extends "dpsite/base.html" %}
+{% load static %}
+{% block content %}
+<!--
+Full Motion by TEMPLATED
+templated.co @templatedco
+Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<body id="top">
+
+    <!-- Main -->
+    <div id="main" class="row">
+        <div class="inner col-md-9">
+            <h1>This gallery is currently under construction, check back soon!</h1>
+        </div>
+        <div class="col-md-3 dp-sidebar">
+            <h1>{{ tag.title }}</h1>
+            <p>{{ tag.description|safe }}</p>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}

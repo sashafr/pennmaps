@@ -65,14 +65,14 @@
 <body>
     {% extends 'dpsite/base.html' %} {% load static %} {% block content %}
     <!--Toggle Menu-->
-    <a href="javascript:void(0);" class="dp-hideMenu" id="hideButton">Menu<br><br></a>
+    <a href="javascript:void(0);" class="dp-hideMenu open" id="hideButton" style="right: 24%;">Menu<br><br></a>
 
     <!--Sidebar content-->
     <div style="z-index:2; position:fixed; background-color:black;opacity:0.4;width:25%;"></div>
-    <div id="right-align">
+    <div id="right-align" style="right: 0rem;">
         <div class="contentBox">
-            <button class="collapsible"><strong><div id="content-header">Information</div></strong></button>
-            <div class="content" style="color:white;">
+            <button class="collapsible"><strong><div id="content-header">Details</div></strong></button>
+            <div class="content" style="color: white; max-height: 476px;">
                 <!--TITLE-->
                 <h5><strong style="color:black;"><div id="content-title">Explore Black Philadelphia from a spatial perspective.</div></strong></h5>
                 <!--DATES-->
@@ -94,7 +94,7 @@
         <!--SEARCH BOX-->
         <div class="input-group">
             <button class="collapsible" id="search"><strong>Search</strong></button>
-            <div class="content">
+            <div class="content" style="width: 100%;">
                 <div class="searchBox">
                     <input type="text" id="query" placeholder="Search.." name="search">
                     <span class="input-group-btn">
@@ -264,7 +264,6 @@
 
         <script>
         /**/
-        $('#right-align').css("right","-25%");
         $('.dp-hideMenu').on('click',function(){
             if($('.dp-hideMenu').hasClass('open')){
                 $(this).removeClass('open');
@@ -307,7 +306,7 @@
             mapItemPointCoord0 = [];
             mapItemPointCoord1 = [];
             {% for mapItem in map_items%}
-            if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) ||'{{mapItem.description}}'.includes(queryInput.value)) {
+            if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value)) {
                 $('#logMsg').append('{{mapItem.title}}');
                 mapItemList.push('{{mapItem}}');
                 {% for point in mapItem.location1%}
@@ -601,7 +600,6 @@ map.on('singleclick', function(evt) {
         if (feature) {
             // Handle content change
             document.getElementById('content-title').innerHTML = "<a style='color:black !important;' href="+feature.get('link')+">"+feature.get('title')+"</a>";
-            document.getElementById('content-neighborhood-dates').innerHTML = feature.get('start') + ' to ' + feature.get('end');
             if (feature.get('description') !=null){
                 document.getElementById('content-description').innerHTML =  feature.get('description');
             }

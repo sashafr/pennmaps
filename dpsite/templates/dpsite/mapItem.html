@@ -2,18 +2,13 @@
 {% load static %}
 {% block content %}
 
-<body>
-    <!-- Below: pulled from index.html of bootstrap portfolio item theme; beginning adjustments to mimic inDesign markups -->
 
-    <!-- Page Content -->
-    <br> <!-- for space between divs without making margins/padding -->
-
-    <div class="container">
+    <div class="container dp-container">
 
         <!-- Portfolio Item Row -->
         <div class="row">
-            <div class="col-md-6">
-                {{ mapItem.display_media_thumb|safe }}
+            <div class="col-md-8">
+                <div class="dp-about-fixed-image" style="background-image: url('{{ mapItem.get_thm_url }}')"></div>
                 <h2 class="my-3">{{ mapItem.title }}</h2>
                 <h4>{{ mapItem.location_notes }}
                     <br>{{ mapItem.start_date }} to {{ mapItem.end_date }}</h4>
@@ -27,9 +22,6 @@
                 </div>
                 <h3 class="my-3">Information Sources</h3>
                 <p>{{ mapItem.info_sources|safe }}</p>
-            </div>
-
-            <div class="col-md-2">
                 {% for tag in mapItem.tags.all %}
                     {% if tag.description %}
                         <h3>{{ tag.title }}</h3>
@@ -38,7 +30,6 @@
                     {% endif %}
                 {% endfor %}
             </div>
-
 
         </div>
         <!-- /.row -->
@@ -140,11 +131,12 @@
 				]
 			}),
 			style: new ol.style.Style({
-				image: new ol.style.Icon({
-					src: 'https://s8.postimg.cc/gcsd9zztx/target.png',
-					width: 10,
-					anchor: [0.5, 1]
-				})
+                image: new ol.style.Circle({
+                    radius: 5,
+                    fill: new ol.style.Fill({
+                        color: [255,74,0]
+                    })
+                }),
 			})
 		});
 		map.addLayer(markers);
@@ -162,5 +154,4 @@
 			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
 		});
     </script>
-</body>
 {% endblock %}
