@@ -27,6 +27,7 @@ def home(request):
 def aboutProject(request):
     getaboutproject = PageText.objects.filter(text_hook="aboutproject_main")
     getaboutproject_sidebar = PageText.objects.filter(text_hook="aboutproject_sidebar")
+    getaboutproject_smsidebar = PageText.objects.filter(text_hook="aboutproject_smsidebar")
     if getaboutproject:
         aboutproject_main = getaboutproject[0]
     else:
@@ -35,7 +36,11 @@ def aboutProject(request):
         aboutproject_sidebar = getaboutproject_sidebar[0]
     else:
         aboutproject_sidebar = ""
-    context = {'aboutproject_main': aboutproject_main, 'aboutproject_sidebar': aboutproject_sidebar}
+    if getaboutproject_smsidebar:
+        aboutproject_smsidebar = getaboutproject_smsidebar[0]
+    else:
+        aboutproject_smsidebar = ""
+    context = {'aboutproject_main': aboutproject_main, 'aboutproject_sidebar': aboutproject_sidebar, 'aboutproject_smsidebar': aboutproject_smsidebar}
     return render(request, 'dpsite/aboutProject.html', context)
 
 def mapItem(request):

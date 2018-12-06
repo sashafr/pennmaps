@@ -3,31 +3,28 @@
 {% block content %}
 <div class="container dp-container">
 
-    <!-- Portfolio Item Heading -->
-    <!-- (deleted) -->
-
     <!-- Portfolio Item Row -->
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-lg-7">
             <div class="dp-about-fixed-image" style="background-image: url('{% if aboutproject_main.related_image %}{{ aboutproject_main.related_image.url }}{% else %}data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=={% endif %}')"></div>
             <div class="dp-container">
                 {{ aboutproject_main.page_text|safe }}
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-lg-3">
             <div class="dp-sm-about-fixed-image" style="background-image: url('{% if aboutproject_sidebar.related_image %}{{ aboutproject_sidebar.related_image.url }}{% else %}data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=={% endif %}')"></div>
             <div class="dp-container">
                 {{ aboutproject_sidebar.page_text|safe }}
             </div>
         </div>
 
-        <div class="col-md-2">
-            <h3 style="color:rgb(255,74,0);font-weight:600">About Us</span></h3>
-            <p><b>Mapping Black Philadelphia</b> is a multimodal platform that utilizes digital media and technology to document and celebrate the rich experiences, institutions, spaces, and cultures of Black people in the city. </p>
-
+        <div class="col-lg-2">
+            {% if aboutproject_smsidebar.related_image %}<div class="dp-sm-about-fixed-image" style="background-image: url('{{ aboutproject_smsidebar.related_image.url }}')"></div>{% endif %}
+            <div class="dp-container">
+                {{ aboutproject_smsidebar.page_text|safe }}
+            </div>
         </div>
-
 
     </div>
     <!-- /.row -->
