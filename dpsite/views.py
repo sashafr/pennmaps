@@ -60,7 +60,7 @@ def aboutTeam(request):
     else:
         aboutteam_smsidebar = ""
     context = {'aboutteam_main': aboutteam_main, 'aboutteam_sidebar': aboutteam_sidebar, 'aboutteam_smsidebar': aboutteam_smsidebar}
-    return render(request, 'dpsite/aboutTeam.html', context)    
+    return render(request, 'dpsite/aboutTeam.html', context)
 
 def mapItem(request):
     mapItem = MapItem.objects.all()
@@ -102,12 +102,13 @@ def mediaGallery(request, tag=""):
 def archiveGallery(request, tag=""):
     if tag != "":
         items = MapItem.objects.filter(tags__slug = tag)
+        active_tag = Tags.objects.filter(slug = tag)
     else:
         items = MapItem.objects.all()
-    active_tag = get_object_or_404(Tag, slug = tag)
+        active_tag = ""
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
     context = {'items': items, 'tag': active_tag, 'page_styles': page_styles }
-    return render(request, 'dpsite/archiveGallerytemp.html', context)
+    return render(request, 'dpsite/archiveGallery.html', context)
 
 def archiveItem(request, id):
     mapItem = get_object_or_404(MapItem, pk = id)
