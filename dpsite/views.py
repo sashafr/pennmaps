@@ -43,6 +43,25 @@ def aboutProject(request):
     context = {'aboutproject_main': aboutproject_main, 'aboutproject_sidebar': aboutproject_sidebar, 'aboutproject_smsidebar': aboutproject_smsidebar}
     return render(request, 'dpsite/aboutProject.html', context)
 
+def aboutTeam(request):
+    getaboutteam = PageText.objects.filter(text_hook="aboutteam_main")
+    getaboutteam_sidebar = PageText.objects.filter(text_hook="aboutteam_sidebar")
+    getaboutteam_smsidebar = PageText.objects.filter(text_hook="aboutteam_smsidebar")
+    if getaboutteam:
+        aboutteam_main = getaboutteam[0]
+    else:
+        aboutteam_main = ""
+    if getaboutteam_sidebar:
+        aboutteam_sidebar = getaboutteam_sidebar[0]
+    else:
+        aboutteam_sidebar = ""
+    if getaboutteam_smsidebar:
+        aboutteam_smsidebar = getaboutteam_smsidebar[0]
+    else:
+        aboutteam_smsidebar = ""
+    context = {'aboutteam_main': aboutteam_main, 'aboutteam_sidebar': aboutteam_sidebar, 'aboutteam_smsidebar': aboutteam_smsidebar}
+    return render(request, 'dpsite/aboutTeam.html', context)    
+
 def mapItem(request):
     mapItem = MapItem.objects.all()
 
@@ -95,9 +114,6 @@ def archiveItem(request, id):
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
     context = {'mapItem': mapItem, 'page_styles': page_styles }
     return render(request, 'dpsite/mapItem.html', context)
-
-def aboutTeam(request):
-    return render(request, 'dpsite/aboutTeam.html')
 
 def map(request):
     mapItem = MapItem.objects.all()
