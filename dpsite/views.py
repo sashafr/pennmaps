@@ -6,6 +6,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from .models import *
 from django.template import Context, loader
 from django.conf import settings
+from .forms import SearchForm
 
 # Request Functions
 def base(request):
@@ -74,11 +75,6 @@ def mediaGallery(request, tag=""):
     context = {'media': media, 'page_styles': page_styles, 'tag': pagetag, 'sidebar_text': sidebar_text }
     return render(request, 'dpsite/mediaGallery.html', context)
 
-def archiveSearch(request):
-    items = MapItem.objects.all()
-    context = {'items': items, }
-    return render(request, 'dpsite/search.html', context)
-
 def archiveGallery(request, tag=""):
     if tag != "":
         items = MapItem.objects.filter(tags__slug = tag)
@@ -103,3 +99,31 @@ def map(request):
     partOfCity = PartOfCity.objects.all()
     context = {'map_items': mapItem, 'part_of_city': partOfCity}
     return render(request, 'dpsite/Test.html',context)
+
+def archiveSearch(request):
+    item_name = request.GET.get('q', None)
+    form = SearchForm(request.POST)
+    form.is_valid()
+    item_tags = form.cleaned_data.get('tagfield')
+    context = {'form': form}
+    if item_name:
+        items = MapItem.objects.filter(description__icontains=item_name)
+        context['items'] = items
+        items_new = MapItem.objects.none()
+        if item_tags:
+            for tag in item_tags:
+                items_new |= (items.filter(tags__title__icontains=tag))
+            context['items'] = items_new.distinct
+        else:
+            context['items'] = items.distinct
+        return render(request,"dpsite/search.html", context)
+    else:
+        items = MapItem.objects.all()
+        items_new = MapItem.objects.none()
+        if item_tags:
+            for tag in item_tags:
+                items_new |= (items.filter(tags__title__icontains=tag))
+            context['items'] = items_new.distinct
+        else:
+            context['items'] = items.distinct
+        return render(request,"dpsite/search.html", context)

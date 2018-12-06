@@ -1,12 +1,58 @@
 {% extends "dpsite/base.html" %}
 {% load static %}
 {% block content %}
-<div class="container dp-container">
+
+<div style="padding-left: 2%;">
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type='submit' value='submit'>
+</form>
+
+<script language="JavaScript">
+function toggle(source) {
+  checkboxes = document.getElementsByName('tagfield');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+</script>
+<input type="checkbox" onClick="toggle(this)" /> Toggle All<br/>
+</div>
+
+{% if items %}
+{% for each_item in items %}
+  <div>
+    <div style="padding-left: 5%;">
+    <div style="padding-right: 5%;">
+    <center>
+    <img src={{each_item.get_thm_url}} alt="" width="30%" overflow="hidden">
+    <a href={% url 'archiveitem' each_item.id %}><h1>{{each_item.title|safe}}</h1></a>
+    <p>{{each_item.description|safe}}</p>
+    </center>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<div>
+  <div style="padding-left: 5%;">
+  <div style="padding-right: 5%;">
+    <div style="padding-top: 5%;">
+    <div style="padding-bottom: 5%;">
+  <center>
+  <h1>No results found, please try another query!</h1>
+  </center>
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+{% endblock %}
+
+<!--<div class="container dp-container">
     <div class="row">
         <div class="col-md-12">
             <h1>Archive Search is currently under construction, check back soon!</h1>
         </div>
     </div>
-</div>
-
-{% endblock %}
+</div>-->

@@ -1,5 +1,5 @@
 """
-WSGI config for digginphilly project.
+WSGI config for pennmaps project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -14,6 +14,6 @@ from django.core.wsgi import get_wsgi_application
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "digginphilly.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pennmaps.settings")
 
 application = get_wsgi_application()

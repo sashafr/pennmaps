@@ -56,7 +56,7 @@ postgres=# create extension postgis;
 
 	ServerAdmin webmaster@localhost
 	DocumentRoot /project/home
-        WSGIScriptAlias / /project/home/digginphilly/wsgi.py
+        WSGIScriptAlias / /project/home/pennmaps/wsgi.py
 
         <Directory /project/home>
             AllowOverride all
@@ -93,7 +93,7 @@ postgres=# create extension postgis;
             Require all granted
         </Directory>
 
-        <Directory /project/home/digginphilly>
+        <Directory /project/home/pennmaps>
             <Files wsgi.py>
                 Require all granted
             </Files>
