@@ -102,7 +102,11 @@ def mediaGallery(request, tag=""):
 def archiveGallery(request, tag=""):
     if tag != "":
         items = MapItem.objects.filter(tags__slug = tag)
-        active_tag = Tags.objects.filter(slug = tag)
+        active_tag = Tag.objects.filter(slug = tag)
+        if active_tag:
+            active_tag = active_tag[0]
+        else:
+            active_tag = ""
     else:
         items = MapItem.objects.all()
         active_tag = ""

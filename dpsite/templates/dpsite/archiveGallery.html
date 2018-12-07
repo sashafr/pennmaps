@@ -10,7 +10,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
 
     <!-- Main -->
     <div id="main" class="row">
-        <div class="inner col-md-9">
+        <div class="inner {% if tag != '' %}col-md-9{% else %}col-md-12{% endif %}">
             <h1>&nbsp;</h1>
             <div class="thumbnails">
                 {% for item in items %}
@@ -20,18 +20,27 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
                         </div>
                         <div class="inner">
                             <h3>{{ item.title }}</h3>
-                            <p class="dp-fixed-text">{{ item.summary|safe }}</p>
+                            <div class="dp-fixed-text">
+                                {% if item.summary %}
+                                    {{ item.summary|safe }}
+                                {% else %}
+                                    <p>&nbsp;</p>
+                                {% endif %}
+                            </div>
                             <a href="{{ item.get_absolute_url }}" class="button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit">View</a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        <div class="col-md-3 dp-sidebar">
-            <h1>{{ tag.title }}</h1>
-            <p>{{ tag.description }}</p>
-            {{ sidebar_text|safe }}
-        </div>
+        {% if tag != "" %}
+            <div class="col-md-3 dp-sidebar">
+                <h1>{{ tag.title }}</h1>
+                {% if tag.description %}
+                    <div>{{ tag.description|safe }}</div>
+                {% endif %}
+            </div>
+        {% endif %}
     </div>
 </body>
 
