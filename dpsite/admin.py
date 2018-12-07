@@ -117,14 +117,33 @@ admin.site.register(WebSeries, WebSeriesAdmin)
 admin.site.register(PartOfCity)
 admin.site.register(TimePeriod)
 
-class PageTextAdminForm(forms.ModelForm):
-    page_text = forms.CharField(widget=CKEditorWidget())
+class HomeSlideAdminForm(forms.ModelForm):
+    slide_text = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
-        model = PageText
+        model = HomeSlide
         fields = '__all__'
 
-class PageTextAdmin(admin.ModelAdmin):
-    form = PageTextAdminForm
+class HomeSlideAdmin(admin.ModelAdmin):
+    form = HomeSlideAdminForm
 
-admin.site.register(PageText, PageTextAdmin)
+admin.site.register(HomeSlide, HomeSlideAdmin)
+
+class SiteConfigAdminForm(forms.ModelForm):
+    home_sidebar = forms.CharField(widget=CKEditorWidget())
+    aboutproject_main_text = forms.CharField(widget=CKEditorWidget())
+    aboutproject_sidebar_text = forms.CharField(widget=CKEditorWidget())
+    aboutproject_smsidebar_text = forms.CharField(widget=CKEditorWidget())
+    aboutteam_main_text = forms.CharField(widget=CKEditorWidget())
+    aboutteam_sidebar_text = forms.CharField(widget=CKEditorWidget())
+    aboutteam_smsidebar_text = forms.CharField(widget=CKEditorWidget())
+    webseries_sidebar = forms.CharField(widget=CKEditorWidget())
+
+    class Meta:
+        model = SiteConfig
+        fields = '__all__'
+
+class SiteConfigAdmin(admin.ModelAdmin):
+    form = SiteConfigAdminForm
+
+admin.site.register(SiteConfig, SiteConfigAdmin)

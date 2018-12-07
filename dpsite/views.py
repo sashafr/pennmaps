@@ -13,15 +13,13 @@ def base(request):
     return render(request, 'dpsite/base.html')
 
 def home(request):
-    slides = PageText.objects.filter(text_hook__startswith="home_slide")
-    home_sidebar = ""
-    gethometext = PageText.objects.filter(text_hook="home_sidebar")
-    if gethometext:
-        home_sidebar = gethometext[0].page_text
+    site = Site.objects.get_current()
+    configs = SiteConfig.objects.filter(site = site)
+    slides = HomeSlide.objects.all()
     fb = settings.FACEBOOK_URL
     insta = settings.INSTAGRAM_URL
     tw = settings.TWITTER_URL
-    context = {'slides': slides, 'home_sidebar': home_sidebar, 'fb_url': fb, 'insta_url': insta, 'tw_url': tw}
+    context = {'slides': slides, 'configs': configs[0], 'fb_url': fb, 'insta_url': insta, 'tw_url': tw}
     return render(request, 'dpsite/index.html', context)
 
 def aboutProject(request):

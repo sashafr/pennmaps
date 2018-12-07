@@ -3,6 +3,7 @@ from datetime import date
 import os
 from django.urls import reverse
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 class TagGroup(models.Model):
     title = models.CharField(max_length = 50)
@@ -297,15 +298,41 @@ class TimePeriod(models.Model):
     start_date = models.DateField('start date',default=date.today)
     end_date = models.DateField('end date',default=date.today)
 
-class PageText(models.Model):
-    text_hook = models.CharField('Text Hook', max_length = 50)
-    page_text = models.TextField('Page Text')
+class HomeSlide(models.Model):
+    slide_title = models.CharField(max_length = 50)
+    slide_text = models.TextField('Slide Text')
     related_image = models.ImageField('Related Image', blank=True, null=True)
+    order = models.IntegerField()
 
     def __str__(self):
-        return self.text_hook
+        return self.slide_title
 
     class Meta:
-        verbose_name = "Page Text"
-        verbose_name_plural = "Page Text"
-        ordering = ['text_hook']
+        verbose_name = "Home Slide"
+        verbose_name_plural = "Home Slides"
+        ordering = ['order']
+
+class SiteConfig(models.Model):
+    site_title = models.CharField('Site Title', max_length = 50)
+    site = models.OneToOneField(Site, on_delete=models.CASCADE, primary_key=True,)
+    favicon = models.ImageField('Favicon', blank=True, null=True)
+    home_sidebar = models.TextField('Home Sidebar', blank=True, null=True)
+    aboutproject_main_text = models.TextField('About Project Main Text', blank=True, null=True)
+    aboutproject_main_image = models.ImageField('About Project Main Image', blank=True, null=True)
+    aboutproject_sidebar_text = models.TextField('About Project Sidebar Text', blank=True, null=True)
+    aboutproject_sidebar_image = models.ImageField('About Project Sidebar Image', blank=True, null=True)
+    aboutproject_smsidebar_text = models.TextField('About Project Mini-Sidebar Text', blank=True, null=True)
+    aboutteam_main_text = models.TextField('About Team Main Text', blank=True, null=True)
+    aboutteam_main_image = models.ImageField('About Team Main Image', blank=True, null=True)
+    aboutteam_sidebar_text = models.TextField('About Team Sidebar Text', blank=True, null=True)
+    aboutteam_sidebar_image = models.ImageField('About Team Sidebar Image', blank=True, null=True)
+    aboutteam_smsidebar_text = models.TextField('About Team Mini-Sidebar Text', blank=True, null=True)
+    webseries_sidebar = models.TextField('Web Series Sidebar', blank=True, null=True)
+
+    def __str__(self):
+        return self.site_title
+
+    class Meta:
+        verbose_name = "Site Configuration"
+        verbose_name_plural = "Site Configuration"
+        ordering = ['site_title']
