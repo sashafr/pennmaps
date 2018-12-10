@@ -14,50 +14,39 @@ def base(request):
 
 def home(request):
     site = Site.objects.get_current()
-    configs = SiteConfig.objects.filter(site = site)
-    slides = HomeSlide.objects.all()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+    slides = HomeSlide.objects.all().order_by('order')
     fb = settings.FACEBOOK_URL
     insta = settings.INSTAGRAM_URL
     tw = settings.TWITTER_URL
-    context = {'slides': slides, 'configs': configs[0], 'fb_url': fb, 'insta_url': insta, 'tw_url': tw}
+    context = {'slides': slides, 'configs': config, 'fb_url': fb, 'insta_url': insta, 'tw_url': tw}
     return render(request, 'dpsite/index.html', context)
 
 def aboutProject(request):
-    getaboutproject = PageText.objects.filter(text_hook="aboutproject_main")
-    getaboutproject_sidebar = PageText.objects.filter(text_hook="aboutproject_sidebar")
-    getaboutproject_smsidebar = PageText.objects.filter(text_hook="aboutproject_smsidebar")
-    if getaboutproject:
-        aboutproject_main = getaboutproject[0]
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
     else:
-        aboutproject_main = ""
-    if getaboutproject_sidebar:
-        aboutproject_sidebar = getaboutproject_sidebar[0]
-    else:
-        aboutproject_sidebar = ""
-    if getaboutproject_smsidebar:
-        aboutproject_smsidebar = getaboutproject_smsidebar[0]
-    else:
-        aboutproject_smsidebar = ""
-    context = {'aboutproject_main': aboutproject_main, 'aboutproject_sidebar': aboutproject_sidebar, 'aboutproject_smsidebar': aboutproject_smsidebar}
+        config = ""
+    context = {'configs': config}
     return render(request, 'dpsite/aboutProject.html', context)
 
 def aboutTeam(request):
-    getaboutteam = PageText.objects.filter(text_hook="aboutteam_main")
-    getaboutteam_sidebar = PageText.objects.filter(text_hook="aboutteam_sidebar")
-    getaboutteam_smsidebar = PageText.objects.filter(text_hook="aboutteam_smsidebar")
-    if getaboutteam:
-        aboutteam_main = getaboutteam[0]
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
     else:
-        aboutteam_main = ""
-    if getaboutteam_sidebar:
-        aboutteam_sidebar = getaboutteam_sidebar[0]
-    else:
-        aboutteam_sidebar = ""
-    if getaboutteam_smsidebar:
-        aboutteam_smsidebar = getaboutteam_smsidebar[0]
-    else:
-        aboutteam_smsidebar = ""
-    context = {'aboutteam_main': aboutteam_main, 'aboutteam_sidebar': aboutteam_sidebar, 'aboutteam_smsidebar': aboutteam_smsidebar}
+        config = ""
+    context = {'configs': config}
     return render(request, 'dpsite/aboutTeam.html', context)
 
 def mapItem(request):

@@ -130,14 +130,15 @@ class HomeSlideAdmin(admin.ModelAdmin):
 admin.site.register(HomeSlide, HomeSlideAdmin)
 
 class SiteConfigAdminForm(forms.ModelForm):
-    home_sidebar = forms.CharField(widget=CKEditorWidget())
-    aboutproject_main_text = forms.CharField(widget=CKEditorWidget())
-    aboutproject_sidebar_text = forms.CharField(widget=CKEditorWidget())
-    aboutproject_smsidebar_text = forms.CharField(widget=CKEditorWidget())
-    aboutteam_main_text = forms.CharField(widget=CKEditorWidget())
-    aboutteam_sidebar_text = forms.CharField(widget=CKEditorWidget())
-    aboutteam_smsidebar_text = forms.CharField(widget=CKEditorWidget())
-    webseries_sidebar = forms.CharField(widget=CKEditorWidget())
+    home_sidebar = forms.CharField(label="Home Sidebar", widget=CKEditorWidget(), required = False)
+    aboutproject_main_text = forms.CharField(label="About Project Main Text", widget=CKEditorWidget(), required = False)
+    aboutproject_sidebar_text = forms.CharField(label="About Project Sidebar Text", widget=CKEditorWidget(), required = False)
+    aboutproject_smsidebar_text = forms.CharField(label="About Project Mini-Sidebar Text", widget=CKEditorWidget(), required = False)
+    aboutteam_main_text = forms.CharField(label="About Team Main Text", widget=CKEditorWidget(), required = False)
+    aboutteam_sidebar_text = forms.CharField(label="About Team Sidebar Text", widget=CKEditorWidget(), required = False)
+    aboutteam_smsidebar_text = forms.CharField(label="About Team Mini-Sidebar Text", widget=CKEditorWidget(), required = False)
+    webseries_sidebar = forms.CharField(label="Web Series Sidebar", widget=CKEditorWidget(), required = False)
+    footer = forms.CharField(label="Footer", widget=CKEditorWidget(), required = False)
 
     class Meta:
         model = SiteConfig

@@ -6,23 +6,22 @@
     <!-- Portfolio Item Row -->
     <div class="row">
         <div class="col-lg-7">
-            {% if aboutproject_main.related_image %}<div class="dp-about-fixed-image" style="background-image: url('{{ aboutproject_main.related_image.url }}')"></div>{% endif %}
+            {% if configs.aboutproject_main_image %}<div class="dp-about-fixed-image" style="background-image: url('{{ configs.aboutproject_main_image.url }}')"></div>{% endif %}
             <div class="dp-container">
-                {{ aboutproject_main.page_text|safe }}
+                {{ configs.aboutproject_main_text|safe }}
             </div>
         </div>
 
         <div class="col-lg-3">
-            {% if aboutproject_sidebar.related_image %}<div class="dp-sm-about-fixed-image" style="background-image: url('{{ aboutproject_sidebar.related_image.url }}')"></div>{% endif %}
+            {% if configs.aboutproject_sidebar_image %}<div class="dp-sm-about-fixed-image" style="background-image: url('{{ configs.aboutproject_sidebar_image.url }}')"></div>{% endif %}
             <div class="dp-container">
-                {{ aboutproject_sidebar.page_text|safe }}
+                {{ configs.aboutproject_sidebar_text|safe }}
             </div>
         </div>
 
         <div class="col-lg-2">
-            {% if aboutproject_smsidebar.related_image %}<div class="dp-sm-about-fixed-image" style="background-image: url('{{ aboutproject_smsidebar.related_image.url }}')"></div>{% endif %}
             <div class="dp-container">
-                {{ aboutproject_smsidebar.page_text|safe }}
+                {{ configs.aboutproject_smsidebar_text|safe }}
             </div>
         </div>
 
