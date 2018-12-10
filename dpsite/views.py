@@ -49,12 +49,6 @@ def aboutTeam(request):
     context = {'configs': config}
     return render(request, 'dpsite/aboutTeam.html', context)
 
-def mapItem(request):
-    mapItem = MapItem.objects.all()
-
-    context = {'map_items': mapItem}
-    return render(request, 'dpsite/Test.html', context)
-
 def webSeries(request):
     seasons = WebSeries.objects.values('season').distinct()
     series = {}
@@ -108,9 +102,17 @@ def archiveItem(request, id):
     return render(request, 'dpsite/mapItem.html', context)
 
 def map(request):
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/map.css" type="text/css">'
     mapItem = MapItem.objects.all()
     partOfCity = PartOfCity.objects.all()
-    context = {'map_items': mapItem, 'part_of_city': partOfCity}
+    context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles }
     return render(request, 'dpsite/Test.html',context)
 
 def archiveSearch(request):

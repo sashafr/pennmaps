@@ -138,6 +138,7 @@ class SiteConfigAdminForm(forms.ModelForm):
     aboutteam_sidebar_text = forms.CharField(label="About Team Sidebar Text", widget=CKEditorWidget(), required = False)
     aboutteam_smsidebar_text = forms.CharField(label="About Team Mini-Sidebar Text", widget=CKEditorWidget(), required = False)
     webseries_sidebar = forms.CharField(label="Web Series Sidebar", widget=CKEditorWidget(), required = False)
+    map_sidebar = forms.CharField(label="Map Sidebar", widget=CKEditorWidget(), required = False)
     footer = forms.CharField(label="Footer", widget=CKEditorWidget(), required = False)
 
     class Meta:

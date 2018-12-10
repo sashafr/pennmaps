@@ -1,0 +1,73 @@
+/**
+* Aligns all the content boxes to the right side
+*/
+#right-align {
+    width: 25%;
+    height: 75%;
+    right: 0rem;
+    z-index: 100;
+    background-color: rgba(47, 124, 147, 0);
+    overflow-x: hidden;
+    position: fixed;
+    transition: transform 0.2s;
+}
+
+/* Creates a single collapsible tag */
+.collapsible {
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    border-color:rgba(31, 81, 97,0.2);;
+    cursor: pointer;
+    width: 100%;
+    padding: 18px;
+    z-index:2;
+    text-align: center;
+    font-size: 1rem;
+    color: black;
+    background-color: rgba(47, 124, 147, 1);
+}
+
+.active,
+.collapsible:hover {
+    background-color: rgba(31, 81, 97,1);
+}
+
+/* Content inside collapsible */
+.content {
+    padding: 0px 8px;
+    max-height: 0;
+    overflow-x: hidden;
+    width: 100%
+    transition: max-height 1s ease-out;
+    background-color: rgba(47, 124, 147, 1);
+}
+
+
+.dp-hideMenu{
+    position: fixed;
+    top:14.75rem;
+    z-index: 100;
+    background: rgba(47, 124, 147, 1);
+    padding: 8px 8px;
+    transform: rotate(-90deg);
+    right: 24%;
+}
+
+.dp-hideMenu:hover {
+    text-decoration: none;
+    color: #bdbfc1;
+}
+
+.map-detail {
+    color: white;
+    max-height: 476px;
+}
+
+#content-description h1, #content-description h2, #content-description h3, #content-description h4, #content-description h5, #content-title {
+    color: black;
+}
+
+#content-description p {
+    font-size: 1rem;
+}

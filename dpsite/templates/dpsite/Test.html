@@ -1,247 +1,182 @@
-<html>
+{% extends "dpsite/base.html" %}
+{% load static %}
+{% block content %}
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-    /**
-    * Aligns all the content boxes to the right side
-    */
-    #right-align {
-        width: 25%;
-        height: 75%;
-        right: 0em;
-        z-index: 100;
-        background-color: rgba(47, 124, 147, 0);
-        overflow-x: hidden;
-        position: fixed;
-        transition: transform 0.2s;
-    }
+<!--Toggle Menu-->
+<a href="javascript:void(0);" class="dp-hideMenu open" id="hideButton">Menu<br><br></a>
 
-    /* Creates a single collapsible tag */
-    .collapsible {
-        position: relative;
-        border-style: solid;
-        border-width: 1px;
-        border-color:rgba(31, 81, 97,0.2);;
-        cursor: pointer;
-        width: 100%;
-        padding: 18px;
-        z-index:2;
-        text-align: center;
-        font-size: 1rem;
-        color: black;
-        background-color: rgba(47, 124, 147, 1);
-    }
-
-    .active,
-    .collapsible:hover {
-        background-color: rgba(31, 81, 97,1);
-    }
-
-    /* Content inside collapsible */
-    .content {
-        padding: 0px 8px;
-        max-height: 0;
-        overflow-x: hidden;
-        width: 100%
-        transition: max-height 1s ease-out;
-        background-color: rgba(47, 124, 147, 1);
-    }
-
-
-    .dp-hideMenu{
-        position: fixed;
-        right: -1rem;
-        top:14.75rem;
-        z-index: 100;
-        background: rgba(47, 124, 147, 1);
-        padding: 8px 8px;
-        transform: rotate(-90deg);
-    }
-    </style>
-</head>
-
-<body>
-    {% extends 'dpsite/base.html' %} {% load static %} {% block content %}
-    <!--Toggle Menu-->
-    <a href="javascript:void(0);" class="dp-hideMenu open" id="hideButton" style="right: 24%;">Menu<br><br></a>
-
-    <!--Sidebar content-->
-    <div style="z-index:2; position:fixed; background-color:black;opacity:0.4;width:25%;"></div>
-    <div id="right-align" style="right: 0rem;">
-        <div class="contentBox">
-            <button class="collapsible"><strong><div id="content-header">Details</div></strong></button>
-            <div class="content" style="color: white; max-height: 476px;">
-                <!--TITLE-->
-                <h5><strong style="color:black;"><div id="content-title">Explore Black Philadelphia from a spatial perspective.</div></strong></h5>
-                <!--DATES-->
-                <p><strong><div id="content-neighborhood-dates">
-                </div></strong></p>
-                <!--MEDIA-->
-                <div id="content-media"></div>
-                <!--DESCRIPTION-->
-                <p>
-                    <div id="content-description">
-                        Our immersive, interactive map aggregates two-dimensional and 360° representations of the people, places, and events that constitute Black Philly in the past and present.
-                        Navigate your way through the city using various map overlays and search filters, which allow you to filter map points according to Philadelphia neighborhoods, time periods, kinds of locations, and themes. You can also filter according to whether a site is “endangered,” or at risk of closure.
-                        If you hover over a map point, a small pop-up window will preview the location details. If you click on a map point, an information panel will emerge that provides a longer description of the site, information sources, and media related to the site, such as: images, audio, video, and 360° images and videos.
-                    </div>
-                </p>
-            </div>
-        </div>
-
-        <!--SEARCH BOX-->
-        <div class="input-group">
-            <button class="collapsible" id="search"><strong>Search</strong></button>
-            <div class="content" style="width: 100%;">
-                <div class="searchBox">
-                    <input type="text" id="query" placeholder="Search.." name="search">
-                    <span class="input-group-btn">
-                        <button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
-                    </span>
+<!--Sidebar content-->
+<div id="right-align">
+    <div class="contentBox">
+        <button class="collapsible"><strong><div id="content-header">Details</div></strong></button>
+        <div class="content map-detail">
+            <!--TITLE-->
+            <h5><strong><div id="content-title"></div></strong></h5>
+            <!--DATES-->
+            <p><strong><div id="content-neighborhood-dates">
+            </div></strong></p>
+            <!--MEDIA-->
+            <div id="content-media"></div>
+            <!--DESCRIPTION-->
+            <p>
+                <div id="content-description">
+                    {{ configs.map_sidebar|safe }}
                 </div>
-            </div>
+            </p>
         </div>
-
-        <!--CHECKBOXES-->
-        <button class="collapsible"><strong>Theme</strong></button>
-        <div class="content" style="color:white;">
-            <label class="check-container">Education
-                <input type="checkbox" name = "tag" value = "education">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Museum
-                <input type="checkbox" name = "tag" value = "museum">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Historic Firsts
-                <input type="checkbox" name = "tag" value = "Historic Firsts">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Religion
-                <input type="checkbox" name = "tag" value = "Religion">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Arts or Culture
-
-                <input type = "checkbox" name = "tag" value = "Arts or Culture">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Building
-                <input type="checkbox" name = "tag" value = "Building">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Murals
-                <input type="checkbox" name = "tag" value = "Murals">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Activism
-                <input type="checkbox" name = "tag" value = "Activism">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Oral History
-                <input type="checkbox" name = "tag" value = "Oral History">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Public Spaces
-                <input type="checkbox" name = "tag" value = "Public Spaces">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Monument
-                <input type="checkbox" name = "tag" value = "Monument">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Politics
-                <input type="checkbox" name = "tag" value = "Politics">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Historic Events
-                <input type="checkbox" name = "tag" value = "Historic Events">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Image
-                <input type="checkbox" name = "tag" value = "Image">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Video
-                <input type="checkbox" name = "tag" value = "Video">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Organization
-                <input type="checkbox" name = "tag" value = "Organization">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Events
-                <input type="checkbox" name = "tag" value = "Events">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">Historic Marker
-                <input type="checkbox" name = "tag" value = "Historic Marker">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">People
-                <input type="checkbox" name = "tag" value = "People">
-                <span class="checkmark"></span>
-            </label>
-
-            <label class="check-container">360 Video
-                <input type="checkbox" name = "tag" value = "360 Video">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-
-        <!--PART OF CITY-->
-        <div id="part-of-city">
-            <button class="collapsible"><strong>Part of City</strong></button>
-            <div class="content" style="color:white;">
-                <label class="radioContainer">North Philadelphia
-                    <input type="radio" name = "location" value = "North Philadelphia">
-                </label>
-                <br>
-                <label class="radioContainer">West Philadelphia
-                    <input type="radio" name = "location" value = "West Philadelphia">
-                </label>
-                <br>
-                <label class="radioContainer">South Philadelphia
-                    <input type="radio" name = "location" value = "South Philadelphia">
-                </label>
-            </div>
-        </div>
-        <!--TIME PERIOD SLIDER-->
-        <div id="time">
-            <button class="collapsible"><strong>Time Period</strong></button>
-            <div class="content" style="color:white;">
-                <div class="timeSelectionBox">
-
-                    <input type="text" id = "startTimeInput" placeholder="1960" name="search">
-                    <input type="text" id = "endTimeInput" placeholder="2000" name="search">
-                </div>
-                <!-- SLIDER
-                <div class="slidecontainer">
-                <input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
-                <p>Year: <span id="sliderValue"></span></p>
-            </div>
-        -->
     </div>
+
+    <!--SEARCH BOX-->
+    <div class="input-group">
+        <button class="collapsible" id="search"><strong>Search</strong></button>
+        <div class="content" style="width: 100%;">
+            <div class="searchBox">
+                <input type="text" id="query" placeholder="Search.." name="search">
+                <span class="input-group-btn">
+                    <button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!--CHECKBOXES-->
+    <button class="collapsible"><strong>Theme</strong></button>
+    <div class="content" style="color:white;">
+        <label class="check-container">Education
+            <input type="checkbox" name = "tag" value = "education">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Museum
+            <input type="checkbox" name = "tag" value = "museum">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Historic Firsts
+            <input type="checkbox" name = "tag" value = "Historic Firsts">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Religion
+            <input type="checkbox" name = "tag" value = "Religion">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Arts or Culture
+
+            <input type = "checkbox" name = "tag" value = "Arts or Culture">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Building
+            <input type="checkbox" name = "tag" value = "Building">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Murals
+            <input type="checkbox" name = "tag" value = "Murals">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Activism
+            <input type="checkbox" name = "tag" value = "Activism">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Oral History
+            <input type="checkbox" name = "tag" value = "Oral History">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Public Spaces
+            <input type="checkbox" name = "tag" value = "Public Spaces">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Monument
+            <input type="checkbox" name = "tag" value = "Monument">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Politics
+            <input type="checkbox" name = "tag" value = "Politics">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Historic Events
+            <input type="checkbox" name = "tag" value = "Historic Events">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Image
+            <input type="checkbox" name = "tag" value = "Image">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Video
+            <input type="checkbox" name = "tag" value = "Video">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Organization
+            <input type="checkbox" name = "tag" value = "Organization">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Events
+            <input type="checkbox" name = "tag" value = "Events">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">Historic Marker
+            <input type="checkbox" name = "tag" value = "Historic Marker">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">People
+            <input type="checkbox" name = "tag" value = "People">
+            <span class="checkmark"></span>
+        </label>
+
+        <label class="check-container">360 Video
+            <input type="checkbox" name = "tag" value = "360 Video">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+
+    <!--PART OF CITY-->
+    <div id="part-of-city">
+        <button class="collapsible"><strong>Part of City</strong></button>
+        <div class="content" style="color:white;">
+            <label class="radioContainer">North Philadelphia
+                <input type="radio" name = "location" value = "North Philadelphia">
+            </label>
+            <br>
+            <label class="radioContainer">West Philadelphia
+                <input type="radio" name = "location" value = "West Philadelphia">
+            </label>
+            <br>
+            <label class="radioContainer">South Philadelphia
+                <input type="radio" name = "location" value = "South Philadelphia">
+            </label>
+        </div>
+    </div>
+    <!--TIME PERIOD SLIDER-->
+    <div id="time">
+        <button class="collapsible"><strong>Time Period</strong></button>
+        <div class="content" style="color:white;">
+            <div class="timeSelectionBox">
+
+                <input type="text" id = "startTimeInput" placeholder="1960" name="search">
+                <input type="text" id = "endTimeInput" placeholder="2000" name="search">
+            </div>
+            <!-- SLIDER
+            <div class="slidecontainer">
+            <input type="range" min="1900" max="2018" value="2000" class="slider" id="sliderRange">
+            <p>Year: <span id="sliderValue"></span></p>
+        </div>
+    -->
+</div>
 </div>
 
 </div>
@@ -626,7 +561,5 @@ map.on('singleclick', function(evt) {
     });
 
     </script>
-    {% endblock %}
-</body>
 
-</html>
+    {% endblock %}

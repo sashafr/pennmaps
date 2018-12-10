@@ -328,7 +328,8 @@ class SiteConfig(models.Model):
     aboutteam_sidebar_image = models.ImageField('About Team Sidebar Image', blank=True, null=True)
     aboutteam_smsidebar_text = models.TextField('About Team Mini-Sidebar Text', blank=True, null=True)
     webseries_sidebar = models.TextField('Web Series Sidebar', blank=True, null=True)
-    footer = models.TextField('Footer', blank=True, null=True)    
+    map_sidebar = models.TextField('Map Sidebar', blank=True, null=True)
+    footer = models.TextField('Footer', blank=True, null=True)
 
     def __str__(self):
         return self.site_title
