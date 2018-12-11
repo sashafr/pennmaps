@@ -40,108 +40,16 @@
     </div>
 
     <!--CHECKBOXES-->
-    <button class="collapsible"><strong>Theme</strong></button>
-    <div class="content" style="color:white;">
-        <label class="check-container">Education
-            <input type="checkbox" name = "tag" value = "education">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Museum
-            <input type="checkbox" name = "tag" value = "museum">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Historic Firsts
-            <input type="checkbox" name = "tag" value = "Historic Firsts">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Religion
-            <input type="checkbox" name = "tag" value = "Religion">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Arts or Culture
-
-            <input type = "checkbox" name = "tag" value = "Arts or Culture">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Building
-            <input type="checkbox" name = "tag" value = "Building">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Murals
-            <input type="checkbox" name = "tag" value = "Murals">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Activism
-            <input type="checkbox" name = "tag" value = "Activism">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Oral History
-            <input type="checkbox" name = "tag" value = "Oral History">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Public Spaces
-            <input type="checkbox" name = "tag" value = "Public Spaces">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Monument
-            <input type="checkbox" name = "tag" value = "Monument">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Politics
-            <input type="checkbox" name = "tag" value = "Politics">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Historic Events
-            <input type="checkbox" name = "tag" value = "Historic Events">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Image
-            <input type="checkbox" name = "tag" value = "Image">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Video
-            <input type="checkbox" name = "tag" value = "Video">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Organization
-            <input type="checkbox" name = "tag" value = "Organization">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Events
-            <input type="checkbox" name = "tag" value = "Events">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">Historic Marker
-            <input type="checkbox" name = "tag" value = "Historic Marker">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">People
-            <input type="checkbox" name = "tag" value = "People">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="check-container">360 Video
-            <input type="checkbox" name = "tag" value = "360 Video">
-            <span class="checkmark"></span>
-        </label>
+    <button class="collapsible"><strong>Themes</strong></button>
+    <div class="content">
+        <div class="theme-search">
+            {% for tag in tags %}
+                <label class="check-container theme-title">{{ tag.title }}
+                    <input type="checkbox" name = "tag" value = "{{ tag.id }}">
+                    <span class="checkmark"></span>
+                </label>
+            {% endfor %}
+        </div>
     </div>
 
     <!--PART OF CITY-->

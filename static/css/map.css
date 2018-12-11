@@ -67,6 +67,15 @@
     width: 100%;
 }
 
+.theme-search {
+    color: white;
+    padding: 8px;
+}
+
+.theme-title {
+    padding-left: 12px;
+}
+
 #content-description h1, #content-description h2, #content-description h3, #content-description h4, #content-description h5, #content-title {
     color: black;
 }

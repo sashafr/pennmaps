@@ -112,7 +112,8 @@ def map(request):
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/map.css" type="text/css">'
     mapItem = MapItem.objects.all()
     partOfCity = PartOfCity.objects.all()
-    context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles }
+    tags = Tag.objects.filter(tag_group__title = "Themes")
+    context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles, 'tags': tags }
     return render(request, 'dpsite/Test.html',context)
 
 def archiveSearch(request):
