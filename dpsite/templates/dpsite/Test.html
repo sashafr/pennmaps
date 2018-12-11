@@ -9,7 +9,7 @@
 <div id="right-align">
     <div class="contentBox">
         <button class="collapsible"><strong><div id="content-header">Details</div></strong></button>
-        <div class="content map-detail">
+        <div class="content map-detail" style="max-height: 476px;">
             <!--TITLE-->
             <h5><strong><div id="content-title"></div></strong></h5>
             <!--DATES-->
@@ -29,11 +29,11 @@
     <!--SEARCH BOX-->
     <div class="input-group">
         <button class="collapsible" id="search"><strong>Search</strong></button>
-        <div class="content" style="width: 100%;">
-            <div class="searchBox">
-                <input type="text" id="query" placeholder="Search.." name="search">
+        <div class="content map-search">
+            <div class="searchBox form-inline">
+                <input class="form-control mr-sm-2" type="text" id="query" placeholder="Search..." name="search">
                 <span class="input-group-btn">
-                    <button type="submit" id ="submitButton"><i class="fa fa-search"></i></button>
+                    <button class="btn" type="submit" id ="submitButton">Search</button>
                 </span>
             </div>
         </div>

@@ -61,7 +61,10 @@
 
 .map-detail {
     color: white;
-    max-height: 476px;
+}
+
+.map-search {
+    width: 100%;
 }
 
 #content-description h1, #content-description h2, #content-description h3, #content-description h4, #content-description h5, #content-title {
@@ -70,4 +73,8 @@
 
 #content-description p {
     font-size: 1rem;
+}
+
+.searchBox {
+    padding: 5px;
 }
