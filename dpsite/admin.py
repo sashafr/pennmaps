@@ -114,7 +114,17 @@ class WebSeriesAdmin(admin.ModelAdmin):
 
 admin.site.register(WebSeries, WebSeriesAdmin)
 
-admin.site.register(PartOfCity)
+class PartOfCityAdminForm(forms.ModelForm):
+    area = geoforms.MultiPolygonField(widget = geoforms.OSMWidget(attrs={'default_lat': 39.9526, 'default_lon': -75.1652, 'default_zoom': 12 }), required=False)
+
+    class Meta:
+        model = PartOfCity
+        fields = '__all__'
+
+class PartOfCityAdmin(admin.ModelAdmin):
+    form = PartOfCityAdminForm
+
+admin.site.register(PartOfCity, PartOfCityAdmin)
 admin.site.register(TimePeriod)
 
 class HomeSlideAdminForm(forms.ModelForm):

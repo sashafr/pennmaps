@@ -55,20 +55,18 @@
     <!--PART OF CITY-->
     <div id="part-of-city">
         <button class="collapsible"><strong>Part of City</strong></button>
-        <div class="content" style="color:white;">
-            <label class="radioContainer">North Philadelphia
-                <input type="radio" name = "location" value = "North Philadelphia">
-            </label>
-            <br>
-            <label class="radioContainer">West Philadelphia
-                <input type="radio" name = "location" value = "West Philadelphia">
-            </label>
-            <br>
-            <label class="radioContainer">South Philadelphia
-                <input type="radio" name = "location" value = "South Philadelphia">
-            </label>
+        <div class="content">
+            <div class="theme-search">
+                {% for part in part_of_city %}
+                    <label class="check-container theme-title">{{ part.title }}
+                        <input type="checkbox" name = "tag" value = "{{ part.id }}">
+                        <span class="checkmark"></span>
+                    </label>
+                {% endfor %}
+            </div>
         </div>
     </div>
+
     <!--TIME PERIOD SLIDER-->
     <div id="time">
         <button class="collapsible"><strong>Time Period</strong></button>

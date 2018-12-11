@@ -293,6 +293,10 @@ class PartOfCity(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Part of City"
+        verbose_name_plural = "Parts of City"   
+
 class TimePeriod(models.Model):
     title = models.CharField(max_length = 50)
     start_date = models.DateField('start date',default=date.today)
