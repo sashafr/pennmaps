@@ -195,16 +195,16 @@
 
         for (var i = 0; i< locbox.length; i++) {
             if (locbox[i].checked == true) {
-                {% for mapItem in map_items%}
+                {% for mapItem in map_items %}
                     {% for poc in mapItem.get_pocs %}
                         if (locbox[i].value == {{ poc }}) {
                             // $('#logMsg').append('{{mapItem}}');
                             if (!mapItemList.includes('{{mapItem}}')) {
                                 mapItemList.push('{{mapItem}}');
                                 {% for point in mapItem.location1%}
-                                mapItemPointCoord0.push({{point.coords.0}});
-                                mapItemPointCoord1.push({{point.coords.1}});
-                                mapItemPointCoord2.push({{mapItem.id}});
+                                    mapItemPointCoord0.push({{point.coords.0}});
+                                    mapItemPointCoord1.push({{point.coords.1}});
+                                    mapItemPointCoord2.push({{mapItem.id}});
                                 {% endfor %}
                             }
                         }
@@ -212,23 +212,23 @@
                 {% endfor %}
             }
         }
-        /* SLIDER
-        var startDate = '{{mapItem.start_date}}';
-        var startYear = startDate.substr(startDate.indexOf(",")+1);
-        var endDate = '{{mapItem.end_date}}';
-        var endYear = endDate.substr(endDate.indexOf(",")+1);
-        if (startYear <= slider.value && slider.value >= endYear) {
-        if (!mapItemList.includes('{{mapItem}}')) {
-        mapItemList.push('{{mapItem}}');
-        {% for point in mapItem.location1%}
-        mapItemPointCoord0.push({{point.coords.0}});
-        mapItemPointCoord1.push({{point.coords.1}});
-        {% endfor %}
-    }
-}*/
-setMarkers();
 
-}
+        var startQuery = document.getElementById('startTimeInput');
+        var endQuery = document.getElementById('endTimeInput');
+        {% for mapItem in map_items %}
+            if (!({{ mapItem.start_date.year }} > endQuery.value) && !({{ mapItem.end_date.year }} < startQuery.value)) {
+                if (!mapItemList.includes('{{mapItem}}')) {
+                    mapItemList.push('{{mapItem}}');
+                    {% for point in mapItem.location1 %}
+                        mapItemPointCoord0.push({{ point.coords.0 }});
+                        mapItemPointCoord1.push({{ point.coords.1 }});
+                        mapItemPointCoord2.push({{mapItem.id}});
+                    {% endfor %}
+                }
+            }
+        {% endfor %}
+        setMarkers();
+    }
 
 // function for tag selection
 function selectTag() {
