@@ -113,7 +113,12 @@ def map(request):
     mapItem = MapItem.objects.all()
     partOfCity = PartOfCity.objects.all()
     tags = Tag.objects.filter(tag_group__title = "Themes")
-    context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles, 'tags': tags }
+    map_url = settings.MAP_XYZ_URL
+    center = settings.MAP_CENTER_COORDS
+    zoom = settings.MAP_ZOOM
+    min_zoom = settings.MAP_MIN_ZOOM
+    max_zoom = settings.MAP_MAX_ZOOM
+    context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles, 'tags': tags, 'map_url': map_url, 'zoom': zoom, 'center': center, 'min_zoom': min_zoom, 'max_zoom': max_zoom }
     return render(request, 'dpsite/Test.html',context)
 
 def archiveSearch(request):
