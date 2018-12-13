@@ -87,3 +87,12 @@
 .searchBox {
     padding: 5px;
 }
+
+.time-box {
+    margin: 8px;
+    width: 50px;
+}
+
+.timeSelectionBox {
+    text-align: center;
+}
