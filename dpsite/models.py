@@ -165,6 +165,14 @@ class MapItem(models.Model):
         else:
             return '<img class="media-full" src="' + settings.STATIC_URL + 'img/image_default.png" alt="' + self.title + '">'
 
+    def get_pocs(self):
+        pocs = PartOfCity.objects.all()
+        poc_ids = []
+        for poc in pocs:
+            if self.location1 and self.location1.intersects(poc.area):
+                poc_ids.append(poc.id)
+        return poc_ids
+
     def get_absolute_url(self):
         return reverse('archiveitem', kwargs={'id': self.id})
 
@@ -295,7 +303,7 @@ class PartOfCity(models.Model):
 
     class Meta:
         verbose_name = "Part of City"
-        verbose_name_plural = "Parts of City"   
+        verbose_name_plural = "Parts of City"
 
 class TimePeriod(models.Model):
     title = models.CharField(max_length = 50)
