@@ -140,13 +140,15 @@
         var mapItemList = [];
         mapItemPointCoord0 = [];
         mapItemPointCoord1 = [];
+        mapItemPointCoord2 = []
         {% for mapItem in map_items%}
         if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) || '{{mapItem.description}}'.includes(queryInput.value)) {
             $('#logMsg').append('{{mapItem.title}}');
             mapItemList.push('{{mapItem}}');
             {% for point in mapItem.location1%}
-            mapItemPointCoord0.push({{point.coords.0}});
-            mapItemPointCoord1.push({{point.coords.1}});
+                mapItemPointCoord0.push({{point.coords.0}});
+                mapItemPointCoord1.push({{point.coords.1}});
+                mapItemPointCoord2.push({{mapItem.id}});
             {% endfor %}
         }
         {% endfor %}
@@ -161,6 +163,7 @@
 
     var mapItemPointCoord0 = [];
     var mapItemPointCoord1 = [];
+    var mapItemPointCoord2 = [];
 
     /*FILTERS SEARCH*/
     function filter() {
@@ -170,17 +173,19 @@
         $('#logMsg').html("");
         mapItemPointCoord0 = [];
         mapItemPointCoord1 = [];
+        mapItemPointCoord2 = [];
 
         for (var i = 0; i < tagbox.length; i++) {
             if (tagbox[i].checked == true) {
                 {% for mapItem in map_items%}
                     {%for t in mapItem.tags.all%}
-                        if ('{{t}}'==tagbox[i].value) {
+                        if ('{{t.id}}'==tagbox[i].value) {
                             // $('#logMsg').append('{{mapItem}}');
                             mapItemList.push('{{mapItem}}');
                             {% for point in mapItem.location1%}
                                 mapItemPointCoord0.push({{point.coords.0}});
                                 mapItemPointCoord1.push({{point.coords.1}});
+                                mapItemPointCoord2.push({{mapItem.id}});
                             {% endfor %}
                         }
                     {% endfor %}
@@ -199,6 +204,7 @@
                                 {% for point in mapItem.location1%}
                                 mapItemPointCoord0.push({{point.coords.0}});
                                 mapItemPointCoord1.push({{point.coords.1}});
+                                mapItemPointCoord2.push({{mapItem.id}});
                                 {% endfor %}
                             }
                         }
@@ -311,6 +317,7 @@ function clearFilter() {
     {% for point in mapItem.location1%}
     mapItemPointCoord0.push({{point.coords.0}});
     mapItemPointCoord1.push({{point.coords.1}});
+    mapItemPointCoord2.push({{mapItem.id}});
     {% endfor %}
     {% endfor %}
     setMarkers();
@@ -377,23 +384,34 @@ function setMarkers() {
     });
 
     for (var i = 0; i < mapItemPointCoord0.length; i++) {
-        markers = new ol.layer.Vector({
-            source: new ol.source.Vector({
-                features: [
-                new ol.Feature({
-                    geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
-                })
-                ]
-            }),
-            style: new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: 5,
-                    fill: new ol.style.Fill({
-                        color: [255,74,0]
+        {% for mapItem in map_items %}
+            if (mapItemPointCoord2[i] == {{ mapItem.id }}) {
+                markers = new ol.layer.Vector({
+                    source: new ol.source.Vector({
+                        features: [
+                        new ol.Feature({
+                            title: "{{mapItem.title|safe|striptags}}",
+                            summary: '{{mapItem.summary|safe|striptags}}',
+                            description: '{{mapItem.description|safe|striptags}}',
+                            start: '{{mapItem.start_date|safe|striptags}}',
+                            end: '{{mapItem.end_date|safe|striptags}}',
+                            media: '{{mapItem.display_media_full|safe}}',
+                            link:"{% url 'archiveitem' mapItem.id %}",
+                            geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
+                        })
+                        ]
+                    }),
+                    style: new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: 5,
+                            fill: new ol.style.Fill({
+                                color: [255,74,0]
+                            })
+                        }),
                     })
-                }),
-            })
-        });
+                });
+            }
+        {% endfor %}
         map.addLayer(markers);
     }
 }
