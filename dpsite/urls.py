@@ -8,7 +8,7 @@ urlpatterns = [
     path('mediagallery/<slug:tag>/', views.mediaGallery),
     path('archive/search/', views.archiveSearch, name = 'search'),
     path('archive/gallery/', views.archiveGallery, name = 'archivegallery'),
-    path('archive/gallery/<slug:tag>/', views.archiveGallery),
+    path('archive/gallery/<slug:tag>/', views.archiveGallery, name = 'archivegallerytag'),
     path('archive/item/<int:id>/', views.archiveItem, name = 'archiveitem'),
     path('about/team/', views.aboutTeam, name = 'aboutteam'),
     path('about/project/', views.aboutProject, name = 'aboutproject'),

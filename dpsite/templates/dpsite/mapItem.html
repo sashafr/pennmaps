@@ -2,156 +2,157 @@
 {% load static %}
 {% block content %}
 
+<div class="container dp-container">
 
-    <div class="container dp-container">
-
-        <!-- Portfolio Item Row -->
-        <div class="row">
-            <div class="col-md-8">
-                <div class="dp-about-fixed-image" style="background-image: url('{{ mapItem.get_thm_url }}')"></div>
-                <h2 class="my-3">{{ mapItem.title }}</h2>
-                <h4>{{ mapItem.location_notes }}
-                    <br>{{ mapItem.start_date }} to {{ mapItem.end_date }}</h4>
-                    <p>{{ mapItem.description|safe }}</p>
-            </div>
-
-            <div class="col-md-4">
-                <!--Map goes here-->
-                <div style="height:350px; background-color:rgba(255,74,0,0.2);" id="map">
-                  <div id=#dp-info></div>
-                </div>
-                <h3 class="my-3">Information Sources</h3>
-                <p>{{ mapItem.info_sources|safe }}</p>
-                {% for tag in mapItem.tags.all %}
-                    {% if tag.description %}
-                        <h3>{{ tag.title }}</h3>
-                        <p>{{ tag.description|safe }}</p>
-                        <hr />
-                    {% endif %}
-                {% endfor %}
-            </div>
-
+    <!-- Portfolio Item Row -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="dp-about-fixed-image" style="background-image: url('{{ mapItem.get_thm_url }}')"></div>
+            <h2 class="my-3">{{ mapItem.title }}</h2>
+            <h4>{{ mapItem.location_notes }}
+                <br>{{ mapItem.start_date }} to {{ mapItem.end_date }}</h4>
+                <p>{{ mapItem.description|safe }}</p>
         </div>
-        <!-- /.row -->
 
-        <!-- Related Projects Row -->
-        <h3 class="my-4">Explore Related Items</h3>
-
-        <div class="row">
-            {% for mediafile in mapItem.media.all %}
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="dp-mi-fixed-image" style="background-image: url('{{ mediafile.get_thm_url }}')">
-                        {% if mediafile.get_main_url == "iframe" %}
-                            <a href="#inline-{{ mediafile.id }}" class="image fit" data-lity data-lity-desc="{{ mediafile.title }}"></a>
-                            <div id="inline-{{ mediafile.id }}" class="lity-hide">
-                                {{ mediafile.file_iframe|safe }}
-                            </div>
-                        {% else %}
-                            <a href="{{ mediafile.get_main_url }}" class="image fit" data-lity data-lity-desc="{{ mediafile.title }}"></a>
-                        {% endif %}
-                    </div>
-                    <div class="inner">
-                        {% if mediafile.get_main_url == "" %}
-                            <a class="button disabled fit mapitem-button">Coming Soon</a>
-                        {% elif mediafile.get_main_url == "iframe" %}
-                            <a href="#inline-{{ mediafile.id }}" class=" mapitem-button button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
-                        {% else %}
-                            <a href="{{ mediafile.get_main_url }}" class=" mapitem-button button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
-                        {% endif %}
-                    </div>
-                </div>
+        <div class="col-md-4">
+            <!--Map goes here-->
+            <div style="height:350px; background-color:rgba(255,74,0,0.2);" id="map">
+                <div id=#dp-info></div>
+            </div>
+            <h3 class="my-3">Information Sources</h3>
+            <p>{{ mapItem.info_sources|safe }}</p>
+            <hr />
+            {% for tag in mapItem.tags.all %}
+                {% if tag.description %}
+                    <h3><a href="{% url 'archivegallerytag' tag.slug %}">{{ tag.title }}</a></h3>
+                    <p>{{ tag.description|safe }}</p>
+                    <hr />
+                {% endif %}
             {% endfor %}
         </div>
-        <!-- /.row -->
 
     </div>
+    <!-- /.row -->
 
-    <!--Render the map on the page where the <div id="map"> is-->
-    <script>
+    <!-- Related Projects Row -->
+    <h3 class="my-4">Explore Related Items</h3>
+
+    <div class="row">
+        {% for mediafile in mapItem.media.all %}
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="dp-mi-fixed-image" style="background-image: url('{{ mediafile.get_thm_url }}')">
+                {% if mediafile.get_main_url == "iframe" %}
+                    <a href="#inline-{{ mediafile.id }}" class="image fit" data-lity data-lity-desc="{{ mediafile.title }}"></a>
+                    <div id="inline-{{ mediafile.id }}" class="lity-hide">
+                        {{ mediafile.file_iframe|safe }}
+                    </div>
+                {% else %}
+                    <a href="{{ mediafile.get_main_url }}" class="image fit" data-lity data-lity-desc="{{ mediafile.title }}"></a>
+                {% endif %}
+            </div>
+            <div class="inner">
+                {% if mediafile.get_main_url == "" %}
+                    <a class="button disabled fit mapitem-button">Coming Soon</a>
+                {% elif mediafile.get_main_url == "iframe" %}
+                    <a href="#inline-{{ mediafile.id }}" class=" mapitem-button button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
+                {% else %}
+                    <a href="{{ mediafile.get_main_url }}" class=" mapitem-button button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- /.row -->
+
+</div>
+
+<!--Render the map on the page where the <div id="map"> is-->
+<script>
 
     /**
-      * Tooltip
-      */
-      var info = $('#dp-info');
-      info.tooltip({
+    * Tooltip
+    */
+    var info = $('#dp-info');
+    info.tooltip({
         animation:false,
         trigger: 'manual',
-      });
+    });
 
-      var displayFeatureInfo = function(pixel){
+    var displayFeatureInfo = function(pixel){
         info.css({
-          left: pixel[0] + 'px',
-          top: (pixel[1]-15) +'px',
+            left: pixel[0] + 'px',
+            top: (pixel[1]-15) +'px',
         });
         var feature = map.forEachFeatureAtPixel(pixel,function(feature){
-          return feature;
+            return feature;
         });
         if (feature){
-          info.tooltip('show')
+            info.tooltip('show')
             .attr('data-original-title',feature.get('title'))
             .tooltip('show');
         }
         else{
-          info.tooltip('hide');
+            info.tooltip('hide');
         }
-      };
+    };
 
     /**
-		 * Create the map.
-		 */
-		var map = new ol.Map({
-			layers: [
-				new ol.layer.Tile({
-					source: new ol.source.XYZ({
-						url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
-					})
-				})
-			],
-			target: 'map',
-			view: new ol.View({
-				center: ol.proj.fromLonLat([{{mapItem.location1.0.coords.0}}, {{mapItem.location1.0.coords.1}}]),
-				zoom: 12,
-				minZoom: 10,
-				maxZoom: 19,
-			})
-		});
+    * Create the map.
+    */
+    var map = new ol.Map({
+        layers: [
+        new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: '{{ map_url }}'
+            })
+        })
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: ol.proj.fromLonLat([{{mapItem.location1.0.coords.0}}, {{mapItem.location1.0.coords.1}}]),
+            zoom: {{ zoom }},
+            minZoom: {{ min_zoom }},
+            maxZoom: {{ max_zoom }},
+        })
+    });
 
-		/**
-		 * Create a feature for each data point we have
-		 */
+    /**
+    * Create a feature for each data point we have
+    */
 
-		{%for point in mapItem.location1 %}
-		  var markers = new ol.layer.Vector({
-			    source: new ol.source.Vector({
-				  features: [
-					new ol.Feature({
-						title: "{{mapItem.title|safe|striptags}}",
-						geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
-					})
-				]
-			}),
-			style: new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: 5,
-                    fill: new ol.style.Fill({
-                        color: [255,74,0]
-                    })
-                }),
-			})
-		});
-		map.addLayer(markers);
-		{% endfor %}
+    {%for point in mapItem.location1 %}
+    var markers = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: [
+            new ol.Feature({
+                title: "{{mapItem.title|safe|striptags}}",
+                geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
+            })
+            ]
+        }),
+        style: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 5,
+                fill: new ol.style.Fill({
+                    color: [255,74,0]
+                })
+            }),
+        })
+    });
+    map.addLayer(markers);
+    {% endfor %}
 
-		/**
-		 * Add mouse handlers
-		 */
-		map.on('pointermove', function(evt) {
-			if (evt.dragging) {
-				info.tooltip('hide');
-				return;
-			}
-			displayFeatureInfo(map.getEventPixel(evt.originalEvent));
-			map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
-		});
-    </script>
+    /**
+    * Add mouse handlers
+    */
+    map.on('pointermove', function(evt) {
+        if (evt.dragging) {
+            info.tooltip('hide');
+            return;
+        }
+        displayFeatureInfo(map.getEventPixel(evt.originalEvent));
+        map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+    });
+</script>
+
 {% endblock %}

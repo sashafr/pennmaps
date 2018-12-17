@@ -97,8 +97,19 @@ def archiveGallery(request, tag=""):
 
 def archiveItem(request, id):
     mapItem = get_object_or_404(MapItem, pk = id)
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+    map_url = settings.MAP_XYZ_URL
+    zoom = settings.MAP_ZOOM
+    min_zoom = settings.MAP_MIN_ZOOM
+    max_zoom = settings.MAP_MAX_ZOOM
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
-    context = {'mapItem': mapItem, 'page_styles': page_styles }
+    context = {'mapItem': mapItem, 'page_styles': page_styles, 'configs': config, 'map_url': map_url, 'zoom': zoom, 'min_zoom': min_zoom, 'max_zoom': max_zoom }
     return render(request, 'dpsite/mapItem.html', context)
 
 def map(request):
