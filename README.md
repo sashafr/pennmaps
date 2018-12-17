@@ -41,7 +41,7 @@ postgres=# create extension postgis;
 ### Installing
 
 1. Clone this repo
-2. Make a copy of settings-dist.py and rename to settings.py, edit `DATABASES` and `ALLOWED_HOSTS`
+2. Make a copy of settings-dist.py and rename to settings.py, edit `DATABASES` and `ALLOWED_HOSTS` - _Note: Social Media settings and Map settings can be configured at the end of the settings.py file as well. Page text can be configured in the Site Configuration form in the admin dashboard. Content of the home page slides can also be configured from the admin dashboard._
 3. From the command line, run the following to generate a secret key and then edit settings.py to add your `SECRET_KEY`:
 ```
 >>> import random
@@ -108,14 +108,6 @@ postgres=# create extension postgis;
 10. `chmod -R g+w /project/home/media`
 11. Test your install by going to your IP address in a browser
 
-## Running the tests
-
-TODO
-
-## Deployment
-
-TODO
-
 ## Built With
 
 * [Python 3.5.2](https://www.python.org/)
@@ -126,11 +118,6 @@ TODO
 * [PostgreSQL 9.5.13](https://www.postgresql.org/)
 * [PostGIS 2.2.1](https://postgis.net/)
 
-
-## Contributing
-
-TODO
-
 ## Authors
 
 * **Sasha Renninger** - *Lead Developer* - [Github](https://github.com/sashafr)
@@ -138,38 +125,4 @@ TODO
 * **Irene Zhang** - *Assistant Django Developer*
 * **Nia Hammond** - *Web Design & Development*
 * **Miranda Mote** - *Graphic Design*
-## License
-
-TODO
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-
-```
-Color specifications for DP website:
--BR RED:
-rgb(255, 74, 0);
-#ff4a00;
--LT BLUE:
-rgb(47, 124, 147);
-#2f7c93;
--DK BLUE:
-rbg (0, 77, 100);
-#004d64;
--LT GREEN:
-rgb(202, 201, 157);
-#cac99d;
-```
-***
-###Irene's Notes:
--Time Period Slider has been commented out. If the text boxes are adequate, the slider content has been marked with "SLIDER", so you can search and delete all of it if you want.
--The map shows up in the box! Centered on the item!!! much wow.
--Menu toggle is on the side now!
--mapItem titles now linked to their mapItem pages!
-
--Main problems:
-  1. Somehow the mapitem image got messed up after a collectstatic call. The map shows up though.
-  2. some of the options under the mapItem articles don't really show up right anymore, but the buttons do...?
-  3. The search box doesn't quote fill up the whole content box, I couldn't really figure out how to stretch it out or center it?
-***
+* **Curie Shim** - *Assistant Django Developer*

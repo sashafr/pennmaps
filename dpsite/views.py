@@ -51,17 +51,21 @@ def aboutTeam(request):
     return render(request, 'dpsite/aboutTeam.html', context)
 
 def webSeries(request):
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+
     seasons = WebSeries.objects.values('season').distinct()
     series = {}
     for season_number in seasons:
         series[season_number['season']] = WebSeries.objects.filter(season=season_number['season'])
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
-    sidebar_text = ""
-    getsidebar = PageText.objects.filter(text_hook="webseries_sidebar")
-    if getsidebar:
-        sidebar_text = getsidebar[0].page_text
-    context = {'series': series, 'page_styles': page_styles, "sidebar_text": sidebar_text}
-    return render(request, 'dpsite/webseriestemp.html', context)
+    context = {'series': series, 'page_styles': page_styles, 'configs': config}
+    return render(request, 'dpsite/webseries.html', context)
 
 def mediaGallery(request, tag=""):
     site = Site.objects.get_current()
@@ -85,6 +89,14 @@ def mediaGallery(request, tag=""):
     return render(request, 'dpsite/mediaGallery.html', context)
 
 def archiveGallery(request, tag=""):
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+
     if tag != "":
         items = MapItem.objects.filter(tags__slug = tag)
         active_tag = Tag.objects.filter(slug = tag)
@@ -96,7 +108,7 @@ def archiveGallery(request, tag=""):
         items = MapItem.objects.all()
         active_tag = ""
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
-    context = {'items': items, 'tag': active_tag, 'page_styles': page_styles }
+    context = {'items': items, 'tag': active_tag, 'page_styles': page_styles, 'configs': config }
     return render(request, 'dpsite/archiveGallery.html', context)
 
 def archiveItem(request, id):
