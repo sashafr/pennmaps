@@ -119,7 +119,7 @@ def map(request):
     min_zoom = settings.MAP_MIN_ZOOM
     max_zoom = settings.MAP_MAX_ZOOM
     context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles, 'tags': tags, 'map_url': map_url, 'zoom': zoom, 'center': center, 'min_zoom': min_zoom, 'max_zoom': max_zoom }
-    return render(request, 'dpsite/Test.html',context)
+    return render(request, 'dpsite/map.html',context)
 
 def archiveSearch(request):
     item_name = request.GET.get('q', None)

@@ -2,93 +2,254 @@
 {% load static %}
 {% block content %}
 
-<div class="searchBox form-inline">
-    <input type="text" id = "query" placeholder="Search.." name="search">
-    <button type="submit" id = "submitButton"><i class="fa fa-search"></i></button>
-</div>
-    <span id='logMsg'><!-- Use this span for writing debug messages --></span>
+<!--Toggle Menu-->
+<a href="javascript:void(0);" class="dp-hideMenu open" id="hideButton">Menu<br><br></a>
 
-    <!-- Temporary modal button -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-        <<<<<<< HEAD
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background:rgba(47,124,147,0.85);" >
-                <div class="modal-body" style="color: white;">
-                    <h4 style="color: black;"><strong>Site of MOVE Bombing</strong></h4>
-                    <img class="img-responsive" src="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" style="width: 100%;">
-                    <p style="color:black;"><strong>Modal content will go here.</strong></p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                    <div class="embed-container">
-                        <iframe style="height: 50%; width: 100%;" src="https://www.youtube.com/embed/LAqG0wcTfV4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
+<!--Sidebar content-->
+<div id="right-align">
+    <div class="contentBox">
+        <button class="collapsible"><strong><div id="content-header">Details</div></strong></button>
+        <div class="content map-detail" style="max-height: 476px;">
+            <!--TITLE-->
+            <h5><strong><div id="content-title"></div></strong></h5>
+            <!--DATES-->
+            <p><strong><div id="content-neighborhood-dates">
+            </div></strong></p>
+            <!--MEDIA-->
+            <div id="content-media"></div>
+            <!--DESCRIPTION-->
+            <p>
+                <div id="content-description">
+                    {{ configs.map_sidebar|safe }}
                 </div>
-            </div> <!--end modal content-->
-        </div> <!--end modal dialogue-->
-    </div> <!--end modal-->
-
-    <div id="map" class="map"></div>
-    <div id="popup" class="ol-popup">
-        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-        <div id="popup-content"></div>
+            </p>
+        </div>
     </div>
 
+    <!--SEARCH BOX-->
+    <div class="input-group">
+        <button class="collapsible" id="search"><strong>Search</strong></button>
+        <div class="content map-search">
+            <div class="searchBox form-inline">
+                <input class="form-control mr-sm-2" type="text" id="query" placeholder="Search..." name="search">
+                <span class="input-group-btn">
+                    <button class="btn" type="submit" id ="submitButton">Search</button>
+                </span>
+            </div>
+        </div>
+    </div>
 
+    <!--CHECKBOXES-->
+    <button class="collapsible"><strong>Themes</strong></button>
+    <div class="content">
+        <button type="button" class="btn btn-primary" onclick="filter()">Filter</button>
+        <button type="button" class="btn btn-primary" onclick="clearFilter()">Clear Filter</button>
+        <div class="theme-search">
+            {% for tag in tags %}
+            <label class="check-container theme-title">{{ tag.title }}
+                <input type="checkbox" name = "tag" value = "{{ tag.id }}">
+                <span class="checkmark"></span>
+            </label>
+            {% endfor %}
+        </div>
+    </div>
 
-    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-    <script>
+    <!--PART OF CITY-->
+    <div id="part-of-city">
+        <button class="collapsible"><strong>Part of City</strong></button>
+        <div class="content">
+            <button type="button" class="btn btn-primary" onclick="filter()">Filter</button>
+            <button type="button" class="btn btn-primary" onclick="clearFilter()">Clear Filter</button>
+            <div class="theme-search">
+                {% for part in part_of_city %}
+                <label class="check-container theme-title">{{ part.title }}
+                    <input type="checkbox" name = "location" value = "{{ part.id }}">
+                    <span class="checkmark"></span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
+    <!--TIME PERIOD-->
+    <div id="time">
+        <button class="collapsible"><strong>Time Period</strong></button>
+        <div class="content" style="color:white;">
+            <div class="timeSelectionBox">
+                <input class="time-box" type="text" id = "startTimeInput" placeholder="1960" name="search">
+                to
+                <input class="time-box" type="text" id = "endTimeInput" placeholder="2000" name="search">
+                <button type="button" class="btn btn-primary" onclick="filter()">Filter</button>
+                <button type="button" class="btn btn-primary" onclick="clearFilter()">Clear Filter</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Use this span for writing debug messages -->
+<!-- <span id='logMsg'></span> -->
+
+<!--Map and popup items-->
+<div id="map">
+    <div id="dp-info"></div>
+</div>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+
+<script>
+    /*MENU CONTROLS*/
+    $('.dp-hideMenu').on('click',function(){
+        if($('.dp-hideMenu').hasClass('open')){
+            $(this).removeClass('open');
+            $(this).animate({
+                "right":"-1rem"
+            });
+            $('#right-align').animate({"right":"-25%"});
+        }
+        else{
+            $(this).addClass('open');
+            $(this).animate({
+                "right":"24%",
+            });
+            $('#right-align').animate({"right":"0rem"});
+        }
+    });
+
+    /*COLLAPSIBLE SIDEBAR ELEMENTS*/
+    var collapse = document.getElementsByClassName("collapsible");
+
+    for (var i = 0; i < collapse.length; i++) {
+        collapse[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+    /*END COLLAPSIBLE SIDEBAR*/
+
+    /*KEYWORD SEARCH*/
     const queryInput = document.getElementById('query');
     const searchButton = document.getElementById('submitButton');
+
     function search(query) {
-        // $('#logMsg').html(queryInput.value);
-        $('#logMsg').html("queryInput");
+        $('#logMsg').html(queryInput.value);
+        var mapItemList = [];
+        mapItemPointCoord0 = [];
+        mapItemPointCoord1 = [];
+        mapItemPointCoord2 = []
+        {% for mapItem in map_items%}
+        if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) || '{{mapItem.description}}'.includes(queryInput.value)) {
+            $('#logMsg').append('{{mapItem.title}}');
+            mapItemList.push('{{mapItem}}');
+            {% for point in mapItem.location1%}
+                mapItemPointCoord0.push({{point.coords.0}});
+                mapItemPointCoord1.push({{point.coords.1}});
+                mapItemPointCoord2.push({{mapItem.id}});
+            {% endfor %}
+        }
+        {% endfor %}
+        setMarkers();
     }
-    /**
-    * Handle click event.
-    * @param {Event} event The event.
-    */
+
     searchButton.onclick = function(event) {
+        $('#logMsg').html(queryInput.value);
         search(queryInput.value);
         event.preventDefault();
     };
 
-    /**
-    * Elements that make up the popup.
-    */
-    var container = document.getElementById('popup');
-    var content = document.getElementById('popup-content');
-    var closer = document.getElementById('popup-closer');
+    var mapItemPointCoord0 = [];
+    var mapItemPointCoord1 = [];
+    var mapItemPointCoord2 = [];
 
+    /*FILTERS SEARCH*/
+    function filter() {
+        var tagbox = document.getElementsByName("tag");
+        var locbox = document.getElementsByName("location");
+        var mapItemList = [];
+        $('#logMsg').html("");
+        mapItemPointCoord0 = [];
+        mapItemPointCoord1 = [];
+        mapItemPointCoord2 = [];
 
-    /**
-    * Add a click handler to hide the popup.
-    * @return {boolean} Don't follow the href.
-    */
-    closer.onclick = function() {
-        overlay.setPosition(undefined);
-        closer.blur();
-        return false;
-    };
-
-
-    /**
-    * Create an overlay to anchor the popup to the map.
-    */
-    var overlay = new ol.Overlay({
-        element: container,
-        autoPan: true,
-        autoPanAnimation: {
-            duration: 250
+        for (var i = 0; i < tagbox.length; i++) {
+            if (tagbox[i].checked == true) {
+                {% for mapItem in map_items%}
+                    {%for t in mapItem.tags.all%}
+                        if ('{{t.id}}'==tagbox[i].value) {
+                            // $('#logMsg').append('{{mapItem}}');
+                            mapItemList.push('{{mapItem}}');
+                            {% for point in mapItem.location1%}
+                                mapItemPointCoord0.push({{point.coords.0}});
+                                mapItemPointCoord1.push({{point.coords.1}});
+                                mapItemPointCoord2.push({{mapItem.id}});
+                            {% endfor %}
+                        }
+                    {% endfor %}
+                {% endfor %}
+            }
         }
-    });
+
+        for (var i = 0; i< locbox.length; i++) {
+            if (locbox[i].checked == true) {
+                {% for mapItem in map_items %}
+                    {% for poc in mapItem.get_pocs %}
+                        if (locbox[i].value == {{ poc }}) {
+                            // $('#logMsg').append('{{mapItem}}');
+                            if (!mapItemList.includes('{{mapItem}}')) {
+                                mapItemList.push('{{mapItem}}');
+                                {% for point in mapItem.location1%}
+                                    mapItemPointCoord0.push({{point.coords.0}});
+                                    mapItemPointCoord1.push({{point.coords.1}});
+                                    mapItemPointCoord2.push({{mapItem.id}});
+                                {% endfor %}
+                            }
+                        }
+                    {% endfor %}
+                {% endfor %}
+            }
+        }
+
+        var startQuery = document.getElementById('startTimeInput');
+        var endQuery = document.getElementById('endTimeInput');
+        {% for mapItem in map_items %}
+            if (!({{ mapItem.start_date.year }} > endQuery.value) && !({{ mapItem.end_date.year }} < startQuery.value)) {
+                if (!mapItemList.includes('{{mapItem}}')) {
+                    mapItemList.push('{{mapItem}}');
+                    {% for point in mapItem.location1 %}
+                        mapItemPointCoord0.push({{ point.coords.0 }});
+                        mapItemPointCoord1.push({{ point.coords.1 }});
+                        mapItemPointCoord2.push({{mapItem.id}});
+                    {% endfor %}
+                }
+            }
+        {% endfor %}
+        setMarkers();
+    }
+
+    function clearFilter() {
+        // $('#logMsg').html("clearFilter clicked");
+        var tagbox = document.getElementsByName("tag");
+        var locbox = document.getElementsByName("location");
+        for (var i = 0; i < tagbox.length; i++) {
+            tagbox[i].checked = false;
+        }
+        for (var i = 0; i < locbox.length; i++) {
+            locbox[i].checked = false;
+        }
+        {% for mapItem in map_items%}
+            {% for point in mapItem.location1%}
+                mapItemPointCoord0.push({{point.coords.0}});
+                mapItemPointCoord1.push({{point.coords.1}});
+                mapItemPointCoord2.push({{mapItem.id}});
+            {% endfor %}
+        {% endfor %}
+        setMarkers();
+
+    }
 
 
     /**
@@ -96,182 +257,156 @@
     */
     var map = new ol.Map({
         layers: [
-            new ol.layer.Tile({
-                source: new ol.source.XYZ({
-                    url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
-                    =======
-                    </button>
+        new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: "{{ map_url }}"
+            })
+        })
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: ol.proj.fromLonLat({{ center }}),
+            zoom: {{ zoom }},
+            minZoom: {{ min_zoom }},
+            maxZoom: {{ max_zoom }},
+        })
+    });
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="background:rgba(47,124,147,0.85);">
-                    <div class="modal-body" style="color: white;">
-                    <!--Title-->
-                    <h4 style="color: black;"><strong>Site of MOVE Bombing</strong></h4>
-                    <!--Image-->
-                    <img class="img-responsive" src="https://image.freepik.com/free-photo/cute-cat-picture_1122-449.jpg" style="width: 100%;">
-                    <!--Subtitle-->
-                    <p style="color:black;"><strong>Modal content will go here.</strong></p>
-                    <!--Content/Summary-->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                    <!--Media (if available)-->
-                    <div class="embed-container">
-                    <iframe style="height: 50%; width: 100%;" src="https://www.youtube.com/embed/LAqG0wcTfV4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
-                    </div>
-                    </div>
-                    <!--end modal content-->
-                    </div>
-                    <!--end modal dialogue-->
-                    </div>
-                    <!--end modal-->
-                    >>>>>>> 292ca76adc9aa97a7c52e5a363b22c5395e4e82f
-
-                    <div id="map" class="map"></div>
-                    <div id="popup" class="ol-popup">
-                    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-                    <div id="popup-content"></div>
-                    </div>
-
-                    <!--Import JS Stuff-->
-                    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-                    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
-                    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
-                    <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-                    <script>
-                    import Map from 'ol/Map.js';
-                    import Overlay from 'ol/Overlay.js';
-                    import View from 'ol/View.js';
-                    import {toStringHDMS} from 'ol/coordinate.js';
-                    import TileLayer from 'ol/layer/Tile.js';
-                    import {toLonLat} from 'ol/proj.js';
-                    import TileJSON from 'ol/source/TileJSON.js';
-                    /**
-                    * Elements that make up the popup.
-                    */
-                    var container = document.getElementById('popup');
-                    var content = document.getElementById('popup-content');
-                    var closer = document.getElementById('popup-closer');
-
-
-                    /**
-                    * Add a click handler to hide the popup.
-                    * @return {boolean} Don't follow the href.
-                    */
-                    closer.onclick = function() {
-                        overlay.setPosition(undefined);
-                        closer.blur();
-                        return false;
-                    };
-
-
-                    /**
-                    * Create an overlay to anchor the popup to the map.
-                    */
-                    var overlay = new ol.Overlay({
-                        element: container,
-                        autoPan: true,
-                        autoPanAnimation: {
-                            duration: 250
-                        }
-                    });
-
-
-                    /**
-                    * Create the map.
-                    */
-                    var map = new ol.Map({
-                        layers: [
-                            new ol.layer.Tile({
-                                source: new ol.source.XYZ({
-                                    url: 'https://api.mapbox.com/styles/v1/mirandamote/cjig4g2e218z52rqk7zaovjm9/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWlyYW5kYW1vdGUiLCJhIjoiY2ppZzRldDh0MGM2OTNxbzUwcnR5d3JyNiJ9.PVzMeD6NKLhtcIJFkv7ytQ'
-
-                                })
-                            })
-                        ],
-                        overlays: [overlay],
-                        target: 'map',
-                        view: new ol.View({
-                            center: ol.proj.fromLonLat([-75.165222, 39.952583]),
-                            zoom: 12
+    /**
+    * Create a feature for each data point we have (the first time)
+    */
+    {% for mapItem in map_items %}
+        {%for point in mapItem.location1 %}
+            var markers = new ol.layer.Vector({
+                source: new ol.source.Vector({
+                    features: [
+                    new ol.Feature({
+                        title: "{{mapItem.title|safe|striptags}}",
+                        summary: '{{mapItem.summary|safe|striptags}}',
+                        description: '{{mapItem.description|safe|striptags}}',
+                        start: '{{mapItem.start_date|safe|striptags}}',
+                        end: '{{mapItem.end_date|safe|striptags}}',
+                        media: '{{mapItem.display_media_full|safe}}',
+                        link:"{% url 'archiveitem' mapItem.id %}",
+                        geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
+                    })
+                    ]
+                }),
+                style: new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        fill: new ol.style.Fill({
+                            color: [255,74,0]
                         })
-                    });
+                    }),
+                })
+            });
+            map.addLayer(markers);
+        {% endfor %}
+    {% endfor %}
 
-                    // Create markers for each data point
-                    { %
-                        for mapItem in map_items %
-                    } { %
-                        for point in mapItem.location1 %
-                    }
+    function setMarkers() {
+        map.getLayers().forEach(function(Vectorlayer) {
+            if(Vectorlayer instanceof ol.layer.Vector)
+            Vectorlayer.getSource().clear();
+        });
 
-                    var markers = new ol.layer.Vector({
+        for (var i = 0; i < mapItemPointCoord0.length; i++) {
+            {% for mapItem in map_items %}
+                if (mapItemPointCoord2[i] == {{ mapItem.id }}) {
+                    markers = new ol.layer.Vector({
                         source: new ol.source.Vector({
                             features: [
-                                // create new point
-                                new ol.Feature({
-                                    geometry: new ol.geom.Point(ol.proj.fromLonLat([
-                                        {{point.coords .0}}, {{point.coords .1}}
-                                    ])
-                                ),
+                            new ol.Feature({
+                                title: "{{mapItem.title|safe|striptags}}",
+                                summary: '{{mapItem.summary|safe|striptags}}',
+                                description: '{{mapItem.description|safe|striptags}}',
+                                start: '{{mapItem.start_date|safe|striptags}}',
+                                end: '{{mapItem.end_date|safe|striptags}}',
+                                media: '{{mapItem.display_media_full|safe}}',
+                                link:"{% url 'archiveitem' mapItem.id %}",
+                                geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),
                             })
-                        ]
-                    }),
-
-                    // set marker style
-                    style: new ol.style.Style({
-                        image: new ol.style.Circle({
-                            radius: 5,
-                            fill: new ol.style.Fill({
-                                color: 'orange'
-                            })
+                            ]
                         }),
-                    })
-                });
-
-                // TODO: Create a popup for each data point --------------------------------------------------------
-
-                // Add marker layer
-                map.addLayer(markers); { % endfor %
-                } { % endfor %
+                        style: new ol.style.Style({
+                            image: new ol.style.Circle({
+                                radius: 5,
+                                fill: new ol.style.Fill({
+                                    color: [255,74,0]
+                                })
+                            }),
+                        })
+                    });
                 }
-                // -----------------TEST-----------------------------
-                var popup = new ol.Overlay({
-                    element: document.getElementById('exampleModal'),
-                    positioning: 'bottom-center',
-                })
-                /*Bootstrap Modal Pop Up Open Code*/
-                $(".modal-title").text("This is google map..");
-                $(".modal-body").text("Modal Body");
-                $("#myModal").modal('show');
+            {% endfor %}
+            map.addLayer(markers);
+        }
+    }
 
-                /**
-                * Add a click handler to the map to render the popup.
-                */
-                map.on('singleclick', function(evt) {
-                    if (evt.dragging) {
-                        $(element).popover('destroy');
-                        return;
-                    }
+    /**
+    * Tooltip
+    */
+    var info = $('#dp-info');
+    info.tooltip({
+        animation:false,
+        trigger: 'manual',
+    });
 
-                    var name = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
-                        return feature.get('name');
-                    })
+    var displayFeatureInfo = function(pixel){
+        info.css({
+            left: pixel[0] + 'px',
+            top: (pixel[1]-15) +'px',
+        });
+        var feature = map.forEachFeatureAtPixel(pixel,function(feature){
+            return feature;
+        });
+        if (feature){
+            info.tooltip('show')
+            .attr('data-original-title',feature.get('title'))
+            .tooltip('show');
+        }
+        else{
+            info.tooltip('hide');
+        }
+    };
 
-                    var coordinate = evt.coordinate;
-                    const coordinate = evt.coordinate;
-                    const hdms = toStringHDMS(toLonLat(coordinate));
+    /**
+    * Add a click handler to the map.
+    */
+    map.on('singleclick', function(evt) {
+        const feature = map.forEachFeatureAtPixel(evt.pixel,
+        function(feature) {
+            return feature;
+        });
+        // Handle click on map item
+        if (feature) {
+            // Handle content change
+            document.getElementById('content-title').innerHTML = "<a style='color:black !important;' href="+feature.get('link')+">"+feature.get('title')+"</a>";
+            if (feature.get('description') !=null){
+                document.getElementById('content-description').innerHTML =  feature.get('description');
+            }
+            document.getElementById('content-media').innerHTML = feature.get('media');
+            if (feature.get('media') !=null){
+                document.getElementById('content-media'){{mapItem.displayMedia}}
+            }
+        } else {
+            document.getElementById('content=title').innerHTML="";
+            document.getElementById('content-neighborhood-dates').innerHTML = "";
+            document.getElementById('content-description').innerHTML = "{% filter escapejs %}{{ configs.map_sidebar|safe }}{% endfilter %}";
+            document.getElementById('content-media').innerHTML="";
+        }
+    });
 
-                    content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
-                    '</code>';
-                    overlay.setPosition(coordinate);
-                    content.innerHTML = 'name';
-                    overlay.setPosition(coordinate);
-                });
-                map.on('pointermove', function(evt) {
-                    map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
-                });
-                </script>
+    map.on('pointermove', function(evt) {
+        if (evt.dragging) {
+            info.tooltip('hide');
+            return;
+        }
+        displayFeatureInfo(map.getEventPixel(evt.originalEvent));
+        map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
+    });
+
+</script>
 
 {% endblock %}
