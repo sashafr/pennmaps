@@ -7,6 +7,7 @@ from .models import *
 from django.template import Context, loader
 from django.conf import settings
 from .forms import SearchForm
+from django.db.models import Q
 
 # Request Functions
 def base(request):
@@ -79,7 +80,7 @@ def mediaGallery(request, tag=""):
     if tagobject:
         pagetag = tagobject[0]
     else:
-        pagetag = ""    
+        pagetag = ""
     context = {'media': media, 'page_styles': page_styles, 'tag': pagetag, 'configs': config }
     return render(request, 'dpsite/mediaGallery.html', context)
 
@@ -136,13 +137,22 @@ def map(request):
     return render(request, 'dpsite/map.html',context)
 
 def archiveSearch(request):
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+
     item_name = request.GET.get('q', None)
     form = SearchForm(request.POST)
     form.is_valid()
     item_tags = form.cleaned_data.get('tagfield')
-    context = {'form': form}
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+    context = {'form': form, 'configs': config, 'page_styles': page_styles }
     if item_name:
-        items = MapItem.objects.filter(description__icontains=item_name)
+        items = MapItem.objects.filter(Q(description__icontains=item_name) | Q(title__icontains=item_name) | Q(summary__icontains=item_name))
         context['items'] = items
         items_new = MapItem.objects.none()
         if item_tags:
@@ -151,6 +161,7 @@ def archiveSearch(request):
             context['items'] = items_new.distinct
         else:
             context['items'] = items.distinct
+        context['query'] = item_name
         return render(request,"dpsite/search.html", context)
     else:
         items = MapItem.objects.all()
@@ -161,4 +172,5 @@ def archiveSearch(request):
             context['items'] = items_new.distinct
         else:
             context['items'] = items.distinct
+        context['query'] = ''
         return render(request,"dpsite/search.html", context)

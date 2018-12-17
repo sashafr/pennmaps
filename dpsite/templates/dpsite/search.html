@@ -1,58 +1,58 @@
 {% extends "dpsite/base.html" %}
 {% load static %}
 {% block content %}
+<!--
+Full Motion by TEMPLATED
+templated.co @templatedco
+Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<body id="top">
 
-<div style="padding-left: 2%;">
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type='submit' value='submit'>
-</form>
-
-<script language="JavaScript">
-function toggle(source) {
-  checkboxes = document.getElementsByName('tagfield');
-  for(var i=0, n=checkboxes.length;i<n;i++) {
-    checkboxes[i].checked = source.checked;
-  }
-}
-</script>
-<input type="checkbox" onClick="toggle(this)" /> Toggle All<br/>
-</div>
-
-{% if items %}
-{% for each_item in items %}
-  <div>
-    <div style="padding-left: 5%;">
-    <div style="padding-right: 5%;">
-    <center>
-    <img src={{each_item.get_thm_url}} alt="" width="30%" overflow="hidden">
-    <a href={% url 'archiveitem' each_item.id %}><h1>{{each_item.title|safe}}</h1></a>
-    <p>{{each_item.description|safe}}</p>
-    </center>
-</div>
-</div>
-{% endfor %}
-{% else %}
-<div>
-  <div style="padding-left: 5%;">
-  <div style="padding-right: 5%;">
-    <div style="padding-top: 5%;">
-    <div style="padding-bottom: 5%;">
-  <center>
-  <h1>No results found, please try another query!</h1>
-  </center>
-</div>
-</div>
-</div>
-</div>
-{% endif %}
-{% endblock %}
-
-<!--<div class="container dp-container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Archive Search is currently under construction, check back soon!</h1>
+    <!-- Main -->
+    <div id="main" class="row">
+        <div class="inner col-md-9">
+            <h1>{% if query != "" %}Query: "{{ query }}"{% else %}&nbsp;{% endif %}</h1>
+            <div class="thumbnails">
+                {% for item in items %}
+                    <div class="box">
+                        <div class="dp-fixed-image" style="background-image: url('{{ item.get_thm_url }}')">
+                            <a href="{{ item.get_absolute_url }}" class="image fit" data-lity data-lity-desc="{{ item.title }}"></a>
+                        </div>
+                        <div class="inner">
+                            <h3>{{ item.title }}</h3>
+                            <div class="dp-fixed-text">
+                                {% if item.summary %}
+                                    {{ item.summary|safe }}
+                                {% else %}
+                                    <p>&nbsp;</p>
+                                {% endif %}
+                            </div>
+                            <a href="{{ item.get_absolute_url }}" class="button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit">View</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-3">
+            <form method="POST">
+                <div class="dpform">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
+                <input class='dpform-submit' type='submit' value='Filter'>
+                <button type="button" class="btn btn-primary" onclick="clearFilter()">Clear Filter</button>
+            </form>
         </div>
     </div>
-</div>-->
+</body>
+
+<script language="JavaScript">
+    function clearFilter() {
+        checkboxes = document.getElementsByName('tagfield');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            checkboxes[i].checked = false;
+        }
+    }
+</script>
+
+{% endblock content %}
