@@ -63,21 +63,24 @@ def webSeries(request):
     return render(request, 'dpsite/webseriestemp.html', context)
 
 def mediaGallery(request, tag=""):
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
     if tag != "":
         media = Media.objects.filter(tags__slug = tag)
     else:
         media = Media.objects.all()
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
-    sidebar_text = ""
-    getsidebar = PageText.objects.filter(text_hook="media_sidebar")
-    if getsidebar:
-        sidebar_text = getsidebar[0].page_text
     tagobject = Tag.objects.filter(slug = tag)
     if tagobject:
         pagetag = tagobject[0]
     else:
-        pagetag = ""
-    context = {'media': media, 'page_styles': page_styles, 'tag': pagetag, 'sidebar_text': sidebar_text }
+        pagetag = ""    
+    context = {'media': media, 'page_styles': page_styles, 'tag': pagetag, 'configs': config }
     return render(request, 'dpsite/mediaGallery.html', context)
 
 def archiveGallery(request, tag=""):
