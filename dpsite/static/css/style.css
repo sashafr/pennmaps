@@ -11,6 +11,7 @@
     --dp-dk-blue: #004d64;
     --dp-lt-green:  #cac99d;
     --dp-br-red: #ff4a00;
+    --dp-br-yellow: #fba813; /*i've replaced all #ff4a00 for #fba813*/
     /**/
     --blue: #007bff;
     --indigo: #6610f2;
@@ -160,7 +161,7 @@ a:visited {
 }
 
 .home-fixed-carousel-caption h1, .home-fixed-carousel-caption h2, .home-fixed-carousel-caption h3, .home-fixed-carousel-caption h4, .home-fixed-carousel-caption strong {
-    color: #ff4a00;
+    color: #fba813;
 }
 
 .home-carousel-caption strong, .home-fixed-carousel-caption strong {
@@ -497,7 +498,7 @@ span.carousel-item-overlay {
 }
 
 .dp-container a, .dp-container a:visited {
-    color: #ff4a00;
+    color: #fba813;
 }
 
 .dp-container li {
@@ -3123,8 +3124,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #ff4a00;
-    border-color: #ff4a00;
+    background-color: #fba813;
+    border-color: #fba813;
 }
 
 .btn-primary:hover {
