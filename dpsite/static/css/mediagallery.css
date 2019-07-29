@@ -874,7 +874,7 @@ button,
     -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    background-color: #ff4a00; /* regular */
+    background-color: #fba813; /* regular */ /* turned ff4a00 orange to E5911f dark yellow  */
     border-radius: 4px;
     border: 0;
     color: rgb(255, 255, 255) !important;
@@ -894,7 +894,7 @@ input[type="reset"]:hover,
 input[type="button"]:hover,
 button:hover,
 .button:hover {
-    background-color: #ff5c19; /* slightly lighter */
+    background-color: #eaa74b; /* slightly lighter eaa74b from ff5c19*/
 }
 
 input[type="submit"]:active,
@@ -902,7 +902,7 @@ input[type="reset"]:active,
 input[type="button"]:active,
 button:active,
 .button:active {
-    background-color: #cc3b00; /* slightly darker */
+    background-color: #e79c35; /* slightly darker e79c35 from cc3b00*/
 }
 
 input[type="submit"].icon,
@@ -968,7 +968,7 @@ input[type="reset"].style2,
 input[type="button"].style2,
 button.style2,
 .button.style2 {
-    background-color: #004D64; /* regular */
+    background-color: #5A6F8A; /* regular 004D64*/
 }
 
 input[type="submit"].style2:hover,
@@ -976,7 +976,7 @@ input[type="reset"].style2:hover,
 input[type="button"].style2:hover,
 button.style2:hover,
 .button.style2:hover {
-    background-color: #327083;
+    background-color: #48586e; /*327083 */
 }
 
 input[type="submit"].style2:active,
@@ -984,7 +984,7 @@ input[type="reset"].style2:active,
 input[type="button"].style2:active,
 button.style2:active,
 .button.style2:active {
-    background-color: #003d50;
+    background-color: #5A6F8A;
 }
 
 input[type="submit"].style3,
@@ -992,7 +992,7 @@ input[type="reset"].style3,
 input[type="button"].style3,
 button.style3,
 .button.style3 {
-    background-color: #CAC99D; /* regular */
+    background-color: #9c3c2d; /* #CAC99D; /* regular */
 }
 
 input[type="submit"].style3:hover,
@@ -1000,7 +1000,7 @@ input[type="reset"].style3:hover,
 input[type="button"].style3:hover,
 button.style3:hover,
 .button.style3:hover {
-    background-color: #d4d3b0;
+    background-color: #a54f42; /* #d4d3b0;*/
 }
 
 input[type="submit"].style3:active,
@@ -1008,14 +1008,14 @@ input[type="reset"].style3:active,
 input[type="button"].style3:active,
 button.style3:active,
 .button.style3:active {
-    background-color: #a1a07d;
+    background-color: #af6256; /* a1a07d; */
 }
 input[type="submit"].style4,
 input[type="reset"].style4,
 input[type="button"].style4,
 button.style4,
 .button.style4 {
-    background-color: #191919; /* regular */
+    background-color: #1f4643; /* regular */
 }
 
 input[type="submit"].style4:hover,
@@ -1023,7 +1023,7 @@ input[type="reset"].style4:hover,
 input[type="button"].style4:hover,
 button.style4:hover,
 .button.style4:hover {
-    background-color: #323232;
+    background-color: #355855;
 }
 
 input[type="submit"].style4:active,
@@ -1031,7 +1031,7 @@ input[type="reset"].style4:active,
 input[type="button"].style4:active,
 button.style4:active,
 .button.style4:active {
-    background-color: #000000;
+    background-color: #627d7b;
 }
 
 @media screen and (max-width: 480px) {

@@ -147,7 +147,7 @@ a:visited {
 
 .home-carousel-caption {
     top: 20px;
-    background-color: rgba(47, 124, 147, 0.8);
+    background-color: rgba(98, 125, 123, 1);
     bottom: unset !important;
 }
 
@@ -292,7 +292,7 @@ span.carousel-item-overlay {
     width: 1px;
     z-index: 100;
     color: #000;
-    background-color: rgba(255,74,0,1);
+    background-color: rgba(156, 60 , 45, 1);
 }
 
 .tooltip.in{
@@ -301,15 +301,15 @@ span.carousel-item-overlay {
 }
 
 .tooltip-inner{
-    border: 2px solid rgba(255,74,0,1);
-    background-color:  rgba(255,74,0,1);
+    border: 2px solid rgba(156, 60 , 45, 1);
+    background-color:  rgba(156, 60 , 45, 1);
     color: #fff;
     padding: 5px 5px;
 }
 
 .tooltip.top .tooltip-show{
-    border-top-color: rgba(255, 74,0,1);
-    background-color:rgba(255,74,0,1);
+    border-top-color: rgba(156, 60 , 45, 1);
+    background-color:rgba(156, 60 , 45, 1);
 }
 
 .tooltip.show{
@@ -639,7 +639,7 @@ sup {
 }
 
 a {
-    color: #007bff;
+    color: #5A6F8A;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
