@@ -107,7 +107,7 @@ a:visited {
 .tooltip{
     position: relative;
     display: inline-block;
-    background-color: rgb(255, 74, 0);
+    background-color: rgb(251, 168, 19, 1);
 }
 
 .tooltip .tooltiptext{
