@@ -197,6 +197,7 @@ a:visited {
 
 .nav-title {
     padding-left: 20px;
+    display: none;
 }
 
 /* Declare heights because of positioning of img element */
@@ -4648,6 +4649,7 @@ tbody.collapse.show {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 0.5rem rem;
+    background-image: url(static/img/logo_copy.png);
 }
 
 .navbar>.container,
@@ -6432,6 +6434,7 @@ button.bg-light:focus {
 
 .bg-dark {
     background-color: #2b2e34 !important;
+    background-image: url(/img/logo_copy.png);
 }
 
 a.bg-dark:hover,
@@ -9253,7 +9256,7 @@ a.text-dark:focus {
         padding: 0 15px;
     }
     .navbar {
-        display: none;
+
     }
     .badge {
         border: 1px solid #000;

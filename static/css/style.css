@@ -107,7 +107,7 @@ a:visited {
 .tooltip{
     position: relative;
     display: inline-block;
-    background-color: rgb(251, 168, 19, 1);
+    background-color: rgb(255, 74, 0);
 }
 
 .tooltip .tooltiptext{
@@ -197,6 +197,7 @@ a:visited {
 
 .nav-title {
     padding-left: 20px;
+    display: none;
 }
 
 /* Declare heights because of positioning of img element */
@@ -534,7 +535,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
+    color: #f8f8f8;
     text-align: left;
     background-color: #fff;
 }
@@ -639,7 +640,7 @@ sup {
 }
 
 a {
-    color: #007bff;
+    color: #5A6F8A;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
@@ -3130,13 +3131,13 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #0069d9;
-    border-color: #0062cc;
+    background-color: #8FA2A1;
+    border-color: #8FA2A1;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(31, 70, 67, 0);
 }
 
 .btn-primary.disabled,
@@ -4648,6 +4649,7 @@ tbody.collapse.show {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 0.5rem rem;
+    background-image: url(static/img/logo_copy.png);
 }
 
 .navbar>.container,
@@ -6431,7 +6433,8 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-    background-color: #2b2e34 !important;
+    background-color: #000000 !important;
+    background-image: url(/img/logo_copy.png);
 }
 
 a.bg-dark:hover,
@@ -8054,6 +8057,8 @@ button.bg-dark:focus {
     .mr-sm-2,
     .mx-sm-2 {
         margin-right: 0.5rem !important;
+        display:inline;
+        list-style: none;
     }
     .mb-sm-2,
     .my-sm-2 {
@@ -9253,7 +9258,7 @@ a.text-dark:focus {
         padding: 0 15px;
     }
     .navbar {
-        display: none;
+
     }
     .badge {
         border: 1px solid #000;
