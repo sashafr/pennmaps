@@ -469,12 +469,12 @@ span.carousel-item-overlay {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #1F4643;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #355855;
 }
 
 /* About Page Styles */
@@ -535,7 +535,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #f8f8f8;
+    color: #000000;
     text-align: left;
     background-color: #fff;
 }
@@ -2545,9 +2545,9 @@ pre code {
     font-size: 1rem;
     line-height: 1.5;
     color: #495057;
-    background-color: #fff;
+    background-color: #FFFFFF;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
+    border: 1px solid #303030;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -2987,7 +2987,7 @@ select.form-control-lg:not([size]):not([multiple]),
 }
 
 .form-inline {
-    display: -webkit-box;
+    display: none;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-orient: horizontal;

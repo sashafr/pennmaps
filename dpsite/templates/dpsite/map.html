@@ -31,7 +31,7 @@
         <button class="collapsible" id="search"><strong>Search</strong></button>
         <div class="content map-search">
             <div class="searchBox form-inline">
-                <input class="form-control mr-sm-2" type="text" id="query" placeholder="Search..." name="search">
+                <input class="form-control mr-sm-2" type="text" id="query" placeholder="Search" name="search">
                 <span class="input-group-btn">
                     <button class="btn" type="submit" id ="submitButton">Search</button>
                 </span>
@@ -42,8 +42,8 @@
     <!--CHECKBOXES-->
     <button class="collapsible"><strong>Themes</strong></button>
     <div class="content">
-        <button type="button" class="btn btn-primary" onclick="filter()">Filter</button>
-        <button type="button" class="btn btn-primary" onclick="clearFilter()">Clear Filter</button>
+        <button type="button" class="btn btn-primary" onclick="filter()">filter</button>
+        <button type="button" class="btn btn-primary" onclick="clearFilter()">clear filter</button>
         <div class="theme-search">
             {% for tag in tags %}
             <label class="check-container theme-title">{{ tag.title }}
@@ -58,8 +58,8 @@
     <div id="part-of-city">
         <button class="collapsible"><strong>Part of City</strong></button>
         <div class="content">
-            <button type="button" class="btn btn-primary" onclick="filter()">Filter</button>
-            <button type="button" class="btn btn-primary" onclick="clearFilter()">Clear Filter</button>
+            <button type="button" class="btn btn-primary" onclick="filter()">filter</button>
+            <button type="button" class="btn btn-primary" onclick="clearFilter()">clear filter</button>
             <div class="theme-search">
                 {% for part in part_of_city %}
                 <label class="check-container theme-title">{{ part.title }}
@@ -296,7 +296,7 @@
                     image: new ol.style.Circle({
                         radius: 5,
                         fill: new ol.style.Fill({
-                            color: [255,74,0]
+                            color: [156,60,45]
                         })
                     }),
                 })
@@ -333,7 +333,7 @@
                             image: new ol.style.Circle({
                                 radius: 5,
                                 fill: new ol.style.Fill({
-                                    color: [255,74,0]
+                                    color: [156,60,45]
                                 })
                             }),
                         })

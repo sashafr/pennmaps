@@ -35,8 +35,8 @@
                     <!--<img src="{% static 'img/logo_copy.png' %}" alt="header logo" height="70">-->
                     <!--<h1 class="nav-title">{{ configs.site_title }}</h1>-->
                 </a>
-                <form class="form-inline mt-2 mt-md-0 dpsearchbar" action="{% url 'search' %}" method="get" accept-charset="utf-8">
-                    <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search" aria-label="Search" display="inline">
+                <!--<form class="form-inline mt-2 mt-md-0 dpsearchbar" action="{% url 'search' %}" method="get" accept-charset="utf-8">
+                    <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search" aria-label="Search" display="inline">-->
                     <!--<button class="btn my-2 my-sm-0" type="submit">Search</button>-->
                 </form>
             </nav>
@@ -60,11 +60,14 @@
                             <a class="nav-link" href="{% url 'map' %}">MAP</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'webseries' %}">MIRCO-DOCS</a>
+                            <a class="nav-link" href="{% url 'archivegallerytag' 'oral-history' %}">COLLECTIONS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'archivegallerytag' 'oral-history' %}">ORAL HISTORIES</a>
+                            <a class="nav-link" href="{% url 'webseries' %}">FILM</a>
                         </li>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="{% url 'archivegallerytag' 'oral-history' %}">COLLECTIONS</a>
+                        </li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'mediagallerytag' '3d-gallery' %}">3D ARCHIVE</a>
                         </li>
