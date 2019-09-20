@@ -17,7 +17,7 @@ class TagGroup(models.Model):
 class Tag(models.Model):
     title = models.CharField(max_length = 50)
     description = models.TextField(blank=True, null=True)
-    slug = models.SlugField()
+    slug = models.SlugField(blank=True, null=True)
     tag_group = models.ForeignKey('TagGroup', on_delete=models.CASCADE, blank=True, null=True)
     def __str__(self):
         return self.title
