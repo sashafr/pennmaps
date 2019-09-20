@@ -64,6 +64,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
     # "django.contrib.humanize", # Handy template tags
     "django.contrib.admin",
+    "django.contrib.gis"
 ]
 THIRD_PARTY_APPS = [
     "crispy_forms",
@@ -72,7 +73,8 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "rest_framework",
     "django_celery_beat",
-    "ckeditor"
+    "ckeditor",
+    "import_export"
 ]
 
 LOCAL_APPS = [
