@@ -4,6 +4,18 @@ The Mapping Black Philadelphia project is a large and ambitious project to docum
 
 ## Getting Started
 
+These instructions are a preliminary attempt at describing how to get up and running on your local machine using Docker. 
+If you do not want to use Docker, see the non-docker installation instructions below. But they probably don't work any longer.
+
+Install Docker
+Install Docker Compose
+Run `docker-compose -f local.yml build`
+Run `docker-compose -f local.yml run --rm django python manage.py migrate`
+Run `docker-compose -f local.yml run --rm django python manage.py createsuperuser`
+
+
+## Old Setup Instructions
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
