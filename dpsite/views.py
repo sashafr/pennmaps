@@ -15,6 +15,8 @@ def base(request):
 
 def home(request):
     site = Site.objects.get_current()
+    print(site)
+    print(request.get_host())
     if site:
         configs = SiteConfig.objects.filter(site = site)
     if configs:

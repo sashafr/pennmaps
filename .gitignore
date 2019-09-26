@@ -269,6 +269,7 @@ tags
 ### Project template
 
 pennmapsbase/media/
+media
 
 .pytest_cache/
 

@@ -303,7 +303,7 @@ FACEBOOK_URL = ''
 INSTAGRAM_URL = ''
 TWITTER_URL = ''
 
-MAP_XYZ_URL = ''
+MAP_XYZ_URL = 'https://api.mapbox.com/styles/v1/garconj/cjyn9mrwd3itv1cpj8benn47s/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZ2FyY29uaiIsImEiOiJjanlranQ2dHAwZjhjM2dwcXB1NTc1NnVtIn0.gVufMUpUWJt4RICnR0YRyQ'
 MAP_CENTER_COORDS = [-75.165222, 39.952583]
 MAP_ZOOM = 12
 MAP_MIN_ZOOM = 10

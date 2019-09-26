@@ -76,7 +76,8 @@ RUN cd /usr/src/postgis \
         protobuf-c \
     && cd / \
     && rm -rf /usr/src/postgis \
-    && apk del .fetch-deps .build-deps .build-deps-testing
+    && apk del .fetch-deps .build-deps .build-deps-testing \
+    && ln -s /usr/lib/libproj.so.15 /usr/lib/libproj.so
 #  && apk del .fetch-deps .build-deps .build-deps-testing
 # END POSTGIS Changes
 
