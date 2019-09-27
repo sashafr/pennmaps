@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 
 class TagGroup(models.Model):
-    title = models.CharField(max_length = 50)
+    title = models.CharField(max_length=50)
     def __str__(self):
         return self.title
 
@@ -15,7 +15,7 @@ class TagGroup(models.Model):
         verbose_name_plural = "Tag Groups"
 
 class Tag(models.Model):
-    title = models.CharField(max_length = 50)
+    title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(blank=True, null=True)
     tag_group = models.ForeignKey('TagGroup', on_delete=models.CASCADE, blank=True, null=True)
@@ -26,7 +26,7 @@ class Layer(models.Model):
     xyz = models.URLField(max_length=200)
 
 class OverlayGroup(models.Model):
-    title = models.CharField(max_length = 50)
+    title = models.CharField(max_length=50)
     layer = models.ManyToManyField('Layer', through='OverlayGroupLayer')
 
 class OverlayGroupLayer(models.Model):
@@ -35,17 +35,18 @@ class OverlayGroupLayer(models.Model):
     order = models.IntegerField()
 
 class Media(models.Model):
-    title = models.CharField(max_length = 200)
-    description = models.CharField(max_length = 200, blank=True, null=True)
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True, null=True)
+    featured = models.BooleanField(default=False)
     credits = models.CharField(max_length=50, blank=True, null=True)
     date_created = models.DateField('Uploaded', default=date.today)
     file_upload = models.FileField('File Upload', blank=True, null=True)
     file_url = models.URLField('File URL', max_length=200, blank=True, null=True)
-    file_iframe = models.CharField('File <iframe>', max_length = 1000, help_text="Please paste in an &lt;iframe&gt; to embed external content. Content must begin with &lt;iframe&gt; and end with &lt;/iframe&gt; ", blank=True, null=True)
+    file_iframe = models.CharField('File <iframe>', max_length=1000, help_text="Please paste in an &lt;iframe&gt; to embed external content. Content must begin with &lt;iframe&gt; and end with &lt;/iframe&gt; ", blank=True, null=True)
     tags = models.ManyToManyField('Tag', blank=True)
     start_date = models.DateField('Start Date', blank=True, null=True)
     end_date = models.DateField('End Date', blank=True, null=True)
-    media_sources = models.CharField('Sources', max_length = 500, blank=True, null=True)
+    media_sources = models.CharField('Sources', max_length=500, blank=True, null=True)
     thumbnail = models.FileField('Thumbnail', blank=True, null=True, help_text="If you are uploading a non-image file or using the File URL or File IFrame options, its recommended you select a thumbnail. If you do not, a default image will be used.")
 
     def get_main_url(self):
