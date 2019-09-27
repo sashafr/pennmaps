@@ -37,7 +37,6 @@ class OverlayGroupLayer(models.Model):
 class Media(models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200, blank=True, null=True)
-    featured = models.BooleanField(default=False)
     credits = models.CharField(max_length=50, blank=True, null=True)
     date_created = models.DateField('Uploaded', default=date.today)
     file_upload = models.FileField('File Upload', blank=True, null=True)
@@ -133,6 +132,7 @@ class Media(models.Model):
 
 class MapItem(models.Model):
     title = models.CharField(max_length = 50)
+    featured = models.BooleanField(default=False)
     summary = models.CharField(max_length = 200, blank=True, null=True)
     description = models.CharField(max_length = 5000, blank=True, null=True)
     info_sources = models.CharField(max_length = 2000, blank=True, null=True)
