@@ -188,3 +188,7 @@ def archiveSearch(request):
             context['items'] = items.distinct
         context['query'] = ''
         return render(request,"dpsite/search.html", context)
+
+def featured(request):
+    context = {}
+    return render(request, 'dpsite/featured.html', context)
