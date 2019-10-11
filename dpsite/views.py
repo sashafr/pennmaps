@@ -189,6 +189,23 @@ def archiveSearch(request):
         context['query'] = ''
         return render(request,"dpsite/search.html", context)
 
+
 def featured(request):
-    context = {}
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+
+
+    featuredmedia = MapItem.objects.filter(featured=True)
+    context = {
+        'page_styles': page_styles,
+        'config': config,
+        'featuredmedia': featuredmedia,
+    }
     return render(request, 'dpsite/featured.html', context)

@@ -8,7 +8,7 @@
 <!--Sidebar content-->
 <div id="right-align">
     <div class="contentBox">
-        <button class="collapsible"><strong><div id="content-header">Details</div></strong></button>
+        <!-- <button class="collapsible"><strong><div id="content-header">Details</div></strong></button> -->
         <div class="content map-detail" style="max-height: 476px;">
             <!--TITLE-->
             <h5><strong><div id="content-title"></div></strong></h5>
@@ -27,7 +27,7 @@
     </div>
 
     <!--SEARCH BOX-->
-    <div class="input-group">
+    <!-- <div class="input-group">
         <button class="collapsible" id="search"><strong>Search</strong></button>
         <div class="content map-search">
             <div class="searchBox form-inline">
@@ -37,10 +37,10 @@
                 </span>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!--CHECKBOXES-->
-    <button class="collapsible"><strong>Themes</strong></button>
+    <!-- <button class="collapsible"><strong>Themes</strong></button>
     <div class="content">
         <button type="button" class="btn btn-primary" onclick="filter()">filter</button>
         <button type="button" class="btn btn-primary" onclick="clearFilter()">clear filter</button>
@@ -52,10 +52,10 @@
             </label>
             {% endfor %}
         </div>
-    </div>
+    </div> -->
 
     <!--PART OF CITY-->
-    <div id="part-of-city">
+    <!-- <div id="part-of-city">
         <button class="collapsible"><strong>Part of City</strong></button>
         <div class="content">
             <button type="button" class="btn btn-primary" onclick="filter()">filter</button>
@@ -69,10 +69,10 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!--TIME PERIOD-->
-    <div id="time">
+    <!-- <div id="time">
         <button class="collapsible"><strong>Time Period</strong></button>
         <div class="content" style="color:white;">
             <div class="timeSelectionBox">
@@ -83,7 +83,7 @@
                 <button type="button" class="btn btn-primary" onclick="clearFilter()">Clear Filter</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- Use this span for writing debug messages -->
@@ -132,8 +132,9 @@
     /*END COLLAPSIBLE SIDEBAR*/
 
     /*KEYWORD SEARCH*/
-    const queryInput = document.getElementById('query');
-    const searchButton = document.getElementById('submitButton');
+    
+    const queryInput = document.getElementById('query') || {};
+    const searchButton = document.getElementById('submitButton') || {};
 
     function search(query) {
         $('#logMsg').html(queryInput.value);
@@ -213,8 +214,8 @@
             }
         }
 
-        var startQuery = document.getElementById('startTimeInput');
-        var endQuery = document.getElementById('endTimeInput');
+        var startQuery = document.getElementById('startTimeInput') || {};
+        var endQuery = document.getElementById('endTimeInput') || {};
         {% for mapItem in map_items %}
             if (!({{ mapItem.start_date.year }} > endQuery.value) && !({{ mapItem.end_date.year }} < startQuery.value)) {
                 if (!mapItemList.includes('{{mapItem}}')) {
