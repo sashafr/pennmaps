@@ -20,6 +20,15 @@ RUN apk update \
   # CFFI dependencies
   && apk add libffi-dev py-cffi
 
+## ADD PostGIS & dpendencies here                                               
+RUN apk add --no-cache --virtual .build-deps-testing \                          
+     --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \           
+     gdal-dev \                                                                 
+     geos-dev \                                                                 
+     proj-dev \                                                                 
+     postgis-dev \                                                              
+     protobuf-c-dev   
+
 RUN addgroup -S django \
     && adduser -S -G django django
 

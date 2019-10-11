@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.6-alpine3.9
 
 ENV PYTHONUNBUFFERED 1
 
@@ -15,71 +15,14 @@ RUN apk update \
   # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
   && apk add postgresql-client
 
-# ADD PostGIS here
-# POSTGIS dependencies
-ENV POSTGIS_VERSION 2.5.3
-ENV POSTGIS_SHA256 402323c83d97f3859bc9083345dd687f933c261efe0830e1262c20c12671f794
-
-RUN set -ex \
-    \
-    && apk add --no-cache --virtual .fetch-deps \
-        ca-certificates \
-        openssl \
-        tar \
-    \
-    && wget -O postgis.tar.gz "https://github.com/postgis/postgis/archive/$POSTGIS_VERSION.tar.gz" \
-    && echo "$POSTGIS_SHA256 *postgis.tar.gz" | sha256sum -c - \
-    && mkdir -p /usr/src/postgis \
-    && tar \
-        --extract \
-        --file postgis.tar.gz \
-        --directory /usr/src/postgis \
-        --strip-components 1 \
-    && rm postgis.tar.gz \
-    \
-    && apk add --no-cache --virtual .build-deps \
-        autoconf \
-        automake \
-        g++ \
-        json-c-dev \
-        libtool \
-        libxml2-dev \
-        make \
-        perl \
-    \
-    # add libcrypto from (edge:main) for gdal-2.3.0
-    && apk add --no-cache --virtual .crypto-rundeps \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-        libressl2.7-libcrypto \
-    && apk add --no-cache --virtual .build-deps-testing \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-        gdal-dev \
-        geos-dev \
-        proj-dev \
-        protobuf-c-dev
-
-RUN cd /usr/src/postgis \
-    && ./autogen.sh \
-# configure options taken from:
-# https://anonscm.debian.org/cgit/pkg-grass/postgis.git/tree/debian/rules?h=jessie
-    && ./configure \
-#       --with-gui \
-    && make \
-    && make install \
-    && apk add --no-cache --virtual .postgis-rundeps \
-        json-c \
-    && apk add --no-cache --virtual .postgis-rundeps-testing \
-        --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-        geos \
-        gdal \
-        proj \
-        protobuf-c \
-    && cd / \
-    && rm -rf /usr/src/postgis \
-    && apk del .fetch-deps .build-deps .build-deps-testing \
-    && ln -s /usr/lib/libproj.so.15 /usr/lib/libproj.so
-#  && apk del .fetch-deps .build-deps .build-deps-testing
-# END POSTGIS Changes
+## ADD PostGIS & dpendencies here
+RUN apk add --no-cache --virtual .build-deps-testing \
+     --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+     gdal-dev \
+     geos-dev \
+     proj-dev \
+     postgis-dev \
+     protobuf-c-dev
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
