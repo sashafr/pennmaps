@@ -293,7 +293,7 @@ SOCIALACCOUNT_ADAPTER = "pennmapsbase.users.adapters.SocialAccountAdapter"
 # Your stuff...
 # ------------------------------------------------------------------------------
 
-GDAL_LIBRARY_PATH = "/usr/lib/libgdal.so.20"
+GDAL_LIBRARY_PATH = "/usr/local/lib/libgdal.so"
 GEOS_LIBRARY_PATH = "/usr/lib/libgeos_c.so.1"
 
 MEDIA_ROOT = os.path.join(ROOT_DIR, 'media/')

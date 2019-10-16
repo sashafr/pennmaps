@@ -16,13 +16,110 @@ RUN apk update \
   && apk add postgresql-client
 
 ## ADD PostGIS & dpendencies here
-RUN apk add --no-cache --virtual .build-deps-testing \
-     --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-     gdal-dev \
-     geos-dev \
-     proj-dev \
-     postgis-dev \
-     protobuf-c-dev
+
+ENV GDAL_VERSION 3.0.1
+ENV GDAL_MD5 2b397c041e6b0b10ec7c49fd76e9fa99
+ENV PROJ_VERSION 6.2.0
+ENV PROJ_MD5 5cde556545828beaffbe50b1bb038480
+ENV POSTGIS_VERSION 2.5.3
+ENV POSTGIS_SHA256 402323c83d97f3859bc9083345dd687f933c261efe0830e1262c20c12671f794
+
+RUN set -ex \
+    && apk add --no-cache --virtual .fetch-deps \
+       ca-certificates \
+       openssl \
+       tar \
+    \
+    && wget -O proj.tar.gz "https://download.osgeo.org/proj/proj-$PROJ_VERSION.tar.gz" \
+    && echo "$PROJ_MD5 *proj.tar.gz" | md5sum -c - \
+    && mkdir -p /usr/src/proj \
+    && tar \
+        --extract \
+        --file proj.tar.gz \
+        --directory /usr/src/proj \
+        --strip-components 1 \
+    && rm proj.tar.gz \
+    \
+    && wget -O gdal.tar.gz "https://github.com/OSGeo/gdal/releases/download/v$GDAL_VERSION/gdal-$GDAL_VERSION.tar.gz" \
+    && echo "$GDAL_MD5 *gdal.tar.gz" | md5sum -c - \
+    && mkdir -p /usr/src/gdal \
+    && tar \
+        --extract \
+        --file gdal.tar.gz \
+        --directory /usr/src/gdal \
+        --strip-components 1 \
+    && rm gdal.tar.gz \
+    \ 
+    && wget -O postgis.tar.gz "https://github.com/postgis/postgis/archive/$POSTGIS_VERSION.tar.gz" \
+    && echo "$POSTGIS_SHA256 *postgis.tar.gz" | sha256sum -c - \
+    && mkdir -p /usr/src/postgis \
+    && tar \
+        --extract \
+        --file postgis.tar.gz \
+        --directory /usr/src/postgis \
+        --strip-components 1 \
+    && rm postgis.tar.gz \
+    \
+    && apk del .fetch-deps
+
+RUN apk add --no-cache --virtual .build-deps \
+        autoconf \
+        automake \
+        g++ \
+        json-c-dev \
+        libtool \
+        libxml2-dev \
+        make \
+        perl \
+    \
+    && apk add --no-cache --virtual .build-deps-testing \
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+        sqlite-dev \
+        sqlite \
+        geos-dev \
+        protobuf-c-dev \
+    \
+    && cd /usr/src/proj \
+    && ./configure \
+    && make \
+    && make install \
+    && cd / \
+    \
+    # add libcrypto from (edge:main) for gdal
+    && apk add --no-cache --virtual .crypto-rundeps \
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+        libressl2.7-libcrypto \
+    \
+    && cd /usr/src/gdal \
+    && ./autogen.sh \
+    && ./configure \
+    && make \
+    && make install \
+    && cd / \
+    \
+    && cd /usr/src/postgis \
+    && ./autogen.sh \
+    && ./configure \
+    && make \
+    && make install \
+    && cd / \
+    \
+    && apk add --no-cache --virtual .postgis-rundeps \
+        json-c \
+    \
+    && apk add --no-cache --virtual .postgis-run \
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \    
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \        
+        geos \
+        protobuf-c \
+    \ 
+    && cd / \
+    && rm -rf /usr/src/proj \
+    && rm -rf /usr/src/gdal \
+    && rm -rf /usr/src/postgis \
+    && apk del .build-deps .build-deps-testing
+
+# End Postgis additions
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
