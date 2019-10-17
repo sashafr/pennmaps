@@ -139,7 +139,7 @@ def map(request):
     else:
         config = ""
     page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/map.css" type="text/css">'
-    mapItem = MapItem.objects.all()
+    mapItem = MapItem.objects.filter(featured=True)
     partOfCity = PartOfCity.objects.all()
     tags = Tag.objects.filter(tag_group__title = "Themes")
     map_url = settings.MAP_XYZ_URL

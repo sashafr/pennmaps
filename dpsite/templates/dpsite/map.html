@@ -383,7 +383,7 @@
         // Handle click on map item
         if (feature) {
             // Handle content change
-            document.getElementById('content-title').innerHTML = "<a style='color:black !important;' href="+feature.get('link')+">"+feature.get('title')+"</a>";
+            document.getElementById('content-title').innerHTML = "<a href="+feature.get('link')+">"+feature.get('title')+"</a>";
             if (feature.get('description') !=null){
                 document.getElementById('content-description').innerHTML =  feature.get('description');
             }

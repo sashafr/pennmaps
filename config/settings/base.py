@@ -29,7 +29,7 @@ TIME_ZONE = "UTC"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-SITE_ID = 1
+SITE_ID = 5
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
@@ -156,9 +156,9 @@ STATICFILES_FINDERS = [
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR("media"))
+# MEDIA_ROOT = str(APPS_DIR("media"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = "/media/"
+# MEDIA_URL = "/media/"
 
 # TEMPLATES
 # ------------------------------------------------------------------------------
@@ -296,7 +296,7 @@ SOCIALACCOUNT_ADAPTER = "pennmapsbase.users.adapters.SocialAccountAdapter"
 GDAL_LIBRARY_PATH = "/usr/local/lib/libgdal.so"
 GEOS_LIBRARY_PATH = "/usr/lib/libgeos_c.so.1"
 
-MEDIA_ROOT = os.path.join(ROOT_DIR, 'media/')
+MEDIA_ROOT = str(ROOT_DIR("media"))
 MEDIA_URL = '/media/'
 
 FACEBOOK_URL = ''

@@ -12,7 +12,18 @@ FROM python:3.6-alpine
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apk update
+RUN apk update \
+  # psycopg2 dependencies
+  && apk add --virtual build-deps gcc python3-dev musl-dev \
+  && apk add postgresql-dev \
+  # Pillow dependencies
+  && apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev \
+  # CFFI dependencies
+  && apk add libffi-dev py-cffi \
+  # Translations dependencies
+  && apk add gettext \
+  # Need git to install packages from git
+  && apk add git
 
 ## Build Postgis and dependencies
 
@@ -74,15 +85,16 @@ RUN apk add --no-cache --virtual .build-deps \
         libxml2-dev \
         make \
         perl \
+        linux-headers \
     \
     && apk add --no-cache --virtual .build-deps-testing \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
         sqlite-dev \
         sqlite \
         geos-dev \
-        protobuf-c-dev \
-    \
-    && cd /usr/src/proj \
+        protobuf-c-dev
+
+RUN cd /usr/src/proj \
     && ./configure \
     && make \
     && make install \
@@ -91,16 +103,16 @@ RUN apk add --no-cache --virtual .build-deps \
     # add libcrypto from (edge:main) for gdal
     && apk add --no-cache --virtual .crypto-rundeps \
         --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-        libressl2.7-libcrypto \
-    \
-    && cd /usr/src/gdal \
+        libressl2.7-libcrypto 
+
+RUN cd /usr/src/gdal \
     && ./autogen.sh \
     && ./configure \
     && make \
     && make install \
-    && cd / \
-    \
-    && cd /usr/src/postgis \
+    && cd /
+
+RUN cd /usr/src/postgis \
     && ./autogen.sh \
     && ./configure \
     && make \
@@ -123,8 +135,8 @@ RUN apk add --no-cache --virtual .build-deps \
     && apk del .build-deps .build-deps-testing
 
 
-RUN installgroup -S django \
-    && installuser -S -G django django
+RUN addgroup -S django \
+    && adduser -S -G django django
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
@@ -153,10 +165,8 @@ RUN chown django /start-celerybeat
 COPY ./compose/production/django/celery/flower/start /start-flower
 RUN sed -i 's/\r$//g' /start-flower
 RUN chmod +x /start-flower
-COPY --from=client-builder /app /app
 
-
-RUN chown -R django /app
+COPY --chown=django --from=client-builder /app /app
 
 USER django
 
