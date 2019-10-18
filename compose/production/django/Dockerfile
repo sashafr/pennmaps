@@ -8,7 +8,7 @@ RUN npm run build
 
 # Python build stage
 
-FROM senderle/pystgis:django_base
+FROM senderle/pystgis:django-base
 
 RUN addgroup -S django \
     && adduser -S -G django django
