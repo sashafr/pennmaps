@@ -6135,6 +6135,11 @@ button.close {
     -webkit-appearance: none;
 }
 
+.banner {
+  height: 220;
+  width: 100%;
+}
+
 
 .carousel {
     position: relative;
