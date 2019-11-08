@@ -22,6 +22,8 @@
 
 #test{
   width: 0vw;
+  background-color: #355855;
+
   /* display:none; */
   /* background-color: blue; */
 }
