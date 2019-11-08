@@ -95,6 +95,7 @@
 <div id="map">
     <div id="dp-info"></div>
 </div>
+
 <div id="test">
     <div class="contentBox">
         <!-- <button class="collapsible"><strong><div id="content-header">Details</div></strong></button> -->
@@ -109,10 +110,17 @@
             <!--DESCRIPTION-->
             <p>
                 <div id="content-description">
-                    {{ configs.map_sidebar|safe }}
+                    <!-- {{ configs.map_sidebar|safe }} -->
                 </div>
             <!-- </p> -->
         </div>
+    </div>
+</div>
+
+  <div id="welcome-text-map">
+    <div id="content-description">
+      {{ configs.map_sidebar|safe }}
+      </div>
     </div>
 </div>
 
@@ -419,16 +427,27 @@
             }
 
             //shrink map
-            document.getElementById("map").style.width = "70vw";
+            document.getElementById("map").style.width = "74vw";
             map.updateSize();
 
             //expand test
-            document.getElementById("test").style.width = "30vw";
+            document.getElementById("test").style.width = "26vw";
+            document.getElementById("test").style.display = "block";
+
+
+            // document.getElementById("welcome-text-map").style.width = "0vw";
+            document.getElementById("welcome-text-map").style.display = "none";
+
 
 
         } else {
           //shrink test
-          document.getElementById("test").style.width = "0vw";
+          // document.getElementById("test").style.width = "0vw";
+          document.getElementById("test").style.display = "none";
+
+
+          // document.getElementById("welcome-text-map").style.width = "0vw";
+          document.getElementById("welcome-text-map").style.display = "none";
 
           //expand map
           document.getElementById("map").style.width = "100vw";

@@ -9,8 +9,15 @@
   flex-direction: row;
 }
 
+#welcome-text-map{
+  width: 26vw;
+  background-color: #355855;
+  padding: 10px;
+
+}
+
 #map {
-  width: 100vw;
+  width: 74vw;
 }
 
 #test{
@@ -110,6 +117,7 @@ div.contentBox > div.map-detail {
 #content-description p {
     font-size: 1rem;
 }
+
 
 .searchBox {
     padding: 5px;
