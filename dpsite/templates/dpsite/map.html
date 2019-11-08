@@ -3,26 +3,27 @@
 {% block content %}
 
 <!--Toggle Menu-->
-<a href="javascript:void(0);" class="dp-hideMenu open" id="hideButton">Menu<br><br></a>
+<!-- <a href="javascript:void(0);" class="dp-hideMenu open" id="hideButton">Menu<br><br></a> -->
 
+<div class="contentBox"></div>
 <!--Sidebar content-->
 <div id="right-align">
-    <div class="contentBox">
+    <div class="contentBox1">
         <!-- <button class="collapsible"><strong><div id="content-header">Details</div></strong></button> -->
-        <div class="content map-detail" style="max-height: 476px;">
+        <div class="content map-detail1" style="display:none;">
             <!--TITLE-->
-            <h5><strong><div id="content-title"></div></strong></h5>
+            <h5><strong><div id="content-title1"></div></strong></h5>
             <!--DATES-->
-            <p><strong><div id="content-neighborhood-dates">
+            <p><strong><div id="content-neighborhood-dates1">
             </div></strong></p>
             <!--MEDIA-->
-            <div id="content-media"></div>
+            <div id="content-media1"></div>
             <!--DESCRIPTION-->
             <p>
-                <div id="content-description">
+                <div id="content-description1">
                     {{ configs.map_sidebar|safe }}
                 </div>
-            </p>
+            <!-- </p> -->
         </div>
     </div>
 
@@ -90,8 +91,37 @@
 <!-- <span id='logMsg'></span> -->
 
 <!--Map and popup items-->
+<div class ="box">
 <div id="map">
     <div id="dp-info"></div>
+</div>
+
+<div id="test">
+    <div class="contentBox">
+        <!-- <button class="collapsible"><strong><div id="content-header">Details</div></strong></button> -->
+        <div class="content map-detail">
+            <!--TITLE-->
+            <h5><strong><div id="content-title"></div></strong></h5>
+            <!--DATES-->
+            <!-- <p><strong><div id="content-neighborhood-dates">
+            </div></strong></p> -->
+            <!--MEDIA-->
+            <div id="content-media"></div>
+            <!--DESCRIPTION-->
+            <p>
+                <div id="content-description">
+                    <!-- {{ configs.map_sidebar|safe }} -->
+                </div>
+            <!-- </p> -->
+        </div>
+    </div>
+</div>
+
+  <div id="welcome-text-map">
+    <div id="content-description">
+      {{ configs.map_sidebar|safe }}
+      </div>
+    </div>
 </div>
 
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
@@ -132,7 +162,7 @@
     /*END COLLAPSIBLE SIDEBAR*/
 
     /*KEYWORD SEARCH*/
-    
+
     const queryInput = document.getElementById('query') || {};
     const searchButton = document.getElementById('submitButton') || {};
 
@@ -382,6 +412,10 @@
         });
         // Handle click on map item
         if (feature) {
+          info.tooltip('show')
+          .attr('data-original-title',feature.get('title'))
+          .tooltip('show');
+
             // Handle content change
             document.getElementById('content-title').innerHTML = "<a href="+feature.get('link')+">"+feature.get('title')+"</a>";
             if (feature.get('description') !=null){
@@ -391,7 +425,34 @@
             if (feature.get('media') !=null){
                 document.getElementById('content-media'){{mapItem.displayMedia}}
             }
+
+            //shrink map
+            document.getElementById("map").style.width = "74vw";
+            map.updateSize();
+
+            //expand test
+            document.getElementById("test").style.width = "26vw";
+            document.getElementById("test").style.display = "block";
+
+
+            // document.getElementById("welcome-text-map").style.width = "0vw";
+            document.getElementById("welcome-text-map").style.display = "none";
+
+
+
         } else {
+          //shrink test
+          // document.getElementById("test").style.width = "0vw";
+          document.getElementById("test").style.display = "none";
+
+
+          // document.getElementById("welcome-text-map").style.width = "0vw";
+          document.getElementById("welcome-text-map").style.display = "none";
+
+          //expand map
+          document.getElementById("map").style.width = "100vw";
+          map.updateSize();
+
             document.getElementById('content=title').innerHTML="";
             document.getElementById('content-neighborhood-dates').innerHTML = "";
             document.getElementById('content-description').innerHTML = "{% filter escapejs %}{{ configs.map_sidebar|safe }}{% endfilter %}";
@@ -407,6 +468,10 @@
         displayFeatureInfo(map.getEventPixel(evt.originalEvent));
         map.getTargetElement().style.cursor = map.hasFeatureAtPixel(evt.pixel) ? 'pointer' : '';
     });
+
+//     window.onresize = function(){
+//   setTimeout( function() { map.updateSize();}, 200);
+// }
 
 </script>
 
