@@ -39,7 +39,8 @@
 
     <div class="row">
         {% for mediafile in mapItem.media.all %}
-        <div class="col-md-3 col-sm-6 mb-4">
+        <!-- <div class="col-md-3 col-sm-6 mb-4"> -->
+        <div class="box">
             <div class="dp-mi-fixed-image" style="background-image: url('{{ mediafile.get_thm_url }}')">
                 {% if mediafile.get_main_url == "iframe" %}
                     <a href="#inline-{{ mediafile.id }}" class="image fit" data-lity data-lity-desc="{{ mediafile.title }}"></a>
@@ -50,6 +51,7 @@
                     <a href="{{ mediafile.get_main_url }}" class="image fit" data-lity data-lity-desc="{{ mediafile.title }}"></a>
                 {% endif %}
             </div>
+            <!--
             <div class="inner">
                 {% if mediafile.get_main_url == "" %}
                     <a class="button disabled fit mapitem-button">Coming Soon</a>
@@ -57,6 +59,18 @@
                     <a href="#inline-{{ mediafile.id }}" class=" mapitem-button button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
                 {% else %}
                     <a href="{{ mediafile.get_main_url }}" class=" mapitem-button button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
+                {% endif %}
+            </div>
+            -->
+            <div class="inner">
+                <h3>{{ mediafile.title }}</h3>
+                <p class="dp-fixed-text">{{ mediafile.description }}</p>
+                {% if mediafile.get_main_url == "" %}
+                    <a class="button disabled fit">Coming Soon</a>
+                {% elif mediafile.get_main_url == "iframe" %}
+                    <a href="#inline-{{ mediafile.id }}" class="button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
+                {% else %}
+                    <a href="{{ mediafile.get_main_url }}" class="button {% if forloop.counter|divisibleby:'4' %}style4{% elif forloop.counter|add:'1'|divisibleby:'4' %}style3{% elif forloop.counter|add:'2'|divisibleby:'4' %}style2{% endif %} fit" data-lity data-lity-desc="{{ mediafile.title }}">View</a>
                 {% endif %}
             </div>
         </div>
