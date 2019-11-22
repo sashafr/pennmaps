@@ -275,7 +275,7 @@ span.carousel-item-overlay {
 .dp-fixed-text {
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 9%;
+    /* height: 9%; */
     margin-bottom: 10px;
 }
 
