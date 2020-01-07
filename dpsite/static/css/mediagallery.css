@@ -272,6 +272,7 @@ header h6 + p {
 
 .thumbnails .box {
     margin: 0 1em 2em 1em;
+    height: 100%;
     width: 30%;
 }
 
@@ -927,7 +928,7 @@ input[type="button"].fit,
 button.fit,
 .button.fit {
     display: block;
-    margin: 0 0 1em 0;
+    /* margin: 0 0 1em 0; */
     width: 100%;
 }
 
