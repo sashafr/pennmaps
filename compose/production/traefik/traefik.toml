@@ -38,11 +38,11 @@ OnHostRule = true
   [frontends.nginx]
     backend = "nginx"
     [frontends.nginx.routes.media]
-      rule = "Host:pmtest.pennds.org;PathPrefix:/media"
+      rule = "Host:rememberblackphilly.com;PathPrefix:/media"
   [frontends.django]
     backend = "django"
     passHostHeader = true
     [frontends.django.headers]
       HostsProxyHeaders = ['X-CSRFToken']
     [frontends.django.routes.dr1]
-      rule = "Host:pmtest.pennds.org"
+      rule = "Host:rememberblackphilly.com"
