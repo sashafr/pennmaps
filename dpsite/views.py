@@ -150,6 +150,26 @@ def map(request):
     context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles, 'tags': tags, 'map_url': map_url, 'zoom': zoom, 'center': center, 'min_zoom': min_zoom, 'max_zoom': max_zoom }
     return render(request, 'dpsite/map.html',context)
 
+def mapall(request):
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/map.css" type="text/css">'
+    mapItem = MapItem.objects.all()
+    partOfCity = PartOfCity.objects.all()
+    tags = Tag.objects.filter(tag_group__title = "Themes")
+    map_url = settings.MAP_XYZ_URL
+    center = settings.MAP_CENTER_COORDS
+    zoom = settings.MAP_ZOOM
+    min_zoom = settings.MAP_MIN_ZOOM
+    max_zoom = settings.MAP_MAX_ZOOM
+    context = {'map_items': mapItem, 'part_of_city': partOfCity, 'configs': config, 'page_styles': page_styles, 'tags': tags, 'map_url': map_url, 'zoom': zoom, 'center': center, 'min_zoom': min_zoom, 'max_zoom': max_zoom }
+    return render(request, 'dpsite/allitemsmap.html',context)
+
 def archiveSearch(request):
     site = Site.objects.get_current()
     if site:
@@ -209,3 +229,23 @@ def featured(request):
         'featuredmedia': featuredmedia,
     }
     return render(request, 'dpsite/featured.html', context)
+
+def allitems(request):
+    site = Site.objects.get_current()
+    if site:
+        configs = SiteConfig.objects.filter(site = site)
+    if configs:
+        config = configs[0]
+    else:
+        config = ""
+
+    page_styles = '<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/mediagallery.css" type="text/css">'
+
+
+    featuredmedia = MapItem.objects.all()
+    context = {
+        'page_styles': page_styles,
+        'config': config,
+        'featuredmedia': featuredmedia,
+    }
+    return render(request, 'dpsite/allitems.html', context)

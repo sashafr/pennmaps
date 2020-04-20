@@ -173,7 +173,9 @@
         mapItemPointCoord1 = [];
         mapItemPointCoord2 = []
         {% for mapItem in map_items%}
-        if ('{{mapItem.title}}'.includes(queryInput.value) || '{{mapItem.summary}}'.includes(queryInput.value) || '{{mapItem.description}}'.includes(queryInput.value)) {
+        if ('{{mapItem.title|safe|linebreaksbr}}'.includes(queryInput.value) || 
+                '{{mapItem.summary|safe|linebreaksbr}}'.includes(queryInput.value) || 
+		'{{mapItem.description|safe|linebreaksbr}}'.includes(queryInput.value)) {
             $('#logMsg').append('{{mapItem.title}}');
             mapItemList.push('{{mapItem}}');
             {% for point in mapItem.location1%}
@@ -312,11 +314,11 @@
                 source: new ol.source.Vector({
                     features: [
                     new ol.Feature({
-                        title: "{{mapItem.title|safe|striptags}}",
-                        summary: '{{mapItem.summary|safe|striptags}}',
-                        description: '{{mapItem.description|safe|striptags}}',
-                        start: '{{mapItem.start_date|safe|striptags}}',
-                        end: '{{mapItem.end_date|safe|striptags}}',
+                        title: "{{mapItem.title|safe|linebreaksbr}}",
+                        summary: '{{mapItem.summary|safe|linebreaksbr}}',
+                        description: '{{mapItem.description|safe|linebreaksbr}}',
+                        start: '{{mapItem.start_date|safe|linebreaksbr}}',
+                        end: '{{mapItem.end_date|safe|linebreaksbr}}',
                         media: '{{mapItem.display_media_full|safe}}',
                         link:"{% url 'archiveitem' mapItem.id %}",
                         geometry: new ol.geom.Point(ol.proj.fromLonLat([{{point.coords.0}} , {{point.coords.1}}])),
@@ -349,11 +351,11 @@
                         source: new ol.source.Vector({
                             features: [
                             new ol.Feature({
-                                title: "{{mapItem.title|safe|striptags}}",
-                                summary: '{{mapItem.summary|safe|striptags}}',
-                                description: '{{mapItem.description|safe|striptags}}',
-                                start: '{{mapItem.start_date|safe|striptags}}',
-                                end: '{{mapItem.end_date|safe|striptags}}',
+                                title: "{{mapItem.title|safe|linebreaksbr}}",
+                                summary: '{{mapItem.summary|safe|linebreaksbr}}',
+                                description: '{{mapItem.description|safe|linebreaksbr}}',
+                                start: '{{mapItem.start_date|safe|linebreaksbr}}',
+                                end: '{{mapItem.end_date|safe|linebreaksbr}}',
                                 media: '{{mapItem.display_media_full|safe}}',
                                 link:"{% url 'archiveitem' mapItem.id %}",
                                 geometry: new ol.geom.Point(ol.proj.fromLonLat([mapItemPointCoord0[i] , mapItemPointCoord1[i]])),

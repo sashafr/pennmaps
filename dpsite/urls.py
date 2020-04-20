@@ -14,5 +14,7 @@ urlpatterns = [
     path('about/team/', views.aboutTeam, name = 'aboutteam'),
     path('about/project/', views.aboutProject, name = 'aboutproject'),
     path('map/', views.map, name = 'map'),
+    path('mapall/', views.mapall, name = 'mapall'),
     path('featured/', views.featured, name='featured'),
+    path('allitems/', views.allitems, name='allitems'),
 ]
